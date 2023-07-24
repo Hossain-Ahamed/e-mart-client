@@ -1,0 +1,32 @@
+[
+    {
+        "name": "basic-green-shirt-men",
+        "img": "https://img.freepik.com/free-photo/basic-green-shirt-men-rsquo-s-fashion-apparel-studio-shoot_53876-101197.jpg?size=626&ext=jpg&ga=GA1.1.1461934439.1649021458&semt=ais",
+        "price": "1200",
+        "realPrice": "1500"
+    },
+    {
+        "name": "basic-white-shirt-men",
+        "img": "https://img.freepik.com/free-photo/basic-white-shirt-men-s-fashion-apparel-studio-shoot_53876-105424.jpg?size=626&ext=jpg&ga=GA1.1.1461934439.1649021458&semt=ais",
+        "price": "1200",
+        "realPrice": "1500"
+    },
+    {
+        "name": "red-white",
+        "img": "https://img.freepik.com/free-photo/portrait-handsome-single-bearded-young-man-with-serious-expression-gray-wall-with-copy-space_231208-7753.jpg?size=626&ext=jpg&ga=GA1.2.1461934439.1649021458&semt=ais",
+        "price": "1200",
+        "realPrice": "1500"
+    },
+    {
+        "name": "ash",
+        "img": "https://img.freepik.com/free-photo/young-handsome-businessman-posing-indoor_144627-28063.jpg?size=626&ext=jpg&ga=GA1.1.1461934439.1649021458&semt=ais",
+        "price": "1200",
+        "realPrice": "1500"
+    },
+    {
+        "name": "black",
+        "img": "https://img.freepik.com/free-photo/vertical-shot-concentrated-businessman-listening-carefully-with-crossed-hands_181624-29443.jpg?w=360&t=st=1687106470~exp=1687107070~hmac=9bb6596ed20a956dbc77c4cdc97932155406dadc19a810b0c432658783552dda",
+        "price": "1200",
+        "realPrice": "1500"
+    }
+]
