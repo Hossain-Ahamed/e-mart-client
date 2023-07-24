@@ -9,6 +9,7 @@ import ShowMensFashion from "../../Pages/Men'sFashion/ShowMensFashion";
 import HomeForMen from "../../Pages/Men'sFashion/HomeForMen/HomeForMen";
 import HomeForWomen from "../../Pages/Women'sFashion/HomeForWomen/HomeForWomen";
 import HomeForGrocery from "../../Pages/Grocery/HomeForGrocery/HomeForGrocery";
+import HomeForKitchenTools from "../../Pages/KitchenTools/Home/HomeForKitchenTools";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         {
           path: "/beauty&glamour",
           element: <HomeForBeauty></HomeForBeauty>
+        },
+        {
+          path: "/kitchenTools",
+          element: <HomeForKitchenTools></HomeForKitchenTools>
         },
       ]
     },
