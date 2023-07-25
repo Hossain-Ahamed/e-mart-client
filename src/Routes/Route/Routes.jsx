@@ -10,6 +10,8 @@ import HomeForMen from "../../Pages/Men'sFashion/HomeForMen/HomeForMen";
 import HomeForWomen from "../../Pages/Women'sFashion/HomeForWomen/HomeForWomen";
 import HomeForGrocery from "../../Pages/Grocery/HomeForGrocery/HomeForGrocery";
 import HomeForKitchenTools from "../../Pages/KitchenTools/Home/HomeForKitchenTools";
+import PrivateRoutes from "../PrivateRoute/PrivateRoutes";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +23,10 @@ const router = createBrowserRouter([
             element: <Home></Home>
         },
         
-        
+        {
+          path: "/login",
+          element: <Login></Login>
+        },
         {
           path: "/pages/:id",
           element: <PagesForCategory></PagesForCategory>
@@ -46,8 +51,19 @@ const router = createBrowserRouter([
           path: "/kitchenTools",
           element: <HomeForKitchenTools></HomeForKitchenTools>
         },
+        {
+          path: '/dashboard',
+          element: <Dashboard></Dashboard>
+      
+        },
       ]
     },
+    // {
+    //   path: '/dashboard',
+    //   element: <PrivateRoutes>
+    //     <Dashboard></Dashboard>
+    //   </PrivateRoutes>
+    // }
   ]);
 
 export default router;
