@@ -28,6 +28,10 @@ const router = createBrowserRouter([
           element: <Login></Login>
         },
         {
+          path: "/signUp",
+          element: <SignUp></SignUp>
+        },
+        {
           path: "/pages/:id",
           element: <PagesForCategory></PagesForCategory>
         },
@@ -50,20 +54,13 @@ const router = createBrowserRouter([
         {
           path: "/kitchenTools",
           element: <HomeForKitchenTools></HomeForKitchenTools>
-        },
-        {
-          path: '/dashboard',
-          element: <Dashboard></Dashboard>
-      
-        },
+        }
       ]
     },
-    // {
-    //   path: '/dashboard',
-    //   element: <PrivateRoutes>
-    //     <Dashboard></Dashboard>
-    //   </PrivateRoutes>
-    // }
+    {
+      path: '/dashboard',
+      element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>
+    }
   ]);
 
 export default router;
