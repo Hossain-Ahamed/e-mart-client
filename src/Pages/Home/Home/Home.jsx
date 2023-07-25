@@ -4,6 +4,7 @@ import Swip from '../Banner/Swip';
 import ShowCategories from '../Categories/ShowCategories';
 import ShowAllProducts from '../../AllProducts/ShowAllProducts';
 import Login from '../../Login/Login';
+import SignUp from '../../SignUp/SignUp';
 
 
 const Home = () => {
@@ -11,7 +12,6 @@ const Home = () => {
         <>
         <div className=''>
         <Swip></Swip>
-        <Login></Login>
         <ShowCategories></ShowCategories>
         <ShowAllProducts></ShowAllProducts>
         </div>

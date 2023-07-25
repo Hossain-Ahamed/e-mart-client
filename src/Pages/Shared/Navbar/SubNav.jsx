@@ -18,14 +18,18 @@ const SubNav = () => {
     {user?.uid ?
       <li><button onClick={handleLogOut}>LogOut</button></li>
       :
-      <li><label htmlFor='my_modal_3'>Login</label></li>
+      <li><Link to="/login">Login</Link></li>
     }
     </>
     const menuItem = <>
     <li className='text-semibold'><Link to="/">Home</Link></li>
     <li className='text-semibold'><Link to="/about">About</Link></li>
     <li className='text-semibold'><Link to="/reviews">Reviews</Link></li>
-    <li className='text-semibold'><Link to="/login">Login</Link></li>
+    {user?.uid ?
+      <li className='text-semibold'><button onClick={handleLogOut}>LogOut</button></li>
+      :
+      <li className='text-semibold'><Link to="/login">Login</Link></li>
+    }
     </>
     return (
         <>
