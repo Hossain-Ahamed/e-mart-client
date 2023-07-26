@@ -11,16 +11,25 @@ import { Navigation, Autoplay, Pagination } from "swiper";
 import { TbCurrencyTaka } from 'react-icons/tb';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import useProduct from '../../../Hooks/useProduct';
 
 const BestSellers = () => {
 
-    const  [ products, setProducts ]  = useState([]);
+   const [product] = useProduct();
+   const bestSellers = product.filter(
+            bestSeller => bestSeller.category === 'men' && bestSeller['sub-category'] === 'bestDeals'
+          );
 
-    useEffect( () =>{
-      fetch('http://localhost:5000/menBestDeals')
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }, [])
+    // useEffect(() => {
+    //   fetch('http://localhost:5000/products')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       const bestSellers = data.filter(
+    //         bestSeller => bestSeller.category === 'men' && bestSeller['sub-category'] === 'bestDeals'
+    //       );
+    //       setProduct(bestSellers);
+    //     });
+    // }, []);  
 
     return (
         <>
@@ -63,25 +72,25 @@ const BestSellers = () => {
       >
         
           {
-            products.map(product => ( <SwiperSlide
-            key={product._id}>
+            bestSellers.map(bestSeller => ( <SwiperSlide
+            key={bestSeller._id}>
             <div className="w-[130px] h-[350px] md:w-[200px] md:h-[400px] hover:drop-shadow-xl bg-white">
         <Link >
           <figure>
-            <img className="w-[130px] h-[200px] md:w-[200px] md:h-[250px]" src={product.img} />
+            <img className="w-[130px] h-[200px] md:w-[200px] md:h-[250px]" src={bestSeller.img} />
           </figure>
           <div className="">
             <div className="my-3 px-2">
             <h2 className="text-lg md:text-xl font-semibold text-gray-700">
-                {product.name}
+                {bestSeller.name}
               </h2>
               <p className="flex text-orange-400 font-bold lg:text-lg">
                 <TbCurrencyTaka></TbCurrencyTaka>
-                {product?.price}
-                {(product?.mainPrice !==product?.price) && (
+                {bestSeller?.price}
+                {(bestSeller?.mainPrice !==bestSeller?.price) && (
                   <s className="flex text-sm text-gray-600">
                     <TbCurrencyTaka></TbCurrencyTaka>
-                    {product.mainPrice}
+                    {bestSeller.mainPrice}
                   </s>
                 )}
               </p>

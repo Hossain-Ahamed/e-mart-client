@@ -6,10 +6,14 @@ import BeautyCategory from './BeautyCategory';
 import BeautyBestSellers from './BeautyBestSellers';
 import BeautyThirdBanner from './BeautyThirdBanner';
 import BeautyNewProducts from './BeautyNewProducts';
+import { Helmet } from 'react-helmet-async';
 
 const HomeForBeauty = () => {
     return (
         <>
+        <Helmet>
+            <title>E-Mart | Beauty&Glamour</title>
+        </Helmet>
         <div className='bg-white'>
         <BeautyBanner />
         <BeautyFeaturedProducts />

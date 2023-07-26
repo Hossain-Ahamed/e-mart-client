@@ -5,6 +5,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
 import SignUp from '../SignUp/SignUp';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const auth = getAuth(app)
@@ -47,6 +48,9 @@ const Login = () => {
     }
     return (
         <>
+        <Helmet>
+            <title>E-Mart | Login</title>
+        </Helmet>
     <div className="w-80 my-12 mx-auto">
         <h3 className='text-3xl'>Login</h3>
       <form onSubmit={handleSubmit(handleLogin)}>

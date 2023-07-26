@@ -6,17 +6,16 @@ import { Navigation, Autoplay, Pagination } from "swiper";
 import { TbCurrencyTaka } from 'react-icons/tb';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import useProduct from '../../../Hooks/useProduct';
 
 const GroceryFeaturedProducts = () => {
 
-    const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [product] = useProduct();
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
-  useEffect(() => {
-    fetch('http://localhost:5000/groceryFeaturedProducts')
-      .then(res => res.json())
-      .then(data => setFeaturedProducts(data))
-  }, [])
+  const featuredProducts = product.filter(
+            featuredProduct => featuredProduct.category === 'grocery' && featuredProduct['sub-category'] === 'featuredProducts'
+          );
 
   const handleMouseEnter = (product) => {
     setHoveredProduct(product);

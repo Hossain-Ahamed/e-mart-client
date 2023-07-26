@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,6 +18,9 @@ const SignUp = () => {
     }
     return (
         <>
+        <Helmet>
+            <title>E-Mart | SignUp</title>
+        </Helmet>
         <div className='w-80 mx-auto mt-12'>
         <form onSubmit={handleSubmit(handleSignUp)}>     
         <div className="form-control">

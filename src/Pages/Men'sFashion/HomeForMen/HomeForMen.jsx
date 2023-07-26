@@ -6,10 +6,14 @@ import HotDeals from './HotDeals';
 import BestSellers from './BestSellers';
 import ThirdBanner from './ThirdBanner';
 import NewProduct from './NewProduct';
+import { Helmet } from 'react-helmet-async';
 
 const HomeForMen = () => {
     return (
         <>
+        <Helmet>
+            <title>E-Mart | Men'sFashion</title>
+        </Helmet>
         <div className='bg-white'>
         <Banner></Banner>
         </div>

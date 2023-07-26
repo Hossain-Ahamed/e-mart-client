@@ -6,10 +6,14 @@ import GroceryFeaturedProducts from './GroceryFeaturedProducts';
 import GroceryThirdBanner from './GroceryThirdBanner';
 import GroceryNewProducts from './GroceryNewProducts';
 import GroceryBestSellers from './GroceryBestSellers';
+import { Helmet } from 'react-helmet-async';
 
 const HomeForGrocery = () => {
     return (
         <>
+        <Helmet>
+            <title>E-Mart | Grocery</title>
+        </Helmet>
         <div className='bg-white'>
             <GroceryBanner></GroceryBanner>
             <GroceryCategory></GroceryCategory>
