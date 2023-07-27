@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import { MdShoppingCart } from "react-icons/md";
 import { LuMenu } from "react-icons/lu";
+import useCart from '../../../Hooks/useCart';
 
 const SubNav = () => {
   const {user, logOut} = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handleLogOut = () => {
     logOut()
@@ -59,12 +61,12 @@ const SubNav = () => {
       <label tabIndex={0} className="btn btn-ghost btn-circle">
         <div className="indicator">
           <MdShoppingCart className='text-3xl'></MdShoppingCart>
-          <span className="badge badge-sm indicator-item bg-white text-black">8</span>
+          <span className="badge badge-sm indicator-item bg-white text-black">{cart?.length || 0}</span>
         </div>
       </label>
       <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
         <div className="card-body">
-          <span className="font-bold text-lg">8 Items</span>
+          <span className="font-bold text-lg">{cart?.length || 0} Items</span>
           <span className="text-info">Subtotal: $999</span>
           <div className="card-actions">
             <button className="btn btn-primary btn-block">View cart</button>

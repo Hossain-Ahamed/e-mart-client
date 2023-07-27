@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, Autoplay, Pagination } from "swiper";
 import { TbCurrencyTaka } from 'react-icons/tb';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider';
+import Swal from 'sweetalert2';
+import useCart from '../../../Hooks/useCart';
+import useProduct from '../../../Hooks/useProduct';
+import useAddToCart from '../../../Hooks/useAddToCart';
 
 const TrendingProducts = () => {
   const [activeContent, setActiveContent] = useState('content1');
-  const [products, setProducts] = useState([]);
-  const [featuredProducts, setFeaturedProducts] = useState([]);
   const [hoveredProduct, setHoveredProduct] = useState(null);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/womenNewProducts')
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }, [])
-
-  useEffect(() => {
-    fetch('http://localhost:5000/womenFeaturedProducts')
-      .then(res => res.json())
-      .then(data => setFeaturedProducts(data))
-  }, [])
 
   const handleContentSwitch = (contentId) => {
     setActiveContent(contentId);
@@ -36,6 +27,19 @@ const TrendingProducts = () => {
   const handleMouseLeave = () => {
     setHoveredProduct(null);
   };
+
+  const  [ product ]  = useProduct();
+
+    const products = product.filter(
+      showProduct => showProduct.category === 'women' && showProduct['sub-category'] === 'featuredProducts'
+            );
+
+    const newProducts = product.filter(
+      showProduct => showProduct.category === 'women' && showProduct['sub-category'] === 'newProducts'
+                    );
+
+    const handleAddToCart = useAddToCart();
+
 
   return (
     <>
@@ -87,23 +91,23 @@ const TrendingProducts = () => {
                 modules={[Autoplay]}
                 className="mySwiper"
               >
-                {featuredProducts.map(featuredProduct => (
-                  <SwiperSlide key={featuredProduct._id}>
+                {products.map(showProduct => (
+                  <SwiperSlide key={showProduct._id}>
                     <div className="w-[130px] h-[350px] md:w-[280px] md:h-[450px] border">
                       <div
                         className="relative"
-                        onMouseEnter={() => handleMouseEnter(featuredProduct)}
+                        onMouseEnter={() => handleMouseEnter(showProduct)}
                         onMouseLeave={handleMouseLeave}
                       >
                         <figure>
                           <img
                             className="w-[130px] h-[200px] md:w-[280px] md:h-[320px]"
-                            src={featuredProduct.img}
-                            alt={featuredProduct.name}
+                            src={showProduct.img}
+                            alt={showProduct.name}
                           />
                         </figure>
-                        {hoveredProduct === featuredProduct && (
-                          <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-[280px] md:h-10 rounded-md hover:bg-amber-800 hover:text-white mx-auto">
+                        {hoveredProduct === showProduct && (
+                          <button onClick={() => handleAddToCart(showProduct)} className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-[280px] md:h-10 rounded-md hover:bg-amber-800 hover:text-white mx-auto">
                           <AiOutlineShoppingCart></AiOutlineShoppingCart>
                           <span className="">Add to Cart</span>
                         </button>
@@ -112,15 +116,15 @@ const TrendingProducts = () => {
                       <div className="">
                         <div className="my-3 text-center">
                           <p className="text-gray-700">
-                            {featuredProduct.name}
+                            {showProduct.name}
                           </p>
                           <p className="flex text-amber-800 font-bold lg:text-xl justify-center my-3">
                             <TbCurrencyTaka></TbCurrencyTaka>
-                            {featuredProduct?.price}
-                            {(featuredProduct?.mainPrice !== featuredProduct?.price) && (
+                            {showProduct?.price}
+                            {(showProduct?.mainPrice !== showProduct?.price) && (
                               <s className="flex text-sm text-gray-600">
                                 <TbCurrencyTaka></TbCurrencyTaka>
-                                {featuredProduct.mainPrice}
+                                {showProduct.mainPrice}
                               </s>
                             )}
                           </p>
@@ -164,23 +168,23 @@ const TrendingProducts = () => {
                 modules={[Autoplay]}
                 className="mySwiper"
               >
-                {products.map(product => (
-                  <SwiperSlide key={product._id}>
+                {newProducts.map(showProduct => (
+                  <SwiperSlide key={showProduct._id}>
                     <div className="w-[130px] h-[350px] md:w-[280px] md:h-[450px] border">
                     <div
                         className="relative"
-                        onMouseEnter={() => handleMouseEnter(product)}
+                        onMouseEnter={() => handleMouseEnter(showProduct)}
                         onMouseLeave={handleMouseLeave}
                       >
                         <figure>
                           <img
                             className="w-[130px] h-[200px] md:w-[280px] md:h-[320px]"
-                            src={product.img}
-                            alt={product.name}
+                            src={showProduct.img}
+                            alt={showProduct.name}
                           />
                         </figure>
-                        {hoveredProduct === product && (
-                          <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-[280px] md:h-10 rounded-md hover:bg-amber-800 hover:text-white mx-auto">
+                        {hoveredProduct === showProduct && (
+                          <button onClick={() => handleAddToCart(showProduct)} className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-[280px] md:h-10 rounded-md hover:bg-amber-800 hover:text-white mx-auto">
                           <AiOutlineShoppingCart></AiOutlineShoppingCart>
                           <span className="">Add to Cart</span>
                         </button>
@@ -189,15 +193,15 @@ const TrendingProducts = () => {
                       <div className="">
                         <div className="my-3 text-center">
                           <p className="text-gray-700">
-                            {product.name}
+                            {showProduct.name}
                           </p>
                           <p className="flex text-amber-800 font-bold lg:text-xl justify-center my-3">
                             <TbCurrencyTaka></TbCurrencyTaka>
-                            {product.price}
-                            {(product.mainPrice !== product.price) && (
+                            {showProduct.price}
+                            {(showProduct.mainPrice !== showProduct.price) && (
                               <s className="flex text-sm text-gray-600">
                                 <TbCurrencyTaka></TbCurrencyTaka>
-                                {product.mainPrice}
+                                {showProduct.mainPrice}
                               </s>
                             )}
                           </p>

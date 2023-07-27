@@ -11,16 +11,18 @@ import { Navigation, Autoplay, Pagination } from "swiper";
 import { TbCurrencyTaka } from 'react-icons/tb';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import useProduct from '../../../Hooks/useProduct';
+import useAddToCart from '../../../Hooks/useAddToCart';
 
 const NewProduct = () => {
 
-    const  [ products, setProducts ]  = useState([]);
+    const  [ product ]  = useProduct();
 
-    useEffect( () =>{
-      fetch('http://localhost:5000/menBestDeals')
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }, [])
+    const products = product.filter(
+      showProduct => showProduct.category === 'men' && showProduct['sub-category'] === 'newProducts'
+            );
+
+    const handleAddToCart = useAddToCart();
 
     return (
         <>
@@ -63,32 +65,32 @@ const NewProduct = () => {
       >
         
           {
-            products.map(product => ( <SwiperSlide
-            key={product._id}>
+            products.map(showProduct => ( <SwiperSlide
+            key={showProduct._id}>
             <div className="w-[130px] h-[350px] md:w-[200px] md:h-[400px] hover:drop-shadow-xl">
         <Link >
           <figure>
-            <img className="w-[130px] h-[200px] md:w-[200px] md:h-[250px]" src={product.img} />
+            <img className="w-[130px] h-[200px] md:w-[200px] md:h-[250px]" src={showProduct.img} />
           </figure>
           <div className="">
             <div className="my-3">
             <h2 className="text-lg md:text-xl font-semibold text-gray-700">
-                {product.name}
+                {showProduct.name}
               </h2>
               <p className="flex text-orange-400 font-bold lg:text-lg">
                 <TbCurrencyTaka></TbCurrencyTaka>
-                {product?.price}
-                {(product?.mainPrice !==product?.price) && (
+                {showProduct?.price}
+                {(showProduct?.mainPrice !==showProduct?.price) && (
                   <s className="flex text-sm text-gray-600">
                     <TbCurrencyTaka></TbCurrencyTaka>
-                    {product.mainPrice}
+                    {showProduct.mainPrice}
                   </s>
                 )}
               </p>
             </div>
           </div>
         </Link>
-        <button className="flex justify-center items-center gap-2 border lg:text-xl w-32 h-8 md:w-40 md:h-10 rounded-md bg-slate-200 hover:bg-orange-400 hover:text-white">
+        <button onClick={() => handleAddToCart(showProduct)} className="flex justify-center items-center gap-2 border lg:text-xl w-32 h-8 md:w-40 md:h-10 rounded-md bg-slate-200 hover:bg-orange-400 hover:text-white">
               <AiOutlineShoppingCart></AiOutlineShoppingCart>
               <span className="">Add to Cart</span>
             </button>
