@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dashboard = () => {
+const MyCart = () => {
     return (
         <>
         <div>
@@ -10,4 +10,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default MyCart;

@@ -1,7 +1,7 @@
 import React from 'react';
-import ThirdBanner from '../../../Component/ThirdBanner';
+import ThirdBanner from '../../Component/ThirdBanner';
 
-const GroceryThirdBanner = () => {
+const HomeThirdBanner = () => {
     const data = [
         {
         "_id": 1,
@@ -32,4 +32,4 @@ const GroceryThirdBanner = () => {
     );
 };
 
-export default GroceryThirdBanner;
+export default HomeThirdBanner;

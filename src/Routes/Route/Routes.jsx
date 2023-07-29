@@ -11,7 +11,9 @@ import HomeForWomen from "../../Pages/Women'sFashion/HomeForWomen/HomeForWomen";
 import HomeForGrocery from "../../Pages/Grocery/HomeForGrocery/HomeForGrocery";
 import HomeForKitchenTools from "../../Pages/KitchenTools/Home/HomeForKitchenTools";
 import PrivateRoutes from "../PrivateRoute/PrivateRoutes";
-import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import MyCart from "../../Pages/Dashboard/Dashboard/MyCart";
+import AllProducts from "../../Pages/AllProducts/AllProducts";
+import Dashboard from "../../Layout/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +38,10 @@ const router = createBrowserRouter([
           element: <PagesForCategory></PagesForCategory>
         },
         {
+          path: "/allproducts",
+          element: <AllProducts></AllProducts>
+        },
+        {
           path: "/mensFashion",
           element: <HomeForMen></HomeForMen>
         },
@@ -58,8 +64,14 @@ const router = createBrowserRouter([
       ]
     },
     {
-      path: '/dashboard',
-      element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>
+      path: 'dashboard',
+      element: <Dashboard></Dashboard>,
+      children: [
+        {
+          path: "myCart",
+          element: <MyCart></MyCart>
+        }
+      ]
     }
   ]);
 

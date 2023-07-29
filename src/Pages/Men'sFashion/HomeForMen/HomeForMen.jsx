@@ -1,12 +1,11 @@
 import React from 'react';
 import Banner from './Banner';
 import ShowMenCategories from '../MenCategories/ShowMenCategories';
-import SecondBanner from './SecondBanner';
-import HotDeals from './HotDeals';
-import BestSellers from './BestSellers';
-import ThirdBanner from './ThirdBanner';
-import NewProduct from './NewProduct';
+import MenSecondBanner from './MenSecondBanner';
+import TrendingProducts from './TrendingProducts';
+import MenThirdBanner from './MenThirdBanner';
 import { Helmet } from 'react-helmet-async';
+import AllProducts from './AllProducts';
 
 const HomeForMen = () => {
     return (
@@ -21,15 +20,10 @@ const HomeForMen = () => {
         <ShowMenCategories></ShowMenCategories>
         </div>
         <div className='bg-white'>
-        <SecondBanner></SecondBanner>
-        <HotDeals></HotDeals>
-        </div>
-        <div className='bg-zinc-100'>
-            <BestSellers></BestSellers>
-        </div>
-        <div className='bg-white'>
-            <ThirdBanner></ThirdBanner>
-            <NewProduct></NewProduct>
+        <MenSecondBanner></MenSecondBanner>
+        <TrendingProducts />
+            <MenThirdBanner></MenThirdBanner>
+            <AllProducts />
         </div>
         </>
     );

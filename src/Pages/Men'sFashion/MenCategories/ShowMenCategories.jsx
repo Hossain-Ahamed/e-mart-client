@@ -20,7 +20,7 @@ const ShowMenCategories = () => {
     return (
         <>
 
-        <div className=' lg:p-12 p-3 pt-6 lg:pt-20'>
+<div className=' lg:p-12 p-3 pt-6 lg:pt-20'>
             <div className='grid grid-cols-3 items-center gap-0'>
             <h3 className='text-lg md:text-2xl font-bold'>Categories</h3>
             <hr className='border'/>
@@ -44,7 +44,7 @@ const ShowMenCategories = () => {
             spaceBetween: 5,
           },
           "@1.00": {
-            slidesPerView: 4,
+            slidesPerView: 5,
             spaceBetween: 5,
           },
           "@1.50": {

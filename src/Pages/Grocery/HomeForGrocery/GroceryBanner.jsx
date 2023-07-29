@@ -11,7 +11,40 @@ import "../../Men'sFashion/HomeForMen/Banner.css"
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
+import SlimBanner from "../../../Component/SlimBanner";
 const GroceryBanner = () => {
+  const data = [
+    {
+      "id": 1,
+      "img": "https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-04.jpg",
+      "title": "Big Range Of",
+      "description": "Organic Milk" 
+    },
+    {
+      "id": 2,
+      "img": "https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-01.jpg",
+      "title": "Big Range Of",
+      "description": "Organic Juice" 
+    },
+    {
+      "id": 3,
+      "img": "https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-05.jpg",
+      "title": "Big Range Of",
+      "description": "Fresh Vegetables" 
+    },
+    {
+      "id": 4,
+      "img": "https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-02.jpg",
+      "title": "Big Range Of",
+      "description": "Fresh Fruits" 
+    },
+    {
+      "id": 5,
+      "img": "https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-03.jpg",
+      "title": "Big Range Of",
+      "description": "Breakfast & Dairy" 
+    },
+  ]
     return (
         <>
         <div className="grid lg:flex justify-center p-12">
@@ -130,58 +163,20 @@ const GroceryBanner = () => {
       }}
       modules={[Autoplay]} 
       className="mySwiper">
-        <SwiperSlide>
-          <div className="flex gap-16 lg:gap-28 h-[110px] bg-white p-4">
-            <img src="https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-04.jpg" alt="" className="border-r-2 " />
-            <div>
-            <h3 className=" text-red-500">Big Range Of</h3>
-              <p className="lg:text-xl font-bold my-1">Organic Milk</p>
-              <p className="text-sm text-green-500">Up to 20% Off</p>
-            </div>
-          </div>
-          </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex gap-16 lg:gap-28 h-[110px] bg-white p-4">
-            <img src="https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-01.jpg" alt="" className="border-r-2 " />
-            <div>
-            <h3 className=" text-red-500">Big Range Of</h3>
-              <p className="lg:text-xl font-bold my-1">Organic Juice</p>
-              <p className="text-sm text-green-500">Up to 20% Off</p>
-            </div>
-          </div>
-          </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex gap-16 lg:gap-28 h-[110px] bg-white p-4">
-            <img src="https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-05.jpg" alt="" className="border-r-2 " />
-            <div>
-            <h3 className=" text-red-500">Big Range Of</h3>
-              <p className="lg:text-xl font-bold my-1">Fresh Vegetables</p>
-              <p className="text-sm text-green-500">Up to 20% Off</p>
-            </div>
-          </div>
-          </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex gap-16 lg:gap-28 h-[110px] bg-white p-4">
-            <img src="https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-02.jpg" alt="" className="border-r-2 " />
-            <div>
-            <h3 className=" text-red-500">Big Range Of</h3>
-              <p className="lg:text-xl font-bold my-1">Fresh Fruits</p>
-              <p className="text-sm text-green-500">Up to 20% Off</p>
-            </div>
-          </div>
-          </SwiperSlide>
-        <SwiperSlide>
-          <div className="flex gap-16 lg:gap-28 h-[110px] bg-white p-4">
-            <img src="https://cdn11.bigcommerce.com/s-vptmq0v2zd/product_images/uploaded_images/offer-img-03.jpg" alt="" className="border-r-2 " />
-            <div>
-            <h3 className=" text-red-500">Big Range Of</h3>
-              <p className="lg:text-xl font-bold my-1">Breakfast & Dairy</p>
-              <p className="text-sm text-green-500">Up to 20% Off</p>
-            </div>
-          </div>
-          </SwiperSlide>
-        
-      </Swiper>
+        {data.map(slimBannerInfo => 
+                  <SwiperSlide 
+                    key={slimBannerInfo.id}
+                    slimBannerInfo={slimBannerInfo}
+                ><div className="flex gap-16 lg:gap-28 h-[110px] bg-white p-4">
+                <img src={slimBannerInfo.img} alt="" className="border-r-2 " />
+                <div>
+                <h3 className=" text-red-500">{slimBannerInfo.title}</h3>
+                  <p className="lg:text-xl font-bold my-1">{slimBannerInfo.description}</p>
+                  <p className="text-sm text-green-500">Up to 20% Off</p>
+                </div>
+              </div></SwiperSlide>)}
+          </Swiper>
+      
       </div>
         </>
     );

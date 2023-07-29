@@ -1,11 +1,10 @@
 import React from 'react';
 import BeautyBanner from './BeautyBanner';
-import BeautyFeaturedProducts from './BeautyFeaturedProducts';
+import BeautyTrendingProducts from './BeautyTrendingProducts';
 import BeautySecondBanner from './BeautySecondBanner';
 import BeautyCategory from './BeautyCategory';
-import BeautyBestSellers from './BeautyBestSellers';
 import BeautyThirdBanner from './BeautyThirdBanner';
-import BeautyNewProducts from './BeautyNewProducts';
+import BeautyAllProducts from './BeautyAllProducts';
 import { Helmet } from 'react-helmet-async';
 
 const HomeForBeauty = () => {
@@ -16,14 +15,11 @@ const HomeForBeauty = () => {
         </Helmet>
         <div className='bg-white'>
         <BeautyBanner />
-        <BeautyFeaturedProducts />
-        <BeautySecondBanner />
         <BeautyCategory />
-        <div className='bg-gray-100'>
-            <BeautyBestSellers />
-        </div>
+        <BeautySecondBanner />
+        <BeautyTrendingProducts />
         <BeautyThirdBanner />
-        <BeautyNewProducts />
+        <BeautyAllProducts />
         </div>
         </>
     );

@@ -6,6 +6,9 @@ import ShowAllProducts from '../../AllProducts/ShowAllProducts';
 import Login from '../../Login/Login';
 import SignUp from '../../SignUp/SignUp';
 import { Helmet } from 'react-helmet-async';
+import HomeSecondBanner from '../HomeSecondBanner';
+import HomeTrendingProducts from '../HomeTrendingProducts';
+import HomeThirdBanner from '../HomeThirdBanner';
 
 
 const Home = () => {
@@ -17,6 +20,9 @@ const Home = () => {
         </Helmet>
         <Swip></Swip>
         <ShowCategories></ShowCategories>
+        <HomeSecondBanner></HomeSecondBanner>
+        <HomeTrendingProducts></HomeTrendingProducts>
+        <HomeThirdBanner></HomeThirdBanner>
         <ShowAllProducts></ShowAllProducts>
         </div>
         </>

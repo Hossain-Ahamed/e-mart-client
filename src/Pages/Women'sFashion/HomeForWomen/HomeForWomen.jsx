@@ -1,9 +1,11 @@
 import React from 'react';
 import WomenBanner from './WomenBanner';
 import WomenCategory from './WomenCategory';
-import TrendingProdutcs from './TrendingProdutcs';
+import TrendingProducts from './TrendingProducts';
 import WomenSecondBanner from './WomenSecondBanner';
 import { Helmet } from 'react-helmet-async';
+import WomenThirdBanner from './WomenThirdBanner';
+import WomenAllProducts from './WomenAllProducts';
 
 const HomeForWomen = () => {
     return (
@@ -14,7 +16,9 @@ const HomeForWomen = () => {
         <WomenBanner></WomenBanner>
         <WomenCategory></WomenCategory>
         <WomenSecondBanner></WomenSecondBanner>
-        <TrendingProdutcs></TrendingProdutcs>
+        <TrendingProducts></TrendingProducts>
+        <WomenThirdBanner></WomenThirdBanner>
+        <WomenAllProducts></WomenAllProducts>
         </>
     );
 };

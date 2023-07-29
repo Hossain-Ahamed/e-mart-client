@@ -1,8 +1,7 @@
 import React from 'react';
-import ThirdBanner from '../../Component/ThirdBanner';
+import ThirdBanner from '../../../Component/ThirdBanner';
 
-const BeautyThirdBanner = () => {
-  const data = [
+const WomenThirdBanner = () => {const data = [
     {
     "_id": 1,
     "img": "https://cdn11.bigcommerce.com/s-5y3552fo3h/product_images/uploaded_images/bottom-banner-01.jpg",
@@ -32,4 +31,4 @@ const BeautyThirdBanner = () => {
     );
 };
 
-export default BeautyThirdBanner;
+export default WomenThirdBanner;
