@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import useAddToCart from '../../Hooks/useAddToCart';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { TbCurrencyTaka } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({showProduct}) => {
-    const {img, name, price, mainPrice} = showProduct;
+    const {_id, img, name, price, mainPrice} = showProduct;
 
     const [hoveredProduct, setHoveredProduct] = useState(null);
 
@@ -19,6 +20,7 @@ const ProductCard = ({showProduct}) => {
       const handleAddToCart = useAddToCart();
     return (
         <>
+            <Link to={`/overView/${_id}`}>
             <div className="w-32 md:w-52 border">
                       <div
                         className="relative"
@@ -59,6 +61,7 @@ const ProductCard = ({showProduct}) => {
                         
                       </div>
                     </div>
+            </Link>
         </>
     );
 };

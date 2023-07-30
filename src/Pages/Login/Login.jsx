@@ -19,19 +19,16 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     const handleLogin = (data) => {
-        console.log(data);
-        setLoginError('');
-        logIn(data.email, data.password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-            navigate(from, {replace: true});
-        })
-        .catch(error => {
-            console.log(error.message)
-            setLoginError(error.message);
-        });
-    }
+      setLoginError('');
+      logIn(data.email, data.password)
+      .then(result =>{
+          const user = result.user;
+          navigate(from, {replace: true});
+      })
+      .catch(error => {
+          setLoginError(error.message);
+      });
+  }
   
   
     const provider = new GoogleAuthProvider();
@@ -39,8 +36,18 @@ const Login = () => {
         signInWithPopup(auth, provider)
         .then(result => {
             const user = result.user;
-            console.log(user);
-            navigate(from, {replace: true});
+            const saveUser = { name: user.displayName, email: user.email }
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        navigate(from, { replace: true });
+                    })
         })
         .catch( error => {
             console.error('error: ', error);

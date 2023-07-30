@@ -14,6 +14,7 @@ import PrivateRoutes from "../PrivateRoute/PrivateRoutes";
 import MyCart from "../../Pages/Dashboard/Dashboard/MyCart";
 import AllProducts from "../../Pages/AllProducts/AllProducts";
 import Dashboard from "../../Layout/Dashboard";
+import ProductOverView from "../../Pages/OverView/ProductOverView";
 
 const router = createBrowserRouter([
     {
@@ -34,8 +35,9 @@ const router = createBrowserRouter([
           element: <SignUp></SignUp>
         },
         {
-          path: "/pages/:id",
-          element: <PagesForCategory></PagesForCategory>
+          path: "/overview/:id",
+          element: <ProductOverView></ProductOverView>,
+          loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
         },
         {
           path: "/allproducts",
