@@ -6,6 +6,7 @@ import { IoWalletOutline } from 'react-icons/io5';
 import { Link, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
+  const isAdmin = true;
     return (
         <>
         <div className="drawer drawer-mobile">
@@ -18,11 +19,24 @@ const Dashboard = () => {
   <div className="drawer-side">
     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-      {/* Sidebar content here */}
-      <li><Link><AiOutlineUser></AiOutlineUser>User</Link></li>
+      {
+        isAdmin ? 
+        <>
+         <li><Link><AiOutlineUser></AiOutlineUser>Admin Home</Link></li>
+      <li><Link><BiCalendar />Reservation</Link></li>
+      <li><Link><IoWalletOutline />Payment History</Link></li>
+      <li><Link to="/dashboard/allUsers"><BsCart3 />All Users</Link></li>
+        </> 
+        : 
+        <>
+         <li><Link><AiOutlineUser></AiOutlineUser>User</Link></li>
       <li><Link><BiCalendar />Reservation</Link></li>
       <li><Link><IoWalletOutline />Payment History</Link></li>
       <li><Link to="/dashboard/myCart"><BsCart3 />My Cart</Link></li>
+        </>
+      }
+      {/* Sidebar content here */}
+     
       <div className='divider'></div>
       <li><Link><AiOutlineHome />Home</Link></li>
     </ul>

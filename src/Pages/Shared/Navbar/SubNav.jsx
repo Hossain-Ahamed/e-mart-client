@@ -27,11 +27,13 @@ const SubNav = () => {
     <li className='text-semibold'><Link to="/">Home</Link></li>
     <li className='text-semibold'><Link to="/about">About</Link></li>
     <li className='text-semibold'><Link to="/reviews">Reviews</Link></li>
+    <li className='text-semibold'><Link to="/dashboard">Dashboard</Link></li>
     {user?.uid ?
       <li className='text-semibold'><button onClick={handleLogOut}>LogOut</button></li>
       :
       <li className='text-semibold'><Link to="/login">Login</Link></li>
     }
+
     </>
     return (
         <>
