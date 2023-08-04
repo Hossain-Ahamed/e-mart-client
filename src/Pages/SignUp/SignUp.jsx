@@ -4,33 +4,34 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const {createUser, updateUserProfile} = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleSignUp = (data) => {
+    const handleSignUp = data => {
         
         createUser(data.email, data.password)
         .then(result =>{
-            const user = result.user;
-            
+          const user = result.user;
+            console.log(user)
             updateUserProfile(data.name)
             .then(() => {
               const saveUser = { name: data.name, email: data.email}
+              // axios.post('http://localhost:5000/users', saveUser, {withCredentials: true})
               fetch('http://localhost:5000/users', {
-                method: 'POST',
-                headers: {
-                  'content-type': 'application/json'
-                },
-                body: JSON.stringify(saveUser)
-              })
-              .then(res => res.json())
-              .then(data => {
-                if (data.insertedId){
-                  
-                  reset();
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.insertedId) {
+                                reset();
                   Swal.fire({
                     position: 'top-end',
                     icon: 'success',

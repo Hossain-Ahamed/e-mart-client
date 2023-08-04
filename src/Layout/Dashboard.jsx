@@ -1,12 +1,18 @@
 import React from 'react';
 import { BsCart3 } from 'react-icons/bs';
 import { AiOutlineUser, AiOutlineHome } from 'react-icons/ai';
-import { BiCalendar } from 'react-icons/bi';
-import { IoWalletOutline } from 'react-icons/io5';
+import { BiCalendar, BiCategory } from 'react-icons/bi';
+import { IoWalletOutline, IoSettingsOutline } from 'react-icons/io5';
+import { MdAddCard } from "react-icons/md";
+import { HiOutlineUserGroup } from "react-icons/hi";
+// import { MdAddCard } from "react-icons/md";
 import { Link, Outlet } from 'react-router-dom';
+import useAdmin from '../Hooks/useAdmin';
 
 const Dashboard = () => {
-  const isAdmin = true;
+  // const isAdmin = true;
+
+  const [isAdmin] = useAdmin();
     return (
         <>
         <div className="drawer drawer-mobile">
@@ -23,9 +29,10 @@ const Dashboard = () => {
         isAdmin ? 
         <>
          <li><Link><AiOutlineUser></AiOutlineUser>Admin Home</Link></li>
-      <li><Link><BiCalendar />Reservation</Link></li>
-      <li><Link><IoWalletOutline />Payment History</Link></li>
-      <li><Link to="/dashboard/allUsers"><BsCart3 />All Users</Link></li>
+      <li><Link><BiCategory />Categories</Link></li>
+      <li><Link to="/dashboard/addProduct"><MdAddCard />Add Product</Link></li>
+      <li><Link to="/dashboard/allUsers"><HiOutlineUserGroup />All Users</Link></li>
+      <li><Link to="/dashboard/allUsers"><IoSettingsOutline />Home Page Settings</Link></li>
         </> 
         : 
         <>

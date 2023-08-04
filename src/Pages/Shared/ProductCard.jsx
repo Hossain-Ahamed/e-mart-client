@@ -21,7 +21,7 @@ const ProductCard = ({showProduct}) => {
     return (
         <>
             <Link to={`/overView/${_id}`}>
-            <div className="w-32 md:w-52 border">
+            <div className="w-32 h-96 md:w-52 border">
                       <div
                         className="relative"
                         onMouseEnter={() => handleMouseEnter(showProduct)}
@@ -29,7 +29,7 @@ const ProductCard = ({showProduct}) => {
                       >
                         <figure>
                           <img
-                            className="w-32 h-40 md:h-72 md:w-52"
+                            className="w-32 h-40 md:h-64 md:w-52"
                             src={img}
                             alt={name}
                           />
@@ -44,7 +44,7 @@ const ProductCard = ({showProduct}) => {
                       <hr className='mb-1'/>
                       <div className="border-t-2">
                         <div className="my-1 text-center">
-                          <p className="text-gray-700">
+                          <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden px-3">
                             {name}
                           </p>
                           <p className="flex text-green-700 font-bold lg:text-xl justify-center my-1">
