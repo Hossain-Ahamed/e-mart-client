@@ -18,6 +18,9 @@ import ProductOverView from "../../Pages/OverView/ProductOverView";
 import AllUsers from "../../Pages/Dashboard/Dashboard/AdminDashboard/AllUsers";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import AddProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddProduct";
+import UploadCategory from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadCategory";
+import HomePageLayout from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/HomePageLayout";
+import UpdateTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateTopBanner";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +48,10 @@ const router = createBrowserRouter([
         {
           path: "/allproducts",
           element: <AllProducts></AllProducts>
+        },
+        {
+          path: "/categoryPages/:id",
+          element: <PagesForCategory></PagesForCategory>
         },
         {
           path: "/mensFashion",
@@ -83,7 +90,20 @@ const router = createBrowserRouter([
         {
           path: 'addProduct',
           element: <AdminRoute><AddProduct></AddProduct></AdminRoute>
-        }
+        },
+        {
+          path: 'upload-category',
+          element: <AdminRoute><UploadCategory></UploadCategory></AdminRoute>
+        },
+        {
+          path: 'upload-category/:category_slug/home-page-layout',
+          element: <AdminRoute><HomePageLayout></HomePageLayout></AdminRoute>
+        },
+        {
+          path: 'upload-category/:category_slug/upload-top-banner',
+          element: <AdminRoute><UpdateTopBanner></UpdateTopBanner></AdminRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/categories/${params.category_slug}`)
+        },
       ]
     }
   ]);

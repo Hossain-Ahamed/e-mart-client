@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsCart3 } from 'react-icons/bs';
 import { AiOutlineUser, AiOutlineHome } from 'react-icons/ai';
-import { BiCalendar, BiCategory } from 'react-icons/bi';
+import { BiCalendar, BiCategory, BiDuplicate } from 'react-icons/bi';
 import { IoWalletOutline, IoSettingsOutline } from 'react-icons/io5';
 import { MdAddCard } from "react-icons/md";
 import { HiOutlineUserGroup } from "react-icons/hi";
@@ -29,10 +29,10 @@ const Dashboard = () => {
         isAdmin ? 
         <>
          <li><Link><AiOutlineUser></AiOutlineUser>Admin Home</Link></li>
-      <li><Link><BiCategory />Categories</Link></li>
+      <li><Link to="/dashboard/upload-category"><BiDuplicate />Add New Category</Link></li>
       <li><Link to="/dashboard/addProduct"><MdAddCard />Add Product</Link></li>
       <li><Link to="/dashboard/allUsers"><HiOutlineUserGroup />All Users</Link></li>
-      <li><Link to="/dashboard/allUsers"><IoSettingsOutline />Home Page Settings</Link></li>
+      <li><Link to="/dashboard/homePageSettings"><BiCategory />All Categories</Link></li>
         </> 
         : 
         <>

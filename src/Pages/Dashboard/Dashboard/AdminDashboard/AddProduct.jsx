@@ -1,15 +1,56 @@
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import useCategory from "../../../../Hooks/useCategory";
+import slugify from "slugify";
 
 const AddProduct = () => {
+  const [category] = useCategory();
+  console.log(category)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(errors);
+
+  const img_hosting_token = "2f18d2acff1da26cc85eee5c8407a95f"
+
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+
+  const onSubmit = data => {
+    const formData = new FormData();
+    formData.append('image', data.image[0])
+    fetch(img_hosting_url,{
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(imgResponse => {
+      if(imgResponse.success){
+        const imgURL = imgResponse.data.display_url;
+        const {productTitle, des, image, buyingPrice, sellingPrice, weight, size, bestDeal, category, subCategory, quantity} = data;
+
+        const newProduct = {productTitle, des, image: imgURL, buyingPrice: parseFloat(buyingPrice), sellingPrice: parseFloat(sellingPrice), weight: parseFloat(weight), size, bestDeal, category, subCategory, quantity: parseFloat(quantity), productSlug: slugify(productTitle)}
+        console.log(newProduct);
+        axios.post('http://localhost:5000/products', newProduct, { withCredentials: true })
+        .then(data => {
+          console.log('new', data.data);
+          if(data.data.insertedId){
+            reset();
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'One new product added',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }
+        })
+      }
+    })
   };
   return (
     <>
@@ -27,7 +68,7 @@ const AddProduct = () => {
                   type="text"
                   placeholder="Product Title"
                   className="input input-bordered rounded-md"
-                  {...register("Product Title", { required: true })}
+                  {...register("productTitle", { required: true })}
                 />
               </div>
               <div className="form-control">
@@ -36,7 +77,7 @@ const AddProduct = () => {
                 </label>
                 <textarea 
                 className="textarea textarea-bordered rounded-md h-24"
-                {...register("Description", { required: true })}
+                {...register("des", { required: true })}
                 ></textarea>
               </div>
               <div className="form-control">
@@ -46,7 +87,7 @@ const AddProduct = () => {
                 <input
                   type="file"
                   className="file-input file-input-bordered rounded-md"
-                  {...register("Product Image", { required: true })}
+                  {...register("image", { required: true })}
                 />
               </div>
             </div>
@@ -60,7 +101,7 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("Buying Price", { required: true })}
+                    {...register("buyingPrice", { required: true })}
                   />
                 </div>
                 <div className="form-control w-full max-w-xs">
@@ -70,7 +111,7 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("Selling Price", { required: true })}
+                    {...register("sellingPrice", { required: true })}
                   />
                 </div>
               </div>
@@ -82,7 +123,7 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("Weight", { required: true })}
+                    {...register("weight", { required: true })}
                   />
                 </div>
                 <div className="form-control w-full max-w-xs">
@@ -90,7 +131,7 @@ const AddProduct = () => {
                     <span className="label-text">Size</span>
                   </label>
                   <select
-                    {...register("Size", { required: true })}
+                    {...register("size", { required: true })}
                     className="select select-bordered rounded-md w-full max-w-xs"
                   >
                     <option value="XS">
@@ -110,17 +151,17 @@ const AddProduct = () => {
                   <span className="label-text">Category</span>
                 </label>
                 <select
-                  {...register("Category", { required: true })}
+                  {...register("category", { required: true })}
                   className="select select-bordered rounded-md"
                 >
-                  <option value="XS">
-                    XS
+                  {
+                    category.map(categories => (
+                      <option key={categories._id}
+                       value={categories.name}>
+                    {categories.name}
                   </option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
-                  <option value="XXL">XXL</option>
+                    ))
+                  }
                 </select>
               </div>
               <div className="form-control">
@@ -128,7 +169,7 @@ const AddProduct = () => {
                   <span className="label-text">Sub-Category</span>
                 </label>
                 <select
-                  {...register("SubCategory", { required: true })}
+                  {...register("subCategory", { required: true })}
                   className="select select-bordered rounded-md"
                 >
                   <option value="XS">
@@ -147,7 +188,8 @@ const AddProduct = () => {
                   <input
                     type="checkbox"
                     className="checkbox"
-                    {...register("BestDeal", { required: true })}
+                    {...register("bestDeal", { required: true })}
+                    defaultChecked={true}
                   />
                 </label>
               </div>
@@ -158,7 +200,7 @@ const AddProduct = () => {
                 <input
                   type="text"
                   className="input input-bordered rounded-md"
-                  {...register("Quantity", { required: true })}
+                  {...register("quantity", { required: true })}
                 />
               </div>
               <input type="submit" className="w-full h-10 bg-blue-500 text-white font-bold rounded-md mt-5" value="Add New Product"/>
