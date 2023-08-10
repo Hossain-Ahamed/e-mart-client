@@ -5,8 +5,6 @@ import useCategory from "../../../../../Hooks/useCategory";
 const HomePageLayout = () => {
   const {category_slug} = useParams();
   
-  // const location = useLocation();
-  // const categorySlug = new URLSearchParams(location.search).get('categorySlug');
   console.log(category_slug);
   return (
     <>
@@ -27,6 +25,7 @@ const HomePageLayout = () => {
       </div>
 
       <div className="bg-gray-200 w-80 h-16 mx-auto">
+      <Link to={`/dashboard/upload-category/${category_slug}/upload-second-banner`}><button className="text-center w-96">For Second Banner Click Here</button></Link>
       </div>
 
       <h3 className="text-center my-3">Trending Products</h3>
@@ -40,6 +39,7 @@ const HomePageLayout = () => {
 
       <div className="flex gap-5 px-5">
       <div className="bg-gray-200 w-40 h-16 mx-auto">
+      <Link to={`/dashboard/upload-category/${category_slug}/upload-bottom-banner`}><button className="text-center w-96">For Bottom Banner Click Here</button></Link>
       </div>
       <div className="bg-gray-200 w-40 h-16 mx-auto">
       </div>

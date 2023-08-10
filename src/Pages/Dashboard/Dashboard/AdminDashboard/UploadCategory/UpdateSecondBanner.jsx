@@ -1,18 +1,11 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useLoaderData, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
-import useCategory from "../../../../../Hooks/useCategory";
+import axios from 'axios';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const UpdateTopBanner = () => {
-  const banner = useLoaderData();
-  console.log(banner)
-  const [category] = useCategory();
-  console.log(category);
-  const [topBanner, setTopBanner] = useState();
-  const [selectedImage, setSelectedImage] = useState(null);
-  const { category_slug } = useParams();
+const UpdateSecondBanner = () => {
+    const { category_slug } = useParams();
   const categorySlug = category_slug;
   const {
     register,
@@ -41,11 +34,11 @@ const UpdateTopBanner = () => {
         if (imgResponse.success) {
           const imgURL = imgResponse.data.display_url;
           const { image } = data;
-          setValue("topBannerImage", image);
-         // console.log(imgURL);
+          setValue("secondBannerImage", image);
+         console.log(imgURL);
 
-          const updatedCategory = { topBannerImage: imgURL };
-          //console.log(updatedCategory);
+          const updatedCategory = { secondBannerImage: imgURL };
+          console.log(updatedCategory);
           axios
             .patch(
               `http://localhost:5000/categories/${category_slug}`,
@@ -61,7 +54,7 @@ const UpdateTopBanner = () => {
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
-                  title: "Category updated successfully",
+                  title: "Second Banner updated successfully",
                   showConfirmButton: false,
                   timer: 1500,
                 });
@@ -70,29 +63,16 @@ const UpdateTopBanner = () => {
         }
       });
   };
-
-  const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
-    }
-  };
-
-  // axios.get(`http://localhost:5000/categories/${category._id}`, {withCredentials: true})
-  // .then(data =>{
-  //   console.log(data)
-  // })
-
-
-
-
-  return (
-    <>
-      <div className="w-full h-full">
+    return (
+        
+            
+        <>
+        <div className='w-full h-full'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
             className={`w-64 h-64 lg:w-80 lg:h-20 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
           >
-            {!selectedImage && (
+            {/* {!selectedImage && ( */}
             <>
               <div className="icon absolute top-3 right-3">
                 <svg
@@ -146,20 +126,20 @@ const UpdateTopBanner = () => {
                 <p className="text-gray-500">place an .png image</p>
               </div>
             </>
-            )}
-            {selectedImage && (
+            {/* )} */}
+            {/* {selectedImage && (
             <img
               src={selectedImage}
               alt="Uploaded"
-              className="w-full h-64 md:h-80 lg:w-80 lg:h-20 rounded-2xl object-contain"
+              className="w-full h-64 md:h-80 lg:h-96 rounded-2xl object-contain"
             />
-          )} 
+          )} */}
             <input
               type="file"
               className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"
               {...register("image", { required: true })}
 
-              onChange={handleImageChange}
+              //onChange={handleImageUpload0}
             />
           </div>
           <input
@@ -169,65 +149,11 @@ const UpdateTopBanner = () => {
           />
         </form>
 
-        <div>
-        <table className="table">
-                  {/* head */}
-                  <thead>
-                    <tr>
-                  
-                      <th>Name</th>
-                      <th>Job</th>
-                      
-                      <th></th>
-                    </tr>
-                  </thead>
-                  
-          {category.map((categories) => (
-            <tbody key={categories._id} categories={categories}>
-              
-                
-                  
-                    {/* row 1 */}
-                    <tr>
-                      
-                      
-                      <td>
-                      {categories.name}
-                        
-                      </td>
-                      <td>
-                        <div className="flex items-center space-x-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                              <img
-                                src={categories.topBannerImage}
-                                alt="Avatar Tailwind CSS Component"
-                              />
-                            </div>
-                          </div>
-                          
-                        </div>
-                      </td>
-                      
-                      <th>
-                        <button className="btn btn-ghost btn-xs">
-                          details
-                        </button>
-                      </th>
-                    </tr>
-                  </tbody>
-               
-              
-              
-              // <img src={categories.topBannerImage} alt="" />
-            
-          ))}
-          
-           </table>
         </div>
-      </div>
-    </>
-  );
+        </>
+
+
+    );
 };
 
-export default UpdateTopBanner;
+export default UpdateSecondBanner;

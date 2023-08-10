@@ -21,6 +21,11 @@ import AddProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddProduc
 import UploadCategory from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadCategory";
 import HomePageLayout from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/HomePageLayout";
 import UpdateTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateTopBanner";
+import UpdateSecondBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateSecondBanner";
+import UpdateBottomBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomBanner";
+import ManageProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/ManageProduct";
+import UserHome from "../../Pages/Dashboard/Dashboard/UserHome/UserHome";
+import AdminHome from "../../Pages/Dashboard/Dashboard/AdminDashboard/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
     {
@@ -80,16 +85,28 @@ const router = createBrowserRouter([
       element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
       children: [
         {
+          path: "user-home",
+          element: <UserHome></UserHome>
+        },
+        {
           path: "myCart",
           element: <MyCart></MyCart>
         },
         {
           path: "allUsers",
-          element: <AllUsers></AllUsers>
+          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+        },
+        {
+          path: "admin-home",
+          element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
         },
         {
           path: 'addProduct',
           element: <AdminRoute><AddProduct></AddProduct></AdminRoute>
+        },
+        {
+          path: 'manageProduct',
+          element: <AdminRoute><ManageProduct></ManageProduct></AdminRoute>
         },
         {
           path: 'upload-category',
@@ -103,6 +120,14 @@ const router = createBrowserRouter([
           path: 'upload-category/:category_slug/upload-top-banner',
           element: <AdminRoute><UpdateTopBanner></UpdateTopBanner></AdminRoute>,
           loader: ({params}) => fetch(`http://localhost:5000/categories/${params.category_slug}`)
+        },
+        {
+          path: 'upload-category/:category_slug/upload-second-banner',
+          element: <AdminRoute><UpdateSecondBanner></UpdateSecondBanner></AdminRoute>,
+        },
+        {
+          path: 'upload-category/:category_slug/upload-bottom-banner',
+          element: <AdminRoute><UpdateBottomBanner></UpdateBottomBanner></AdminRoute>,
         },
       ]
     }
