@@ -1,59 +1,131 @@
-import React from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import useCategory from "../../../../../Hooks/useCategory";
+import React, { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Layout1 from "../../../../../Component/HomeLayout/Layout1";
+import Layout2 from "../../../../../Component/HomeLayout/Layout2";
+import Layout3 from "../../../../../Component/HomeLayout/Layout3";
+import axios from "axios";
 
 const HomePageLayout = () => {
-  const {category_slug} = useParams();
-  
+  const { category_slug } = useParams();
+  const { layout } = useParams();
+  // console.log(layout)
+  const [activeContent, setActiveContent] = useState("content1");
+
+  const handleContentSwitch = (contentId) => {
+    setActiveContent(contentId);
+  };
+
+  const navigate = useNavigate();
+
+  const handleLayoutSelect = async (selectedLayout) => {
+    try {
+      
+      console.log("Selected Layout:", selectedLayout);
+      const response = await axios.patch(
+        `http://localhost:5000/categories/${category_slug}/layout`,
+        {layout: selectedLayout},
+        { withCredentials: true }
+      );
+
+      // Debug: Log the response from the server
+      console.log("Server Response:", response.data);
+
+      // Handle the response if needed
+      console.log("Category updated:", response.data.message);
+      navigate(`/dashboard/upload-category/${category_slug}/home-page-layout/${selectedLayout}`)
+    } catch (error) {
+      // Debug: Log the error
+      console.error("Error updating category:", error);
+
+      // Handle errors if the request fails
+      if (error.response) {
+        console.error("Error response from server:", error.response.data);
+      } else {
+        console.error("Network error:", error.message);
+      }
+    }
+  };
+
   console.log(category_slug);
   return (
     <>
-      <div className="h-full w-full">
-        <h1>LayOut</h1>
-      <div className="border-2 w-96 m-3">
-      <div className="bg-gray-200 w-96 h-20">
-        <Link to={`/dashboard/upload-category/${category_slug}/upload-top-banner`}><button className="text-center w-96">For Top Banner Click Here</button></Link>
-      </div>
+      <div className="h-full mt-5">
+        <h1 className="text-center text-2xl font-bold text-yellow-600 my-10">
+          LayOut
+        </h1>
 
-        <h3 className="m-3">Category</h3>
-      <div className="flex gap-3 my-5 mx-2">
-        <div className="border bg-gray-200 rounded-full w-16 h-16"></div>
-        <div className="border bg-gray-200 rounded-full w-16 h-16"></div>
-        <div className="border bg-gray-200 rounded-full w-16 h-16"></div>
-        <div className="border bg-gray-200 rounded-full w-16 h-16"></div>
-        <div className="border bg-gray-200 rounded-full w-16 h-16"></div>
-      </div>
+        <div className="flex gap-4 mb-4">
+          <button
+            className={`px-4 py-2 text-lg ${
+              activeContent === "content1"
+                ? "bg-yellow-600 text-white font-bold"
+                : " bg-slate-300 text-black font-bold"
+            }`}
+            onClick={() => handleContentSwitch("content1")}
+          >
+            LayOut 1
+          </button>
+          <button
+            className={`px-4 py-2 text-lg ${
+              activeContent === "content2"
+                ? "bg-yellow-600 text-white font-bold"
+                : " bg-slate-300 text-black font-bold"
+            }`}
+            onClick={() => handleContentSwitch("content2")}
+          >
+            LayOut 2
+          </button>
+          <button
+            className={`px-4 py-2 text-lg ${
+              activeContent === "content3"
+                ? "bg-yellow-600 text-white font-bold"
+                : " bg-slate-300 text-black font-bold"
+            }`}
+            onClick={() => handleContentSwitch("content3")}
+          >
+            LayOut 3
+          </button>
+        </div>
 
-      <div className="bg-gray-200 w-80 h-16 mx-auto">
-      <Link to={`/dashboard/upload-category/${category_slug}/upload-second-banner`}><button className="text-center w-96">For Second Banner Click Here</button></Link>
-      </div>
+        <div className="p-4">
+          {activeContent === "content1" && (
+            <div>
+              {" "}
+              <button
+                onClick={() => handleLayoutSelect(1)} // Pass the selected layout (1)
+                className="w-36 h-10 text-gray-700 font-bold bg-slate-300 m-3"
+              >
+                Select Layout 1
+              </button>
+              <Layout1></Layout1>
+            </div>
+          )}
 
-      <h3 className="text-center my-3">Trending Products</h3>
-      <div className="flex gap-3 my-5 mx-2">
-        <div className="border bg-gray-200 w-16 h-20"></div>
-        <div className="border bg-gray-200 w-16 h-20"></div>
-        <div className="border bg-gray-200 w-16 h-20"></div>
-        <div className="border bg-gray-200 w-16 h-20"></div>
-        <div className="border bg-gray-200 w-16 h-20"></div>
-      </div>
+          {activeContent === "content2" && (
+            <div>
+              <button
+                onClick={() => handleLayoutSelect(2)}
+                className="w-20 h-8 border-2 text-gray-700"
+              >
+                Select
+              </button>
 
-      <div className="flex gap-5 px-5">
-      <div className="bg-gray-200 w-40 h-16 mx-auto">
-      <Link to={`/dashboard/upload-category/${category_slug}/upload-bottom-banner`}><button className="text-center w-96">For Bottom Banner Click Here</button></Link>
-      </div>
-      <div className="bg-gray-200 w-40 h-16 mx-auto">
-      </div>
-      </div>
+              <Layout2></Layout2>
+            </div>
+          )}
 
-      <h3 className="m-3">All Products</h3>
-      <div className="flex gap-3 my-5 mx-2">
-        <div className="border bg-gray-200 w-16 h-20"></div>
-        <div className="border bg-gray-200 w-16 h-20"></div>
-        <div className="border bg-gray-200 w-16 h-20"></div>
-        <div className="border bg-gray-200 w-16 h-20"></div>
-        <div className="border bg-gray-200 w-16 h-20"></div>
-      </div>
-      </div>
+          {activeContent === "content3" && (
+            <div>
+              <button
+                onClick={() => handleLayoutSelect(3)}
+                className="w-20 h-8 border-2 text-gray-700"
+              >
+                Select
+              </button>
+              <Layout3></Layout3>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

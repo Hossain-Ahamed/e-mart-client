@@ -3,14 +3,21 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import useCategory from "../../../../../Hooks/useCategory";
+
+export async function loader({params}) {
+  try {    
+    const response = await axios.get(`http://localhost:5000/upload-category/${params.category_slug}/upload-top-banner`);
+    
+    const banner = response.data;
+    return { banner };
+  } catch (error) { 
+    throw {error}
+  }
+}
 
 const UpdateTopBanner = () => {
-  const banner = useLoaderData();
-  console.log(banner)
-  const [category] = useCategory();
-  console.log(category);
-  const [topBanner, setTopBanner] = useState();
+  
+  const { banner } = useLoaderData();
   const [selectedImage, setSelectedImage] = useState(null);
   const { category_slug } = useParams();
   const categorySlug = category_slug;
@@ -27,7 +34,7 @@ const UpdateTopBanner = () => {
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const onSubmit = (data) => {
-   // console.log(data);
+    //console.log(data);
 
     const formData = new FormData();
     formData.append("image", data.image[0]);
@@ -42,7 +49,7 @@ const UpdateTopBanner = () => {
           const imgURL = imgResponse.data.display_url;
           const { image } = data;
           setValue("topBannerImage", image);
-         // console.log(imgURL);
+          //console.log(imgURL);
 
           const updatedCategory = { topBannerImage: imgURL };
           //console.log(updatedCategory);
@@ -55,7 +62,7 @@ const UpdateTopBanner = () => {
               }
             )
             .then((data) => {
-              console.log("updated", data.data);
+             // console.log("updated", data.data);
               if (data.data.modifiedCount === 1) {
                 reset();
                 Swal.fire({
@@ -77,14 +84,7 @@ const UpdateTopBanner = () => {
     }
   };
 
-  // axios.get(`http://localhost:5000/categories/${category._id}`, {withCredentials: true})
-  // .then(data =>{
-  //   console.log(data)
-  // })
-
-
-
-
+  
   return (
     <>
       <div className="w-full h-full">
@@ -182,8 +182,8 @@ const UpdateTopBanner = () => {
                     </tr>
                   </thead>
                   
-          {category.map((categories) => (
-            <tbody key={categories._id} categories={categories}>
+          
+            <tbody>
               
                 
                   
@@ -192,10 +192,19 @@ const UpdateTopBanner = () => {
                       
                       
                       <td>
-                      {categories.name}
+                      {banner.name}
                         
                       </td>
                       <td>
+            {banner?.topBannerImage?.map((image, index) => (
+              <div key={index} className="avatar">
+                <div className="mask mask-squircle w-12 h-12">
+                  <img src={image} alt={`Banner ${index}`} />
+                </div>
+              </div>
+            ))}
+          </td>
+                      {/* <td>
                         <div className="flex items-center space-x-3">
                           <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
@@ -207,7 +216,7 @@ const UpdateTopBanner = () => {
                           </div>
                           
                         </div>
-                      </td>
+                      </td> */}
                       
                       <th>
                         <button className="btn btn-ghost btn-xs">
@@ -218,11 +227,7 @@ const UpdateTopBanner = () => {
                   </tbody>
                
               
-              
-              // <img src={categories.topBannerImage} alt="" />
-            
-          ))}
-          
+             
            </table>
         </div>
       </div>

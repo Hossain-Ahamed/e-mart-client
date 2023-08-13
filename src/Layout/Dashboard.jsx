@@ -30,10 +30,11 @@ const Dashboard = () => {
         <>
          <li><Link to="/dashboard/admin-home"><AiOutlineUser></AiOutlineUser>Admin Home</Link></li>
       <li><Link to="/dashboard/upload-category"><BiDuplicate />Add New Category</Link></li>
+      <li><Link to="/dashboard/add-sub-category"><BiDuplicate />Add New Sub Category</Link></li>
       <li><Link to="/dashboard/addProduct"><MdAddCard />Add Product</Link></li>
       <li><Link to="/dashboard/manageProduct"><AiOutlineCreditCard />Manage Product</Link></li>
       <li><Link to="/dashboard/allUsers"><HiOutlineUserGroup />All Users</Link></li>
-      <li><Link to="/dashboard/homePageSettings"><BiCategory />All Categories</Link></li>
+      <li><Link to="/dashboard/all-categories"><BiCategory />All Categories</Link></li>
         </> 
         : 
         <>

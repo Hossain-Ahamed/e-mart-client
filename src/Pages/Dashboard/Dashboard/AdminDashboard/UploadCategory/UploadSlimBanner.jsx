@@ -1,11 +1,23 @@
-import axios from 'axios';
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import axios from "axios";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useLoaderData, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const UpdateBottomBanner = () => {
-    const { category_slug } = useParams();
+export async function loader({params}) {
+  try {    
+    const response = await axios.get(`http://localhost:5000/upload-category/${params.category_slug}/upload-slim-banner`);
+    
+    const banner = response.data;
+    return { banner };
+  } catch (error) { 
+    throw {error}
+  }
+}
+const UploadSlimBanner = () => {
+    const { banner } = useLoaderData();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const { category_slug } = useParams();
   const categorySlug = category_slug;
   const {
     register,
@@ -20,7 +32,7 @@ const UpdateBottomBanner = () => {
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const onSubmit = (data) => {
-   // console.log(data);
+    //console.log(data);
 
     const formData = new FormData();
     formData.append("image", data.image[0]);
@@ -34,44 +46,51 @@ const UpdateBottomBanner = () => {
         if (imgResponse.success) {
           const imgURL = imgResponse.data.display_url;
           const { image } = data;
-          setValue("topBannerImage", image);
-          console.log(imgURL);
+          setValue("slimBannerImage", image);
+          //console.log(imgURL);
 
-          const updatedCategory = { topBannerImage: imgURL };
-          console.log(updatedCategory);
-        //   axios
-        //     .patch(
-        //       `http://localhost:5000/categories/${category_slug}`,
-        //       updatedCategory,
-        //       {
-        //         withCredentials: true,
-        //       }
-        //     )
-        //     .then((data) => {
-        //       console.log("updated", data.data);
-        //       if (data.data.modifiedCount === 1) {
-        //         reset();
-        //         Swal.fire({
-        //           position: "top-end",
-        //           icon: "success",
-        //           title: "Category updated successfully",
-        //           showConfirmButton: false,
-        //           timer: 1500,
-        //         });
-        //       }
-        //     });
+          const updatedCategory = { slimBannerImage: imgURL };
+          //console.log(updatedCategory);
+          axios
+            .patch(
+              `http://localhost:5000/categories/${category_slug}`,
+              updatedCategory,
+              {
+                withCredentials: true,
+              }
+            )
+            .then((data) => {
+             // console.log("updated", data.data);
+              if (data.data.modifiedCount === 1) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Category updated successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+            });
         }
       });
   };
 
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
+    }
+  };
+
     return (
+        <>
         <div className="w-full h-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
             className={`w-64 h-64 lg:w-80 lg:h-20 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
           >
-            {/* {!selectedImage && ( */}
-            
+            {!selectedImage && (
+            <>
               <div className="icon absolute top-3 right-3">
                 <svg
                   width="28"
@@ -123,34 +142,94 @@ const UpdateBottomBanner = () => {
                 <p className="text-gray-500">440 x 440</p>
                 <p className="text-gray-500">place an .png image</p>
               </div>
-           
-            {/* )} */}
-            {/* {selectedImage && (
+            </>
+            )}
+            {selectedImage && (
             <img
               src={selectedImage}
               alt="Uploaded"
-              className="w-full h-64 md:h-80 lg:h-96 rounded-2xl object-contain"
+              className="w-full h-64 md:h-80 lg:w-80 lg:h-20 rounded-2xl object-contain"
             />
-          )} */}
+          )} 
             <input
               type="file"
               className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"
               {...register("image", { required: true })}
 
-              //onChange={handleImageUpload0}
+              onChange={handleImageChange}
             />
           </div>
-          
-
-
           <input
             type="submit"
             className="cursor-pointer w-full h-10 bg-blue-500 text-white font-bold rounded-md mt-5"
             value="New Banner"
           />
         </form>
+
+        <div>
+        <table className="table">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                  
+                      <th>Name</th>
+                      <th>Job</th>
+                      
+                      <th></th>
+                    </tr>
+                  </thead>
+                  
+          
+            <tbody>
+              
+                
+                  
+                    {/* row 1 */}
+                    <tr>
+                      
+                      
+                      <td>
+                      {banner.name}
+                        
+                      </td>
+                      <td>
+            {banner?.slimBannerImage?.map((image, index) => (
+              <div key={index} className="avatar">
+                <div className="mask mask-squircle w-12 h-12">
+                  <img src={image} alt={`Banner ${index}`} />
+                </div>
+              </div>
+            ))}
+          </td>
+                      {/* <td>
+                        <div className="flex items-center space-x-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle w-12 h-12">
+                              <img
+                                src={categories.topBannerImage}
+                                alt="Avatar Tailwind CSS Component"
+                              />
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </td> */}
+                      
+                      <th>
+                        <button className="btn btn-ghost btn-xs">
+                          details
+                        </button>
+                      </th>
+                    </tr>
+                  </tbody>
+               
+              
+             
+           </table>
         </div>
+      </div>
+        </>
     );
 };
 
-export default UpdateBottomBanner;
+export default UploadSlimBanner;
