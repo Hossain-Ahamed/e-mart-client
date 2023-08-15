@@ -10,7 +10,7 @@ const ProductOverView = () => {
 
     const {img, name, price, mainPrice} = showProduct;
 
-      const handleAddToCart = useAddToCart();
+    const handleAddToCart = useAddToCart();
     return (
         <>
             

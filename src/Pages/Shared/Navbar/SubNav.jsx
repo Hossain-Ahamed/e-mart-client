@@ -5,10 +5,13 @@ import { AuthContext } from '../../../Contexts/AuthProvider';
 import { MdShoppingCart } from "react-icons/md";
 import { LuMenu } from "react-icons/lu";
 import useCart from '../../../Hooks/useCart';
+import useAdmin from '../../../Hooks/useAdmin';
 
 const SubNav = () => {
   const {user, logOut} = useContext(AuthContext);
   const [cart] = useCart();
+
+  const [isAdmin] = useAdmin();
 
   const handleLogOut = () => {
     logOut()
@@ -27,7 +30,11 @@ const SubNav = () => {
     <li className='text-semibold'><Link to="/">Home</Link></li>
     <li className='text-semibold'><Link to="/about">About</Link></li>
     <li className='text-semibold'><Link to="/reviews">Reviews</Link></li>
-    <li className='text-semibold'><Link to="/dashboard">Dashboard</Link></li>
+    {
+      isAdmin ? <li className='text-semibold'><Link to="/dashboard/admin-home">Dashboard</Link></li>
+      :
+      <li className='text-semibold'><Link to="/dashboard/user-home">Dashboard</Link></li>
+    }
     {user?.uid ?
       <li className='text-semibold'><button onClick={handleLogOut}>LogOut</button></li>
       :

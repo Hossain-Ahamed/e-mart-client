@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsCart3 } from 'react-icons/bs';
-import { AiOutlineUser, AiOutlineHome } from 'react-icons/ai';
-import { BiCalendar, BiCategory } from 'react-icons/bi';
+import { AiOutlineUser, AiOutlineHome, AiOutlineCreditCard } from 'react-icons/ai';
+import { BiCalendar, BiCategory, BiDuplicate } from 'react-icons/bi';
 import { IoWalletOutline, IoSettingsOutline } from 'react-icons/io5';
 import { MdAddCard } from "react-icons/md";
 import { HiOutlineUserGroup } from "react-icons/hi";
@@ -28,15 +28,17 @@ const Dashboard = () => {
       {
         isAdmin ? 
         <>
-         <li><Link><AiOutlineUser></AiOutlineUser>Admin Home</Link></li>
-      <li><Link><BiCategory />Categories</Link></li>
+         <li><Link to="/dashboard/admin-home"><AiOutlineUser></AiOutlineUser>Admin Home</Link></li>
+      <li><Link to="/dashboard/upload/upload-category"><BiDuplicate />Add New Category</Link></li>
+      <li><Link to="/dashboard/upload/upload-sub-category"><BiDuplicate />Add New Sub Category</Link></li>
       <li><Link to="/dashboard/addProduct"><MdAddCard />Add Product</Link></li>
+      <li><Link to="/dashboard/manageProduct"><AiOutlineCreditCard />Manage Product</Link></li>
       <li><Link to="/dashboard/allUsers"><HiOutlineUserGroup />All Users</Link></li>
-      <li><Link to="/dashboard/allUsers"><IoSettingsOutline />Home Page Settings</Link></li>
+      <li><Link to="/dashboard/all-categories"><BiCategory />All Categories</Link></li>
         </> 
         : 
         <>
-         <li><Link><AiOutlineUser></AiOutlineUser>User</Link></li>
+         <li><Link to="/dashboard/user-home"><AiOutlineUser></AiOutlineUser>User</Link></li>
       <li><Link><BiCalendar />Reservation</Link></li>
       <li><Link><IoWalletOutline />Payment History</Link></li>
       <li><Link to="/dashboard/myCart"><BsCart3 />My Cart</Link></li>
@@ -45,7 +47,7 @@ const Dashboard = () => {
       {/* Sidebar content here */}
      
       <div className='divider'></div>
-      <li><Link><AiOutlineHome />Home</Link></li>
+      <li><Link to="/"><AiOutlineHome />Home</Link></li>
     </ul>
   
   </div>
