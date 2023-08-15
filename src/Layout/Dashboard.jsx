@@ -29,8 +29,8 @@ const Dashboard = () => {
         isAdmin ? 
         <>
          <li><Link to="/dashboard/admin-home"><AiOutlineUser></AiOutlineUser>Admin Home</Link></li>
-      <li><Link to="/dashboard/upload-category"><BiDuplicate />Add New Category</Link></li>
-      <li><Link to="/dashboard/add-sub-category"><BiDuplicate />Add New Sub Category</Link></li>
+      <li><Link to="/dashboard/upload/upload-category"><BiDuplicate />Add New Category</Link></li>
+      <li><Link to="/dashboard/upload/upload-sub-category"><BiDuplicate />Add New Sub Category</Link></li>
       <li><Link to="/dashboard/addProduct"><MdAddCard />Add Product</Link></li>
       <li><Link to="/dashboard/manageProduct"><AiOutlineCreditCard />Manage Product</Link></li>
       <li><Link to="/dashboard/allUsers"><HiOutlineUserGroup />All Users</Link></li>

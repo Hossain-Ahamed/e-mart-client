@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 const Layout3 = () => {
-    const { category_slug } = useParams();
+    const { slug, type } = useParams();
     return (
         <>
         <div className='h-full border-2'>
@@ -10,7 +10,7 @@ const Layout3 = () => {
                 <div className=" bg-gray-200 w-36 h-24">
                   <div>
                     {/* <Link
-                to={`/dashboard/upload-category/${category_slug}/upload-top-banner`}
+                to={`/dashboard/upload/${type}/${slug}/upload-top-banner`}
               >
                 <button className="text-center w-96">
                   For Top Banner Click Here
@@ -28,7 +28,7 @@ const Layout3 = () => {
               <div className=" bg-gray-200 w-96 h-14 mb-4">
                 <div>
                   {/* <Link
-                to={`/dashboard/upload-category/${category_slug}/upload-top-banner`}
+                to={`/dashboard/upload/${type}/${slug}/upload-top-banner`}
               >
                 <button className="text-center w-96">
                   For Top Banner Click Here
@@ -46,7 +46,7 @@ const Layout3 = () => {
               </div>
               <div className="w-80 h-16 bg-gray-200 mx-auto">
                 <Link
-                  to={`/dashboard/upload-category/${category_slug}/upload-second-banner`}
+                  to={`/dashboard/upload/${type}/${slug}/upload-second-banner`}
                 >
                   <button className="text-center w-96">
                     For Second Banner Click Here
@@ -64,14 +64,14 @@ const Layout3 = () => {
               <div className="flex gap-5 px-5">
                 <div className="bg-gray-200 w-40 h-16 mx-auto">
                   <Link
-                    to={`/dashboard/upload-category/${category_slug}/upload-bottom-banner`}
+                    to={`/dashboard/upload/${type}/${slug}/upload-bottom-banner`}
                   >
                     <button className="text-center w-40">Click Here</button>
                   </Link>
                 </div>
                 <div className="bg-gray-200 w-40 h-16 mx-auto">
                   <Link
-                    to={`/dashboard/upload-category/${category_slug}/upload-bottom-second-banner`}
+                    to={`/dashboard/upload/${type}/${slug}/upload-bottom-second-banner`}
                   >
                     <button className="text-center w-40">Click Here</button>
                   </Link>

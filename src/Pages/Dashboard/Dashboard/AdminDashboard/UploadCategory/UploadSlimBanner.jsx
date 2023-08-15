@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 export async function loader({params}) {
   try {    
-    const response = await axios.get(`http://localhost:5000/upload-category/${params.category_slug}/upload-slim-banner`);
+    const response = await axios.get(`http://localhost:5000/upload-category/${params.slug}/upload-slim-banner`);
     
     const banner = response.data;
     return { banner };
@@ -17,8 +17,8 @@ export async function loader({params}) {
 const UploadSlimBanner = () => {
     const { banner } = useLoaderData();
   const [selectedImage, setSelectedImage] = useState(null);
-  const { category_slug } = useParams();
-  const categorySlug = category_slug;
+  const { slug } = useParams();
+  const categorySlug = slug;
   const {
     register,
     handleSubmit,
@@ -53,7 +53,7 @@ const UploadSlimBanner = () => {
           //console.log(updatedCategory);
           axios
             .patch(
-              `http://localhost:5000/categories/${category_slug}`,
+              `http://localhost:5000/categories/${slug}`,
               updatedCategory,
               {
                 withCredentials: true,

@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const UpdateSecondBanner = () => {
-    const { category_slug } = useParams();
-  const categorySlug = category_slug;
+    const { slug, type } = useParams();
+  const categorySlug = slug;
   const {
     register,
     handleSubmit,
@@ -41,7 +41,7 @@ const UpdateSecondBanner = () => {
           console.log(updatedCategory);
           axios
             .patch(
-              `http://localhost:5000/categories/${category_slug}`,
+              `http://localhost:5000/${type}/${slug}`,
               updatedCategory,
               {
                 withCredentials: true,

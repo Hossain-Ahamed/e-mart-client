@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export async function loader({params}) {
     try {
-      const response = await axios.get(`http://localhost:5000/upload-category/${params.category_slug}/upload-top-left-banner-layout2`);
+      const response = await axios.get(`http://localhost:5000/${params.type}/${params.slug}/upload-top-left-banner-layout2`);
 
       const banner = response.data;
       return { banner };
@@ -17,15 +17,14 @@ export async function loader({params}) {
 const TopLeftBannerLayout2 = () => {
     const { banner } = useLoaderData();
   console.log(banner)
+  const [banners, setBanners] = useState([]);
+  useEffect(() => {
+    setBanners(banner?.topLeftBannerLayout2);
 
-// Assuming 'topRightBannerLayout2' is a property of 'banner' (based on your previous code)
-// const { topRightBannerLayout2 } = banner || {};
-
-// Now you can destructure a single image URL from the 'topRightBannerLayout2' array
-// const [singleImageUrl, singleImageUrl2] = topRightBannerLayout2 || [];
+    }, [banner])
   const [selectedImage, setSelectedImage] = useState(null);
-  const { category_slug } = useParams();
-  const categorySlug = category_slug;
+  const { slug, type } = useParams();
+  
   const {
     register,
     handleSubmit,
@@ -60,7 +59,7 @@ const TopLeftBannerLayout2 = () => {
           console.log(updatedCategory);
           axios
             .patch(
-              `http://localhost:5000/categories/${category_slug}`,
+              `http://localhost:5000/${type}/${slug}`,
               updatedCategory,
               {
                 withCredentials: true,
@@ -68,9 +67,10 @@ const TopLeftBannerLayout2 = () => {
             )
             .then((data) => {
               console.log("updated", data.data);
-              if (data.data.modifiedCount === 1) {
+              if (data?.data?.result?.modifiedCount === 1) {
                 reset();
                 setSelectedImage(null);
+                setBanners([...banners, imgURL])
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
@@ -203,7 +203,7 @@ const TopLeftBannerLayout2 = () => {
                         
                       </td>
                       <td>
-            {banner?.topLeftBannerLayout2?.map((image, index) => (
+            {banners.map((image, index) => (
               <div key={index} 
               
               className="avatar">

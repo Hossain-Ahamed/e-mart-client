@@ -10,7 +10,7 @@ const UploadCategory = () => {
   // const [submitted, setSubmitted] = useState(false);
   // const [categorySlug, setCategorySlug] = useState(null);
   // const [category] = useCategory();
-  // const {_id, category_slug} = category;
+  // const {_id, slug} = category;
   const navigate = useNavigate();
   const {
     register,
@@ -38,7 +38,7 @@ const UploadCategory = () => {
           name,
           color,
           img: imgURL,
-          category_slug: slugify(name),
+          slug: slugify(name),
         };
         console.log(newCategory);
 
@@ -61,7 +61,7 @@ const UploadCategory = () => {
               });
 
               navigate(
-                `/dashboard/upload-category/${newCategory.category_slug}/home-page-layout`
+                `/dashboard/upload/upload-category/${newCategory.slug}/home-page-layout`
               );
             }
           })
@@ -117,7 +117,7 @@ const UploadCategory = () => {
             value="Add New Category"
           />
 
-          {/* <Link to={`/homePageLayout?categorySlug=${encodeURIComponent(newCategory.category_slug)}`}>
+          {/* <Link to={`/homePageLayout?categorySlug=${encodeURIComponent(newCategory.slug)}`}>
               
       </Link> */}
         </form>

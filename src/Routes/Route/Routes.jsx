@@ -42,6 +42,7 @@ import {loader as topLeftBannerLayout2Loader} from "../../Pages/Dashboard/Dashbo
 import UploadSlimBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadSlimBanner";
 import {loader as slimBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadSlimBanner";
 import AddSubCategory from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadSubCategory/AddSubCategory";
+import SelectType from "../../Pages/SelectType/SelectType";
 
 
 
@@ -132,16 +133,16 @@ const router = createBrowserRouter([
           element: <AdminRoute><AllCategories></AllCategories></AdminRoute>
         },
         {
-          path: 'upload-category',
-          element: <AdminRoute><UploadCategory></UploadCategory></AdminRoute>
+          path: 'upload/:type',
+          element: <AdminRoute><SelectType /></AdminRoute>
         },
         {
-          path: 'upload-category/:category_slug/home-page-layout',
+          path: 'upload/:type/:slug/home-page-layout',
           element: <AdminRoute><HomePageLayout></HomePageLayout></AdminRoute>
         },
         {
           
-          path: 'upload-category/:category_slug/home-page-layout/:layout',
+          path: 'upload/:type/:slug/home-page-layout/:layout',
           
           element: <AdminRoute>
             
@@ -150,45 +151,42 @@ const router = createBrowserRouter([
         },
         
         {
-          path: 'upload-category/:category_slug/upload-top-banner',
+          path: 'upload/:type/:slug/upload-top-banner',
           element: <AdminRoute><UpdateTopBanner></UpdateTopBanner></AdminRoute>,
           loader: updateTopBannerLoader ,
           errorElement: <Error /> 
         },
         {
-          path: 'upload-category/:category_slug/upload-second-banner',
+          path: 'upload/:type/:slug/upload-second-banner',
           element: <AdminRoute><UpdateSecondBanner></UpdateSecondBanner></AdminRoute>,
         },
         {
-          path: 'upload-category/:category_slug/upload-bottom-banner',
+          path: 'upload/:type/:slug/upload-bottom-banner',
           element: <AdminRoute><UpdateBottomBanner></UpdateBottomBanner></AdminRoute>,
         },
         {
-          path: 'upload-category/:category_slug/upload-bottom-second-banner',
+          path: 'upload/:type/:slug/upload-bottom-second-banner',
           element: <AdminRoute><UpdateBottomSecondBanner></UpdateBottomSecondBanner></AdminRoute>,
         },
         {
-          path: 'upload-category/:category_slug/upload-top-left-banner-layout2',
+          path: 'upload/:type/:slug/upload-top-left-banner-layout2',
           element: <AdminRoute><TopLeftBannerLayout2 /></AdminRoute>,
           loader: topLeftBannerLayout2Loader,
           errorElement: <Error />
         },
         {
-          path: 'upload-category/:category_slug/upload-top-right-banner-layout2',
+          path: 'upload/:type/:slug/upload-top-right-banner-layout2',
           element: <AdminRoute><TopRightBannerLayout2></TopRightBannerLayout2></AdminRoute>,
           loader: topRightBannerLayout2Loader,
           errorElement: <Error />
         },
         {
-          path: 'upload-category/:category_slug/upload-slim-banner',
+          path: 'upload/:type/:slug/upload-slim-banner',
           element: <AdminRoute><UploadSlimBanner /></AdminRoute>,
           loader: slimBannerLoader,
           errorElement: <Error />
         },
-        {
-          path: 'add-sub-category',
-          element: <AdminRoute><AddSubCategory /></AdminRoute>
-        }
+        
       ]
     }
   ]);

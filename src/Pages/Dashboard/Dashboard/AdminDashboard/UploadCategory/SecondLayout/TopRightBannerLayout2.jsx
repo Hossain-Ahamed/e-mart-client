@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 export async function loader({ params }) {
   try {
     const response = await axios.get(
-      `http://localhost:5000/upload-category/${params.category_slug}/upload-top-right-banner-layout2`
+      `http://localhost:5000/${params.type}/${params.slug}/upload-top-right-banner-layout2`
     );
 
     const banner = response.data;
@@ -27,8 +27,8 @@ const TopRightBannerLayout2 = () => {
   // Now you can destructure a single image URL from the 'topRightBannerLayout2' array
   const [singleImageUrl, singleImageUrl2] = topRightBannerLayout2 || [];
   const [selectedImage, setSelectedImage] = useState(null);
-  const { category_slug } = useParams();
-  const categorySlug = category_slug;
+  const { slug, type } = useParams();
+  const categorySlug = slug;
   const {
     register,
     handleSubmit,
@@ -63,7 +63,7 @@ const TopRightBannerLayout2 = () => {
           console.log(updatedCategory);
           axios
             .patch(
-              `http://localhost:5000/categories/${category_slug}`,
+              `http://localhost:5000/${type}/${slug}`,
               updatedCategory,
               {
                 withCredentials: true,

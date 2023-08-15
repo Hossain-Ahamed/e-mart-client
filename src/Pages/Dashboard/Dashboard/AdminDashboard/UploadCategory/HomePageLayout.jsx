@@ -6,7 +6,7 @@ import Layout3 from "../../../../../Component/HomeLayout/Layout3";
 import axios from "axios";
 
 const HomePageLayout = () => {
-  const { category_slug } = useParams();
+  const { slug, type } = useParams();
   const { layout } = useParams();
   // console.log(layout)
   const [activeContent, setActiveContent] = useState("content1");
@@ -22,7 +22,7 @@ const HomePageLayout = () => {
       
       console.log("Selected Layout:", selectedLayout);
       const response = await axios.patch(
-        `http://localhost:5000/categories/${category_slug}/layout`,
+        `http://localhost:5000/${type}/${slug}/layout`,
         {layout: selectedLayout},
         { withCredentials: true }
       );
@@ -32,7 +32,7 @@ const HomePageLayout = () => {
 
       // Handle the response if needed
       console.log("Category updated:", response.data.message);
-      navigate(`/dashboard/upload-category/${category_slug}/home-page-layout/${selectedLayout}`)
+      navigate(`/dashboard/upload/${type}/${slug}/home-page-layout/${selectedLayout}`)
     } catch (error) {
       // Debug: Log the error
       console.error("Error updating category:", error);
@@ -46,7 +46,7 @@ const HomePageLayout = () => {
     }
   };
 
-  console.log(category_slug);
+  console.log(slug);
   return (
     <>
       <div className="h-full mt-5">
@@ -105,9 +105,9 @@ const HomePageLayout = () => {
             <div>
               <button
                 onClick={() => handleLayoutSelect(2)}
-                className="w-20 h-8 border-2 text-gray-700"
+                className="w-36 h-10 text-gray-700 font-bold bg-slate-300 m-3"
               >
-                Select
+                Select Layout 2
               </button>
 
               <Layout2></Layout2>
@@ -118,9 +118,9 @@ const HomePageLayout = () => {
             <div>
               <button
                 onClick={() => handleLayoutSelect(3)}
-                className="w-20 h-8 border-2 text-gray-700"
+                className="w-36 h-10 text-gray-700 font-bold bg-slate-300 m-3"
               >
-                Select
+                Select Layout 3
               </button>
               <Layout3></Layout3>
             </div>
