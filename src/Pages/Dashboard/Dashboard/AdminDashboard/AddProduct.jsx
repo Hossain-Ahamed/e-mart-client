@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useCategory from "../../../../Hooks/useCategory";
 import slugify from "slugify";
+import AdminTitle from "../../../../Component/AdminTitle";
 
 const AddProduct = () => {
   const [category] = useCategory();
@@ -55,8 +56,7 @@ const AddProduct = () => {
   return (
     <>
       <div className="w-full h-full p-10">
-        <p>Add A Product</p>
-        <div className="divider"></div>
+      <AdminTitle heading="Add New Product"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex gap-5">
             <div className="border-2 w-2/3 p-5">
@@ -203,7 +203,7 @@ const AddProduct = () => {
                   {...register("quantity", { required: true })}
                 />
               </div>
-              <input type="submit" className="w-full h-10 bg-blue-500 text-white font-bold rounded-md mt-5" value="Add New Product"/>
+              <input type="submit" className="w-full h-10 bg-primary text-white font-bold rounded-md mt-5" value="Add New Product"/>
             </div>
           </div>
         </form>

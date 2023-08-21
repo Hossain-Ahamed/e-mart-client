@@ -12,7 +12,7 @@ const Layout2 = () => {
                     <Link
               to={`/dashboard/upload/${type}/${slug}/upload-top-left-banner-layout2`}
             >
-              <button className="">
+              <button className="text-gray-700 font-semibold text-center m-5">
                 Top Left Banner
               </button>
             </Link>
@@ -24,13 +24,23 @@ const Layout2 = () => {
                     <Link
               to={`/dashboard/upload/${type}/${slug}/upload-top-right-banner-layout2`}
             >
-              <button className="">
+              <button className="text-gray-700 font-semibold text-center text-xs">
                 Top Right Banner
               </button>
             </Link>
                   </div>
                   </div>
-                  <div className=" bg-gray-200 w-16 h-10"></div>
+                  <div className=" bg-gray-200 w-16 h-10">
+                  <div>
+                    <Link
+              to={`/dashboard/upload/${type}/${slug}/upload-top-right-banner-layout2`}
+            >
+              <button className="text-gray-700 font-semibold text-center text-xs">
+                Top Right Banner
+              </button>
+            </Link>
+                  </div>
+                  </div>
                 </div>
               </div>
               <div className=" bg-gray-200 w-96 h-14 mb-4">
@@ -38,7 +48,7 @@ const Layout2 = () => {
                   <Link
               to={`/dashboard/upload/${type}/${slug}/upload-slim-banner`}
             >
-              <button className="text-center w-96">
+              <button className="text-gray-700 font-semibold text-center w-96 my-3">
                 Slim Banner Click Here
               </button>
             </Link>
@@ -56,8 +66,8 @@ const Layout2 = () => {
                 <Link
                   to={`/dashboard/upload/${type}/${slug}/upload-second-banner`}
                 >
-                  <button className="text-center w-96">
-                    For Second Banner Click Here
+                  <button className="text-gray-700 font-semibold text-center w-80 my-4">
+                    Second Banner
                   </button>
                 </Link>
               </div>
@@ -74,14 +84,14 @@ const Layout2 = () => {
                   <Link
                     to={`/dashboard/upload/${type}/${slug}/upload-bottom-banner`}
                   >
-                    <button className="text-center w-40">Click Here</button>
+                    <button className="text-gray-700 font-semibold text-center w-40 my-4">Click Here</button>
                   </Link>
                 </div>
                 <div className="bg-gray-200 w-40 h-16 mx-auto">
                   <Link
                     to={`/dashboard/upload/${type}/${slug}/upload-bottom-second-banner`}
                   >
-                    <button className="text-center w-40">Click Here</button>
+                    <button className="text-gray-700 font-semibold text-center w-40 my-4">Click Here</button>
                   </Link>
                 </div>
               </div>

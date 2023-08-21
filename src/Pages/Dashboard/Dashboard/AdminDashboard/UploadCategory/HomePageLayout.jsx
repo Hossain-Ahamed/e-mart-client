@@ -49,17 +49,17 @@ const HomePageLayout = () => {
   console.log(slug);
   return (
     <>
-      <div className="h-full mt-5">
-        <h1 className="text-center text-2xl font-bold text-yellow-600 my-10">
+      <div className="h-full mt-3 bg-white">
+        <h1 className="text-center text-2xl font-bold text-primary my-10">
           LayOut
         </h1>
 
-        <div className="flex gap-4 mb-4">
+        <div className="flex justify-center gap-4 mb-4">
           <button
             className={`px-4 py-2 text-lg ${
               activeContent === "content1"
-                ? "bg-yellow-600 text-white font-bold"
-                : " bg-slate-300 text-black font-bold"
+                ? "bg-primary text-white font-bold"
+                : " bg-slate-200 text-primary font-bold"
             }`}
             onClick={() => handleContentSwitch("content1")}
           >
@@ -68,8 +68,8 @@ const HomePageLayout = () => {
           <button
             className={`px-4 py-2 text-lg ${
               activeContent === "content2"
-                ? "bg-yellow-600 text-white font-bold"
-                : " bg-slate-300 text-black font-bold"
+                ? "bg-primary text-white font-bold"
+                : " bg-slate-200 text-primary font-bold"
             }`}
             onClick={() => handleContentSwitch("content2")}
           >
@@ -78,8 +78,8 @@ const HomePageLayout = () => {
           <button
             className={`px-4 py-2 text-lg ${
               activeContent === "content3"
-                ? "bg-yellow-600 text-white font-bold"
-                : " bg-slate-300 text-black font-bold"
+                ? "bg-primary text-white font-bold"
+                : " bg-slate-200 text-primary font-bold"
             }`}
             onClick={() => handleContentSwitch("content3")}
           >
@@ -90,7 +90,6 @@ const HomePageLayout = () => {
         <div className="p-4">
           {activeContent === "content1" && (
             <div>
-              {" "}
               <button
                 onClick={() => handleLayoutSelect(1)} // Pass the selected layout (1)
                 className="w-36 h-10 text-gray-700 font-bold bg-slate-300 m-3"

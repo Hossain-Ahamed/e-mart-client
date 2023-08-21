@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -20,15 +20,13 @@ export async function loader({ params }) {
 const TopRightBannerLayout2 = () => {
   const { banner } = useLoaderData();
   console.log(banner);
-
-  // Assuming 'topRightBannerLayout2' is a property of 'banner' (based on your previous code)
-  const { topRightBannerLayout2 } = banner || {};
-
-  // Now you can destructure a single image URL from the 'topRightBannerLayout2' array
-  const [singleImageUrl, singleImageUrl2] = topRightBannerLayout2 || [];
+  const [banners, setBanners] = useState([]);
+  useEffect(() => {
+    setBanners(banner?.topLeftBannerLayout2);
+  }, [banner]);
   const [selectedImage, setSelectedImage] = useState(null);
   const { slug, type } = useParams();
-  const categorySlug = slug;
+
   const {
     register,
     handleSubmit,
@@ -90,16 +88,14 @@ const TopRightBannerLayout2 = () => {
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
-    // if (e?.target?.files[0]) {
-    //   setSelectedImage(URL.createObjectURL(e?.target?.files[0]));
-    // }
   };
+
   return (
     <>
-      <div className="h-full">
+      <div className="w-full h-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
-            className={`w-64 h-64 lg:w-80 lg:h-20 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
+            className={`w-full h-40 lg:w-40 lg:h-20 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
           >
             {!selectedImage && (
               <>
@@ -160,7 +156,7 @@ const TopRightBannerLayout2 = () => {
               <img
                 src={selectedImage}
                 alt="Uploaded"
-                className="w-full h-64 md:h-80 lg:w-80 lg:h-20 rounded-2xl object-contain"
+                className="w-full h-40 lg:w-48 lg:h-20 rounded-2xl"
               />
             )}
             <input
@@ -173,7 +169,7 @@ const TopRightBannerLayout2 = () => {
           </div>
           <input
             type="submit"
-            className="cursor-pointer w-full h-10 bg-blue-500 text-white font-bold rounded-md mt-5"
+            className="cursor-pointer w-full h-10 bg-primary text-white font-bold rounded-md mt-5"
             value="New Banner"
           />
         </form>

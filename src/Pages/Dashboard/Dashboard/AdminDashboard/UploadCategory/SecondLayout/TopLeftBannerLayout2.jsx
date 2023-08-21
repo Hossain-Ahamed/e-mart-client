@@ -1,30 +1,32 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AiOutlineDelete } from "react-icons/ai";
 import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export async function loader({params}) {
-    try {
-      const response = await axios.get(`http://localhost:5000/${params.type}/${params.slug}/upload-top-left-banner-layout2`);
+export async function loader({ params }) {
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/${params.type}/${params.slug}/upload-top-left-banner-layout2`
+    );
 
-      const banner = response.data;
-      return { banner };
-    } catch (error) {
-      throw {error}
-    }
+    const banner = response.data;
+    return { banner };
+  } catch (error) {
+    throw { error };
   }
+}
 const TopLeftBannerLayout2 = () => {
-    const { banner } = useLoaderData();
-  console.log(banner)
+  const { banner } = useLoaderData();
+  console.log(banner);
   const [banners, setBanners] = useState([]);
   useEffect(() => {
     setBanners(banner?.topLeftBannerLayout2);
-
-    }, [banner])
+  }, [banner]);
   const [selectedImage, setSelectedImage] = useState(null);
   const { slug, type } = useParams();
-  
+
   const {
     register,
     handleSubmit,
@@ -58,19 +60,15 @@ const TopLeftBannerLayout2 = () => {
           const updatedCategory = { topLeftBannerLayout2: imgURL };
           console.log(updatedCategory);
           axios
-            .patch(
-              `http://localhost:5000/${type}/${slug}`,
-              updatedCategory,
-              {
-                withCredentials: true,
-              }
-            )
+            .patch(`http://localhost:5000/${type}/${slug}`, updatedCategory, {
+              withCredentials: true,
+            })
             .then((data) => {
               console.log("updated", data.data);
               if (data?.data?.result?.modifiedCount === 1) {
                 reset();
                 setSelectedImage(null);
-                setBanners([...banners, imgURL])
+                setBanners([...banners, imgURL]);
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
@@ -84,19 +82,17 @@ const TopLeftBannerLayout2 = () => {
       });
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
-    // if (e?.target?.files[0]) {
-    //   setSelectedImage(URL.createObjectURL(e?.target?.files[0])); 
-    // }
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
+    }
   };
-    return (
-       <>
-<div className="h-full">
+  return (
+    <>
+      <div className="h-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
-            className={`w-64 h-64 lg:w-80 lg:h-20 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
+            className={`w-full h-40 md:w-[700px] md:h-[400px] rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
           >
             {!selectedImage && (
               <>
@@ -148,7 +144,7 @@ const TopLeftBannerLayout2 = () => {
                   </svg>
                 </div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <p className="text-gray-500">440 x 440</p>
+                  <p className="text-gray-500">700 x 400</p>
                   <p className="text-gray-500">place an .png image</p>
                 </div>
               </>
@@ -157,7 +153,7 @@ const TopLeftBannerLayout2 = () => {
               <img
                 src={selectedImage}
                 alt="Uploaded"
-                className="w-full h-64 md:h-80 lg:w-80 lg:h-20 rounded-2xl object-contain"
+                className="w-full h-40 md:w-[700px] md:h-[400px] rounded-2xl"
               />
             )}
             <input
@@ -170,67 +166,41 @@ const TopLeftBannerLayout2 = () => {
           </div>
           <input
             type="submit"
-            className="cursor-pointer w-full h-10 bg-blue-500 text-white font-bold rounded-md mt-5"
+            className="cursor-pointer w-full h-10 bg-primary text-white font-bold rounded-md mt-5"
             value="New Banner"
           />
         </form>
 
-        <div>
-        <div>
-        <table className="table">
-                  {/* head */}
-                  <thead>
-                    <tr>
-                  
-                      <th>Name</th>
-                      <th>Job</th>
-                      
-                      <th></th>
-                    </tr>
-                  </thead>
-                  
-          
+        <div className="md:w-96 mx-auto mt-10">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Top Banner</th>
+                <th></th>
+              </tr>
+            </thead>
+
             <tbody>
-              
-                
-                  
-                    {/* row 1 */}
-                    <tr>
+              {banners?.map((image, index) => (
+                <tr key={index}>
+                  <td>
+                    
+                        <img src={image} alt={`Banner ${index}`} className="w-48 h-20"/>
                       
-                      
-                      <td>
-                      {banner.name}
-                        
-                      </td>
-                      <td>
-            {banners.map((image, index) => (
-              <div key={index} 
-              
-              className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img src={image} alt={`Banner ${index}`} />
-                  
-                </div>
-              </div>
-            ))}
-          </td>
-                      
-                      <th>
-                        <button className="btn btn-ghost btn-xs">
-                          details
-                        </button>
-                      </th>
-                    </tr>
-                  </tbody>
-               
-              
-             
-           </table>
-        </div>
+                  </td>
+                  <th>
+                    <button className="btn btn-ghost text-red-700 text-2xl">
+                      <AiOutlineDelete />
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-       </>
-    );
+    </>
+  );
 };
 
 export default TopLeftBannerLayout2;

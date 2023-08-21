@@ -47,22 +47,22 @@ const Layout1 = () => {
                 <div className="border bg-gray-200 w-16 h-20"></div>
               </div>
               <div className="flex gap-5 px-5">
-                <div className="bg-gray-200 w-40 h-16 mx-auto relative">
+                <div className="bg-gray-200 w-40 h-16 mx-auto">
                   
                   <Link
                     to={`/dashboard/upload/${type}/${slug}/upload-bottom-banner`}
                   >
-                    <button className="text-gray-700 font-semibold text-center w-40 absolute top-3">
+                    <button className="text-gray-700 font-semibold text-center w-40 my-4">
                       Click Here
                     </button>
                   </Link>
                 </div>
-                <div className="bg-gray-200 w-40 h-16 mx-auto relative">
+                <div className="bg-gray-200 w-40 h-16 mx-auto">
                  
                   <Link
                     to={`/dashboard/upload/${type}/${slug}/upload-bottom-banner`}
                   >
-                    <button className="text-gray-900 font-semibold text-center w-40 absolute top-3">
+                    <button className="text-gray-700 font-semibold text-center w-40 my-4">
                       Click Here
                     </button>
                   </Link>

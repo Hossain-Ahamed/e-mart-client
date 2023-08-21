@@ -23,7 +23,9 @@ import HomePageLayout from "../../Pages/Dashboard/Dashboard/AdminDashboard/Uploa
 import UpdateTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateTopBanner";
 import {loader as updateTopBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateTopBanner";
 import UpdateSecondBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateSecondBanner";
+import {loader as updateSecondBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateSecondBanner";
 import UpdateBottomBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomBanner";
+import {loader as updateBottomBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomBanner";
 import ManageProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/ManageProduct";
 import UserHome from "../../Pages/Dashboard/Dashboard/UserHome/UserHome";
 import AdminHome from "../../Pages/Dashboard/Dashboard/AdminDashboard/AdminHome/AdminHome";
@@ -159,10 +161,14 @@ const router = createBrowserRouter([
         {
           path: 'upload/:type/:slug/upload-second-banner',
           element: <AdminRoute><UpdateSecondBanner></UpdateSecondBanner></AdminRoute>,
+          loader: updateSecondBannerLoader,
+          errorElement: <Error></Error>
         },
         {
           path: 'upload/:type/:slug/upload-bottom-banner',
           element: <AdminRoute><UpdateBottomBanner></UpdateBottomBanner></AdminRoute>,
+          loader: updateBottomBannerLoader,
+          errorElement: <Error />
         },
         {
           path: 'upload/:type/:slug/upload-bottom-second-banner',

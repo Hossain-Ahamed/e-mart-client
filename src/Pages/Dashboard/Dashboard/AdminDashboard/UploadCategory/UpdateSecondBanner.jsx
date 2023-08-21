@@ -1,10 +1,31 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { useLoaderData, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+export async function loader({ params }) {
+  try {
+    console.log(params.slug);
+    const response = await axios.get(
+      `http://localhost:5000/${params.type}/${params.slug}/upload-second-banner`
+    );
+
+    const banner = response.data;
+    return { banner };
+  } catch (error) {
+    throw { error };
+  }
+}
+
 const UpdateSecondBanner = () => {
+  const { banner } = useLoaderData();
+  const [banners, setBanners] = useState([]);
+  useEffect(() => {
+    setBanners(banner?.secondBannerImage);
+  }, [banner]);
+  const [selectedImage, setSelectedImage] = useState(null);
     const { slug, type } = useParams();
   const categorySlug = slug;
   const {
@@ -49,8 +70,10 @@ const UpdateSecondBanner = () => {
             )
             .then((data) => {
               console.log("updated", data.data);
-              if (data.data.modifiedCount === 1) {
+              if (data?.data?.result?.modifiedCount === 1) {
                 reset();
+                setSelectedImage(null);
+                setBanners([...banners, imgURL]);
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
@@ -63,16 +86,21 @@ const UpdateSecondBanner = () => {
         }
       });
   };
-    return (
-        
-            
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
+    }
+  };
+
+    return (          
         <>
         <div className='w-full h-full'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
-            className={`w-64 h-64 lg:w-80 lg:h-20 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
+            className={`w-full h-48 lg:w-[700px] lg:h-[300px] rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
           >
-            {/* {!selectedImage && ( */}
+            {!selectedImage && (
             <>
               <div className="icon absolute top-3 right-3">
                 <svg
@@ -122,32 +150,60 @@ const UpdateSecondBanner = () => {
                 </svg>
               </div>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <p className="text-gray-500">440 x 440</p>
+                <p className="text-gray-500">1200 x 400</p>
                 <p className="text-gray-500">place an .png image</p>
               </div>
             </>
-            {/* )} */}
-            {/* {selectedImage && (
+            )}
+            {selectedImage && (
             <img
               src={selectedImage}
               alt="Uploaded"
-              className="w-full h-64 md:h-80 lg:h-96 rounded-2xl object-contain"
+              className="w-full h-48 lg:w-[700px] lg:h-[300px] rounded-2xl"
             />
-          )} */}
+          )}
             <input
               type="file"
               className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"
               {...register("image", { required: true })}
 
-              //onChange={handleImageUpload0}
+              onChange={handleImageChange}
             />
           </div>
           <input
             type="submit"
-            className="cursor-pointer w-full h-10 bg-blue-500 text-white font-bold rounded-md mt-5"
+            className="cursor-pointer w-full h-12 bg-primary text-white text-lg font-bold rounded-md mt-5"
             value="New Banner"
           />
         </form>
+
+        <div className="md:w-96 mx-auto">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Top Banner</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {banners?.map((image, index) => (
+                <tr key={index}>
+                  <td>
+                    
+                        <img src={image} alt={`Banner ${index}`} className="w-48 h-20"/>
+                      
+                  </td>
+                  <th>
+                    <button className="btn btn-ghost text-red-700 text-2xl">
+                      <AiOutlineDelete />
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         </div>
         </>
