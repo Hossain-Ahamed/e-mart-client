@@ -173,19 +173,13 @@ const TopLeftBannerLayout2 = () => {
 
         <div className="md:w-96 mx-auto mt-10">
           <table className="table">
-            <thead>
-              <tr>
-                <th>Top Banner</th>
-                <th></th>
-              </tr>
-            </thead>
-
+            
             <tbody>
               {banners?.map((image, index) => (
                 <tr key={index}>
                   <td>
                     
-                        <img src={image} alt={`Banner ${index}`} className="w-48 h-20"/>
+                        <img src={image} alt={`Banner ${index}`} className="w-48 h-28"/>
                       
                   </td>
                   <th>

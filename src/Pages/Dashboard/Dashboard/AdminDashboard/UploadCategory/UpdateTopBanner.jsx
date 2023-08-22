@@ -28,7 +28,6 @@ const UpdateTopBanner = () => {
   }, [banner]);
   const [selectedImage, setSelectedImage] = useState(null);
   const { slug, type } = useParams();
-  const categorySlug = slug;
   const {
     register,
     handleSubmit,
@@ -178,13 +177,7 @@ const UpdateTopBanner = () => {
 
         <div className="md:w-96 mx-auto">
           <table className="table">
-            <thead>
-              <tr>
-                <th>Top Banner</th>
-                <th></th>
-              </tr>
-            </thead>
-
+            
             <tbody>
               {banners?.map((image, index) => (
                 <tr key={index}>

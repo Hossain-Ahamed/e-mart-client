@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AiOutlineDelete } from "react-icons/ai";
 import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -22,7 +23,7 @@ const TopRightBannerLayout2 = () => {
   console.log(banner);
   const [banners, setBanners] = useState([]);
   useEffect(() => {
-    setBanners(banner?.topLeftBannerLayout2);
+    setBanners(banner?.topRightBannerLayout2);
   }, [banner]);
   const [selectedImage, setSelectedImage] = useState(null);
   const { slug, type } = useParams();
@@ -69,9 +70,10 @@ const TopRightBannerLayout2 = () => {
             )
             .then((data) => {
               console.log("updated", data.data);
-              if (data.data.modifiedCount === 1) {
+              if (data?.data?.result?.modifiedCount === 1) {
                 reset();
                 setSelectedImage(null);
+                setBanners([...banners, imgURL]);
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
@@ -92,10 +94,10 @@ const TopRightBannerLayout2 = () => {
 
   return (
     <>
-      <div className="w-full h-full">
+      <div className="h-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
-            className={`w-full h-40 lg:w-40 lg:h-20 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
+            className={`w-full h-40 lg:w-96 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative `}
           >
             {!selectedImage && (
               <>
@@ -147,7 +149,7 @@ const TopRightBannerLayout2 = () => {
                   </svg>
                 </div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <p className="text-gray-500">440 x 440</p>
+                  <p className="text-gray-500">300 x 220</p>
                   <p className="text-gray-500">place an .png image</p>
                 </div>
               </>
@@ -156,7 +158,7 @@ const TopRightBannerLayout2 = () => {
               <img
                 src={selectedImage}
                 alt="Uploaded"
-                className="w-full h-40 lg:w-48 lg:h-20 rounded-2xl"
+                className="w-full h-40 lg:w-96 rounded-2xl"
               />
             )}
             <input
@@ -174,34 +176,23 @@ const TopRightBannerLayout2 = () => {
           />
         </form>
         <div>
-          <div>
+          <div className="w-96 mx-auto">
             <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Job</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* row 1 */}
-                <tr>
-                  <td>{banner.name}</td>
-                  <td>
-                    {banner?.topRightBannerLayout2?.map((image, index) => (
-                      <div key={index} className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img src={image} alt={`Banner ${index}`} />
-                        </div>
-                      </div>
-                    ))}
+              
+            <tbody>
+              {banners?.map((image, index) => (
+                <tr key={index}>
+                  <td>                   
+                        <img src={image} alt={`Banner ${index}`} className="w-48 h-28"/>                     
                   </td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
+                    <button className="btn btn-ghost text-red-700 text-2xl">
+                      <AiOutlineDelete />
+                    </button>
                   </th>
                 </tr>
-              </tbody>
+              ))}
+            </tbody>
             </table>
           </div>
         </div>

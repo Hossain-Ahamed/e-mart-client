@@ -89,7 +89,7 @@ const Layout2 = () => {
                 </div>
                 <div className="bg-gray-200 w-40 h-16 mx-auto">
                   <Link
-                    to={`/dashboard/upload/${type}/${slug}/upload-bottom-second-banner`}
+                    to={`/dashboard/upload/${type}/${slug}/upload-bottom-banner`}
                   >
                     <button className="text-gray-700 font-semibold text-center w-40 my-4">Click Here</button>
                   </Link>

@@ -93,7 +93,7 @@ const handleImageChange = (e) => {
 
 
     return (
-        <div className="w-full h-full">
+        <div className="h-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
             className={`w-full h-40 md:w-[600px] md:h-[200px] rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
@@ -177,19 +177,13 @@ const handleImageChange = (e) => {
 
         <div className="md:w-96 mx-auto">
           <table className="table">
-            <thead>
-              <tr>
-                <th>Top Banner</th>
-                <th></th>
-              </tr>
-            </thead>
-
+            
             <tbody>
               {banners?.map((image, index) => (
                 <tr key={index}>
                   <td>
                     
-                        <img src={image} alt={`Banner ${index}`} className="w-48 h-20"/>
+                        <img src={image} alt={`Banner ${index}`} className="w-48 h-28"/>
                       
                   </td>
                   <th>
