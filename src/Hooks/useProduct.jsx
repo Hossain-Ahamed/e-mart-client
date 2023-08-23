@@ -8,7 +8,7 @@ const useProduct = () => {
         queryKey: ['products'],
         queryFn: async () => {
             const res = await axios.get(`http://localhost:5000/products`, {withCredentials: true})
-            console.log(res.data)
+            // console.log(res.data)
             return res.data;
         },
           });
