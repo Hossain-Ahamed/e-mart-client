@@ -10,12 +10,13 @@ const useCart = () => {
         queryKey: ['carts', user?.email],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/carts?email=${user?.email}`, {withCredentials: true})
-            console.log(res.data)
-            return res.data;
+          
+            const res = await axios.get(`http://localhost:5000/get-cart?email=${user?.email}`, { withCredentials: true })
+            // console.log(res.data?.cart);
+            return res.data?.cart;
         },
-          });
-    
+    });
+
 
     return [cart, refetch]
 };
