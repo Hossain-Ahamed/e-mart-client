@@ -1,11 +1,10 @@
-import { createBrowserRouter, useParams } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import HomeForBeauty from "../../Pages/Beauty&Glamour/HomeForBeauty";
 import PagesForCategory from "../../Pages/PagesForCategory/PagesForCategory";
-import ShowMensFashion from "../../Pages/Men'sFashion/ShowMensFashion";
 import HomeForMen from "../../Pages/Men'sFashion/HomeForMen/HomeForMen";
 import HomeForWomen from "../../Pages/Women'sFashion/HomeForWomen/HomeForWomen";
 import HomeForGrocery from "../../Pages/Grocery/HomeForGrocery/HomeForGrocery";
@@ -18,7 +17,6 @@ import ProductOverView from "../../Pages/OverView/ProductOverView";
 import AllUsers from "../../Pages/Dashboard/Dashboard/AdminDashboard/AllUsers";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import AddProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddProduct";
-import UploadCategory from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadCategory";
 import HomePageLayout from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/HomePageLayout";
 import UpdateTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateTopBanner";
 import {loader as updateTopBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateTopBanner";
@@ -31,11 +29,7 @@ import UserHome from "../../Pages/Dashboard/Dashboard/UserDashboard/UserHome";
 import AdminHome from "../../Pages/Dashboard/Dashboard/AdminDashboard/AdminHome/AdminHome";
 import UpdateBottomSecondBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomSecondBanner";
 import AllCategories from "../../Pages/Dashboard/Dashboard/AdminDashboard/AllCategories";
-import axios from "axios";
 import Error from "../../Pages/Shared/error/Error";
-import Layout1 from "../../Component/HomeLayout/Layout1";
-import Layout2 from "../../Component/HomeLayout/Layout2";
-import Layout3 from "../../Component/HomeLayout/Layout3";
 import SelectLayout from "../SelectLayout/SelectLayout";
 import TopRightBannerLayout2 from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/SecondLayout/TopRightBannerLayout2";
 import {loader as topRightBannerLayout2Loader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/SecondLayout/TopRightBannerLayout2";
@@ -43,11 +37,11 @@ import TopLeftBannerLayout2 from "../../Pages/Dashboard/Dashboard/AdminDashboard
 import {loader as topLeftBannerLayout2Loader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/SecondLayout/TopLeftBannerLayout2";
 import UploadSlimBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadSlimBanner";
 import {loader as slimBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadSlimBanner";
-import AddSubCategory from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadSubCategory/AddSubCategory";
 import SelectType from "../../Pages/SelectType/SelectType";
-import UserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserProfile";
 import AddReview from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddReview";
 import CheckOut from "../../Pages/Dashboard/Dashboard/CheckOut";
+import UserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserProfile";
+import EditUserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/EditUserProfile";
 
 
 
@@ -112,6 +106,10 @@ const router = createBrowserRouter([
         {
           path: "user-home",
           element: <UserHome></UserHome>
+        },
+        {
+          path: "edit-user-profile",
+          element: <EditUserProfile />
         },
         {
           path: "user-profile",
