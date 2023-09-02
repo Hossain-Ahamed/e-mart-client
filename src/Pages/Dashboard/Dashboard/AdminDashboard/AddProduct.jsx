@@ -35,9 +35,9 @@ const AddProduct = () => {
     .then(imgResponse => {
       if(imgResponse.success){
         const imgURL = imgResponse.data.display_url;
-        const {productTitle, des, image, buyingPrice, sellingPrice, weight, size, bestDeal, category, subCategory, quantity} = data;
+        const {productTitle, des, image, mainPrice, price, weight, size, bestDeal, category, subCategory, quantity} = data;
 
-        const newProduct = {productTitle, des, image: imgURL, buyingPrice: parseFloat(buyingPrice), sellingPrice: parseFloat(sellingPrice), weight: parseFloat(weight), size, bestDeal, category, subCategory, quantity: parseFloat(quantity), productSlug: slugify(productTitle)}
+        const newProduct = {productTitle, des, image: imgURL, mainPrice: parseFloat(mainPrice), price: parseFloat(price), weight: parseFloat(weight), size, bestDeal, category, subCategory, stock: parseFloat(quantity), productSlug: slugify(productTitle)}
         console.log(newProduct);
         axios.post('http://localhost:5000/products', newProduct, { withCredentials: true })
         .then(data => {
@@ -185,7 +185,7 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("buyingPrice", { required: true })}
+                    {...register("mainPrice", { required: true })}
                   />
                 </div>
                 <div className="form-control w-full max-w-xs">
@@ -195,7 +195,7 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("sellingPrice", { required: true })}
+                    {...register("price", { required: true })}
                   />
                 </div>
               </div>

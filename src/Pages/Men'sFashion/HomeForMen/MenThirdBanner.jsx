@@ -17,7 +17,7 @@ const MenThirdBanner = () => {const data = [
 ]
   return (
       <>
-       <div className="grid grid-cols-1 md:flex gap-8 justify-center p-20">
+       <div className="grid grid-cols-1 md:flex gap-8 justify-center p-20 my-10">
        {
         data.map(thirdBannerInfo => <ThirdBanner
         key={thirdBannerInfo._id}

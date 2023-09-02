@@ -6,6 +6,7 @@ import BeautyCategory from './BeautyCategory';
 import BeautyThirdBanner from './BeautyThirdBanner';
 import BeautyAllProducts from './BeautyAllProducts';
 import { Helmet } from 'react-helmet-async';
+import BackToTopButton from '../../Component/BackToTopButton';
 
 const HomeForBeauty = () => {
     return (
@@ -21,6 +22,7 @@ const HomeForBeauty = () => {
         <BeautyThirdBanner />
         <BeautyAllProducts />
         </div>
+        <BackToTopButton />
         </>
     );
 };

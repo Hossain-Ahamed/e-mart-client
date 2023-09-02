@@ -6,6 +6,7 @@ import WomenSecondBanner from './WomenSecondBanner';
 import { Helmet } from 'react-helmet-async';
 import WomenThirdBanner from './WomenThirdBanner';
 import WomenAllProducts from './WomenAllProducts';
+import BackToTopButton from '../../../Component/BackToTopButton';
 
 const HomeForWomen = () => {
     return (
@@ -19,6 +20,7 @@ const HomeForWomen = () => {
         <TrendingProducts></TrendingProducts>
         <WomenThirdBanner></WomenThirdBanner>
         <WomenAllProducts></WomenAllProducts>
+        <BackToTopButton />
         </>
     );
 };

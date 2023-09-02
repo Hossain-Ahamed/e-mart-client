@@ -24,7 +24,7 @@ const Dashboard = () => {
   </div> 
   <div className="drawer-side">
     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-    <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+    <ul className="menu p-4 w-60 h-full bg-base-200 text-base-content">
       {
         isAdmin ? 
         <>
@@ -39,9 +39,11 @@ const Dashboard = () => {
         : 
         <>
          <li><Link to="/dashboard/user-home"><AiOutlineUser></AiOutlineUser>User</Link></li>
+         <li><Link to="/dashboard/user-profile"><AiOutlineUser></AiOutlineUser>User Profile</Link></li>
       <li><Link><BiCalendar />Reservation</Link></li>
       <li><Link><IoWalletOutline />Payment History</Link></li>
       <li><Link to="/dashboard/myCart"><BsCart3 />My Cart</Link></li>
+      <li><Link to="/dashboard/add-review"><BsCart3 />Add Review</Link></li>
         </>
       }
       {/* Sidebar content here */}

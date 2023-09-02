@@ -6,6 +6,7 @@ import TrendingProducts from './TrendingProducts';
 import MenThirdBanner from './MenThirdBanner';
 import { Helmet } from 'react-helmet-async';
 import AllProducts from './AllProducts';
+import BackToTopButton from '../../../Component/BackToTopButton';
 
 const HomeForMen = () => {
     return (
@@ -25,6 +26,7 @@ const HomeForMen = () => {
             <MenThirdBanner></MenThirdBanner>
             <AllProducts />
         </div>
+        <BackToTopButton />
         </>
     );
 };

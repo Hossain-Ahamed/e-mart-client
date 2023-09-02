@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import useCart from '../../Hooks/useCart';
 
 const ProductCard = ({ showProduct }) => {
-  const { _id, img, name, price, mainPrice } = showProduct;
+  const { _id, image, productTitle, price, mainPrice } = showProduct;
 
   const [cart] = useCart();
 
@@ -40,8 +40,8 @@ const ProductCard = ({ showProduct }) => {
             <figure>
               <img
                 className="w-32 h-40 md:h-64 md:w-52"
-                src={img}
-                alt={name}
+                src={image}
+                alt={productTitle}
               />
             </figure>
           </Link >
@@ -63,7 +63,7 @@ const ProductCard = ({ showProduct }) => {
         <div className="border-t-2">
           <div className="my-1 text-center">
             <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden px-3">
-              {name}
+              {productTitle}
             </p>
             <p className="flex text-green-700 font-bold lg:text-xl justify-center my-1">
               <TbCurrencyTaka></TbCurrencyTaka>

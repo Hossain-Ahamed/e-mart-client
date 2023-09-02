@@ -12,12 +12,12 @@ const TrendingProducts = () => {
   const  [ product ]  = useProduct();
 
     const products = product.filter(
-      showProduct => showProduct.category === 'women' && showProduct['sub-category'] === 'featuredProducts'
+      showProduct => showProduct.category === 'women' && showProduct.bestDeal === true
             );
 
     const newProducts = product.filter(
-      showProduct => showProduct.category === 'women' && showProduct['sub-category'] === 'newProducts'
-                    );
+      showProduct => showProduct.category === 'women' 
+    );
 
 
   return (
@@ -54,7 +54,7 @@ const TrendingProducts = () => {
           {activeContent === 'content2' && (
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-[300px] md:w-[700px] lg:w-[1200px] mx-auto mt-10'>
               
-            {newProducts.slice(0, 5).map(showProduct => 
+            {newProducts.slice(-5).map(showProduct => 
                   <ProductCard 
                     key={showProduct._id}
                     showProduct={showProduct}

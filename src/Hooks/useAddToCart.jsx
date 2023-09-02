@@ -20,13 +20,17 @@ const useAddToCart = () => {
       const cartProduct = {
         productId: featuredProduct._id,
         quantity : quantity,
-        email: user.email
+        email: user.email,
+        checked: false
       }
       // console.log(cartProduct);
       axios.post(`http://localhost:5000/add-to-cart`, cartProduct, { withCredentials: true } )
-        .then(data => {
-       
-          if (data.data) {
+      .then((response) => {
+        // Check if the response contains the updated cart data
+        const updatedCart = response.data.cart;
+        console.log('Updated Cart:', updatedCart);
+          if (updatedCart) {
+            //console.log(data.data)
             refetch();
             Swal.fire({
               position: 'top-end',

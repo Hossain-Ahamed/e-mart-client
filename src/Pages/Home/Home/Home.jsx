@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import HomeSecondBanner from '../HomeSecondBanner';
 import HomeTrendingProducts from '../HomeTrendingProducts';
 import HomeThirdBanner from '../HomeThirdBanner';
+import BackToTopButton from '../../../Component/BackToTopButton';
 
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
         <HomeTrendingProducts></HomeTrendingProducts>
         <HomeThirdBanner></HomeThirdBanner>
         <ShowAllProducts></ShowAllProducts>
+        <BackToTopButton />
         </div>
         </>
     );

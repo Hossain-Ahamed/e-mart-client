@@ -10,6 +10,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import CartDataProvider from "./Contexts/CartDataProvider";
 
 const queryClient = new QueryClient();
 
@@ -17,9 +18,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <HelmetProvider>
+        <CartDataProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
         </QueryClientProvider>
+        </CartDataProvider>
       </HelmetProvider>
     </AuthProvider>
   </React.StrictMode>

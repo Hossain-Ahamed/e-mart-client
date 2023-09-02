@@ -6,6 +6,7 @@ import GroceryTrendingProducts from './GroceryTrendingProducts';
 import GroceryThirdBanner from './GroceryThirdBanner';
 import { Helmet } from 'react-helmet-async';
 import GroceryAllProducts from './GroceryAllProducts';
+import BackToTopButton from '../../../Component/BackToTopButton';
 
 const HomeForGrocery = () => {
     return (
@@ -21,6 +22,7 @@ const HomeForGrocery = () => {
             <GroceryThirdBanner></GroceryThirdBanner> 
             <GroceryAllProducts></GroceryAllProducts>
         </div>
+        <BackToTopButton />
         </>
     );
 };

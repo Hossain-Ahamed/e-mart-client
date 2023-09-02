@@ -27,7 +27,7 @@ import {loader as updateSecondBannerLoader} from "../../Pages/Dashboard/Dashboar
 import UpdateBottomBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomBanner";
 import {loader as updateBottomBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomBanner";
 import ManageProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/ManageProduct";
-import UserHome from "../../Pages/Dashboard/Dashboard/UserHome/UserHome";
+import UserHome from "../../Pages/Dashboard/Dashboard/UserDashboard/UserHome";
 import AdminHome from "../../Pages/Dashboard/Dashboard/AdminDashboard/AdminHome/AdminHome";
 import UpdateBottomSecondBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomSecondBanner";
 import AllCategories from "../../Pages/Dashboard/Dashboard/AdminDashboard/AllCategories";
@@ -45,6 +45,9 @@ import UploadSlimBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/Upl
 import {loader as slimBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadSlimBanner";
 import AddSubCategory from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadSubCategory/AddSubCategory";
 import SelectType from "../../Pages/SelectType/SelectType";
+import UserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserProfile";
+import AddReview from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddReview";
+import CheckOut from "../../Pages/Dashboard/Dashboard/CheckOut";
 
 
 
@@ -111,8 +114,20 @@ const router = createBrowserRouter([
           element: <UserHome></UserHome>
         },
         {
+          path: "user-profile",
+          element: <UserProfile />
+        },
+        {
           path: "myCart",
           element: <MyCart></MyCart>
+        },
+        {
+          path: "check-out",
+          element: <CheckOut />
+        },
+        {
+          path: "add-review",
+          element: <AddReview />
         },
         {
           path: "allUsers",
