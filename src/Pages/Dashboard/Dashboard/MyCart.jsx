@@ -40,7 +40,9 @@ const MyCart = () => {
     setTotal(
       selectedOrders.reduce((sum, product) => product.price * product.quantity + sum, 0)
     );
+    
   }, [selectedOrders]);
+  console.log(total)
 
   
   const handleRemoveFromSelectedOrders = (product) => {
@@ -147,7 +149,7 @@ const MyCart = () => {
   };
 
   const handleCheckOut = () => {
-    setSelectedOrderItems(selectedOrders);
+    setSelectedOrderItems(selectedOrders, total);
     if(selectedOrders.length >= 0){
       navigate('/dashboard/check-out')
     }
@@ -205,7 +207,7 @@ const MyCart = () => {
                 </div>
                
                
-                  <button onClick={handleCheckOut} disabled={selectedOrders.length <= 0} className="w-full h-10 focus:ring focus:ring-3 ring-yellow-300  bg-yellow-600 text-white text-lg font-bold rounded-sm mt-5 disabled:cursor-not-allowed">
+                  <button onClick={handleCheckOut} disabled={selectedOrders.length <= 0} className="w-full h-10 focus:ring focus:ring-3 ring-yellow-300  bg-accent text-white text-lg font-bold rounded-sm mt-5 disabled:cursor-not-allowed">
                     Check Out
                   </button>
                   {

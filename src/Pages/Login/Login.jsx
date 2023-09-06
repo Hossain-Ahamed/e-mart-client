@@ -75,7 +75,7 @@ const Login = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <input type="submit" className="btn hover:bg-yellow-600 rounded-none text-white border-0 max-w-xs" value="Login" />
+          <input type="submit" className="btn hover:bg-accent rounded-none text-white border-0 max-w-xs" value="Login" />
         </div>
         <div>
         {loginError && <p>{loginError}</p>}
@@ -89,8 +89,8 @@ const Login = () => {
         </div>
 
           <div className='grid grid-cols-2 gap-2 mt-4 max-w-xs'>
-          <button onClick={handleGoogleSignIn} className="btn hover:bg-yellow-600 text-white rounded-none border-0">Google</button>
-          <Link to="/signUp" className="btn hover:bg-yellow-600 text-white rounded-none border-0">Create Account</Link>
+          <button onClick={handleGoogleSignIn} className="btn hover:bg-accent text-white rounded-none border-0">Google</button>
+          <Link to="/signUp" className="btn hover:bg-accent text-white rounded-none border-0">Create Account</Link>
             
           </div>
           </div>

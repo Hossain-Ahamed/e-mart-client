@@ -48,7 +48,7 @@ const UserProfile = () => {
       </div>
       <div>
       <Link to="/dashboard/edit-user-profile">
-        <button className="w-64 h-12 focus:ring focus:ring-3 ring-yellow-300  bg-yellow-600 text-white text-lg font-bold rounded-sm mt-5 m-5">Edit Profile</button>
+        <button className="w-64 h-12 focus:ring focus:ring-3 ring-yellow-300  bg-accent text-white text-lg font-bold rounded-sm mt-5 m-5">Edit Profile</button>
       </Link>
       </div>
       </div>

@@ -42,6 +42,7 @@ import AddReview from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddReview"
 import CheckOut from "../../Pages/Dashboard/Dashboard/CheckOut";
 import UserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserProfile";
 import EditUserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/EditUserProfile";
+import AddCoupon from "../../Pages/Dashboard/Dashboard/AdminDashboard/CouponCode/AddCoupon";
 
 
 
@@ -142,6 +143,10 @@ const router = createBrowserRouter([
         {
           path: 'manageProduct',
           element: <AdminRoute><ManageProduct></ManageProduct></AdminRoute>
+        },
+        {
+          path: 'add-coupon',
+          element: <AdminRoute><AddCoupon /></AdminRoute>
         },
         {
           path: 'all-categories',
