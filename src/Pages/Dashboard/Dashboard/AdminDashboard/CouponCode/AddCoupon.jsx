@@ -1,55 +1,76 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import slugify from "slugify";
 import AdminTitle from "../../../../../Component/AdminTitle";
-import { format } from "date-fns"; // Import the format function
+import { addDays } from "date-fns"; // Import the format function
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
+import { DateRangePicker } from "react-date-range";
+
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 const AddCoupon = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     control,
     formState: { errors },
     reset,
   } = useForm();
 
-  // const [dateRange, setDateRange] = useState([null, null]);
-  const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
-  const [startDate, endDate] = selectedDateRange;
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 2),
+      key: "selection",
+    },
+  ]);
+
+  const dateFunction = (item) => {
+    setState([item.selection]);
+    //console.log(item.selection)
+    if (item?.selection?.startDate && item?.selection?.endDate) {
+      setValue(
+        "start_Date",
+        new Date(item.selection.startDate).toISOString().replace("Z", "+00:00")
+      );
+      setValue(
+        "end_Date",
+        new Date(item.selection.endDate).toISOString().replace("Z", "+00:00")
+      );
+    }
+  };
 
   const onSubmit = (data) => {
+    console.log(data);
     const {
       couponCode,
       percentage,
       minimumOrderAmount,
       maximumDiscountLimit,
       numberOfUse,
-      dateRange,
+      start_Date,
+      end_Date,
     } = data;
 
-    // Format the selected date range to 'pp' format
-    // const formattedStartDate = selectedDateRange[0] ? format(new Date(selectedDateRange[0]), 'pp') : null;
-    // const formattedEndDate = selectedDateRange[1] ? format(new Date(selectedDateRange[1]), 'pp') : null;
-
-    const newCategory = {
+    const newCoupon = {
       couponCode,
-      percentage,
-      minimumOrderAmount,
-      maximumDiscountLimit,
-      numberOfUse,
-      //dateRange: [formattedStartDate, formattedEndDate],
-      dateRange,
-      slug: slugify(couponCode),
+      percentage: parseFloat(percentage).toFixed(2),
+      minimumOrderAmount: parseFloat(minimumOrderAmount).toFixed(2),
+      maximumDiscountLimit: parseFloat(maximumDiscountLimit).toFixed(2),
+      numberOfUse: parseInt(numberOfUse),
+      start_Date,
+      end_Date,
     };
 
-    console.log(newCategory);
+    console.log(newCoupon);
 
     axios
-      .post("http://localhost:5000/coupon", newCategory, {
+      .post("http://localhost:5000/coupon", newCoupon, {
         withCredentials: true,
       })
       .then((data) => {
@@ -75,7 +96,7 @@ const AddCoupon = () => {
   return (
     <>
       <div className="h-full p-5 px-10 bg-white">
-        <AdminTitle heading="Add New Category"></AdminTitle>
+        <AdminTitle heading="Create New Coupon"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
             <input
@@ -90,21 +111,34 @@ const AddCoupon = () => {
               placeholder="Percentage"
               type="text"
               className="input input-bordered rounded-md"
-              {...register("percentage", { required: true })}
+              {...register("percentage", {
+                required: "Percentage is required",
+                validate: (value) =>
+                  !isNaN(Number(value)) || "Please enter a number",
+              })}
             />
+            {errors.percentage && (
+              <p className="p-1 text-xs text-red-600">
+                {errors.percentage.message}
+              </p>
+            )}
           </div>
           <div className="form-control">
             <input
               placeholder="Minimum Order Amount"
-              type="text"
+              type="number"
               className="input input-bordered rounded-md"
-              {...register("minimumOrderAmount", { required: true })}
+              {...register("minimumOrderAmount", {
+                required: true,
+                validate: (value) =>
+                  !isNaN(Number(value)) || "Please enter a number",
+              })}
             />
           </div>
           <div className="form-control my-3">
             <input
               placeholder="Maximum Discount Limit"
-              type="text"
+              type="number"
               className="input input-bordered rounded-md"
               {...register("maximumDiscountLimit", { required: true })}
             />
@@ -112,35 +146,31 @@ const AddCoupon = () => {
           <div className="form-control">
             <input
               placeholder="Number of Use"
-              type="text"
+              type="number"
               className="input input-bordered rounded-md"
               {...register("numberOfUse", { required: true })}
             />
           </div>
-
-          <div className="form-control my-3">
-            <Controller
-              control={control}
-              name="dateRange"
-              render={({ field }) => (
-                <>
-                  <DatePicker
-                    selectsRange={true}
-                    startDate={startDate}
-                    endDate={endDate}
-                    onChange={(dates) => {
-                      setSelectedDateRange(dates);
-                      field.onChange(dates);
-                    }}
-                    isClearable={true}
-                    dateFormat="yyyy-MM-dd"
-                    className="form-control"
-                  />
-                </>
-              )}
-              rules={{
-                required: true,
-              }}
+          <input
+            type="checkbox"
+            name="datePicker"
+            id="datePicker"
+            className="peer/datePicker hidden"
+          />
+          <label
+            htmlFor="datePicker"
+            className="peer-checked/datePicker:text-gray-200"
+          >
+            Select Range
+          </label>
+          <div className="my-3 hidden peer-checked/datePicker:block">
+            <DateRangePicker
+              onChange={(item) => dateFunction(item)}
+              showSelectionPreview={true}
+              moveRangeOnFirstSelection={false}
+              months={2}
+              ranges={state}
+              direction="horizontal"
             />
           </div>
 
