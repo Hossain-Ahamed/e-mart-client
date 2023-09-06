@@ -55,7 +55,7 @@ const SubNav = () => {
                 {menuItem}
               </ul>
             </div>
-            <Link to="/" className='flex items-center text-2xl font-bold '><p><span className='text-yellow-600 text-xl font-extrabold'>E</span>Mart</p><GiShoppingCart className='text-5xl text-yellow-600' /></Link>
+            <Link to="/" className='flex items-center text-2xl font-bold '><p><span className='text-accent text-xl font-extrabold'>E</span>Mart</p><GiShoppingCart className='text-5xl text-accent' /></Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">

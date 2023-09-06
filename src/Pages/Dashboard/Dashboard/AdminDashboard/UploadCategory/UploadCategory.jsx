@@ -184,8 +184,6 @@ const UploadCategory = () => {
             className="w-full h-12 cursor-pointer bg-primary text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-5"
             value="Add New Sub Category"
           />
-
-          
         </form>
       </div>
     </>

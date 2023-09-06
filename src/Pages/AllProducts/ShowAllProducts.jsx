@@ -26,7 +26,7 @@ const ShowAllProducts = () => {
             </div>
         </div>
         <div className=' absolute right-6 bottom-[-4]'>
-        <Link to='/allproducts' className='btn p-2 px-5 m-1 bg-slate-100 text-black hover:bg-yellow-600 hover:text-white font-semibold text-lg rounded-md border-none'>view all</Link>
+        <Link to='/allproducts' className='btn p-2 px-5 m-1 bg-slate-100 text-black hover:bg-accent hover:text-white font-semibold text-lg rounded-md border-none'>view all</Link>
         </div>
         </div>
         </>
