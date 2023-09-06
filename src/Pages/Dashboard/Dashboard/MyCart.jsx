@@ -110,7 +110,7 @@ const MyCart = () => {
     const updatedCart = { email: user?.email, productId: _id, quantity: Updatedquantity, checked: isChecked }
     console.log(updatedCart)
     axios
-    .put(`http://localhost:5000/update-cart-product/${user?.email}`, updatedCart, { withCredentials: true })
+    .put(`${import.meta.env.VITE_SERVERADDRESS}/update-cart-product/${user?.email}`, updatedCart, { withCredentials: true })
     .then((response) => {
       // Handle success
       console.log('Cart updated in the database', response.data);

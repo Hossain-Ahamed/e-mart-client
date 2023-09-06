@@ -6,12 +6,13 @@ import { MdShoppingCart } from "react-icons/md";
 import { LuMenu } from "react-icons/lu";
 import useCart from '../../../Hooks/useCart';
 import useAdmin from '../../../Hooks/useAdmin';
+import useProfile from '../../../Hooks/useProfile';
 
 const SubNav = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
-
   const [isAdmin] = useAdmin();
+  const [profile] = useProfile();
 
   const handleLogOut = () => {
     logOut()
@@ -86,7 +87,7 @@ const SubNav = () => {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src="" />
+                    <img src={profile?.img} />
                   </div>
                 </label>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow w-52 hover:rounded-none">
