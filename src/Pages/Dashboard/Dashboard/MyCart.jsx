@@ -9,9 +9,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Error from "../../Shared/error/Error";
 import { set } from "react-hook-form";
 import { cartDataContext } from "../../../Contexts/CartDataProvider";
+import toast from "react-hot-toast";
 
 const MyCart = () => {
-  const {setSelectedOrderItems} = useContext(cartDataContext);
+  const { setSelectedOrderItems } = useContext(cartDataContext);
   const navigate = useNavigate()
   const { user } = useContext(AuthContext);
   const [, refetch] = useCart();
@@ -19,13 +20,13 @@ const MyCart = () => {
   const [total, setTotal] = useState(0.0);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedOrders, setSelectedOrders] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/get-cart?email=${user?.email}`, {
-        withCredentials: true,
-      })
+    axios.get(`http://localhost:5000/get-cart?email=${user?.email}`, {
+      withCredentials: true,
+    })
       .then((data) => {
-        //console.log(data.data);
+        // console.log(data.data);
         setCart(data.data.cart);
       })
       .catch((e) => {
@@ -35,16 +36,21 @@ const MyCart = () => {
         setLoading(false);
       });
   }, [user]);
-  const [selectedOrders, setSelectedOrders] = useState([]);
+
+
+  useEffect(() => {
+    // console.log(cart);
+    setSelectedOrders(cart.filter(temp => temp?.checked === true))
+  }, [cart])
   useEffect(() => {
     setTotal(
       selectedOrders.reduce((sum, product) => product.price * product.quantity + sum, 0)
     );
-    
-  }, [selectedOrders]);
-  console.log(total)
 
-  
+  }, [selectedOrders]);
+  // console.log(total)
+
+
   const handleRemoveFromSelectedOrders = (product) => {
     setSelectedOrders(selectedOrders.filter((item) => item._id !== product?._id))
   };
@@ -85,10 +91,10 @@ const MyCart = () => {
         }
         return product;
       });
-  
+
       return updatedCart;
     });
-  
+
     setSelectedOrders((prevCart) => {
       const updatedCart = prevCart.map((product) => {
         if (product._id === _id) {
@@ -96,33 +102,34 @@ const MyCart = () => {
         }
         return product;
       });
-  
+
       return updatedCart;
     });
-  
+
     // Call a function to update this change in the database (you need to implement this).
     updateInDB(_id, Updatedquantity, isChecked);
   };
-  
+
 
   const updateInDB = (_id, Updatedquantity, isChecked) => {
-    console.log(_id, Updatedquantity, isChecked);
+    // console.log(_id, Updatedquantity, isChecked);
     const updatedCart = { email: user?.email, productId: _id, quantity: Updatedquantity, checked: isChecked }
-    console.log(updatedCart)
-    axios
-    .put(`${import.meta.env.VITE_SERVERADDRESS}/update-cart-product/${user?.email}`, updatedCart, { withCredentials: true })
-    .then((response) => {
-      // Handle success
-      console.log('Cart updated in the database', response.data);
-      // Optionally, you can also update the local cart state if needed
-      refetch();
-    })
-    .catch((error) => {
-      // Handle error
-      console.error('Error updating cart in the database', error);
-    });
-  
-    
+    // console.log(updatedCart)
+
+
+    axios.put(`${import.meta.env.VITE_SERVERADDRESS}/update-cart-product/${user?.email}`, updatedCart, { withCredentials: true })
+      .then((response) => {
+        // Handle success
+        // console.log('Cart updated in the database', response.data);
+        // Optionally, you can also update the local cart state if needed
+        refetch();
+      })
+      .catch((error) => {
+        // Handle error
+        console.e('Error updating cart in the database', error);
+      });
+
+
   };
 
   // function to delete an item of cart
@@ -131,30 +138,31 @@ const MyCart = () => {
     setSelectedOrders(selectedOrders.filter((item) => item._id !== _id));
 
     const data = {
-       _id
+      _id
     };
     console.log(data)
-    axios
-      .delete(`http://localhost:5000/remove-from-cart/${user.email}/${_id}`, {
-        data,
-        withCredentials: true,
-      })
+    axios.delete(`http://localhost:5000/remove-from-cart/${user.email}/${_id}`, {
+      data,
+      withCredentials: true,
+    })
       .then(() => {
-       refetch();
+        refetch();
       })
       .catch((e) => {
-         console.error('error', e)
+        console.error('error', e)
         navigate("/not-found");
       });
   };
 
   const handleCheckOut = () => {
     setSelectedOrderItems(selectedOrders, total);
-    if(selectedOrders.length >= 0){
+    if (selectedOrders.length >= 0) {
       navigate('/dashboard/check-out')
     }
-    
+
   }
+
+  //   
 
   return (
     <>
@@ -179,7 +187,7 @@ const MyCart = () => {
                 </div>
                 {cart.map((product, _idx) => (
                   <CartComponent
-                    key={product._id}
+                    key={_idx}
                     product={product}
                     handleAddToSelectedOrders={handleAddToSelectedOrders}
                     handleRemoveFromSelectedOrders={
@@ -203,16 +211,16 @@ const MyCart = () => {
                     <p>{total}</p>
                   </div>
                 </div>
-               
-               
-                  <button onClick={handleCheckOut} disabled={selectedOrders.length <= 0} className="w-full h-10 focus:ring focus:ring-3 ring-yellow-300  bg-accent text-white text-lg font-bold rounded-sm mt-5 disabled:cursor-not-allowed">
-                    Check Out
-                  </button>
-                  {
-                    selectedOrders.length <= 0 && <p className="text-sm text-red-600 text-center">"You must select an item"</p>
-                  }
-                
-                
+
+
+                <button onClick={selectedOrders.length <= 0 ? () => { toast.error("You must select an item") } : handleCheckOut} className={` w-full h-10 focus:ring focus:ring-3 ring-yellow-300  bg-accent text-white text-lg font-bold rounded-sm mt-5 disabled:cursor-not-allowed`}>
+                  Check Out
+                </button>
+                {/* {
+                    selectedOrders.length <= 0 && <p className="text-sm text-red-600 text-center">You must select an item</p>
+                  } */}
+
+
               </div>
             </div>
           </div>

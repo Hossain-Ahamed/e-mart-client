@@ -4,12 +4,12 @@ import useProfile from "../../../Hooks/useProfile";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-
+import { Link } from 'react-router-dom'
 const CheckOut = () => {
   const { selectedOrderItems, total } = useContext(cartDataContext);
   console.log(selectedOrderItems, total);
   const [profile] = useProfile();
-  const { name, email, phone, address } = profile;
+  const { name, email, phone, address,city } = profile;
  // const [total] = useParams();
 
   const { data: deliveryCharges = [] } = useQuery(
@@ -46,11 +46,12 @@ const CheckOut = () => {
       <div className="grid grid-cols-3 gap-5 m-10">
         <div className="col-span-2">
         <div className="border rounded-md shadow-lg bg-white mb-5 p-5">
-          <p>Deliver to: {name}</p>
+          <p className="text-sm">Deliver to: <span className="text-base  font-medium">{name}</span></p>
           <p>{phone}</p>
           <div className="flex gap-3">
-          <p>{address}</p>
-          <button className="text-blue-600">Edit</button>
+          <p>{address}, {city}</p>
+       
+          <Link className="text-blue-600 text-sm" to='/dashboard/edit-user-profile'>Edit</Link>
           </div>
         </div>
         <div className="border rounded-md shadow-lg bg-white mb-5 p-5">
