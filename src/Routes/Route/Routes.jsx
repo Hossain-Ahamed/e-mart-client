@@ -43,6 +43,7 @@ import CheckOut from "../../Pages/Dashboard/Dashboard/CheckOut";
 import UserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserProfile";
 import EditUserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/EditUserProfile";
 import AddCoupon from "../../Pages/Dashboard/Dashboard/AdminDashboard/CouponCode/AddCoupon";
+import DeliveryCharge from "../../Pages/Dashboard/Dashboard/AdminDashboard/DeliveryCharge/DeliveryCharge";
 
 
 
@@ -143,6 +144,10 @@ const router = createBrowserRouter([
         {
           path: 'manageProduct',
           element: <AdminRoute><ManageProduct></ManageProduct></AdminRoute>
+        },
+        {
+          path: 'delivery-charge',
+          element: <AdminRoute><DeliveryCharge /></AdminRoute>
         },
         {
           path: 'add-coupon',

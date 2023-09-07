@@ -194,13 +194,11 @@ const MyCart = () => {
                 <div className="grid grid-cols-4">
                   <div className="col-span-3">
                     <p className="font-bold">Total Price:</p>
-                    <p className="font-bold">Shipping Price:</p>
                     <p className="font-bold">Coupon Code:</p>
                     <p className="font-bold">Grand Total:</p>
                   </div>
                   <div>
                     <p className="">{total}</p>
-                    <p>{total}</p>
                     <p>{total}</p>
                     <p>{total}</p>
                   </div>

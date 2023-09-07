@@ -10,46 +10,17 @@ const EditUserProfile = () => {
   const { user } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // const [districts, setDistricts] = useState([]);
-
-  // useEffect(() => {
-  //   // Define the API URL
-  //   const apiUrl = "https://barikoi.xyz/v1/api/NDc5NTpIWUNRMjRLUUdJ/districts";
-
-  //   // Make the API request
-  //   axios
-  //     .get(apiUrl)
-  //     .then((response) => {
-  //       // Handle the successful response
-  //       setDistricts(response.data);
-  //       console.log(districts.data)
-  //     })
-  //     .catch((error) => {
-  //       // Handle errors here (e.g., display an error message)
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, []);
-
   const {
-    data: places = {},
-    isLoading,
-    isError,
+    data: places = []
   } = useQuery(["places"], async () => {
     try {
-      const res = await axios.get(
-        `https://barikoi.xyz/v1/api/NDc5NTpIWUNRMjRLUUdJ/districts`,
-      );
-      console.log(res.data);
-      
+      const res = await axios.get(`http://localhost:5000/address`);
+      //console.log(res.data);
       return res.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || "An error occurred");
     }
   });
-
-  const districts = places
-  console.log(districts)
-  
 
   const email = user.email;
   const {
@@ -88,18 +59,16 @@ const EditUserProfile = () => {
             withCredentials: true,
           })
           .then((data) => {
-            console.log("new", data.data);
-            if (data.data.insertedId) {
+            console.log("new", data.data); 
               reset();
               setSelectedImage(null);
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "One new product added",
+                title: "Done",
                 showConfirmButton: false,
                 timer: 1500,
               });
-            }
           })
           .catch((e) => {
             console.log(e);
@@ -192,7 +161,7 @@ const EditUserProfile = () => {
                 <input
                   type="file"
                   className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"
-                  {...register("image", { required: true })}
+                  {...register("image")}
                   onChange={handleImageChange}
                 />
               </div>
@@ -234,9 +203,11 @@ const EditUserProfile = () => {
                   {...register("address", { required: true })}
                   className="select select-bordered rounded-md"
                 >
-                  {/* {districts.map((district) => ( */}
-                    <option></option>
-                  {/* ))} */}
+                  {places.map((place) => (
+                    <option key={place._id} value={place.name}>
+                      {place.name}
+                    </option>
+                  ))}
                 </select>
                 <label className="label">
                   {errors.address?.type === "required" && (
