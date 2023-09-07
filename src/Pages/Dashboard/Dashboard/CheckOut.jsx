@@ -64,7 +64,7 @@ const CheckOut = () => {
           ))}
         </div>
         </div>
-        <div className="border rounded-md shadow-lg bg-white p-5 h-64">
+        <div className="border rounded-md shadow-lg bg-white p-5 h-60">
         <div>
             <p>Total Product Price: </p>
           <p>Delivery Charge: {deliveryChargeToShow}</p>

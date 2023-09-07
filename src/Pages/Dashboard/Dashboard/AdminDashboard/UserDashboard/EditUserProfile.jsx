@@ -5,10 +5,14 @@ import axios from "axios";
 import slugify from "slugify";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import useGeolocation from "../../../../../Hooks/useGeolocation";
 
 const EditUserProfile = () => {
   const { user } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const {place} = useGeolocation();
+  console.log(place)
 
   const {
     data: places = []
@@ -200,12 +204,13 @@ const EditUserProfile = () => {
                   <span className="label-text">Address</span>
                 </label>
                 <select
-                  {...register("address", { required: true })}
+                  {...register("address", { value: 'abcas', required: true })}
                   className="select select-bordered rounded-md"
+                  //value="abrh"
                 >
-                  {places.map((place) => (
-                    <option key={place._id} value={place.name}>
-                      {place.name}
+                  {places.map((p) => (
+                    <option key={p._id} value={p.name}>
+                      {p.name}
                     </option>
                   ))}
                 </select>
@@ -217,6 +222,26 @@ const EditUserProfile = () => {
                   )}
                 </label>
               </div>
+
+              <div className="form-control w-full max-w-xs">
+                <label className="label">
+                  <span className="label-text font-semibold">
+                    Address
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Contact Number"
+                  className="input input-bordered rounded-md"
+                  {...register("detailAddress", {
+                    required: {
+                      value: true,
+                      message: "Address is Required",
+                    },
+                  })}
+                />
+              </div>
+
 
               {/* -------phone----- */}
               <div className="form-control w-full max-w-xs">
