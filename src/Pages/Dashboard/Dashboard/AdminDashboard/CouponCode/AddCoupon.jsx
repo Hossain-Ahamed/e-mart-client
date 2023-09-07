@@ -1,10 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import slugify from "slugify";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import AdminTitle from "../../../../../Component/AdminTitle";
 import { addDays } from "date-fns"; // Import the format function
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 import { DateRangePicker } from "react-date-range";
