@@ -35,6 +35,7 @@ const Dashboard = () => {
       <li><Link to="/dashboard/upload/upload-sub-category"><BiDuplicate />Add Sub Category</Link></li>
       <li><Link to="/dashboard/addProduct"><MdAddCard />Add Product</Link></li>
       <li><Link to="/dashboard/manageProduct"><AiOutlineCreditCard />Manage Product</Link></li>
+      <li><Link to="/dashboard/delivery-charge"><AiOutlineCreditCard />Set Delivery Charge</Link></li>
       <li><Link to="/dashboard/add-coupon"><MdAddCard />Add Coupon</Link></li>
       <li><Link to="/dashboard/allUsers"><HiOutlineUserGroup />All Users</Link></li>
       
