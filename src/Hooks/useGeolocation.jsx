@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
 function useGeolocation() {
-  const [place, setPlace] = useState('Bangladesh');
+  const [place, setPlace] = useState("");
+  const [loading,setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -22,6 +23,8 @@ function useGeolocation() {
         setPlace(placeName);
       } catch (error) {
         setError(error.message);
+      }finally{
+        setLoading(false);
       }
     }
 
@@ -36,7 +39,7 @@ function useGeolocation() {
     return data;
   }
 
-  return { place, error };
+  return { place, error ,loading};
 }
 
 export default useGeolocation;

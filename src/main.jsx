@@ -11,6 +11,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import CartDataProvider from "./Contexts/CartDataProvider";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -19,9 +20,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <HelmetProvider>
         <CartDataProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-        </QueryClientProvider>
+          <QueryClientProvider client={queryClient}>
+            <Toaster
+              position="bottom-right"
+              reverseOrder={false} />
+            <RouterProvider router={router} />
+          </QueryClientProvider>
         </CartDataProvider>
       </HelmetProvider>
     </AuthProvider>

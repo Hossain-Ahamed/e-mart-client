@@ -6,13 +6,26 @@ import slugify from "slugify";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import useGeolocation from "../../../../../Hooks/useGeolocation";
-
+import toast from "react-hot-toast";
+import useProfile from "../../../../../Hooks/useProfile";
+import { useNavigate } from "react-router-dom";
 const EditUserProfile = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [city, setCity] = useState("");
+  const [profile,profileLoading] = useProfile();
 
-  const {place} = useGeolocation();
-  console.log(place)
+
+  useEffect(()=>{
+
+    if(profile?.img){
+      setSelectedImage(profile?.img)
+    }
+
+  },[profile])
+
+  const { place, loading } = useGeolocation();
 
   const {
     data: places = []
@@ -26,7 +39,6 @@ const EditUserProfile = () => {
     }
   });
 
-  const email = user.email;
   const {
     register,
     formState: { errors },
@@ -34,11 +46,17 @@ const EditUserProfile = () => {
     setValue,
     reset,
   } = useForm();
+
+
   const img_hosting_token = "2f18d2acff1da26cc85eee5c8407a95f";
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
   const onSubmit = (data) => {
     //console.log(data)
+    if(!selectedImage){
+      toast.error('You must select an image')
+      return ;
+    }
     const formData = new FormData();
     formData.append("image", data.image[0]);
     axios.post(img_hosting_url, formData).then((imgResponse) => {
@@ -46,13 +64,14 @@ const EditUserProfile = () => {
       if (imgResponse.data.success) {
         const imgURL = imgResponse.data.data.display_url;
         console.log(imgURL);
-        const { name, email, image, address, phone } = data;
+        const { name, email, image, address, phone, city } = data;
         setValue("img", image);
         const newProfile = {
           name,
           email,
           img: imgURL,
           address,
+          city,
           phone,
           slug: slugify(name),
         };
@@ -63,20 +82,24 @@ const EditUserProfile = () => {
             withCredentials: true,
           })
           .then((data) => {
-            console.log("new", data.data); 
-              reset();
-              setSelectedImage(null);
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Done",
-                showConfirmButton: false,
-                timer: 1500,
-              });
+            console.log("new", data.data);
+            // reset();
+            // setSelectedImage(null);
+
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Done",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            navigate('/dashboard/user-profile')
           })
           .catch((e) => {
             console.log(e);
             if (e?.response?.status === 409) {
+              //
             }
           });
       }
@@ -88,6 +111,22 @@ const EditUserProfile = () => {
       setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
     }
   };
+
+
+  // set city in state 
+  useEffect(() => {
+    if (place) {
+      setCity(place?.address?.city)
+    }
+  }, [place])
+
+
+  if (loading || profileLoading) {
+    return <>Loading...</>
+  }
+
+
+
   return (
     <>
       <div className="bg-white p-20 h-full">
@@ -101,7 +140,7 @@ const EditUserProfile = () => {
               >
                 {!selectedImage && (
                   <>
-                    <div className="icon absolute top-3 right-3">
+                    <div className="icon absolute top-5 right-6   ">
                       <svg
                         width="28"
                         height="28"
@@ -179,7 +218,7 @@ const EditUserProfile = () => {
                   type="name"
                   readOnly
                   value={user.displayName}
-                  className="input input-bordered rounded-md"
+                  className="input input-bordered rounded-md read-only:cursor-not-allowed"
                   {...register("name", {})}
                 />
               </div>
@@ -193,54 +232,73 @@ const EditUserProfile = () => {
                   type="email"
                   readOnly
                   value={user.email}
-                  className="input input-bordered rounded-md"
+                  className="input input-bordered rounded-md read-only:cursor-not-allowed"
                   {...register("email", {})}
                 />
               </div>
 
               {/* -----Address----- */}
+
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Address</span>
+                  <span className="label-text">City</span>
                 </label>
                 <select
-                  {...register("address", { value: 'abcas', required: true })}
+                  {...register("city", {
+                    value: (profile?.city  || place?.address?.city) || "", required: {
+                      value: true,
+                      message: "* select city",
+                    },
+                  })}
                   className="select select-bordered rounded-md"
-                  //value="abrh"
+                  onChange={(event) => setCity(event.target.value)}
                 >
+                  <option disabled value="" >
+                    Select City
+                  </option>
                   {places.map((p) => (
                     <option key={p._id} value={p.name}>
                       {p.name}
                     </option>
                   ))}
                 </select>
-                <label className="label">
-                  {errors.address?.type === "required" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.address.message}
-                    </span>
-                  )}
-                </label>
+
+                {errors.city?.type === "required" && (
+                  <span className="label-text-alt text-red-500 mt-1">
+                    {errors?.city?.message}
+                  </span>
+                )}
+
               </div>
 
-              <div className="form-control w-full max-w-xs">
-                <label className="label">
-                  <span className="label-text font-semibold">
-                    Address
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Contact Number"
-                  className="input input-bordered rounded-md"
-                  {...register("detailAddress", {
-                    required: {
-                      value: true,
-                      message: "Address is Required",
-                    },
-                  })}
-                />
-              </div>
+              {
+                city && <>
+                  <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                      <span className="label-text font-semibold">
+                        Address
+                      </span>
+                    </label>
+                    <textarea id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Address here..."
+                      value={profile?.address}
+                      {...register("address", {
+                        required: {
+                          value: true,
+                          message: "* address is Required",
+                        },
+                      })} ></textarea>
+
+                    {
+                      <span className="label-text-alt text-red-500 mt-1">
+                        {errors?.address?.message}
+                      </span>
+                    }
+
+                  </div>
+                </>
+              }
+
 
 
               {/* -------phone----- */}
@@ -254,13 +312,20 @@ const EditUserProfile = () => {
                   type="tel"
                   placeholder="Contact Number"
                   className="input input-bordered rounded-md"
+                  defaultValue={profile?.phone}
                   {...register("phone", {
                     required: {
                       value: true,
-                      message: "phone is Required",
+                      message: "* phone is Required",
                     },
                   })}
                 />
+                {
+                  <span className="label-text-alt text-red-500 mt-1">
+                    {errors?.phone?.message}
+                  </span>
+                }
+
               </div>
 
               <br />

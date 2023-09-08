@@ -10,6 +10,7 @@ import {
   AiOutlinePlus,
 } from "react-icons/ai";
 import { GrCheckbox, GrCheckboxSelected } from "react-icons/gr";
+import toast from "react-hot-toast";
 
 const CartComponent = ({
   product,
@@ -19,13 +20,13 @@ const CartComponent = ({
   updateQuantityAndChecked,
   handleDeleteCartItem,
 }) => {
-  const { _id, productTitle, image, price, mainPrice, quantity, stock } =
+  const { _id, productTitle, image, price, mainPrice, quantity, stock, checked } =
     product;
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(checked);
 
   const toggleProductChecked = (value) => {
-    console.log(value);
+    // console.log(value);
     setIsChecked(!isChecked);
     if (value) {
       handleAddToSelectedOrders(product);
@@ -37,9 +38,7 @@ const CartComponent = ({
   const [Updatedquantity, setUpdatedquantity] = useState(quantity);
   // console.log(quantity)
 
-  useEffect(() => {
-    updateQuantityAndChecked( _id, Updatedquantity, isChecked );
-  }, [Updatedquantity, isChecked]);
+
 
   const handleIncrease = () => {
     // 20 will be replaced by "available product ammount"
@@ -52,14 +51,19 @@ const CartComponent = ({
       return;
     }
 
+    updateQuantityAndChecked(_id, Updatedquantity + 1, isChecked);
     setUpdatedquantity(parseInt(Updatedquantity) + 1);
   };
 
   const handleDecrease = () => {
+
     if (parseInt(Updatedquantity) <= 1) {
       toast.error("Product less than 1");
       return;
     }
+
+
+    updateQuantityAndChecked(_id, Updatedquantity - 1, isChecked);
     setUpdatedquantity(parseInt(Updatedquantity) - 1);
   };
 
@@ -69,7 +73,7 @@ const CartComponent = ({
       <div className="grid gap-4">
         <div className="grid grid-cols-4 md:grid-cols-5 items-center justify-items-center">
           <div className="flex items-center gap-3 md:col-span-2">
-            <div onClick={() => toggleProductChecked(!isChecked)}>
+            <div onClick={() => { updateQuantityAndChecked(_id, Updatedquantity , !isChecked); toggleProductChecked(!isChecked)}}>
               {isChecked ? (
                 <GrCheckboxSelected></GrCheckboxSelected>
               ) : (
@@ -94,7 +98,7 @@ const CartComponent = ({
             <button
               onClick={handleDecrease}
               className="md:p-1 bg-gray-200 shadow-md rounded-sm"
-              disabled={quantity <= 1}
+             
             >
               <AiOutlineMinus />
             </button>
@@ -102,7 +106,7 @@ const CartComponent = ({
             <button
               onClick={handleIncrease}
               className="md:p-1 bg-gray-300 shadow-md rounded-sm"
-              disabled={quantity >= stock}
+             
             >
               <AiOutlinePlus />
             </button>
