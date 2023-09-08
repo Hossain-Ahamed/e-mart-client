@@ -20,10 +20,10 @@ const CartComponent = ({
   updateQuantityAndChecked,
   handleDeleteCartItem,
 }) => {
-  const { _id, productTitle, image, price, mainPrice, quantity, stock, checked } =
-    product;
+  const { _id, productTitle, image, price, mainPrice, quantity, stock, checked } = product;
 
-  const [isChecked, setIsChecked] = useState(checked);
+
+  const [isChecked, setIsChecked] = useState((stock === 0 ? false : checked));
 
   const toggleProductChecked = (value) => {
     // console.log(value);
@@ -72,14 +72,14 @@ const CartComponent = ({
       <div className="divider"></div>
       <div className="grid gap-4">
         <div className="grid grid-cols-4 md:grid-cols-5 items-center justify-items-center">
-          <div className="flex items-center gap-3 md:col-span-2">
-            <div onClick={() => { updateQuantityAndChecked(_id, Updatedquantity , !isChecked); toggleProductChecked(!isChecked)}}>
+          <div className="flex items-center gap-3 md:col-span-2 ">
+            <button disabled={stock === 0} className="disabled:cursor-not-allowed" onClick={() => { updateQuantityAndChecked(_id, Updatedquantity, !isChecked); toggleProductChecked(!isChecked) }}>
               {isChecked ? (
                 <GrCheckboxSelected></GrCheckboxSelected>
               ) : (
                 <GrCheckbox></GrCheckbox>
               )}
-            </div>
+            </button>
 
             <div className="avatar">
               <div className="w-16 lg:w-24 rounded">
@@ -88,9 +88,16 @@ const CartComponent = ({
             </div>
             <p
               title={productTitle}
-              className="hidden md:block w-20 font-bold line-clamp-1"
+              className="hidden md:block w-28 font-bold line-clamp-1"
             >
               {productTitle}
+              {
+                stock === 0 && <>
+                <br />
+                  <span className="text-xs text-red-400 ">&#40;Out of Stock&#41;</span>
+                </>
+              }
+
             </p>
           </div>
           <p className="">{price}</p>
@@ -98,7 +105,7 @@ const CartComponent = ({
             <button
               onClick={handleDecrease}
               className="md:p-1 bg-gray-200 shadow-md rounded-sm"
-             
+
             >
               <AiOutlineMinus />
             </button>
@@ -106,7 +113,7 @@ const CartComponent = ({
             <button
               onClick={handleIncrease}
               className="md:p-1 bg-gray-300 shadow-md rounded-sm"
-             
+
             >
               <AiOutlinePlus />
             </button>
