@@ -64,6 +64,7 @@ const CheckOut = () => {
       .catch((e) => {
         setDiscount({ couponCode: '', discountedAmmount: 0 })
         toast.error(e?.response?.data?.message);
+        reset();
 
       }).finally(() => setserverRequesting(false));
 
