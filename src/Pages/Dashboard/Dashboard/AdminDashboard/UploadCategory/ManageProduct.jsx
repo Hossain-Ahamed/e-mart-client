@@ -57,14 +57,14 @@ const ManageProduct = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src={product.img}
+                            src={product.image}
                             alt="Avatar Tailwind CSS Component"
                           />
                         </div>
                       </div>
                       <div>
                         <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden">
-                          {product.name}
+                          {product.productTitle}
                         </p>
                       </div>
                     </div>

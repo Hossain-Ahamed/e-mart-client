@@ -10,6 +10,7 @@ import Error from "../../Shared/error/Error";
 import { set } from "react-hook-form";
 import { cartDataContext } from "../../../Contexts/CartDataProvider";
 import toast from "react-hot-toast";
+import UserTitle from "../../../Component/UserTitle";
 
 const MyCart = () => {
   const { setSelectedOrderItems } = useContext(cartDataContext);
@@ -171,11 +172,8 @@ const MyCart = () => {
           <p>loading....</p>
         ) : (
           <div className="w-full h-full md:p-10 user-select-none">
-            <div className="flex gap-8 items-center my-10">
-              <h3 className="text-2xl font-bold">
-                Your Cart ({cart.length} Products)
-              </h3>
-              <div className="divider w-3/5"></div>
+            <div className="">
+            <UserTitle heading={`Your Cart (${cart.length} Products)`} />
             </div>
             <div className="grid lg:grid-cols-3 gap-5">
               <div className="bg-white col-span-2 p-5">

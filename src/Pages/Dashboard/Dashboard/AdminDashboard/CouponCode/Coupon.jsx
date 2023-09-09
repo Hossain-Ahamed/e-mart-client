@@ -38,7 +38,8 @@ const Coupon = () => {
   };
   return (
     <>
-      <div className="overflow-x-auto">
+     <div className='p-10 w-full'>
+     <div className="">
         <table className="table text-center">
           {/* head */}
           <thead>
@@ -79,6 +80,7 @@ const Coupon = () => {
           </tbody>
         </table>
       </div>
+     </div>
     </>
   );
 };

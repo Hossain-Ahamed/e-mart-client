@@ -10,6 +10,7 @@ import { AuthContext } from "../../../Contexts/AuthProvider";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import AdminTitle from "../../../Component/AdminTitle";
+import UserTitle from "../../../Component/UserTitle";
 const CheckOut = () => {
 
 
@@ -78,7 +79,7 @@ const CheckOut = () => {
 
   return (
     <>
-    <AdminTitle heading="CheckOut"/>
+    <UserTitle heading="CheckOut"/>
       <div className="grid grid-cols-3 gap-5 m-10">
         <div className="col-span-2">
           <div className="border rounded-md shadow-lg bg-white mb-5 p-5">
