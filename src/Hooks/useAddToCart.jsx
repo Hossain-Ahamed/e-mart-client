@@ -15,7 +15,7 @@ const useAddToCart = () => {
   const location = useLocation();
 
   const handleAddToCart = (featuredProduct, quantity) => {
-    // console.log(featuredProduct);
+    console.log(featuredProduct);
     if (user && user.email) {
       const cartProduct = {
         productId: featuredProduct._id,
@@ -26,8 +26,9 @@ const useAddToCart = () => {
       // console.log(cartProduct);
       axios.post(`http://localhost:5000/add-to-cart`, cartProduct, { withCredentials: true } )
       .then((response) => {
+        console.log(response);
         // Check if the response contains the updated cart data
-        const updatedCart = response.data.cart;
+        const updatedCart = response?.data?.cart;
         console.log('Updated Cart:', updatedCart);
           if (updatedCart) {
             //console.log(data.data)

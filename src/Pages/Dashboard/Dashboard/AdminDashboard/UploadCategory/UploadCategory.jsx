@@ -53,7 +53,7 @@ const UploadCategory = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "One new product added",
+                title: "One new category added",
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -182,7 +182,7 @@ const UploadCategory = () => {
           <input
             type="submit"
             className="w-full h-12 cursor-pointer bg-primary text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-5"
-            value="Add New Sub Category"
+            value="Add New Category"
           />
         </form>
       </div>
