@@ -33,7 +33,7 @@ const EditUserProfile = () => {
     try {
       const res = await axios.get(`http://localhost:5000/address`);
       //console.log(res.data);
-      return res.data;
+      return res?.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || "An error occurred");
     }
@@ -58,11 +58,11 @@ const EditUserProfile = () => {
       return ;
     }
     const formData = new FormData();
-    formData.append("image", data.image[0]);
+    formData.append("image", data?.image[0]);
     axios.post(img_hosting_url, formData).then((imgResponse) => {
       console.log(imgResponse);
-      if (imgResponse.data.success) {
-        const imgURL = imgResponse.data.data.display_url;
+      if (imgResponse?.data?.success) {
+        const imgURL = imgResponse?.data?.data?.display_url;
         console.log(imgURL);
         const { name, email, image, address, phone, city } = data;
         setValue("img", image);
@@ -82,7 +82,7 @@ const EditUserProfile = () => {
             withCredentials: true,
           })
           .then((data) => {
-            console.log("new", data.data);
+            console.log("new", data?.data);
             // reset();
             // setSelectedImage(null);
 
@@ -121,9 +121,9 @@ const EditUserProfile = () => {
   }, [place])
 
 
-  if (loading || profileLoading) {
-    return <>Loading...</>
-  }
+  // if (loading || profileLoading) {
+  //   return <>Loading...</>
+  // }
 
 
 

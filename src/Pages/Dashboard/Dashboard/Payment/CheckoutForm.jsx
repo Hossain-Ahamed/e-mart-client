@@ -19,7 +19,7 @@ const CheckoutForm = ({ price, products }) => {
     axios
       .post(`http://localhost:5000/create-payment-intent`, { price })
       .then((res) => {
-        console.log(res.data.clientSecret);
+        //console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
   }, [price]);
@@ -67,9 +67,9 @@ const CheckoutForm = ({ price, products }) => {
         },
       });
     if (intentError) {
-      console.log(intentError);
+     // console.log(intentError);
     }
-    console.log(paymentIntent);
+    //console.log(paymentIntent);
 
     setProcessing(false);
 
@@ -82,6 +82,8 @@ const CheckoutForm = ({ price, products }) => {
         price,
         quantity: products?.length,
         cartItems: products?.map(item => item._id),
+        cartItemsName: products?.map(item => item.productTitle),
+        cartItemsQuantity: products?.map(item => item.quantity),
         payItems: products?.map(item => item.productId),
         date: new Date()
       }
@@ -118,8 +120,9 @@ const CheckoutForm = ({ price, products }) => {
           <button
             type="submit"
             disabled={!stripe || !clientSecret || processing}
+            className="bg-accent text-white font-bold text-lg w-32 h-10 rounded-md mt-10"
           >
-            Pay
+            Pay Now
           </button>
         </form>
         {cardError && toast.error(cardError)}

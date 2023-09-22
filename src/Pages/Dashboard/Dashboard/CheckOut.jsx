@@ -95,8 +95,9 @@ const CheckOut = () => {
 
   const handlePlaceOrder = () => {
     const totalPayment = totalProductPrice + deliveryCharge - discount?.discountedAmmount;
+    console.log(totalPayment)
     const products = selectedOrderItems;
-    navigate('/dashboard/payment', { state: { totalPayment, products } });
+    navigate('/dashboard/payment-methods', { state: { totalPayment, products } });
   }
 
   return (

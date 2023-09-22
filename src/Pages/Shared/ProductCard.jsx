@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
 import useAddToCart from "../../Hooks/useAddToCart";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
+import useAddToWishList from "../../Hooks/useAddToWishList";
+import useWishList from "../../Hooks/useWishList";
 
 const ProductCard = ({ showProduct }) => {
   const { _id, image, productTitle, price, mainPrice, quantity } = showProduct;
 
   const [cart] = useCart();
+  const [wishList] = useWishList();
 
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [alreadyAdded, setalreadyAdded] = useState(false);
+  const [inWishList, setInWishList] = useState(false);
 
   useEffect(() => {
     setalreadyAdded(cart.some((obj) => obj._id === _id));
   }, [cart, _id]);
+
+  useEffect(() => {
+    setInWishList(wishList.some((obj) => obj._id === _id));
+  }, [wishList, _id]);
 
   const handleMouseEnter = (product) => {
     setHoveredProduct(product);
@@ -26,6 +34,16 @@ const ProductCard = ({ showProduct }) => {
   };
 
   const handleAddToCart = useAddToCart();
+  const handleAddToWishList = useAddToWishList();
+
+  // const toggleWishList = () => {
+  //   if (!inWishList) {
+  //     handleAddToWishList(showProduct);
+  //   } else {
+  //     // Handle removing from wishlist here if needed
+  //   }
+  //   setInWishList(!inWishList);
+  // };
   return (
     <>
       <div className="w-32 h-96 md:w-52 border">
@@ -43,32 +61,49 @@ const ProductCard = ({ showProduct }) => {
               />
             </figure>
           </Link>
-          {hoveredProduct === showProduct &&
-          (
-            quantity > 0 ? (
-              alreadyAdded ? (
-                <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto">
-                <AiOutlineShoppingCart></AiOutlineShoppingCart>
-                <span className="">Added</span>
-              </button>
+          {hoveredProduct === showProduct && (
+            <>
+              {quantity > 0 ? (
+                <div className="">
+                  {alreadyAdded ? (
+                    <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto">
+                      <AiOutlineShoppingCart></AiOutlineShoppingCart>
+                      <span className="">Added</span>
+                    </button>
+                  ) : (
+                    <>
+                    <button
+                      onClick={() => handleAddToCart(showProduct, 1)}
+                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto"
+                    >
+                      <AiOutlineShoppingCart></AiOutlineShoppingCart>
+                      <span className="">Add to Cart</span>
+                    </button>
+                    <button
+                        onClick={() => handleAddToWishList(showProduct, 1)}
+                        className="absolute bottom-10 left-48 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 mx-auto"
+                      >
+                        {inWishList ? (
+                          <AiFillHeart className="text-red-600" />
+                        ) : (
+                          <AiOutlineHeart />
+                        )}
+                      </button>
+                    </>
+                  )}
+                  
+                </div>
               ) : (
                 <button
-                onClick={() => handleAddToCart(showProduct, 1)}
-                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto"
-              >
-                <AiOutlineShoppingCart></AiOutlineShoppingCart>
-                <span className="">Add to Cart</span>
-              </button>
-              )
-            ) : (
-              <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto cursor-not-allowed" disabled>
-                <AiOutlineShoppingCart />
-                <span>Out of Stock</span>
-              </button>
-            )
-            
-          )
-          }
+                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto"
+                  disabled
+                >
+                  <AiOutlineShoppingCart />
+                  <span>Out of Stock</span>
+                </button>
+              )}
+           </>
+          )}
         </div>
         <hr className="mb-1" />
         <div className="border-t-2">

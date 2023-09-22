@@ -19,7 +19,7 @@ const UserProfile = () => {
         { withCredentials: true }
       );
       // console.log(res.data);
-      return res.data;
+      return res?.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || "An error occurred");
     }

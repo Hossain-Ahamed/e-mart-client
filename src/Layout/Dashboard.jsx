@@ -4,6 +4,7 @@ import {
   AiOutlineUser,
   AiOutlineHome,
   AiOutlineCreditCard,
+  AiOutlineHeart,
 } from "react-icons/ai";
 import { BiCalendar, BiCategory, BiDuplicate } from "react-icons/bi";
 import { IoWalletOutline, IoSettingsOutline } from "react-icons/io5";
@@ -90,6 +91,12 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/dashboard/ordered-products">
+                    <MdAddCard />
+                    Ordered Products
+                  </Link>
+                </li>
+                <li>
                   <Link to="/dashboard/allUsers">
                     <HiOutlineUserGroup />
                     All Users
@@ -110,21 +117,27 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link>
-                    <BiCalendar />
-                    Reservation
+                  <Link to="/dashboard/myCart">
+                    <BsCart3 />
+                    My Cart
                   </Link>
                 </li>
                 <li>
-                  <Link>
+                  <Link to="/dashboard/wish-list">
+                    <AiOutlineHeart />
+                    Wish List
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/payment-history">
                     <IoWalletOutline />
                     Payment History
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/myCart">
-                    <BsCart3 />
-                    My Cart
+                  <Link to="/dashboard/order-details">
+                    <BiCalendar />
+                    Order Details
                   </Link>
                 </li>
                 <li>

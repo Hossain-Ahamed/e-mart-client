@@ -17,12 +17,12 @@ const useProfile = () => {
               );
               setProfileLoading(false);
               //console.log(res.data);
-              return res.data;
+              return res?.data;
         },
           });
     
     
-    return [profile, profileLoading,refetch]
+    return [profile, profileLoading, refetch]
     };
 
 export default useProfile;

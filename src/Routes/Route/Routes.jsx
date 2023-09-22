@@ -47,6 +47,11 @@ import DeliveryCharge from "../../Pages/Dashboard/Dashboard/AdminDashboard/Deliv
 import Coupon from "../../Pages/Dashboard/Dashboard/AdminDashboard/CouponCode/Coupon";
 import Payment from "../../Pages/Dashboard/Dashboard/Payment/Payment";
 import CheckoutForm from "../../Pages/Dashboard/Dashboard/Payment/CheckoutForm";
+import PaymentHistory from "../../Pages/Dashboard/Dashboard/Payment/PaymentHistory";
+import PaymentMethods from "../../Pages/Dashboard/Dashboard/Payment/PaymentMethods";
+import OrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/OrderDetails/OrderDetails";
+import WishList from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/WishList";
+import OrderedProducts from "../../Pages/Dashboard/Dashboard/AdminDashboard/OrderedProducts/OrderedProducts";
 
 
 
@@ -125,16 +130,32 @@ const router = createBrowserRouter([
           element: <MyCart></MyCart>
         },
         {
+          path: "wish-list",
+          element: <WishList />
+        },
+        {
           path: "check-out",
           element: <CheckOut />
+        },
+        {
+          path: "payment-methods",
+          element: <PaymentMethods />
         },
         {
           path: "payment",
           element: <Payment />
         },
         {
+          path: "payment-history",
+          element: <PaymentHistory />
+        },
+        {
           path: "check-out-form",
           element: <CheckoutForm />
+        },
+        {
+          path: "order-details",
+          element: <OrderDetails />
         },
         {
           path: "add-review",
@@ -167,6 +188,10 @@ const router = createBrowserRouter([
         {
           path: 'manage-coupon',
           element: <AdminRoute><Coupon /></AdminRoute>
+        },
+        {
+          path: 'ordered-products',
+          element: <AdminRoute><OrderedProducts /></AdminRoute>
         },
         {
           path: 'all-categories',
