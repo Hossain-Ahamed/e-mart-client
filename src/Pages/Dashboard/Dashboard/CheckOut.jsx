@@ -64,18 +64,13 @@ const CheckOut = () => {
     // console.log(data);
     setserverRequesting(true);
 
-    axios
-      .post(
-        `${import.meta.env.VITE_SERVERADDRESS}/get-discount-by-coupon?email=${
-          user?.email
-        }`,
-        data,
-        {
-          withCredentials: true,
-        }
-      )
+    axios.post(`${import.meta.env.VITE_SERVERADDRESS}/get-discount-by-coupon?email=${user?.email}`, data,
+      {
+        withCredentials: true,
+      }
+    )
       .then((data) => {
-        console.log(data.data);
+        toast.success("YAY !!!")
         setDiscount({
           couponCode: data.data?.couponCode,
           discountedAmmount: data.data?.discountedAmmount,
@@ -90,28 +85,30 @@ const CheckOut = () => {
   };
 
   if (loading) {
-    return <>Loadin...</>;
+    return <>Loading...</>;
   }
 
   const handlePlaceOrder = () => {
-    const totalPayment = totalProductPrice + deliveryCharge - discount?.discountedAmmount;
-    console.log(totalPayment)
-    const products = selectedOrderItems;
-    const data = {couponName: discount?.couponCode}
-    axios
-    .post(
-      `${import.meta.env.VITE_SERVERADDRESS}/checkout?email=${user?.email}`, data,
+
+    const data = { couponName: discount?.couponCode }
+    axios.post(`${import.meta.env.VITE_SERVERADDRESS}/checkout?email=${user?.email}`, data,
       {
         withCredentials: true,
-      }
-    )
-    .then((data) => {
-      navigate('/dashboard/payment-methods', { state: { totalPayment, products } });
-    })
-    .catch((e) => {
-      <Error />;
-    })
-    
+      } )
+      .then((data) => {
+        console.log(data.data)
+        navigate(`/dashboard/payment-methods/${data.data?.orderData?.insertedId}`, {
+          state: {
+            totalPayment: totalProductPrice + deliveryCharge - discount?.discountedAmmount,
+            products: selectedOrderItems,
+            _id : data.data?.insertedId
+          }
+        });
+      })
+      .catch((e) => {
+        <Error />;
+      })
+
   }
 
   return (

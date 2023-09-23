@@ -138,11 +138,11 @@ const router = createBrowserRouter([
           element: <CheckOut />
         },
         {
-          path: "payment-methods",
+          path: "payment-methods/:_OrderID",
           element: <PaymentMethods />
         },
         {
-          path: "payment",
+          path: "payment/:_OrderID",
           element: <Payment />
         },
         {
