@@ -97,7 +97,21 @@ const CheckOut = () => {
     const totalPayment = totalProductPrice + deliveryCharge - discount?.discountedAmmount;
     console.log(totalPayment)
     const products = selectedOrderItems;
-    navigate('/dashboard/payment-methods', { state: { totalPayment, products } });
+    const data = {couponName: discount?.couponCode}
+    axios
+    .post(
+      `${import.meta.env.VITE_SERVERADDRESS}/checkout?email=${user?.email}`, data,
+      {
+        withCredentials: true,
+      }
+    )
+    .then((data) => {
+      navigate('/dashboard/payment-methods', { state: { totalPayment, products } });
+    })
+    .catch((e) => {
+      <Error />;
+    })
+    
   }
 
   return (

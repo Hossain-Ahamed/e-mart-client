@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import UserTitle from '../../../../Component/UserTitle';
 import { BsCashCoin, BsCreditCard } from 'react-icons/bs';
 import { TbCurrencyTaka } from 'react-icons/tb';
@@ -13,6 +13,8 @@ const PaymentMethods = () => {
     const location = useLocation();
     const totalPayment = location.state?.totalPayment || 0;
   const products = location.state?.products || 0;
+
+  
 
   const price =  totalPayment;
 
@@ -60,6 +62,10 @@ const PaymentMethods = () => {
 //   const handleCashOnDelivery = () => {
 
 //   }
+
+if(!location.state?.totalPayment || !location.state?.products){
+  return <Navigate to="/" replace></Navigate>
+ }
     return (
         <>
         <div className='w-full p-10'>
