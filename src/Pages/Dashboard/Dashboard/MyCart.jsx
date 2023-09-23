@@ -196,22 +196,20 @@ const MyCart = () => {
                   ></CartComponent>
                 ))}
               </div>
-              <div className=" bg-white p-5 h-64">
+              <div className=" bg-white p-5 h-40">
                 <div className="grid grid-cols-4">
                   <div className="col-span-3">
                     <p className="font-bold">Total Price:</p>
-                    <p className="font-bold">Coupon Code:</p>
-                    <p className="font-bold">Grand Total:</p>
+                    
                   </div>
                   <div>
-                    <p className="">{total}</p>
-                    <p>{total}</p>
-                    <p>{total}</p>
+                    <p className="">{total.toFixed(2)}</p>
+                    
                   </div>
                 </div>
 
 
-                <button onClick={selectedOrders.length <= 0 ? () => { toast.error("You must select an item") } : handleCheckOut} className={` w-full h-10 focus:ring focus:ring-3 ring-yellow-300  bg-accent text-white text-lg font-bold rounded-sm mt-5 disabled:cursor-not-allowed`}>
+                <button onClick={selectedOrders.length <= 0 ? () => { toast.error("You must select an item") } : handleCheckOut} className={` w-full h-10 focus:ring focus:ring-3 ring-yellow-300  bg-accent text-white text-lg font-bold rounded-sm mt-8 disabled:cursor-not-allowed`}>
                   Check Out
                 </button>
                 {/* {
