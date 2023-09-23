@@ -1,32 +1,53 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import React from 'react';
+import React ,{useContext} from 'react';
 import CheckoutForm from './CheckoutForm';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { FaCcMastercard, FaCreditCard } from "react-icons/fa";
+import { useQueries, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { AuthContext } from '../../../../Contexts/AuthProvider';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
 const Payment = () => {
-    const location = useLocation();
-  const totalPayment = location.state?.totalPayment || 0;
-  const products = location.state?.products || 0;
-  console.log(products)
-  console.log(totalPayment)
-  const price = parseFloat(totalPayment.toFixed(2))
+    const {_OrderID} = useParams();
+    const { user } = useContext(AuthContext);
+   
+  const { isLoading, isError, data : orderedData, error } = useQuery({
+    queryKey: ['orderData', _OrderID],
+    queryFn: async () => {
+
+      const res = await axios.get(`${import.meta.env.VITE_SERVERADDRESS}/payment-methods?email=${user?.email}&_orderID=${_OrderID}`, { withCredentials: true })
+   
+      return res?.data;
+    },
+  })
+
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>
+  }
+
+
+    
+
     return (
         <>
-        <div className='bg-white p-10'>
-            <div className='flex gap-5 text-3xl mb-10'>
-                <FaCcMastercard />
-                <FaCreditCard />
+            <div className='bg-white p-10'>
+                <div className='flex gap-5 text-3xl mb-10'>
+                    <FaCcMastercard />
+                    <FaCreditCard />
+                </div>
+                <div>
+                    <Elements stripe={stripePromise}>
+                        <CheckoutForm price={orderedData?.totalAmount} products={orderedData?.productLength}></CheckoutForm>
+                    </Elements>
+                </div>
             </div>
-        <div>
-            <Elements stripe={stripePromise}>
-                <CheckoutForm price={price} products={products}></CheckoutForm>
-            </Elements>
-        </div>
-        </div>
         </>
     );
 };
