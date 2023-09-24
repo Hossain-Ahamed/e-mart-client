@@ -5,8 +5,9 @@ import useAllUserProfile from '../../../../../Hooks/useAllUserProfile';
 
 const OrderedProducts = () => {
     const [orderedProducts] = useOrderedProducts();
+    console.log(orderedProducts)
     const [userProfiles] = useAllUserProfile();
-    console.log(userProfiles)
+    //console.log(userProfiles)
     const [selectedUser, setSelectedUser] = useState(null);
 
   const openModal = (email) => {
@@ -36,35 +37,42 @@ const OrderedProducts = () => {
             </tr>
           </thead>
             <tbody>
-              {orderedProducts?.map((product) => (
-                <tr key={product?._id} product={product}>
-                  {/* row 1 */}
+            {orderedProducts.map((product, index) => (
+  <tr key={product._id}>
+    <td>
+      <p>Order {index + 1}</p>
+    <p>Coupon: {product.coupon}</p>
+    <p>Courier Charge: {product.courirerCharge}</p>
+    <p>Discounted Amount: {product.discountedAmount}</p>
+    <p>Final Amount: {product.finalAmount}</p>
+    <p>Order Type: {product.orderType || "N/A"}</p>
+    <p>Subtotal Amount: {product.subTotalAmount}</p>
+    <p>User Address: {product.userAddress}</p>
+    <p>User City: {product.userCity}</p>
+    <p>User Phone: {product.userPhone}</p>
+    <p>User ID: {product.userId}</p>
+    <p>Transaction ID: {product.transactionId || "N/A"}</p>
+    </td>
+    
+    <td>Order Status:</td>
+    <td>
+      {product.orderStatus.map((status, statusIndex) => (
+        <p key={statusIndex}>
+          Name: {status.name}, Message: {status.message}, Time: {status.time}
+        </p>
+      ))}
+    </td>
+    <td>Ordered Items:</td>
+    <td>
+      {product.orderedItems.map((item, itemIndex) => (
+        <p key={itemIndex}>
+          Product ID: {item.productId}, Product Name: {item.productName}, Product Price: {item.productPrice}, Product Quantity: {item.productQuantity}
+        </p>
+      ))}
+    </td>
+  </tr>
+))}
 
-                  <td>
-                    {product.email}
-                  </td>
-                  
-                  <td>
-                  {product.cartItemsName.map((itemName, index) => (
-                    <div key={index}>{itemName}</div>
-                  ))}
-                  </td>
-                  <td>
-                  {product.cartItemsQuantity?.map((itemQuantity, index) => (
-                    <div key={index}>{itemQuantity}</div>
-                  ))}
-                  </td>
-                  
-
-                  <td>{product.price}</td>
-                  <td>{product.transactionId || product.cashOnDelivery}</td>
-                  <td><label
-                        
-                        htmlFor="customer-info"
-                        className='btn'>
-                            Customer Info</label></td>  
-                </tr>
-              ))}
             </tbody>
           </table>
         </div>
@@ -78,21 +86,21 @@ const OrderedProducts = () => {
               ✕
             </label>
             <h3 className="text-lg font-bold"></h3>
-            <p>{userProfiles.length}</p>
+            {/* <p>{userProfiles.length}</p>
             <div>
               {orderedProducts.map((product) => (
                 <div key={product._id} onClick={() => openModal(product.email)}>
                   <p>{product.email}</p>
-                  {/* Render other product data here */}
+                 
                 </div>
               ))}
             </div>
             {selectedUser && (
               <div key={selectedUser._id} info={selectedUser}>
                 <p>{selectedUser.name}</p>
-                {/* Render other user data here */}
+                
               </div>
-            )}
+            )} */}
             
                     <p>ydhththrt</p>
                     {/* <form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-1 gap-3 mt-10'>

@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 const PaymentMethods = () => {
   const { user } = useContext(AuthContext);
@@ -34,56 +35,31 @@ const PaymentMethods = () => {
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>
+    console.log(error)
+    return <span>Error: {error?.response?.data?.message}</span>
   }
 
 
-
-
-
-  // const onSubmit = (data) => {
-  //   console.log(data)
-  //   const {typeOfPayment} = data;
-  //   const orderType = typeOfPayment;
-  //   axios.put(`${import.meta.env.VITE_SERVERADDRESS}/updateOrder/${_OrderID}`, {orderType}, {withCredentials: true})
-  //     .then((res) => {
-  //       console.log(res.data)
-  //       if (res.data.insertedId) {
-  //         navigate(
-  //           `/dashboard/order-details`
-  //         );
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //       if (e?.response?.status === 409) {
-  //         //
-  //       }
-  //     });
-  // }
-
-  const onSubmit = async (data) => {
-    try {
-      // Add the orderType field to the data object with the value "COD".
-      data.orderType = "COD";
+  const onSubmit = (data) => {
+    console.log('Request Data:', data);
+      const updatedData = {
+        typeOfPayment: data.typeOfPayment, 
+      };
+     
+      axios.patch(`${import.meta.env.VITE_SERVERADDRESS}/payment/${_OrderID}?email=${user?.email}`, updatedData, { withCredentials: true })
+      .then(data => {
+        toast.success("successfully paid")
+        navigate("/dashboard/order-details")
+      })
+      .catch(e => {
+        toast.error("try again")
+        console.error(e)
+      })
       
-      // Make a POST request to your server's /checkout endpoint with the data.
-      const response = await axios.post(`${import.meta.env.VITE_SERVERADDRESS}/checkout?email=${user?.email}`, data, { withCredentials: true });
       
-      // Check the response and handle it as needed.
-      if (response.status === 200) {
-        // Success: Order placed, you can navigate to a confirmation page or do further actions.
-        console.log('Order placed successfully.');
-      } else {
-        // Handle other status codes or errors.
-        console.error('Error placing the order:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error placing the order:', error);
-    }
   };
   
-
+  
 
   const handleCardPayment = () => {
     navigate(`/dashboard/payment/${_OrderID}`);

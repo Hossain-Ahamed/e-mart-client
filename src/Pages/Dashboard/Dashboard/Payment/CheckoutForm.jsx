@@ -3,11 +3,14 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../../Contexts/AuthProvider";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 //import './CheckoutForm.css'
 
 const CheckoutForm = ({ price, products }) => {
   console.log(price, products)
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -15,6 +18,26 @@ const CheckoutForm = ({ price, products }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
+
+  const { _OrderID } = useParams();
+
+  const { isLoading, isError, data : orderedData, error } = useQuery({
+    queryKey: ['orderData', _OrderID],
+    queryFn: async () => {
+
+      const res = await axios.get(`${import.meta.env.VITE_SERVERADDRESS}/payment-methods?email=${user?.email}&_orderID=${_OrderID}`, { withCredentials: true })
+   
+      return res?.data;
+    },
+  })
+
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
+
+  if (isError) {
+    return <span>Error: {error?.response?.data?.message}</span>
+  }
 
   useEffect(() => {
     axios
@@ -95,25 +118,20 @@ const CheckoutForm = ({ price, products }) => {
 
       //   }
       // })
-      try { 
-        const data = {
-          orderType: "Card", 
-          transactionId: paymentIntent.id, 
-        };
-       
-        const response = await axios.post(`${import.meta.env.VITE_SERVERADDRESS}/checkout?email=${user?.email}`, data, { withCredentials: true });
-        
-        // Check the response and handle it as needed.
-        if (response.status === 200) {
-          // Success: Order placed, you can navigate to a confirmation page or do further actions.
-          console.log('Order placed successfully.');
-        } else {
-          // Handle other status codes or errors.
-          console.error('Error placing the order:', response.data.message);
-        }
-      } catch (error) {
-        console.error('Error placing the order:', error);
-      }
+      const updatedData = {
+        typeOfPayment: "Card", 
+        transactionId: paymentIntent.id,
+      };
+     
+      axios.patch(`${import.meta.env.VITE_SERVERADDRESS}/payment/${_OrderID}?email=${user?.email}`, updatedData, { withCredentials: true })
+      .then(data => {
+        toast.success("successfully paid")
+        navigate("/dashboard/order-details")
+      })
+      .catch(e => {
+        toast.error("try again")
+        console.error(e)
+      })
     }
   };
 
