@@ -52,6 +52,7 @@ import PaymentMethods from "../../Pages/Dashboard/Dashboard/Payment/PaymentMetho
 import OrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/OrderDetails/OrderDetails";
 import WishList from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/WishList";
 import OrderedProducts from "../../Pages/Dashboard/Dashboard/AdminDashboard/OrderedProducts/OrderedProducts";
+import OrderDetailsView from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/OrderDetails/OrderDetailsView";
 
 
 
@@ -156,6 +157,10 @@ const router = createBrowserRouter([
         {
           path: "order-details",
           element: <OrderDetails />
+        },
+        {
+          path: "order-details/:orderId",
+          element: <OrderDetailsView />
         },
         {
           path: "add-review",

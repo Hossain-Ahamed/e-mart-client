@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../Contexts/AuthProvider';
 import { useState } from 'react';
+import { ProfileContext } from '../Contexts/ProfileProvider';
 
 const useProfile = () => {
     const {user, loading} = useContext(AuthContext);
@@ -23,6 +24,9 @@ const useProfile = () => {
     
     
     return [profile, profileLoading, refetch]
+
+    // const {profile, profileLoading} = useContext(ProfileContext)
+    // return [profile, profileLoading]
     };
 
 export default useProfile;
