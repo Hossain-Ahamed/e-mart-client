@@ -51,10 +51,7 @@ const OrderDetails = () => {
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
               <tr>
-                <th scope="col" className="px-3 py-3"></th>
-                {/* <th scope="col" className="px-6 py-3">
-                                    Item Image
-                                </th> */}
+                
                 <th scope="col" className="px-6 py-3">
                   Order Id
                 </th>
@@ -80,7 +77,6 @@ const OrderDetails = () => {
                     key={i?._id}
                     className="bg-white border-b  hover:bg-gray-50 "
                   >
-                    <td className="px-3 py-4">{count + 1}</td>
 
                     {/* <td className="px-6 py-4">
                                         <img className="w-10 h-10 rounded-full" src={i?.image} alt={i?.name} />
