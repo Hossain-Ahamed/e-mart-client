@@ -4,26 +4,35 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
-import useAddToWishList from "../../Hooks/useAddToWishList";
-import useWishList from "../../Hooks/useWishList";
+import useRole from "../../Hooks/useRole";
+import toast from "react-hot-toast";
+// import useAddToWishList from "../../Hooks/useAddToWishList";
+// import useWishList from "../../Hooks/useWishList";
 
 const ProductCard = ({ showProduct }) => {
   const { _id, image, productTitle, price, mainPrice, quantity } = showProduct;
 
+  const {role} = useRole();
+  console.log(role);
+
+
   const [cart] = useCart();
-  const [wishList] = useWishList();
+  // const [wishList] = useWishList();
 
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [alreadyAdded, setalreadyAdded] = useState(false);
-  const [inWishList, setInWishList] = useState(false);
+  // const [inWishList, setInWishList] = useState(false);
 
   useEffect(() => {
-    setalreadyAdded(cart.some((obj) => obj._id === _id));
-  }, [cart, _id]);
+    if(role === "user")
+    {
+      setalreadyAdded(cart.some((obj) => obj._id === _id));
+    }
+  }, [cart, _id, role]);
 
-  useEffect(() => {
-    setInWishList(wishList.some((obj) => obj._id === _id));
-  }, [wishList, _id]);
+  // useEffect(() => {
+  //   setInWishList(wishList.some((obj) => obj._id === _id));
+  // }, [wishList, _id]);
 
   const handleMouseEnter = (product) => {
     setHoveredProduct(product);
@@ -34,7 +43,7 @@ const ProductCard = ({ showProduct }) => {
   };
 
   const handleAddToCart = useAddToCart();
-  const handleAddToWishList = useAddToWishList();
+  // const handleAddToWishList = useAddToWishList();
 
   // const toggleWishList = () => {
   //   if (!inWishList) {
@@ -72,14 +81,16 @@ const ProductCard = ({ showProduct }) => {
                     </button>
                   ) : (
                     <>
+
+                    {/* TODO: Need to change or disable addToCart for admin and others */}
                     <button
-                      onClick={() => handleAddToCart(showProduct, 1)}
+                      onClick={() => {["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role) ? toast.error("You are not an user!") : handleAddToCart(showProduct, 1)}}
                       className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto"
                     >
                       <AiOutlineShoppingCart></AiOutlineShoppingCart>
                       <span className="">Add to Cart</span>
                     </button>
-                    <button
+                    {/* <button
                         onClick={() => handleAddToWishList(showProduct, 1)}
                         className="absolute bottom-10 left-48 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 mx-auto"
                       >
@@ -88,7 +99,7 @@ const ProductCard = ({ showProduct }) => {
                         ) : (
                           <AiOutlineHeart />
                         )}
-                      </button>
+                      </button> */}
                     </>
                   )}
                   

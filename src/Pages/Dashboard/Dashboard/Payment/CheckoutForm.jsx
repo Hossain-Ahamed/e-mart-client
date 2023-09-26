@@ -32,7 +32,7 @@ const CheckoutForm = ({ price, products }) => {
   })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <span>Loading... checkouy</span>
   }
 
   if (isError) {

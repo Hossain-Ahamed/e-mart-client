@@ -5,7 +5,7 @@ import SubNav from '../Pages/Shared/Navbar/SubNav';
 import Footer from '../Pages/Shared/Footer/Footer';
 
 const Main = () => {
-    console.log(import.meta.env.VITE_TEST)
+    //console.log(import.meta.env.VITE_TEST)
     return (
         <>
         <SubNav></SubNav>

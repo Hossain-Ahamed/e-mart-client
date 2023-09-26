@@ -5,12 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Error from "../Pages/Shared/error/Error";
-import useWishList from "./useWishList";
+// import useWishList from "./useWishList";
 
 const useAddToWishList = () => {
 
   const { user } = useContext(AuthContext);
-  const [, refetch] = useWishList();
+  // const [, refetch] = useWishList();
 
   const navigate = useNavigate();
   const location = useLocation();

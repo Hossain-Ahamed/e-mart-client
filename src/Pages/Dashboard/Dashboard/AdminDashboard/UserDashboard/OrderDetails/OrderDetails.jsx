@@ -29,7 +29,7 @@ const OrderDetails = () => {
   });
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <span>Loading... orderdetail</span>;
   }
 
   if (isError) {

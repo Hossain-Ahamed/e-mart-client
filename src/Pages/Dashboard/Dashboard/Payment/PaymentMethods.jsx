@@ -31,7 +31,7 @@ const PaymentMethods = () => {
   })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <span>Loading... method</span>
   }
 
   if (isError) {

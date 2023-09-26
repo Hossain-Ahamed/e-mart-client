@@ -18,7 +18,7 @@ import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
   // const isAdmin = true;
 
-  const [isAdmin] = useAdmin();
+  const [isAdmin, refetch] = useAdmin();
   return (
     <>
       <div className="drawer drawer-mobile">

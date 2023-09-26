@@ -53,6 +53,8 @@ import OrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDas
 import WishList from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/WishList";
 import OrderedProducts from "../../Pages/Dashboard/Dashboard/AdminDashboard/OrderedProducts/OrderedProducts";
 import OrderDetailsView from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/OrderDetails/OrderDetailsView";
+import BlockLogin from "../PrivateRoute/BlockLogin";
+import BlockAdmin from "../PrivateRoute/BlockAdmin";
 
 
 
@@ -69,11 +71,11 @@ const router = createBrowserRouter([
         
         {
           path: "/login",
-          element: <Login></Login>
+          element: <BlockLogin><Login></Login></BlockLogin>
         },
         {
           path: "/signUp",
-          element: <SignUp></SignUp>
+          element: <BlockLogin><SignUp></SignUp></BlockLogin>
         },
         {
           path: "/overview/:id",
@@ -128,43 +130,43 @@ const router = createBrowserRouter([
         },
         {
           path: "myCart",
-          element: <MyCart></MyCart>
+          element: <BlockAdmin><MyCart></MyCart></BlockAdmin>
         },
         {
           path: "wish-list",
-          element: <WishList />
+          element: <BlockAdmin><WishList /></BlockAdmin>
         },
         {
           path: "check-out",
-          element: <CheckOut />
+          element:<BlockAdmin><CheckOut /></BlockAdmin> 
         },
         {
           path: "payment-methods/:_OrderID",
-          element: <PaymentMethods />
+          element: <BlockAdmin><PaymentMethods /></BlockAdmin>
         },
         {
           path: "payment/:_OrderID",
-          element: <Payment />
+          element: <BlockAdmin><Payment /></BlockAdmin>
         },
         {
           path: "payment-history",
-          element: <PaymentHistory />
+          element: <BlockAdmin><PaymentHistory /></BlockAdmin>
         },
         {
           path: "check-out-form",
-          element: <CheckoutForm />
+          element: <BlockAdmin><CheckoutForm /></BlockAdmin>
         },
         {
           path: "order-details",
-          element: <OrderDetails />
+          element: <BlockAdmin><OrderDetails /></BlockAdmin>
         },
         {
           path: "order-details/:orderId",
-          element: <OrderDetailsView />
+          element: <BlockAdmin><OrderDetailsView /></BlockAdmin>
         },
         {
           path: "add-review",
-          element: <AddReview />
+          element: <BlockAdmin><AddReview /></BlockAdmin>
         },
         {
           path: "allUsers",

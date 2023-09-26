@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../../Contexts/AuthProvider";
-import useWishList from "../../../../../Hooks/useWishList";
+// import useWishList from "../../../../../Hooks/useWishList";
 import UserTitle from "../../../../../Component/UserTitle";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
@@ -15,8 +15,8 @@ const WishList = () => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext);
 
-const [wishList, refetch] = useWishList();
-console.log(wishList)
+// const [wishList, refetch] = useWishList();
+// console.log(wishList)
 
 const handleAddToCart = useAddToCart();
 
@@ -41,7 +41,7 @@ const handleDelete = (wish) => {
           .then((res) => res.json())
           .then((data) => {
             if (data.success) { // Assuming your backend responds with a success field
-              refetch();
+              // refetch();
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
             } else {
               Swal.fire("Error!", "Item not found or server error.", "error");
@@ -59,18 +59,18 @@ const handleDelete = (wish) => {
   return (
     <>
       <>
-          <div className="h-full md:p-10 user-select-none">
+          {/* <div className="h-full md:p-10 user-select-none">
             <div className="">
             <UserTitle heading={`Your Cart (${wishList.length} Products)`} />
             </div>
             <div>
             <div className="">
-          {/* <p>{wish.length}</p> */}
+          
           <table className="table">
             <tbody>
               {wishList.map((wish) => (
                 <tr key={wish._id} wish={wish}>
-                  {/* row 1 */}
+                 
 
                   <td>
                     <div className="flex items-center space-x-3">
@@ -108,7 +108,7 @@ const handleDelete = (wish) => {
           </table>
         </div>
             </div>
-          </div>
+          </div> */}
       </>
     </>
   );
