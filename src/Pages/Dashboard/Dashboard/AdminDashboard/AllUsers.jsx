@@ -3,15 +3,19 @@ import axios from "axios";
 import React from "react";
 import Swal from "sweetalert2";
 import AllUsers_Row from "./AllUsers_Row";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
-  const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await axios.get("http://localhost:5000/users", {
-      withCredentials: true,
-    });
-    console.log(res.data);
+  const {axiosSecure} = useAxiosSecure();
+  const { data: users = [], refetch, isError, error } = useQuery(["users"], async () => {
+    const res = await axiosSecure.get("/users");
+    //console.log(res.data);
     return res.data;
   });
+
+  if(isError){
+    console.log(error)
+  }
 
   const handleMakeAdmin = (user) => {
     const ghorardim = { id: user?._id };

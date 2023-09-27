@@ -13,7 +13,7 @@ const ProductCard = ({ showProduct }) => {
   const { _id, image, productTitle, price, mainPrice, quantity } = showProduct;
 
   const {role} = useRole();
-  console.log(role);
+  //console.log(role);
 
 
   const [cart] = useCart();

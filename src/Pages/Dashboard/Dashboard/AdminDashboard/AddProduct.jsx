@@ -6,9 +6,11 @@ import useCategory from "../../../../Hooks/useCategory";
 import slugify from "slugify";
 import AdminTitle from "../../../../Component/AdminTitle";
 import useSubCategory from "../../../../Hooks/useSubCategory";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AddProduct = () => {
   const [category] = useCategory();
+  const {axiosSecure} = useAxiosSecure();
   const [subCategory] = useSubCategory();
   console.log(category);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -64,10 +66,8 @@ const AddProduct = () => {
             productSlug: slugify(productTitle),
           };
           console.log(newProduct);
-          axios
-            .post("http://localhost:5000/products", newProduct, {
-              withCredentials: true,
-            })
+          axiosSecure
+            .post("/products", newProduct)
             .then((data) => {
               console.log("new", data.data);
               if (data.data.insertedId) {
