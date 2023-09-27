@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../../Contexts/AuthProvider";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import useProfile from "../../../../../Hooks/useProfile";
 
 const UserProfile = () => {
   const { user } = useContext(AuthContext);
+
+  //const [, profileLoading] = useProfile();
 
   // Fetch the user's profile
   const {

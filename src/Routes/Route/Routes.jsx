@@ -12,7 +12,7 @@ import HomeForKitchenTools from "../../Pages/KitchenTools/Home/HomeForKitchenToo
 import PrivateRoutes from "../PrivateRoute/PrivateRoutes";
 import MyCart from "../../Pages/Dashboard/Dashboard/MyCart";
 import AllProducts from "../../Pages/AllProducts/AllProducts";
-import Dashboard from "../../Layout/Dashboard";
+import Dashboard from "../../Layout/Dashboard/Dashboard";
 import ProductOverView from "../../Pages/OverView/ProductOverView";
 import AllUsers from "../../Pages/Dashboard/Dashboard/AdminDashboard/AllUsers";
 import AdminRoute from "../AdminRoute/AdminRoute";
@@ -55,6 +55,7 @@ import OrderedProducts from "../../Pages/Dashboard/Dashboard/AdminDashboard/Orde
 import OrderDetailsView from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/OrderDetails/OrderDetailsView";
 import BlockLogin from "../PrivateRoute/BlockLogin";
 import BlockAdmin from "../PrivateRoute/BlockAdmin";
+import AllowAdmin from "../PrivateRoute/AllowAdmin";
 
 
 
@@ -168,9 +169,10 @@ const router = createBrowserRouter([
           path: "add-review",
           element: <BlockAdmin><AddReview /></BlockAdmin>
         },
+
         {
           path: "allUsers",
-          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin"]}><AllUsers></AllUsers></AllowAdmin>
         },
         {
           path: "admin-home",
@@ -178,11 +180,11 @@ const router = createBrowserRouter([
         },
         {
           path: 'addProduct',
-          element: <AdminRoute><AddProduct></AddProduct></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><AddProduct></AddProduct></AllowAdmin>
         },
         {
           path: 'manageProduct',
-          element: <AdminRoute><ManageProduct></ManageProduct></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><ManageProduct /></AllowAdmin>
         },
         {
           path: 'delivery-charge',
@@ -190,75 +192,76 @@ const router = createBrowserRouter([
         },
         {
           path: 'add-coupon',
-          element: <AdminRoute><AddCoupon /></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><AddCoupon /></AllowAdmin>
         },
         {
           path: 'manage-coupon',
-          element: <AdminRoute><Coupon /></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><Coupon /></AllowAdmin>
         },
         {
           path: 'ordered-products',
-          element: <AdminRoute><OrderedProducts /></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><OrderedProducts /></AllowAdmin>
+        },
+        {
+          path: 'ordered-products/:orderId',
+          element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><OrderedProducts /></AllowAdmin>
         },
         {
           path: 'all-categories',
-          element: <AdminRoute><AllCategories></AllCategories></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><AllCategories /></AllowAdmin>
         },
         {
           path: 'upload/:type',
-          element: <AdminRoute><SelectType /></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><SelectType /></AllowAdmin>
         },
         {
           path: 'upload/:type/:slug/home-page-layout',
-          element: <AdminRoute><HomePageLayout></HomePageLayout></AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><HomePageLayout /></AllowAdmin>
         },
         {
           
           path: 'upload/:type/:slug/home-page-layout/:layout',
           
-          element: <AdminRoute>
-            
-            <SelectLayout></SelectLayout>
-          </AdminRoute>
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><SelectLayout /></AllowAdmin>
         },
         
         {
           path: 'upload/:type/:slug/upload-top-banner',
-          element: <AdminRoute><UpdateTopBanner></UpdateTopBanner></AdminRoute>,
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UpdateTopBanner /></AllowAdmin>,
           loader: updateTopBannerLoader ,
           errorElement: <Error /> 
         },
         {
           path: 'upload/:type/:slug/upload-second-banner',
-          element: <AdminRoute><UpdateSecondBanner></UpdateSecondBanner></AdminRoute>,
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UpdateSecondBanner /></AllowAdmin>,
           loader: updateSecondBannerLoader,
           errorElement: <Error></Error>
         },
         {
           path: 'upload/:type/:slug/upload-bottom-banner',
-          element: <AdminRoute><UpdateBottomBanner></UpdateBottomBanner></AdminRoute>,
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UpdateBottomBanner /></AllowAdmin>,
           loader: updateBottomBannerLoader,
           errorElement: <Error />
         },
         {
           path: 'upload/:type/:slug/upload-bottom-second-banner',
-          element: <AdminRoute><UpdateBottomSecondBanner></UpdateBottomSecondBanner></AdminRoute>,
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UpdateBottomSecondBanner /></AllowAdmin>,
         },
         {
           path: 'upload/:type/:slug/upload-top-left-banner-layout2',
-          element: <AdminRoute><TopLeftBannerLayout2 /></AdminRoute>,
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><TopLeftBannerLayout2 /></AllowAdmin>,
           loader: topLeftBannerLayout2Loader,
           errorElement: <Error />
         },
         {
           path: 'upload/:type/:slug/upload-top-right-banner-layout2',
-          element: <AdminRoute><TopRightBannerLayout2></TopRightBannerLayout2></AdminRoute>,
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><TopRightBannerLayout2 /></AllowAdmin>,
           loader: topRightBannerLayout2Loader,
           errorElement: <Error />
         },
         {
           path: 'upload/:type/:slug/upload-slim-banner',
-          element: <AdminRoute><UploadSlimBanner /></AdminRoute>,
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UploadSlimBanner /></AllowAdmin>,
           loader: slimBannerLoader,
           errorElement: <Error />
         },

@@ -1,29 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import useRole from '../../../../Hooks/useRole';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const AllUsers_Row = ({user, index}) => {
-    const {role} = user;
+
+  const {axiosSecure} = useAxiosSecure();
+   const [role, setRole] = useState(user?.role);
+
+   useEffect(() => {
+    setRole(user?.role)
+   }, [user])
+
     const { register, formState: { errors }, handleSubmit, setValue } = useForm({ mode: "onChange" });
 
     const onSubmit = (data) => {
 
-        setRole(data.role);
-        data._id = admin?._id; //admin id also in data
+        setRole(data?.role);
+        data._id = user?._id; //admin id also in data
         
-       // console.log(data);
-        axiosSecure.patch(`${import.meta.env.VITE_SERVER_ADDRESS}/admin/admin-list/${admin?._id}/edit-role`, data, {
-            withCredentials: true
-        })
+       console.log(data, user?._id);
+        axiosSecure.patch(`/admin/admin-list/${user?._id}/edit-role`, data)
             .then(result => {
-                setRole(data.role);
-                toast.success('successfully changed');
-
-
-
+              console.log(result.data)
+                setRole(data?.role);
+                Swal.fire(
+                  'Successful!',
+                  `${user?.name}'s Role set to ${data?.role}!`,
+                  'success'
+              )
             }).catch(e => {
                 // console.log(e);
-                setRole(admin?.role);
-                toast.error('Something error occured')
+                setRole(user?.role);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'ERROR OCCURRED',
+                  text: 'Error: role set unsuccessful',
+                })
             })
 
 

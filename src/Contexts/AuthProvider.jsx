@@ -95,6 +95,10 @@ const AuthProvider = ({children}) => {
         loading,
         
     }
+
+    if(loading){
+      return <><p>Loading AuthProviderLoading</p></>
+    }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

@@ -9,7 +9,7 @@ const UserDataProvider = ({children}) => {
     const {loading, user} = useAuth();
     const {axiosSecure} = useAxiosSecure();
     
-    const { data: userRoleData, isLoading: userRoleDataLoading } = useQuery({
+    const { data: userRoleData, isLoading: userRoleDataLoading, refetch: userAllDataRefetch } = useQuery({
         queryKey: ['userRoleData', user],
         enabled: (!loading && !!user),
         queryFn: async () => {
@@ -25,7 +25,7 @@ const UserDataProvider = ({children}) => {
         },
           });
          // console.log(userRoleDataLoading)
-    const data = { userRoleData, userRoleDataLoading, name: userRoleData?.name, email: userRoleData?.email, role: userRoleData?.role}
+    const data = { userRoleData, userAllDataRefetch, userRoleDataLoading, name: userRoleData?.name, email: userRoleData?.email, role: userRoleData?.role}
     // if(userRoleDataLoading){
     //     return <><p>Loading... userDataLoading</p></>
     // }
