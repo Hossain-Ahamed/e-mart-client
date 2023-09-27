@@ -31,7 +31,7 @@ const OrderDetailsView = () => {
   });
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <span>Loading... detailview</span>;
   }
 
   if (isError) {

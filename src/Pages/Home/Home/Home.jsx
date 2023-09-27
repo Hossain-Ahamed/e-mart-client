@@ -11,9 +11,11 @@ import HomeTrendingProducts from '../HomeTrendingProducts';
 import HomeThirdBanner from '../HomeThirdBanner';
 import BackToTopButton from '../../../Component/BackToTopButton';
 import { Toaster } from 'react-hot-toast';
+import useRole from '../../../Hooks/useRole';
 
 
 const Home = () => {
+   // const user = useRole();
     return (
         <>
         

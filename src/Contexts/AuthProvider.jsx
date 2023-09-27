@@ -72,6 +72,7 @@ const AuthProvider = ({children}) => {
               .then((response) => {
                 // console.log('habijabi')
                 Cookies.remove("_at");
+                setLoading(false);
               })
               .catch((e) => {
                 console.log(e)

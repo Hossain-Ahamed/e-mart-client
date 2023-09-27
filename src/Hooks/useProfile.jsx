@@ -1,32 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../Contexts/AuthProvider';
-import { useState } from 'react';
-import { ProfileContext } from '../Contexts/ProfileProvider';
+import useRole from './useRole';
+import useAxiosSecure from './useAxiosSecure';
 
 const useProfile = () => {
     const {user, loading} = useContext(AuthContext);
-    const [profileLoading,setProfileLoading] = useState(true);
-    const { refetch, data: profile = {} } = useQuery({
+    const {userRoleData, userRoleDataLoading} = useRole();
+    const {axiosSecure} = useAxiosSecure();
+    const { refetch, data: profile = {} , isLoading: profileLoading} = useQuery({
         queryKey: ['profile'],
-        enabled: !loading,
+        enabled: (!loading && !userRoleDataLoading && userRoleData?.role === "user"),
         queryFn: async () => {
-            const res = await axios.get(
-                `http://localhost:5000/get-profile/${user?.email}`,
-                { withCredentials: true }
-              );
-              setProfileLoading(false);
-              //console.log(res.data);
-              return res?.data;
+            const res = await axiosSecure.get(`/get-profile/${user?.email}`, { withCredentials: true });
+            console.log("profile axios",user?.email,res.data)
+            return res?.data;
         },
-          });
+        });
     
     
     return [profile, profileLoading, refetch]
-
-    // const {profile, profileLoading} = useContext(ProfileContext)
-    // return [profile, profileLoading]
     };
 
 export default useProfile;

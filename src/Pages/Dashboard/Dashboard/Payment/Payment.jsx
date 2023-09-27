@@ -25,7 +25,7 @@ const Payment = () => {
   })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <span>Loading... pay</span>
   }
 
   if (isError) {

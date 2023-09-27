@@ -7,10 +7,12 @@ import { LuMenu } from "react-icons/lu";
 import useCart from "../../../Hooks/useCart";
 import useAdmin from "../../../Hooks/useAdmin";
 import useProfile from "../../../Hooks/useProfile";
+import useRole from "../../../Hooks/useRole";
 
 const SubNav = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
+  const { role, name } = useRole();
   const [isAdmin] = useAdmin();
   const [profile] = useProfile();
 
@@ -98,29 +100,52 @@ const SubNav = () => {
 
           <div className="navbar-end mr-5">
             <div className="flex justify-items-center gap-3">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <Link to="/dashboard/myCart">
-                      <div className="indicator">
-                    <MdShoppingCart className="text-3xl"></MdShoppingCart>
-                    <span className="badge badge-sm indicator-item bg-white text-black">
-                      {cart?.length || 0}
-                    </span>
-                  </div>
-                      </Link>
-              </label>
-              <div className="dropdown dropdown-end">
+              {role === "user" && (
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
-                    <img src={profile?.img} />
-                  </div>
+                  <Link to="/dashboard/myCart">
+                    <div className="indicator">
+                      <MdShoppingCart className="text-3xl"></MdShoppingCart>
+                      <span className="badge badge-sm indicator-item bg-white text-black">
+                        {cart?.length || 0}
+                      </span>
+                    </div>
+                  </Link>
                 </label>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow w-52 hover:rounded-none"
-                >
-                  {subMenuItem}
-                </ul>
-              </div>
+              )}
+              {user && (
+                <div className="dropdown dropdown-end">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      {profile?.img ? (
+                        <img
+                          className="w-10 h-10 rounded-full"
+                          src={profile?.img}
+                          alt={name}
+                        />
+                      ) : (
+                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-600 rounded-full ">
+                          <span className="font-medium text-gray-100 ">
+                            {name &&
+                              name
+                                .split(" ")
+                                .map((i) => i.charAt(0).toUpperCase())
+                                .join("")}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow w-52 hover:rounded-none"
+                  >
+                    {subMenuItem}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>

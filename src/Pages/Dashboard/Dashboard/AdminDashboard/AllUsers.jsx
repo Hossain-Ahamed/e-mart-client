@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import Swal from "sweetalert2";
+import AllUsers_Row from "./AllUsers_Row";
 
 const AllUsers = () => {
   const { data: users = [], refetch } = useQuery(["users"], async () => {
@@ -48,35 +49,7 @@ const AllUsers = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {users.map((user, index) => (
-              <tr key={user._id}>
-                <th>{index + 1}</th>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img src={user.img} />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-bold">{user.name}</div>
-                      <div className="text-sm opacity-50">United States</div>
-                    </div>
-                  </div>
-                </td>
-                <td>{user.email}</td>
-                <td>
-                  {user.role === "admin" ? (
-                    "admin"
-                  ) : (
-                    <button onClick={() => handleMakeAdmin(user)}>user</button>
-                  )}
-                </td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
-                </th>
-              </tr>
-            ))}
+            {users.map((user, index) => <AllUsers_Row key={index} user={user} index={index+1}></AllUsers_Row>)}
           </tbody>
         </table>
       </div>
