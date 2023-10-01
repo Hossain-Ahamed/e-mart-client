@@ -53,7 +53,7 @@ const AllCategories = () => {
 
             <tbody>
               {category.map((category) => (
-                <tr key={category._id} category={category}>
+                <tr key={category._id} >
                   {/* row 1 */}
 
                   <td>

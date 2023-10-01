@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useProfile from "../../../../../../Hooks/useProfile";
 import { useQuery } from "@tanstack/react-query";
@@ -8,10 +8,23 @@ import { BsCheckCircle } from "react-icons/bs";
 import toast from "react-hot-toast";
 import OrderDetailRow from "../../UserDashboard/OrderDetails/OrderDetailRow";
 import AdminOrderDetailStatusChange from "./AdminOrderDetailStatusChange";
+import useAxiosSecure from "../../../../../../Hooks/useAxiosSecure";
+import AdminOrderDetailRow from "./AdminOrderDetailRow";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import useRole from "../../../../../../Hooks/useRole";
 
 const AdminOrderDetail = () => {
   const { orderId } = useParams();
-  const [profile, profileLoading] = useProfile();
+
+  const { axiosSecure } = useAxiosSecure();
+  const { register, formState: { errors }, handleSubmit, setValue } = useForm({ mode: "onChange" });
+
+  const { role } = useRole();
+
+  // editable state 
+  const [editable, setEditable] = useState(false);
+
   const {
     isLoading,
     isError,
@@ -19,16 +32,10 @@ const AdminOrderDetail = () => {
     error,
     refetch
   } = useQuery({
-    queryKey: ["details", profile, orderId],
-    enabled: !profileLoading,
+    queryKey: ["details", orderId],
     queryFn: async () => {
-      const res = await axios.get(
-        `${
-          import.meta.env.VITE_SERVERADDRESS
-        }/order-detail-view/${orderId}?email=${profile?.email}`,
-        { withCredentials: true }
-      );
-      console.log(res.data.details);
+      const res = await axiosSecure(`/for-admin/order-detail-view/${orderId}`,);
+      // console.log(res.data.details);
       return res?.data?.details;
     },
   });
@@ -41,23 +48,84 @@ const AdminOrderDetail = () => {
     return <span>Error: {error?.response?.data?.message}</span>;
   }
 
-  const handleCopyClick = () => {
-    const OTP = orderedData?.OTP;
 
-    if (OTP) {
-      navigator.clipboard
-        .writeText(OTP)
-        .then(() => {
-          toast.success("OTP copied to clipboard");
-        })
-        .catch((error) => {
-          console.error("Failed to copy OTP: ", error);
-        });
+  const onSubmit = (data) => {
+
+    if (!['admin', 'Order Manager'].includes(role)) {
+      Swal.fire(
+        {
+          icon: "error",
+          title: `Unauthorized`,
+          text: `You shouldn't have that access---- hakar man`
+        }
+      )
+      return;
     }
-  };
+    if (orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name === "Delivered") {
+      Swal.fire(
+        {
+          icon: "error",
+          title: `Unauthorized`,
+          text: `You can't change delviered product data`
+        }
+      )
+      return;
+    }
+    setValue('id', orderedData?._id);
+
+    const subtotal = orderedData?.subTotalAmount;
+    const courierCharge = orderedData?.courirerCharge;
+
+    const UpdatedDiscount = parseFloat(data?.discountedAmount);
+    const UpdatedfinalAmount = parseFloat(data?.finalAmount);
+
+
+
+
+    if (subtotal + courierCharge - UpdatedDiscount !== UpdatedfinalAmount) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: `Total ammount should be ${subtotal + courierCharge - UpdatedDiscount} , but you provided ${UpdatedfinalAmount}`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Proceeed",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          uploadData(data);
+        }
+      });
+    } else {
+      uploadData(data)
+    }
+
+
+
+  }
+
+
+  const uploadData = (data) => {
+    const reqdata = {
+      id: orderId,
+      discountedAmount: parseFloat(data?.discountedAmount),
+      finalAmount: parseFloat(data?.finalAmount)
+    }
+
+
+    axiosSecure.patch(`/change-order-total-ammount`, reqdata)
+    .then(data => { 
+      
+      refetch(); 
+      setEditable(false)
+    })
+      .catch(e => { })
+
+  }
   return (
     <>
-      <div className="w-[900px] h-full p-20">
+
+      <div className="w-[900px] h-full p-20  ">
         <div className="bg-white p-5 rounded-md shadow-lg text-md grid gap-1">
           <p>
             Order Id:{" "}
@@ -67,134 +135,32 @@ const AdminOrderDetail = () => {
           </p>
           <p>
             Receiver:{" "}
-            <span className="font-semibold uppercase">{profile?.name}</span>
+            <span className="font-semibold uppercase">{orderedData?.name}</span>
           </p>
           <p>
-            <span className="font-semibold">{orderedData?.userPhone}</span>
+            Phone: <span className="font-semibold">{orderedData?.userPhone}</span>
           </p>
           <p>
             <span className="font-semibold text-slate-600">
-              {orderedData?.userAddress}, {orderedData?.userCity}
+              Address : {orderedData?.userAddress}, {orderedData?.userCity}
             </span>
           </p>
-        </div>
-
-        {orderedData?.deliveryPartner?.name && (
-          <div className="bg-white p-5 rounded-md shadow-lg text-md grid gap-1">
+          {orderedData?.deliveryPartner?.name &&
             <p>
               Delivery Partner:{" "}
               <span title={`Email: ${orderedData?.deliveryPartner?.email}`} className="font-semibold text-accent">
                 {orderedData?.deliveryPartner?.name}
               </span>
             </p>
-            <p>
-              Receiver:{" "}
-              <span className="font-semibold uppercase">{profile?.name}</span>
-            </p>
-            <p>
-              <span className="font-semibold">{orderedData?.userPhone}</span>
-            </p>
-            <p>
-              <span className="font-semibold text-slate-600">
-                {orderedData?.userAddress}, {orderedData?.userCity}
-              </span>
-            </p>
-          </div>
-        )}
+          }
+        </div>
 
-        {orderedData?.OTP && (
-          <div className="bg-white p-5 rounded-md shadow-lg text-md mt-5">
-            <p className="flex items-center gap-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M11.02 19.5H7.5C6.88 19.5 6.33 19.48 5.84 19.41C3.21 19.12 2.5 17.88 2.5 14.5V9.5C2.5 6.12 3.21 4.88 5.84 4.59C6.33 4.52 6.88 4.5 7.5 4.5H10.96"
-                  stroke="#292D32"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M15.02 4.5H16.5C17.12 4.5 17.67 4.52 18.16 4.59C20.79 4.88 21.5 6.12 21.5 9.5V14.5C21.5 17.88 20.79 19.12 18.16 19.41C17.67 19.48 17.12 19.5 16.5 19.5H15.02"
-                  stroke="#292D32"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M15 2V22"
-                  stroke="#292D32"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M11.0946 12H11.1036"
-                  stroke="#292D32"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M7.0946 12H7.10359"
-                  stroke="#292D32"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              One time password (OTP) for package collection{" "}
-              <span
-                className="flex items-center gap-1 text-accent italic"
-                title="Click to copy"
-                onClick={handleCopyClick}
-              >
-                {orderedData?.OTP} abce{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M9.31006 14.7L10.8101 16.2L14.8101 12.2"
-                    stroke="#292D32"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10 6H14C16 6 16 5 16 4C16 2 15 2 14 2H10C9 2 8 2 8 4C8 6 9 6 10 6Z"
-                    stroke="#292D32"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M16 4.02002C19.33 4.20002 21 5.43002 21 10V16C21 20 20 22 15 22H9C4 22 3 20 3 16V10C3 5.44002 4.67 4.20002 8 4.02002"
-                    stroke="#292D32"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </p>
-          </div>
-        )}
+
 
         <div className="bg-white p-10 rounded-md shadow-lg text-md grid gap-1 mt-5">
           <ol className="relative border-l border-gray-200 ">
             {orderedData.orderStatus.map((i, index) => (
-              <li key={index} i={i} className="mb-10 ml-4">
+              <li key={index} className="mb-10 ml-4">
                 <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
                 <time className="flex items-center gap-1 mb-1 text-sm font-normal leading-none text-gray-400 ">
                   <svg
@@ -314,49 +280,114 @@ const AdminOrderDetail = () => {
                 <h3 className="text-lg font-semibold text-gray-900 ">
                   {i?.name}
                 </h3>
-                
+
                 <p className="mb-4 text-base font-normal text-gray-500 ">
                   {i?.message}
                 </p>
-                
+
               </li>
             ))}
           </ol>
           {
-              orderedData?.orderStatus && Array.isArray(orderedData?.orderStatus) && 
-              <AdminOrderDetailStatusChange refetchOrderDetail={refetch} id={orderedData?._id} status={orderedData?.orderStatus[orderedData?.orderStatus.length-1]?.name}></AdminOrderDetailStatusChange>
-            }
+            orderedData?.orderStatus && Array.isArray(orderedData?.orderStatus) &&
+            <AdminOrderDetailStatusChange refetchOrderDetail={refetch} id={orderedData?._id} status={orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name}></AdminOrderDetailStatusChange>
+          }
 
         </div>
 
         <div className="bg-white p-5 rounded-md shadow-lg text-md mt-5">
-          <OrderDetailRow products={orderedData?.orderedItems}></OrderDetailRow>
+          <AdminOrderDetailRow products={orderedData?.orderedItems}></AdminOrderDetailRow>
         </div>
 
-        <div className="bg-white p-10 rounded-md shadow-lg text-md grid gap-1 mt-5">
-          <div className="grid grid-cols-4">
-            <div className=" col-span-3">
-              <p>Subtotal:</p>
-              <p>Delivery Charge:</p>
-              <p>Discounts:</p>
+
+
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full" >
+          {/* price section  */}
+          <div className="bg-white px-2 py-5 rounded-md shadow-lg text-md  mt-5 pb-20 flex justify-end ">
+
+            <div className=" w-screen  max-w-[400px] pr-5">
+
+              <div className="flex justify-between items-center h-10">
+                <p className="col-span-4">Subtotal:</p>
+                <p className="col-span-2">{orderedData.subTotalAmount}</p>
+              </div>
+              <div className="flex justify-between items-center h-10">
+                <p className="col-span-4">Delivery Charge</p>
+                <p className="col-span-2">{orderedData.courirerCharge}</p>
+              </div>
+
+
+              {/* shipping charge  */}
+              <div className='mt-3 flex justify-between items-center  relative'>
+
+                <p>Discounted:</p>
+                <div className=''>
+
+                  <input
+                    autoComplete='off'
+                    type='text'
+                    id="discount"
+                    placeholder="Discounted ammount"
+                    defaultValue={orderedData?.discountedAmount}
+                    readOnly={!editable}
+                    className={`block ${editable ? " border border-gray-300 focus:ring-blue-500 focus:border-blue-500" : "select-none cursor-not-allowed focus:ring-red-500 focus:border-red-500"} block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs  `}
+                    {...register("discountedAmount", {
+                      required: "* Discounted Ammount  is required",
+                      validate: (value) => !isNaN(Number(value)) || "Please enter a number",
+                    })}
+                  />
+                  {
+
+                    !["Delivered"].includes(orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name)  && ['admin', 'Order Manager'].includes(role)  && < div className='absolute top-1 right-2 bg-slate-300 px-2 rounded-xl cursor-pointer' onClick={() => setEditable(!editable)}>Edit</div>
+                  }
+              </div>
             </div>
-            <div>
-              <p>{orderedData.subTotalAmount}</p>
-              <p>{orderedData.courirerCharge}</p>
-              <p>- {orderedData.discountedAmount}</p>
-              <p>
-                {orderedData.orderedItems.length}{" "}
-                {(orderedData.orderedItems.length > 1 && <>Items</>) || (
-                  <>Item</>
-                )}
-              </p>
-              <p>Total: {orderedData.finalAmount}</p>
+            {errors.discountedAmount && (<p className='block text-right p-1 text-xs text-red-600'>{errors.discountedAmount.message}</p>)}
+
+
+
+            {/* total charge  */}
+            <div className='mt-3 flex justify-between items-center  relative'>
+
+              <p>Total </p>
+              <div className=''>
+                <div>
+
+                  <input
+                    autoComplete='off'
+                    type='text'
+                    id="finalPrice"
+                    placeholder="Total Ammount"
+                    defaultValue={orderedData?.finalAmount}
+                    readOnly={!editable}
+                    className={`block ${editable ? " border border-gray-300 focus:ring-blue-500 focus:border-blue-500" : "select-none cursor-not-allowed focus:ring-red-500 focus:border-red-500"} block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 `}
+                    {...register("finalAmount", {
+                      required: "* total Ammount  is required",
+                      validate: (value) => !isNaN(Number(value)) || "Please enter a number",
+                    })}
+                  />
+                  {
+                    editable  &&  
+                      orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name !== "Delivered" && ['admin', 'Order Manager'].includes(role)  &&
+                    <input type="submit" value="Save" className='absolute top-1 right-2 text-white bg-green-500 px-2 rounded-xl cursor-pointer' />
+                  }
+                </ div>
+              </div>
             </div>
+            {errors.finalAmount && (<p className='block text-right p-1 text-xs text-red-600'>{errors.finalAmount.message}</p>)}
+
+
+
+
+
           </div>
-        </div>
       </div>
+    </form >
 
-      <div></div>
+
+
+
+      </div >
     </>
   );
 };

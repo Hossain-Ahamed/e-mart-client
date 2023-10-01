@@ -11,7 +11,7 @@ const useProfile = () => {
     const {axiosSecure} = useAxiosSecure();
     const { refetch, data: profile = {} , isLoading: profileLoading} = useQuery({
         queryKey: ['profile', user],
-        enabled: (!loading && !userRoleDataLoading && userRoleData?.role !== "admin"),
+        enabled: (!loading && !userRoleDataLoading && userRoleData?.role === "user"),
         queryFn: async () => {
             const res = await axiosSecure.get(`/get-profile/${user?.email}`);
             console.log("profile axios",user?.email,res.data)

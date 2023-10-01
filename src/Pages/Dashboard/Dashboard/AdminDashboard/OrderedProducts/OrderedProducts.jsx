@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import useOrderedProducts from "../../../../../Hooks/useOrderedProducts";
-import useProfile from "../../../../../Hooks/useProfile";
-import useAllUserProfile from "../../../../../Hooks/useAllUserProfile";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
@@ -23,7 +20,7 @@ const OrderedProducts = () => {
       const res = await axiosSecure.get(
         `/get-all-ordered-products?q=${searchQuery}&size=${searchSize}&currentPage=${currentPage}`
       );
-      console.log(res.data);
+
       return res.data;
     },
   });
@@ -34,25 +31,20 @@ const OrderedProducts = () => {
     setSearchQuery(e.target.value);
   };
 
-  const [userProfiles] = useAllUserProfile();
-  //console.log(userProfiles)
-  const [selectedUser, setSelectedUser] = useState(null);
 
-  const openModal = (email) => {
-    // Find the user profile that matches the email
-    const userProfile = userProfiles.find((profile) => profile.email === email);
-    console.log("Selected User Profile:", userProfile);
-    setSelectedUser(userProfile);
-  };
-
-  const closeModal = () => {
-    setSelectedUser(null);
-  };
 
   return (
     <section className="mt-8 py-7 px-4 bg-white max-w-5xl mx-auto">
       {/* table  */}
-      <AdminTitle heading="All Orders"></AdminTitle>
+      <div>
+        <div className="flex  justify-between items-center">
+          <p className="text-xl font-bold text-primary mt-5">All Orders</p>
+          <button  onClick={refetch} 
+          type="button"
+           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Reload</button>
+        </div>
+        <div className="divider"></div>
+      </div>
 
       <div className="relative mt-5 flex justify-between items-center mb-3">
         <div>
@@ -71,7 +63,7 @@ const OrderedProducts = () => {
           </select>
         </div>
         <div>
-          <label for="table-search" className="sr-only">
+          <label htmlFor="table-search" className="sr-only">
             Search
           </label>
           <div className="relative">
@@ -84,9 +76,9 @@ const OrderedProducts = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </div>
@@ -100,88 +92,87 @@ const OrderedProducts = () => {
           </div>
         </div>
       </div>
-      <table className="w-full min-w-[700px] text-sm text-left text-gray-500 select-none">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              Order Id
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Status
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Placed On
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Phone
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Details
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            isLoading ? <p>Loading</p> : <>
-          
-          {orderedProducts &&
-            Array.isArray(orderedProducts?.orders) &&
-            orderedProducts?.orders.map((i, count) => (
-              <tr key={i?._id} className="bg-white border-b  hover:bg-gray-50 ">
-                {/* <td className="px-6 py-4">
+      {
+        isLoading ? <>Loading</> : <>
+
+          <table className="w-full min-w-[700px] text-sm text-left text-gray-500 select-none">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Order Id
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Status
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Placed On
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Phone
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Details
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderedProducts &&
+                Array.isArray(orderedProducts?.orders) &&
+                orderedProducts?.orders.map((i, count) => (
+                  <tr key={i?._id} className="bg-white border-b  hover:bg-gray-50 ">
+                    {/* <td className="px-6 py-4">
                                       <img className="w-10 h-10 rounded-full" src={i?.image} alt={i?.name} />
 
                                   </td> */}
-                <td className="px-6 py-4">#{i?._id.slice(-6)}</td>
-                <td className="px-6 py-4">
-                  {i?.orderStatus[i?.orderStatus.length - 1]?.name}
-                </td>
-                <td className="px-6 py-4">
-                  <p className="text-sm">
-                    {new Intl.DateTimeFormat("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    }).format(new Date(i?.orderStatus[0]?.time))}
-                  </p>
-                  <p className="text-sm">
-                    {new Date(i?.orderStatus[0]?.time).toLocaleTimeString(
-                      "en-US"
-                    )}
-                  </p>
-                </td>
-                <td className="px-2 py-4">{i?.userPhone}</td>
-                <td className="px-6 py-4">
-                  <Link
-                    to={`/dashboard/ordered-products/${i?._id}`}
-                    className="font-medium text-blue-600 hover:underline"
-                  >
-                    See Details
-                  </Link>
-                </td>
-              </tr>
-            ))}
-            </>
-}
-        </tbody>
-      </table>
+                    <td className="px-6 py-4">#{i?._id.slice(-6)}</td>
+                    <td className="px-6 py-4">
+                      {i?.orderStatus[i?.orderStatus.length - 1]?.name}
+                    </td>
+                    <td className="px-6 py-4 text-sm">
+
+                      {new Intl.DateTimeFormat("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      }).format(new Date(i?.orderStatus[0]?.time))}
+                      <br />
+
+                      {new Date(i?.orderStatus[0]?.time).toLocaleTimeString(
+                        "en-US"
+                      )}
+
+                    </td>
+                    <td className="px-2 py-4">{i?.userPhone}</td>
+                    <td className="px-6 py-4">
+                      <Link
+                        to={`/dashboard/ordered-products/${i?._id}`}
+                        className="font-medium text-blue-600 hover:underline"
+                      >
+                        See Details
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </>
+      }
 
       <nav
         className="w-full flex justify-center mt-5 select-none"
         aria-label="Page navigation example"
       >
         <ul className="inline-flex -space-x-px text-sm">
-          
-          { !isLoading && [
+
+          {!isLoading && [
             ...Array(Math.ceil(orderedProducts?.count / searchSize)).keys(),
           ].map((number) => (
             <li
               key={number}
-              className={`${
-                currentPage === number
-                  ? "bg-slate-400 text-white"
-                  : "text-gray-500 bg-white"
-              } flex items-center justify-center px-3 h-8 leading-tight  border border-gray-300 first:rounded-l-lg last:rounded-r-lg hover:bg-gray-100 hover:text-gray-700`}
+              className={`${currentPage === number
+                ? "bg-slate-400 text-white"
+                : "text-gray-500 bg-white"
+                } flex items-center justify-center px-3 h-8 leading-tight  border border-gray-300 first:rounded-l-lg last:rounded-r-lg hover:bg-gray-100 hover:text-gray-700`}
             >
               <button
                 onClick={() => {
@@ -261,7 +252,7 @@ export default OrderedProducts;
       <input type="checkbox" id="customer-info" className="modal-toggle" />
         <div className="modal">
           <div className="modal-box relative">
-            <label htmlFor="customer-info" className="btn btn-sm btn-circle absolute right-2 top-2">
+            <label htmlhtmlFor="customer-info" className="btn btn-sm btn-circle absolute right-2 top-2">
               ✕
             </label>
             <h3 className="text-lg font-bold"></h3>
