@@ -30,7 +30,7 @@ const AddSubCategory = () => {
     axios.post(img_hosting_url, formData).then((imgResponse) => {
       console.log(imgResponse);
       if (imgResponse.data.success) {
-        const imgURL = imgResponse.data.display_url;
+        const imgURL = imgResponse.data.data.display_url;
         const { name, category, color, image } = data;
         setValue("img", image);
         const newSubCategory = {
@@ -53,9 +53,8 @@ const AddSubCategory = () => {
               reset();
               setSelectedImage(null);
               Swal.fire({
-                position: "top-end",
                 icon: "success",
-                title: "One new product added",
+                title: "Subcategory added",
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -67,8 +66,13 @@ const AddSubCategory = () => {
           })
           .catch((e) => {
             console.log(e);
-            if (e?.response?.status === 409) {
-            }
+            Swal.fire(
+              {
+                icon: "error",
+                title: `${e?.response?.status} ${e?.code} `,
+                text: `${e?.response?.data?.message}`
+              }
+            )
           });
       }
     });
@@ -93,6 +97,7 @@ const AddSubCategory = () => {
               type="text"
               placeholder="Sub-Category Tittle"
               className="input input-bordered rounded-md"
+              
               {...register("name", { required: true })}
             />
           </div>

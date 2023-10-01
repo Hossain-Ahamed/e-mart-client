@@ -18,16 +18,16 @@ const HomeThirdBanner = () => {
     ]
         return (
             <>
-             <div className="grid grid-cols-1 md:flex gap-8 justify-center p-20">
+             {/* <div className="grid grid-cols-1 md:flex gap-8 justify-center p-20">
              {
               data.map(thirdBannerInfo => <ThirdBanner
-              key={thirdBannerInfo._id}
+              key={thirdBannerInfo?._id}
               thirdBannerInfo={thirdBannerInfo}
               ></ThirdBanner>)
             }
             
             
-            </div>
+            </div> */}
             </>
     );
 };

@@ -53,7 +53,7 @@ const UpdateTopBanner = () => {
       .then((imgResponse) => {
         console.log(imgResponse);
         if (imgResponse.success) {
-          const imgURL = imgResponse.data.display_url;
+          const imgURL = imgResponse?.data?.display_url;
           const { image } = data;
           setValue("topBannerImage", image);
           console.log(imgURL);
@@ -73,7 +73,7 @@ const UpdateTopBanner = () => {
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
-                  title: "Category updated successfully",
+                  title: "Image uploaded successfully",
                   showConfirmButton: false,
                   timer: 1500,
                 });

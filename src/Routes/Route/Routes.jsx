@@ -56,6 +56,7 @@ import OrderDetailsView from "../../Pages/Dashboard/Dashboard/AdminDashboard/Use
 import BlockLogin from "../PrivateRoute/BlockLogin";
 import BlockAdmin from "../PrivateRoute/BlockAdmin";
 import AllowAdmin from "../PrivateRoute/AllowAdmin";
+import AdminOrderDetail from "../../Pages/Dashboard/Dashboard/AdminDashboard/OrderedProducts/AdminOrderDetail/AdminOrderDetail";
 
 
 
@@ -88,8 +89,9 @@ const router = createBrowserRouter([
           element: <AllProducts></AllProducts>
         },
         {
-          path: "/categoryPages/:id",
-          element: <PagesForCategory></PagesForCategory>
+          path: "/categoryPages/:slug",
+          element: <PagesForCategory></PagesForCategory>,
+          loader: ({params}) => fetch(`http://localhost:5000/categories/${params.slug}`)
         },
         {
           path: "/mensFashion",
@@ -204,7 +206,7 @@ const router = createBrowserRouter([
         },
         {
           path: 'ordered-products/:orderId',
-          element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><OrderedProducts /></AllowAdmin>
+          element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><AdminOrderDetail /></AllowAdmin>
         },
         {
           path: 'all-categories',

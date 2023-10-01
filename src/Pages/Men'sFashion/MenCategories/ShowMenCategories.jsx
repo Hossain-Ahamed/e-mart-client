@@ -8,15 +8,18 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation, Autoplay, Pagination } from "swiper";
 import { Link } from 'react-router-dom';
+import SubCategories from '../../../Component/SubCategory/SubCategories';
 
 const ShowMenCategories = () => {
-    const [category, setCategory] = useState([]);
+  
+    // const [category, setCategory] = useState([]);
 
-    useEffect(() => {
-        fetch('http://localhost:5000/menCategory')
-        .then(res => res.json())
-        .then(data => setCategory(data))
-    }, [])
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/menCategory')
+    //     .then(res => res.json())
+    //     .then(data => setCategory(data))
+    // }, [])
+
     return (
         <>
 
@@ -27,7 +30,8 @@ const ShowMenCategories = () => {
             <hr className='border'/>
             </div>
         <div className='w-[300px] md:w-[700px] lg:w-[1200px] mx-auto mt-3 lg:mt-10'>
-        <Swiper
+          <SubCategories></SubCategories>
+        {/* <Swiper
         slidesPerView={2}
         spaceBetween={5}
         autoplay={{
@@ -72,7 +76,9 @@ const ShowMenCategories = () => {
             </SwiperSlide>)
           )}
           
-        </Swiper>
+        </Swiper> */}
+
+
         </div>
         </div>
         </>

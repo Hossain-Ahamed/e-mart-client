@@ -52,7 +52,7 @@ const TopLeftBannerLayout2 = () => {
       .then((imgResponse) => {
         console.log(imgResponse);
         if (imgResponse.success) {
-          const imgURL = imgResponse.data.display_url;
+          const imgURL = imgResponse?.data?.display_url;
           const { image } = data;
           setValue("topLeftBannerLayout2", image);
           console.log(imgURL);

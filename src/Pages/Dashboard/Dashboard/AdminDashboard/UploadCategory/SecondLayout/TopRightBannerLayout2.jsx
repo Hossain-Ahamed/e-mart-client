@@ -52,8 +52,8 @@ const TopRightBannerLayout2 = () => {
       .then((res) => res.json())
       .then((imgResponse) => {
         console.log(imgResponse);
-        if (imgResponse.success) {
-          const imgURL = imgResponse.data.display_url;
+        if (imgResponse?.success) {
+          const imgURL = imgResponse?.data?.display_url;
           const { image } = data;
           setValue("topRightBannerLayout2", image);
           console.log(imgURL);
@@ -77,7 +77,7 @@ const TopRightBannerLayout2 = () => {
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
-                  title: "Category updated successfully",
+                  title: "Image uploaded successfully",
                   showConfirmButton: false,
                   timer: 1500,
                 });
@@ -91,6 +91,12 @@ const TopRightBannerLayout2 = () => {
     const file = event.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
   };
+
+  // const handleDeleteImage = (indexToDelete) => {
+  //   const updatedImages = updatedCategory.topRightBannerLayout2.filter((image, index) => index !== indexToDelete);
+  //   // Update the local state or context with the updatedImages
+  // };
+  
 
   return (
     <>
