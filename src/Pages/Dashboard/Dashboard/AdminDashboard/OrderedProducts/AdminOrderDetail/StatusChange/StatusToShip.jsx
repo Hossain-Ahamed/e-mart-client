@@ -9,18 +9,18 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
 const StatusToShip = ({ id, refetchOrderDetail }) => {
-    const { axiosSecure } = useAxiosSecure();
-    const { userRoleDataLoading } = useRole();
+  const { axiosSecure } = useAxiosSecure();
+  const { userRoleDataLoading } = useRole();
   const { loading } = useAuth();
-    const { refetch, data: deliveryPartner = [] } = useQuery({
-        queryKey: ["deliveryPartner", axiosSecure],
-        enabled: (!loading && !userRoleDataLoading),
-        queryFn: async () => {
-          const res = await axiosSecure.get(`/get-delivery-partner`);
-          //console.log(res.data);
-          return res?.data?.deliveryPartner;
-        },
-      });
+  const { refetch, data: deliveryPartner = [] } = useQuery({
+    queryKey: ["deliveryPartner", axiosSecure],
+    enabled: (!loading && !userRoleDataLoading),
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/get-delivery-partner`);
+      //console.log(res.data);
+      return res?.data?.deliveryPartner;
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -30,20 +30,20 @@ const StatusToShip = ({ id, refetchOrderDetail }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data)
+
     const deliveryMan = JSON.parse(data?.deliveryPartner)
     const requestData = {
-        id: id,
-        message: data?.message,
-        deliveryPartner: deliveryMan
+      id: id,
+      message: data?.message,
+      deliveryPartner: deliveryMan
     }
     axiosSecure.patch("/status-processed-to-shipped", requestData)
-    .then((data)=>{
+      .then((data) => {
         refetchOrderDetail();
         toast.success("Successful!")
-        
-    })
-    .catch((e) => {
+
+      })
+      .catch((e) => {
         console.log(e);
         Swal.fire(
           {
@@ -55,17 +55,17 @@ const StatusToShip = ({ id, refetchOrderDetail }) => {
       });
   };
 
-  const backToProcessed = () =>{
+  const backToProcessed = () => {
     const requestData = {
-        id: id,
+      id: id,
     }
     axiosSecure.patch("/status-back-to-processed", requestData)
-    .then((data)=>{
+      .then((data) => {
         refetchOrderDetail();
         toast.success("Successfully returned")
-        
-    })
-    .catch((e) => {
+
+      })
+      .catch((e) => {
         console.log(e);
         Swal.fire(
           {
@@ -98,30 +98,27 @@ const StatusToShip = ({ id, refetchOrderDetail }) => {
         />
       </div>
       <div className="form-control mb-6">
-                <label className="label">
-                  <span className="label-text">Delivery Partner</span>
-                </label>
-                <select
-                
-                className="select select-bordered rounded-md"
-                  {...register("deliveryPartner", { required: true })}
-                  defaultValue=""
-                  
-                >
-                    <option 
-                      disabled value="">
-                    Select One
-                  </option>
-                  {
-                    deliveryPartner.map(item => (
-                      <option key={item?._id}
-                       value={JSON.stringify({email: item?.email, name: item?.name})}>
-                    {item?.name}
-                  </option>
-                    ))
-                  }
-                </select>
-              </div>
+        <label className="label">
+          <span className="label-text">Delivery Partner</span>
+        </label>
+        <select
+
+          className="select select-bordered rounded-md"
+          {...register("deliveryPartner", { required: true })}
+          defaultValue=""
+
+        >
+          <option disabled value=""> Select One </option>
+          {
+            deliveryPartner.map(item => (
+              <option key={item?._id}
+                value={JSON.stringify({ email: item?.email, name: item?.name })}>
+                {item?.name}
+              </option>
+            ))
+          }
+        </select>
+      </div>
       <div className="mb-6">
         <label
           htmlFor="message"
@@ -137,15 +134,15 @@ const StatusToShip = ({ id, refetchOrderDetail }) => {
         />
       </div>
 
-      
+
       <div className="w-full flex justify-between items-center">
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
-      >
-        Proceed To &#34;Shipped&#34;{" "}
-      </button>
-      <button onClick={backToProcessed} className="border-0 bg-none font-medium text-red-500 hover:text-red-600 hover:underline">Back To &#34;Processed&#34;</button>
+        <button
+          type="submit"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+        >
+          Proceed To &#34;Shipped&#34;{" "}
+        </button>
+        <button onClick={backToProcessed} className="border-0 bg-none font-medium text-red-500 hover:text-red-600 hover:underline">Back To &#34;Processed&#34;</button>
       </div>
     </form>
   );

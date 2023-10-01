@@ -1,19 +1,42 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useRole from "../../../../../../../Hooks/useRole";
+import useAxiosSecure from "../../../../../../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
-const StatusToReadyToDelivery = ({ id }) => {
-    const {role} = useRole();
+const StatusToReadyToDelivery = ({ id, refetchOrderDetail }) => {
+
+  const { axiosSecure } = useAxiosSecure();
   const {
     register,
     handleSubmit,
-    setValue,
-    formState: { errors },
-    reset,
+   
   } = useForm();
 
   const onSubmit = (data) => {
     //TODO generate OTP
+
+    const requestData = {
+      id: id,
+      message: data?.message, 
+    }
+    axiosSecure.patch("/status-processed-to-ready-to-delivery", requestData)
+      .then((data) => {
+        refetchOrderDetail();
+        toast.success("Successful!")
+
+      })
+      .catch((e) => {
+        console.log(e);
+        Swal.fire(
+          {
+            icon: "error",
+            title: `${e?.response?.status} ${e?.code} `,
+            text: `${e?.response?.data?.message}`
+          }
+        )
+      });
   };
   return (
     <form

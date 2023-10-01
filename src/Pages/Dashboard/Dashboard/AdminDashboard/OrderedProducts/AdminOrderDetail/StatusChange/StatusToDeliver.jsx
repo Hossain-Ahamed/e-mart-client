@@ -1,26 +1,47 @@
-import { useQuery } from "@tanstack/react-query";
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../../../../Hooks/useAxiosSecure";
-import useRole from "../../../../../../../Hooks/useRole";
-import useAuth from "../../../../../../../Hooks/useAuth";
-import { json } from "react-router-dom";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
-const StatusToDeliver = ({ id }) => {
-    
+
+const StatusToDeliver = ({ id ,refetchOrderDetail }) => {
+  const { axiosSecure } = useAxiosSecure();
   const {
     register,
     handleSubmit,
-    setValue,
+
     formState: { errors },
-    reset,
+
   } = useForm();
 
   const onSubmit = (data) => {
     //TODO first check the OTP inside the response if all okay then save it. Otherwise show unauthorized !!
+    const requestData = {
+      id: id,
+      message: data?.message,
+      OTP : data?.OTP
+    }
+    axiosSecure.patch("/status-to-delivered", requestData)
+      .then((data) => {
+        refetchOrderDetail();
+        toast.success("Successful!")
+
+      })
+      .catch((e) => {
+        console.log(e);
+        Swal.fire(
+          {
+            icon: "error",
+            title: `${e?.response?.status} ${e?.code} `,
+            text: `${e?.response?.data?.message}`
+          }
+        )
+      });
   };
 
-  
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -54,13 +75,13 @@ const StatusToDeliver = ({ id }) => {
           {...register("OTP", { required: true })}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 read-only:cursor-not-allowed"
           placeholder="Ask and Enter OTP"
-          
+
         />
       </div>
-      
 
-      
-      
+
+
+
       <div className="mb-6">
         <label
           htmlFor="message"
@@ -75,8 +96,8 @@ const StatusToDeliver = ({ id }) => {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 resize-none h-20"
         />
       </div>
-      
-     
+
+
       <button
         type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "

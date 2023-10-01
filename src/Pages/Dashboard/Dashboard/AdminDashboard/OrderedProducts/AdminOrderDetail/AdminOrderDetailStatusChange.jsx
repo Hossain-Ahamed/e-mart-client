@@ -13,9 +13,13 @@ const AdminOrderDetailStatusChange = ({status, id, refetchOrderDetail}) => {
     if(status === "Processed And Ready to Ship" && role === "Order Manager"){
         return <StatusToShip id={id} refetchOrderDetail={refetchOrderDetail} />
     }
-    if(status === "Shipped" && (role === "Delivery Partner")){
+    if(status === "Shipped" && (role === "Delivery Partner" || role === "Order Manager")){
         return <StatusToReadyToDelivery id={id} refetchOrderDetail={refetchOrderDetail} />
     }
+    if(status === "Ready To Delivery" && (role === "Delivery Partner" ||  role === "Order Manager")){
+        return <StatusToDeliver id={id} refetchOrderDetail={refetchOrderDetail} />
+    }
+
 
     return <></>
     
