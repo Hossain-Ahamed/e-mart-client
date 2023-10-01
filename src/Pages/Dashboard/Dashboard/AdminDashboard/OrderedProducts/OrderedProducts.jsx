@@ -10,7 +10,7 @@ import AdminTitle from "../../../../../Component/AdminTitle";
 const OrderedProducts = () => {
   const { axiosSecure } = useAxiosSecure();
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchSize, setSearchSize] = useState(2);
+  const [searchSize, setSearchSize] = useState(15);
   const [currentPage, setCurrentPage] = useState(0);
 
   const {
@@ -153,7 +153,7 @@ const OrderedProducts = () => {
                 <td className="px-2 py-4">{i?.userPhone}</td>
                 <td className="px-6 py-4">
                   <Link
-                    to={`${i?._id}`}
+                    to={`/dashboard/ordered-products/${i?._id}`}
                     className="font-medium text-blue-600 hover:underline"
                   >
                     See Details

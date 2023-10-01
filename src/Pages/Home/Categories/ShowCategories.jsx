@@ -62,7 +62,7 @@ const ShowCategories = () => {
             category.map(categories => ( <SwiperSlide
                 key={categories._id}>
             <div className="w-36 h-36 md:w-44 md:h-44 lg:w-64 lg:h-64 hover:drop-shadow-xl">
-            <Link to={`/categoryPages/${categories._id}`}>
+            <Link to={`/categoryPages/${categories.slug}`}>
         <div className=''>
             <img src={categories.img} alt="" className='rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 mx-auto shadow-md' />
             <p className='lg:text-xl font-semibold text-center mt-3'>{categories.name}</p>

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const SecondBanner = ({secondBannerInfo}) => {
-    const {img, title, description} = secondBannerInfo;
+const SecondBanner = ({img}) => {
+    //const {img, title, description} = secondBannerInfo;
     return (
         <>
         <div className="grid justify-center p-16">
@@ -13,7 +13,7 @@ const SecondBanner = ({secondBannerInfo}) => {
               className="w-[1200px] h-[400px] rounded-lg"
             />
           </div>
-          <div>
+          {/* <div>
             <div className="absolute left-16 bottom-16 text-white">
               <h1 className="text-base lg:text-3xl">{title}</h1>
               <p className="text-lg lg:text-4xl font-bold my-4">{description}</p>
@@ -21,7 +21,7 @@ const SecondBanner = ({secondBannerInfo}) => {
                 Save 20%
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
         </>

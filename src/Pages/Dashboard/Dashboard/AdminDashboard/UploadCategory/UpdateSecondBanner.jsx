@@ -177,7 +177,7 @@ const UpdateSecondBanner = () => {
           />
         </form>
 
-        <div className="md:w-96 mx-auto">
+        <div className="md:w-96 mx-auto mt-10">
           <table className="table">
             <thead>
               <tr>

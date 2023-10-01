@@ -23,7 +23,7 @@ const HomeForMen = () => {
         <div className='bg-white'>
         <MenSecondBanner></MenSecondBanner>
         <TrendingProducts />
-            <MenThirdBanner></MenThirdBanner>
+            {/* <MenThirdBanner></MenThirdBanner> */}
             <AllProducts />
         </div>
         <BackToTopButton />

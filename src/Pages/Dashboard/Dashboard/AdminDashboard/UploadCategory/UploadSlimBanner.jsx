@@ -19,7 +19,7 @@ const UploadSlimBanner = () => {
   const { banner } = useLoaderData();
   const [banners, setBanners] = useState([]);
   useEffect(() => {
-    setBanners(banner?.slimBannerImage);
+    setBanners(banner?.slimBanners);
   }, [banner]);
   const [selectedImage, setSelectedImage] = useState(null);
   const { slug, type } = useParams();
@@ -48,7 +48,7 @@ const UploadSlimBanner = () => {
       .then((imgResponse) => {
         //console.log(imgResponse);
         if (imgResponse.success) {
-          const imgURL = imgResponse.data.display_url;
+          const imgURL = imgResponse?.data?.display_url;
           const { headingsSlim, titleSlim, offerSlim, image } = data;
           setValue("slimBannerImage", image);
           const updateCategory = {
@@ -73,7 +73,7 @@ const UploadSlimBanner = () => {
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
-                  title: "Category updated successfully",
+                  title: "Uploaded successfully",
                   showConfirmButton: false,
                   timer: 1500,
                 });
@@ -94,9 +94,9 @@ const UploadSlimBanner = () => {
 
     return (
         <>
-        <div className="h-full">
+        <div className="h-full p-10">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex">
+          <div className="flex gap-5" >
           <div
             className={`rounded-md w-24 h-24 md:w-40 md:h-40 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
           >
@@ -150,7 +150,7 @@ const UploadSlimBanner = () => {
                   </svg>
                 </div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <p className="text-gray-500">100 x 100</p>
+                  <p className="text-gray-500">20 x 20</p>
                   <p className="text-gray-500">place an .png image</p>
                 </div>
               </>
@@ -159,7 +159,7 @@ const UploadSlimBanner = () => {
               <img
                 src={selectedImage}
                 alt="Uploaded"
-                className="rounded-full w-24 h-24 md:w-40 md:h-40"
+                className="w-24 h-24 md:w-40 md:h-40"
               />
             )}
             
@@ -212,25 +212,30 @@ const UploadSlimBanner = () => {
           
         </form>
 
-        <div>
+        <div className="mt-10">
         <table className="table">
                   {/* head */}
                   <thead>
                     <tr>
                   
-                      <th>Name</th>
-                      <th>Job</th>
+                      <th>Title</th>
+                      <th>Heading</th>
+                      <th>Offer</th>
+                      <th>Image</th>
                       
                       <th></th>
                     </tr>
                   </thead>
                   
                   <tbody>
-              {banners?.map((image, index) => (
+              {banners?.map((i, index) => (
                 <tr key={index}>
+                  <td>{i?.titleSlim}</td>
+                  <td>{i?.headingsSlim}</td>
+                  <td>{i?.offerSlim}</td>
                   <td>
                     
-                        <img src={image} alt={`Banner ${index}`} className="w-48 h-20"/>
+                        <img src={i?.slimBannerImage} alt={`Banner ${index}`} className="w-20 h-20"/>
                       
                   </td>
                   

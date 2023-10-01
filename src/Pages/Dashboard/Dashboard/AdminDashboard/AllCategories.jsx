@@ -4,8 +4,10 @@ import { BiEdit } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 import useCategory from "../../../../Hooks/useCategory";
+import { Link, useNavigate } from "react-router-dom";
 
 const AllCategories = () => {
+  const navigate = useNavigate();
   const [category, refetch] = useCategory();
 
   const handleDelete = (category) => {
@@ -87,9 +89,9 @@ const AllCategories = () => {
                         className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-26"
                       >
                         <li>
-                          <a>
+                          <Link to={`/dashboard/upload/upload-category/${category.slug}/home-page-layout`}>
                             <BiEdit /> Edit
-                          </a>
+                          </Link>
                         </li>
                         <li>
                           <button onClick={() => handleDelete(category)}>
