@@ -62,7 +62,7 @@ const AddProduct = () => {
             bestDeal,
             category,
             subCategory,
-            stock: parseFloat(quantity),
+            quantity: parseInt(quantity),
             productSlug: slugify(productTitle),
           };
           console.log(newProduct);
