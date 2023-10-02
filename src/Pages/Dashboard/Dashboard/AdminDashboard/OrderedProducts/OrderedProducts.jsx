@@ -34,7 +34,7 @@ const OrderedProducts = () => {
 
 
   return (
-    <section className="mt-8 py-7 px-4 bg-white max-w-5xl mx-auto">
+    <section className="h-full mt-5 py-7 px-4 bg-white max-w-5xl mx-auto">
       {/* table  */}
       <div>
         <div className="flex  justify-between items-center">
@@ -159,7 +159,7 @@ const OrderedProducts = () => {
       }
 
       <nav
-        className="w-full flex justify-center mt-5 select-none"
+        className="w-full flex justify-center mt-5 select-none pb-5"
         aria-label="Page navigation example"
       >
         <ul className="inline-flex -space-x-px text-sm">

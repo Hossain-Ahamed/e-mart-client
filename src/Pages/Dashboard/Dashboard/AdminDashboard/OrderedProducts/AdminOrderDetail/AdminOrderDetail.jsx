@@ -1,18 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import useProfile from "../../../../../../Hooks/useProfile";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { BsCheckCircle } from "react-icons/bs";
 
-import toast from "react-hot-toast";
-import OrderDetailRow from "../../UserDashboard/OrderDetails/OrderDetailRow";
+import { useQuery } from "@tanstack/react-query";
+
+import { BsFillTelephoneOutboundFill } from "react-icons/bs";
 import AdminOrderDetailStatusChange from "./AdminOrderDetailStatusChange";
 import useAxiosSecure from "../../../../../../Hooks/useAxiosSecure";
 import AdminOrderDetailRow from "./AdminOrderDetailRow";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useRole from "../../../../../../Hooks/useRole";
+import toast from "react-hot-toast";
 
 const AdminOrderDetail = () => {
   const { orderId } = useParams();
@@ -35,7 +33,7 @@ const AdminOrderDetail = () => {
     queryKey: ["details", orderId],
     queryFn: async () => {
       const res = await axiosSecure(`/for-admin/order-detail-view/${orderId}`,);
-      // console.log(res.data.details);
+      console.log(res.data.details);
       return res?.data?.details;
     },
   });
@@ -61,7 +59,9 @@ const AdminOrderDetail = () => {
       )
       return;
     }
-    if (orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name === "Delivered") {
+
+
+    if (orderedData?.status === "Delivered" || orderedData?.status === "Cancelled") {
       Swal.fire(
         {
           icon: "error",
@@ -105,6 +105,9 @@ const AdminOrderDetail = () => {
   }
 
 
+
+
+  //change order ammount 
   const uploadData = (data) => {
     const reqdata = {
       id: orderId,
@@ -114,12 +117,70 @@ const AdminOrderDetail = () => {
 
 
     axiosSecure.patch(`/change-order-total-ammount`, reqdata)
-    .then(data => { 
-      
-      refetch(); 
-      setEditable(false)
-    })
-      .catch(e => { })
+      .then(data => {
+        Swal.fire({
+          icon: "success",
+          title: "Changed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+        setEditable(false)
+      })
+      .catch(e => {
+        Swal.fire(
+          {
+            icon: "error",
+            title: `${e?.code}`,
+            text: `${e?.response?.data?.message}`
+          })
+      })
+
+  }
+
+  // cancel order 
+  const handleCancelOrder = () => {
+
+    if (orderedData?.status === "Delivered" || orderedData?.status === "Cancelled" || !(['admin', 'Order Manager'].includes(role))) {
+      Swal.fire(
+        {
+          icon: "error",
+          title: `You can't change`,
+          text: `Its not available for change`
+        })
+      return;
+    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to cancel the order. You can't revert`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Proceeed",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/cacnel-order/${orderId}`)
+          .then(data => {
+            refetch();
+
+            Swal.fire({
+              icon: "success",
+              title: "Deleted Successfully",
+
+            });
+
+          }).catch(e => {
+            Swal.fire(
+              {
+                icon: "error",
+                title: `${e?.code}`,
+                text: `${e?.response?.data?.message}`
+              })
+          })
+      }
+    });
+
 
   }
   return (
@@ -137,9 +198,10 @@ const AdminOrderDetail = () => {
             Receiver:{" "}
             <span className="font-semibold uppercase">{orderedData?.name}</span>
           </p>
-          <p>
-            Phone: <span className="font-semibold">{orderedData?.userPhone}</span>
-          </p>
+          <Link to={`tel:${orderedData?.userPhone}`} >
+
+            Phone: <span className="font-semibold pl-2 hover:underline cursor-pointer" title="click to call">{orderedData?.userPhone} </span>
+          </Link>
           <p>
             <span className="font-semibold text-slate-600">
               Address : {orderedData?.userAddress}, {orderedData?.userCity}
@@ -153,6 +215,16 @@ const AdminOrderDetail = () => {
               </span>
             </p>
           }
+
+          {/* delete button to cancel a order  */}
+          {
+            ['admin', 'Order Manager'].includes(role) && (orderedData?.status !== "Delivered" && orderedData?.status !== "Cancelled") &&
+            <div className="w-full flex justify-end">
+              <button onClick={handleCancelOrder} type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Cancel order</button>
+
+            </div>
+          }
+
         </div>
 
 
@@ -290,7 +362,7 @@ const AdminOrderDetail = () => {
           </ol>
           {
             orderedData?.orderStatus && Array.isArray(orderedData?.orderStatus) &&
-            <AdminOrderDetailStatusChange refetchOrderDetail={refetch} id={orderedData?._id} status={orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name}></AdminOrderDetailStatusChange>
+            <AdminOrderDetailStatusChange OrdersState={orderedData?.status} refetchOrderDetail={refetch} id={orderedData?._id} status={orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name}></AdminOrderDetailStatusChange>
           }
 
         </div>
@@ -338,51 +410,51 @@ const AdminOrderDetail = () => {
                   />
                   {
 
-                    !["Delivered"].includes(orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name)  && ['admin', 'Order Manager'].includes(role)  && < div className='absolute top-1 right-2 bg-slate-300 px-2 rounded-xl cursor-pointer' onClick={() => setEditable(!editable)}>Edit</div>
+                    orderedData?.status !== "Delivered" && orderedData?.status !== "Cancelled" && ['admin', 'Order Manager'].includes(role) && < div className='absolute top-1 right-2 bg-slate-300 px-2 rounded-xl cursor-pointer' onClick={() => setEditable(!editable)}>Edit</div>
                   }
+                </div>
               </div>
-            </div>
-            {errors.discountedAmount && (<p className='block text-right p-1 text-xs text-red-600'>{errors.discountedAmount.message}</p>)}
+              {errors.discountedAmount && (<p className='block text-right p-1 text-xs text-red-600'>{errors.discountedAmount.message}</p>)}
 
 
 
-            {/* total charge  */}
-            <div className='mt-3 flex justify-between items-center  relative'>
+              {/* total charge  */}
+              <div className='mt-3 flex justify-between items-center  relative'>
 
-              <p>Total </p>
-              <div className=''>
-                <div>
+                <p>Total </p>
+                <div className=''>
+                  <div>
 
-                  <input
-                    autoComplete='off'
-                    type='text'
-                    id="finalPrice"
-                    placeholder="Total Ammount"
-                    defaultValue={orderedData?.finalAmount}
-                    readOnly={!editable}
-                    className={`block ${editable ? " border border-gray-300 focus:ring-blue-500 focus:border-blue-500" : "select-none cursor-not-allowed focus:ring-red-500 focus:border-red-500"} block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 `}
-                    {...register("finalAmount", {
-                      required: "* total Ammount  is required",
-                      validate: (value) => !isNaN(Number(value)) || "Please enter a number",
-                    })}
-                  />
-                  {
-                    editable  &&  
-                      orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name !== "Delivered" && ['admin', 'Order Manager'].includes(role)  &&
-                    <input type="submit" value="Save" className='absolute top-1 right-2 text-white bg-green-500 px-2 rounded-xl cursor-pointer' />
-                  }
-                </ div>
+                    <input
+                      autoComplete='off'
+                      type='text'
+                      id="finalPrice"
+                      placeholder="Total Ammount"
+                      defaultValue={orderedData?.finalAmount}
+                      readOnly={!editable}
+                      className={`block ${editable ? " border border-gray-300 focus:ring-blue-500 focus:border-blue-500" : "select-none cursor-not-allowed focus:ring-red-500 focus:border-red-500"} block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 `}
+                      {...register("finalAmount", {
+                        required: "* total Ammount  is required",
+                        validate: (value) => !isNaN(Number(value)) || "Please enter a number",
+                      })}
+                    />
+                    {
+                      editable &&
+                      orderedData?.orderStatus[orderedData?.orderStatus.length - 1]?.name !== "Delivered" && ['admin', 'Order Manager'].includes(role) &&
+                      <input type="submit" value="Save" className='absolute top-1 right-2 text-white bg-green-500 px-2 rounded-xl cursor-pointer' />
+                    }
+                  </ div>
+                </div>
               </div>
+              {errors.finalAmount && (<p className='block text-right p-1 text-xs text-red-600'>{errors.finalAmount.message}</p>)}
+
+
+
+
+
             </div>
-            {errors.finalAmount && (<p className='block text-right p-1 text-xs text-red-600'>{errors.finalAmount.message}</p>)}
-
-
-
-
-
           </div>
-      </div>
-    </form >
+        </form >
 
 
 

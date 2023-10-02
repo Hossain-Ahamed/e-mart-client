@@ -44,7 +44,7 @@ const OrderDetails = () => {
 
       {/* <SectionTitle subheading="My Cart" heading="WANNA ADD MORE?" /> */}
 
-      <section className="mt-8 py-7 px-4 bg-white max-w-5xl mx-auto">
+      <section className="mt-8 py-7 h-full  px-4 bg-white max-w-5xl mx-auto">
         {/* table  */}
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
@@ -75,16 +75,17 @@ const OrderDetails = () => {
                 orderedData.map((i, count) => (
                   <tr
                     key={i?._id}
-                    className="bg-white border-b  hover:bg-gray-50 "
+                    className={`bg-white border-b  hover:bg-gray-50 `}
                   >
 
                     {/* <td className="px-6 py-4">
                                         <img className="w-10 h-10 rounded-full" src={i?.image} alt={i?.name} />
 
                                     </td> */}
-                    <td className="px-6 py-4">#{i?._id.slice(-6)}</td>
-                    <td className="px-6 py-4">
-                      {i?.orderStatus[i?.orderStatus.length - 1]?.name}
+                    <td className={`px-6 py-4 ${i?.status === "Cancelled" && "text-red-500 font-medium"}`}>#{i?._id.slice(-6)}</td>
+                    <td className={`px-6 py-4 ${i?.status === "Cancelled" && "text-red-500 font-medium"}`}>
+                    {i?.status === "Cancelled" ? "Cancelled" :
+                      i?.orderStatus[i?.orderStatus.length - 1]?.name}
                     </td>
                     <td className="px-6 py-4">
                       <p className="text-sm">
@@ -106,6 +107,7 @@ const OrderDetails = () => {
                 ))}
             </tbody>
           </table>
+      
         </div>
       </section>
     </>
