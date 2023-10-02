@@ -10,18 +10,19 @@ import SlimBanner from "../../Component/SlimBanner";
 import UserTitle from "../../Component/UserTitle";
 import ThirdBanner from "../../Component/ThirdBanner";
 import SubCategories from "../../Component/SubCategory/SubCategories";
+import TrendingProducts from "../Shared/TrendingProducts";
 
 
-const PagesForCategory = () => {
-  const {category, subcategory, products} = useLoaderData();
-  const { _id, name, slug, layout } = category;
-  //console.log(products);
+const PagesForSubCategory = () => {
+  const {subCategory, products} = useLoaderData();
+  const { _id, name, slug, layout } = subCategory;
+  console.log(products);
   return (
     <>
     
       {layout === 1 && (
         <>
-        {category?.topBannerImage && <TopBanner images={category.topBannerImage}></TopBanner>}
+        {subCategory?.topBannerImage && <TopBanner images={subCategory?.topBannerImage}></TopBanner>}
         <UserTitle heading="Category"></UserTitle>
 
         </>
@@ -30,22 +31,24 @@ const PagesForCategory = () => {
         <>
         <div className="bg-white">
         <div className="grid lg:flex justify-center md:gap-5 py-6">
-          { category?.topLeftBannerLayout2 && <TopLeftBanner images={category?.topLeftBannerLayout2} />}
-          {category?.topRightBannerLayout2 && <TopRightBanner images={category?.topRightBannerLayout2} />}
+          { subCategory?.topLeftBannerLayout2 && <TopLeftBanner images={subCategory?.topLeftBannerLayout2} />}
+          {subCategory?.topRightBannerLayout2 && <TopRightBanner images={subCategory?.topRightBannerLayout2} />}
         </div>
         <div className="px-4 py-3">
-            <SlimBanner slimBanners={category?.slimBanners} ></SlimBanner>
+            <SlimBanner slimBanners={subCategory?.slimBanners} ></SlimBanner>
             </div>
             </div>
             
         </>
       )}
       {layout === 3 && <p>Layout 3</p>}
-      <SubCategories subcategory={subcategory}></SubCategories>
+
+      <TrendingProducts products={products} />
+      {/* <SubCategories subcategory={subcategory}></SubCategories>
       <SecondBanner img={category.secondBannerImage}></SecondBanner>
-      <ThirdBanner images={category.bottomBannerImage} />
+      <ThirdBanner images={category.bottomBannerImage} /> */}
     </>
   );
 };
 
-export default PagesForCategory;
+export default PagesForSubCategory;

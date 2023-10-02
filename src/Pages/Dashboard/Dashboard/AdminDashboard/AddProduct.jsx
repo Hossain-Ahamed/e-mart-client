@@ -36,7 +36,7 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((imgResponse) => {
         if (imgResponse.success) {
-          const imgURL = imgResponse.data.display_url;
+          const imgURL = imgResponse?.data?.display_url;
           const {
             productTitle,
             des,
@@ -70,7 +70,7 @@ const AddProduct = () => {
             .post("/products", newProduct)
             .then((data) => {
               console.log("new", data.data);
-              if (data.data.insertedId) {
+              if (data?.data?.insertedId) {
                 reset();
                 setSelectedImage(null);
                 Swal.fire({
@@ -121,7 +121,7 @@ const AddProduct = () => {
               </div>
               <br />
               <div
-                className={`w-64 h-64 lg:w-96 lg:h-72 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+                className={`w-32 h-40 md:h-64 md:w-52 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
               >
                 {!selectedImage && (
                   <>
@@ -182,7 +182,7 @@ const AddProduct = () => {
                   <img
                     src={selectedImage}
                     alt="Uploaded"
-                    className="w-full h-64 md:h-80 lg:w-80 lg:h-20 rounded-2xl object-contain"
+                    className="w-32 h-40 md:h-64 md:w-52 rounded-2xl object-contain"
                   />
                 )}
 
@@ -255,9 +255,9 @@ const AddProduct = () => {
                   {...register("category", { required: true })}
                   className="select select-bordered rounded-md"
                 >
-                  {category.map((categories) => (
-                    <option key={categories._id} value={categories.name}>
-                      {categories.name}
+                  {category?.map((categories) => (
+                    <option key={categories?._id} value={categories?.name}>
+                      {categories?.name}
                     </option>
                   ))}
                 </select>
@@ -270,9 +270,9 @@ const AddProduct = () => {
                   {...register("subCategory", { required: true })}
                   className="select select-bordered rounded-md"
                 >
-                  {subCategory.map((subCategories) => (
-                    <option key={subCategories._id} value={subCategories.name}>
-                      {subCategories.name}
+                  {subCategory?.map((subCategories) => (
+                    <option key={subCategories?._id} value={subCategories?.name}>
+                      {subCategories?.name}
                     </option>
                   ))}
                 </select>
@@ -283,8 +283,8 @@ const AddProduct = () => {
                   <input
                     type="checkbox"
                     className="checkbox"
-                    {...register("bestDeal", { required: true })}
-                    defaultChecked={true}
+                    {...register("bestDeal")}
+                    //defaultChecked={true}
                   />
                 </label>
               </div>
@@ -300,7 +300,7 @@ const AddProduct = () => {
               </div>
               <input
                 type="submit"
-                className="w-full h-10 bg-primary text-white font-bold rounded-md mt-5"
+                className="w-full h-10 bg-primary text-white font-bold rounded-md mt-5 cursor-pointer"
                 value="Add New Product"
               />
             </div>

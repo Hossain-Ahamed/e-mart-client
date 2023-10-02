@@ -31,12 +31,11 @@ const AddSubCategory = () => {
       console.log(imgResponse);
       if (imgResponse.data.success) {
         const imgURL = imgResponse.data.data.display_url;
-        const { name, category, color, image } = data;
+        const { name, category, image } = data;
         setValue("img", image);
         const newSubCategory = {
           name,
           category,
-          color,
           img: imgURL,
           slug: slugify(name),
         };
@@ -119,22 +118,12 @@ const AddSubCategory = () => {
                   }
                 </select>
               </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Color</span>
-            </label>
-            <input
-            placeholder='Color'
-              type="text"
-              className="input input-bordered rounded-md"
-              {...register("color", { required: true })}
-            />
-          </div>
+          
           <br />
           <div>
             
           <div
-            className={`w-64 h-64 lg:w-48 lg:h-48 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+            className={`w-64 h-64 lg:w-48 lg:h-48 rounded-full bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
           >
             {!selectedImage && (
               <>
@@ -195,7 +184,7 @@ const AddSubCategory = () => {
               <img
                 src={selectedImage}
                 alt="Uploaded"
-                className="w-full h-64 md:h-80 lg:w-80 lg:h-20 rounded-2xl object-contain"
+                className="w-64 h-64 lg:w-48 lg:h-48 rounded-full object-contain"
               />
             )}
             

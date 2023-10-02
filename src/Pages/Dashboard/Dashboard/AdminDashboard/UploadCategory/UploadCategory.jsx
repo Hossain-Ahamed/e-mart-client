@@ -6,9 +6,11 @@ import slugify from "slugify";
 import Swal from "sweetalert2";
 import useCategory from "../../../../../Hooks/useCategory";
 import AdminTitle from "../../../../../Component/AdminTitle";
+import { ChromePicker } from "react-color";
 
 const UploadCategory = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedColor, setSelectedColor] = useState("#FFFFFF"); // Initialize with a default color
   const navigate = useNavigate();
   const {
     register,
@@ -23,19 +25,19 @@ const UploadCategory = () => {
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const onSubmit = (data) => {
-    console.log(data)
+    console.log(data);
     const formData = new FormData();
     formData.append("image", data.image[0]);
     axios.post(img_hosting_url, formData).then((imgResponse) => {
       console.log(imgResponse);
       if (imgResponse.data.success) {
         const imgURL = imgResponse.data.data.display_url;
-        console.log(imgURL)
-        const { name, color, image } = data;
+        console.log(imgURL);
+        const { name, image } = data;
         setValue("img", image);
         const newCategory = {
           name,
-          color,
+          color: selectedColor,
           img: imgURL,
           slug: slugify(name),
         };
@@ -82,7 +84,7 @@ const UploadCategory = () => {
   return (
     <>
       <div className="h-full p-5 px-10 bg-white">
-      <AdminTitle heading="Add New Category"></AdminTitle>
+        <AdminTitle heading="Add New Category"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
             <label className="label">
@@ -99,11 +101,9 @@ const UploadCategory = () => {
             <label className="label">
               <span className="label-text">Color</span>
             </label>
-            <input
-            placeholder="Color"
-              type="text"
-              className="input input-bordered rounded-md"
-              {...register("color", { required: true })}
+            <ChromePicker
+              color={selectedColor}
+              onChange={(color) => setSelectedColor(color.hex)}
             />
           </div>
           <br />
@@ -172,7 +172,7 @@ const UploadCategory = () => {
                 className="rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44"
               />
             )}
-            
+
             <input
               type="file"
               className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"

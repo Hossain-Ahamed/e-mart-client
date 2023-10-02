@@ -3,10 +3,10 @@ import axios from 'axios';
 
 const useSubCategory = () => {
     const { refetch, data: subCategory = [] } = useQuery({
-        queryKey: ['subCategory', subCategory],
+        queryKey: ['subCategory'],
         queryFn: async () => {
             const res = await axios.get(`http://localhost:5000/sub-category`, {withCredentials: true})
-            //console.log(res.data)
+            console.log(res.data)
             return res.data;
         },
           });

@@ -126,7 +126,7 @@ const SubNav = () => {
                           alt={name}
                         />
                       ) : (
-                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-600 rounded-full ">
+                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-yellow-600 rounded-full ">
                           <span className="font-medium text-gray-100 ">
                             {name &&
                               name

@@ -19,11 +19,8 @@ import AdminRoute from "../AdminRoute/AdminRoute";
 import AddProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddProduct";
 import HomePageLayout from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/HomePageLayout";
 import UpdateTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateTopBanner";
-import {loader as updateTopBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateTopBanner";
 import UpdateSecondBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateSecondBanner";
-import {loader as updateSecondBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateSecondBanner";
 import UpdateBottomBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomBanner";
-import {loader as updateBottomBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UpdateBottomBanner";
 import ManageProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/ManageProduct";
 import UserHome from "../../Pages/Dashboard/Dashboard/UserDashboard/UserHome";
 import AdminHome from "../../Pages/Dashboard/Dashboard/AdminDashboard/AdminHome/AdminHome";
@@ -32,11 +29,8 @@ import AllCategories from "../../Pages/Dashboard/Dashboard/AdminDashboard/AllCat
 import Error from "../../Pages/Shared/error/Error";
 import SelectLayout from "../SelectLayout/SelectLayout";
 import TopRightBannerLayout2 from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/SecondLayout/TopRightBannerLayout2";
-import {loader as topRightBannerLayout2Loader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/SecondLayout/TopRightBannerLayout2";
 import TopLeftBannerLayout2 from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/SecondLayout/TopLeftBannerLayout2";
-import {loader as topLeftBannerLayout2Loader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/SecondLayout/TopLeftBannerLayout2";
 import UploadSlimBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadSlimBanner";
-import {loader as slimBannerLoader} from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadSlimBanner";
 import SelectType from "../../Pages/SelectType/SelectType";
 import AddReview from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddReview";
 import CheckOut from "../../Pages/Dashboard/Dashboard/CheckOut";
@@ -57,6 +51,7 @@ import BlockLogin from "../PrivateRoute/BlockLogin";
 import BlockAdmin from "../PrivateRoute/BlockAdmin";
 import AllowAdmin from "../PrivateRoute/AllowAdmin";
 import AdminOrderDetail from "../../Pages/Dashboard/Dashboard/AdminDashboard/OrderedProducts/AdminOrderDetail/AdminOrderDetail";
+import PagesForSubCategory from "../../Pages/PagesForSubCategory/PagesForSubCategory";
 
 
 
@@ -92,6 +87,11 @@ const router = createBrowserRouter([
           path: "/categoryPages/:slug",
           element: <PagesForCategory></PagesForCategory>,
           loader: ({params}) => fetch(`http://localhost:5000/categories/${params.slug}`)
+        },
+        {
+          path: "/sub-category-pages/:slug",
+          element: <PagesForSubCategory />,
+          loader: ({params}) => fetch(`http://localhost:5000/sub-categories/${params.slug}`)
         },
         {
           path: "/mensFashion",
@@ -230,19 +230,16 @@ const router = createBrowserRouter([
         {
           path: 'upload/:type/:slug/upload-top-banner',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UpdateTopBanner /></AllowAdmin>,
-          loader: updateTopBannerLoader ,
           errorElement: <Error /> 
         },
         {
           path: 'upload/:type/:slug/upload-second-banner',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UpdateSecondBanner /></AllowAdmin>,
-          loader: updateSecondBannerLoader,
           errorElement: <Error></Error>
         },
         {
           path: 'upload/:type/:slug/upload-bottom-banner',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UpdateBottomBanner /></AllowAdmin>,
-          loader: updateBottomBannerLoader,
           errorElement: <Error />
         },
         {
@@ -252,19 +249,16 @@ const router = createBrowserRouter([
         {
           path: 'upload/:type/:slug/upload-top-left-banner-layout2',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><TopLeftBannerLayout2 /></AllowAdmin>,
-          loader: topLeftBannerLayout2Loader,
           errorElement: <Error />
         },
         {
           path: 'upload/:type/:slug/upload-top-right-banner-layout2',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><TopRightBannerLayout2 /></AllowAdmin>,
-          loader: topRightBannerLayout2Loader,
           errorElement: <Error />
         },
         {
           path: 'upload/:type/:slug/upload-slim-banner',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UploadSlimBanner /></AllowAdmin>,
-          loader: slimBannerLoader,
           errorElement: <Error />
         },
         

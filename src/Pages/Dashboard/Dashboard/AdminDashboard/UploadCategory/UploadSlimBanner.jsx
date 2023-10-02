@@ -4,25 +4,22 @@ import { useForm } from "react-hook-form";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
-export async function loader({params}) {
-  try {    
-    const response = await axios.get(`http://localhost:5000/upload-category/${params.slug}/upload-slim-banner`);
-    
-    const banner = response.data;
-    return { banner };
-  } catch (error) { 
-    throw {error}
-  }
-}
+
 const UploadSlimBanner = () => {
-  const { banner } = useLoaderData();
-  const [banners, setBanners] = useState([]);
-  useEffect(() => {
-    setBanners(banner?.slimBanners);
-  }, [banner]);
+  const {type, slug} = useParams();
+  const { axiosSecure } = useAxiosSecure();
+  const { refetch, data: banners = [], isLoading, isError } = useQuery({
+    queryKey: ["banners", type, slug],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/${type}/${slug}/upload-slim-banner`);
+      console.log(res.data);
+      return res?.data;
+    },
+  });
   const [selectedImage, setSelectedImage] = useState(null);
-  const { slug, type } = useParams();
   const {
     register,
     handleSubmit,
@@ -69,7 +66,8 @@ const UploadSlimBanner = () => {
               if (data?.data?.result?.modifiedCount === 1) {
                 reset();
                 setSelectedImage(null);
-                setBanners([...banners, imgURL]);
+                refetch();
+                //setBanners([...banners, imgURL]);
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
@@ -91,6 +89,17 @@ const UploadSlimBanner = () => {
       setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
     }
   };
+  
+
+  if(isLoading){
+    return <><p>Loading image</p></>
+  }
+
+  if(isError){
+    return <><p>Error</p></>
+  }
+
+
 
     return (
         <>

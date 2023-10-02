@@ -10,7 +10,7 @@ const SecondBanner = ({img}) => {
             <img
               src={img}
               alt=""
-              className="w-[1200px] h-[400px] rounded-lg"
+              className="rounded-lg"
             />
           </div>
           {/* <div>

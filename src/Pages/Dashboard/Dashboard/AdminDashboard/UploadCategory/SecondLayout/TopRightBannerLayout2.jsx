@@ -1,32 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-
-export async function loader({ params }) {
-  try {
-    const response = await axios.get(
-      `http://localhost:5000/${params.type}/${params.slug}/upload-top-right-banner-layout2`
-    );
-
-    const banner = response.data;
-    return { banner };
-  } catch (error) {
-    throw { error };
-  }
-}
+import useAxiosSecure from "../../../../../../Hooks/useAxiosSecure";
 
 const TopRightBannerLayout2 = () => {
-  const { banner } = useLoaderData();
-  console.log(banner);
-  const [banners, setBanners] = useState([]);
-  useEffect(() => {
-    setBanners(banner?.topRightBannerLayout2);
-  }, [banner]);
+  const {type, slug} = useParams();
+  const { axiosSecure } = useAxiosSecure();
+  const { refetch, data: banners = [], isLoading, isError } = useQuery({
+    queryKey: ["banners", type, slug],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/${type}/${slug}/upload-top-right-banner-layout2`);
+      console.log(res.data);
+      return res?.data;
+    },
+  });
   const [selectedImage, setSelectedImage] = useState(null);
-  const { slug, type } = useParams();
 
   const {
     register,
@@ -73,7 +65,8 @@ const TopRightBannerLayout2 = () => {
               if (data?.data?.result?.modifiedCount === 1) {
                 reset();
                 setSelectedImage(null);
-                setBanners([...banners, imgURL]);
+                refetch();
+                //setBanners([...banners, imgURL]);
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
@@ -91,6 +84,15 @@ const TopRightBannerLayout2 = () => {
     const file = event.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
   };
+
+  if(isLoading){
+    return <><p>Loading image</p></>
+  }
+
+  if(isError){
+    return <><p>Error</p></>
+  }
+
 
   // const handleDeleteImage = (indexToDelete) => {
   //   const updatedImages = updatedCategory.topRightBannerLayout2.filter((image, index) => index !== indexToDelete);
