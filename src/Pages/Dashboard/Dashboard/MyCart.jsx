@@ -11,6 +11,7 @@ import { set } from "react-hook-form";
 import { cartDataContext } from "../../../Contexts/CartDataProvider";
 import toast from "react-hot-toast";
 import UserTitle from "../../../Component/UserTitle";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const MyCart = () => {
   const { setSelectedOrderItems } = useContext(cartDataContext);
@@ -203,7 +204,7 @@ const MyCart = () => {
                     
                   </div>
                   <div>
-                    <p className="">{total.toFixed(2)}</p>
+                    <p className="flex items-center"><TbCurrencyTaka />{total.toFixed(2)}</p>
                     
                   </div>
                 </div>

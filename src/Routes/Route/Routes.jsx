@@ -201,12 +201,12 @@ const router = createBrowserRouter([
           element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><Coupon /></AllowAdmin>
         },
         {
-          path: 'ordered-products',
-          element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><OrderedProducts /></AllowAdmin>
+          path: 'orders/:type',
+          element: <AllowAdmin allowedRoles={["admin", "Order Manager", "Delivery Partner"]}><OrderedProducts /></AllowAdmin>
         },
         {
-          path: 'ordered-products/:orderId',
-          element: <AllowAdmin allowedRoles={["admin", "Order Manager"]}><AdminOrderDetail /></AllowAdmin>
+          path: 'orders/:type/:orderId',
+          element: <AllowAdmin allowedRoles={["admin", "Order Manager", "Delivery Partner"]}><AdminOrderDetail /></AllowAdmin>
         },
         {
           path: 'all-categories',

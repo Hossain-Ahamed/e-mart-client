@@ -68,9 +68,21 @@ const AdminRoleNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/ordered-products">
+                  <Link to="/dashboard/orders/current">
                     <MdAddCard />
-                    Ordered Products
+                    Current Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/orders/delivered">
+                    <MdAddCard />
+                    Delivered Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/orders/canceled">
+                    <MdAddCard />
+                    Canceled Orders
                   </Link>
                 </li>
                 <li>

@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
-
-import { BsFillTelephoneOutboundFill } from "react-icons/bs";
 import AdminOrderDetailStatusChange from "./AdminOrderDetailStatusChange";
-import useAxiosSecure from "../../../../../../Hooks/useAxiosSecure";
 import AdminOrderDetailRow from "./AdminOrderDetailRow";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useRole from "../../../../../../Hooks/useRole";
 import toast from "react-hot-toast";
+import { TbCurrencyTaka } from "react-icons/tb";
+import useAxiosSecure from "../../../../../../Hooks/useAxiosSecure";
 
 const AdminOrderDetail = () => {
   const { orderId } = useParams();
@@ -18,7 +17,7 @@ const AdminOrderDetail = () => {
   const { axiosSecure } = useAxiosSecure();
   const { register, formState: { errors }, handleSubmit, setValue } = useForm({ mode: "onChange" });
 
-  const { role } = useRole();
+  const { role, email } = useRole();
 
   // editable state 
   const [editable, setEditable] = useState(false);
@@ -30,10 +29,10 @@ const AdminOrderDetail = () => {
     error,
     refetch
   } = useQuery({
-    queryKey: ["details", orderId],
+    queryKey: ["details", orderId, role, email],
     queryFn: async () => {
-      const res = await axiosSecure(`/for-admin/order-detail-view/${orderId}`,);
-      console.log(res.data.details);
+      const res = await axiosSecure(`/for-admin/order-detail-view/${orderId}?role=${role}&email=${email}`,);
+      //console.log(res.data.details);
       return res?.data?.details;
     },
   });
@@ -171,6 +170,7 @@ const AdminOrderDetail = () => {
             });
 
           }).catch(e => {
+            console.log(e)
             Swal.fire(
               {
                 icon: "error",
@@ -381,11 +381,11 @@ const AdminOrderDetail = () => {
 
               <div className="flex justify-between items-center h-10">
                 <p className="col-span-4">Subtotal:</p>
-                <p className="col-span-2">{orderedData.subTotalAmount}</p>
+                <p className="col-span-2 flex items-center"><TbCurrencyTaka />{orderedData.subTotalAmount}</p>
               </div>
               <div className="flex justify-between items-center h-10">
                 <p className="col-span-4">Delivery Charge</p>
-                <p className="col-span-2">{orderedData.courirerCharge}</p>
+                <p className="col-span-2 flex items-center"><TbCurrencyTaka />{orderedData.courirerCharge}</p>
               </div>
 
 

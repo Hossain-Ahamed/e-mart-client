@@ -5,8 +5,10 @@ import { AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 import useCategory from "../../../../Hooks/useCategory";
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AllCategories = () => {
+  const {axiosSecure} = useAxiosSecure();
   const navigate = useNavigate();
   const [category, refetch] = useCategory();
 
@@ -21,12 +23,9 @@ const AllCategories = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/categories/${category._id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
+        axiosSecure.delete(`/categories/${category._id}`)
           .then((data) => {
-            if (data.deletedCount > 0) {
+            if (data?.data?.deletedCount > 0) {
               refetch();
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
             }

@@ -3,8 +3,10 @@ import useProduct from "../../../../../Hooks/useProduct";
 import { BiEdit } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 
 const ManageProduct = () => {
+  const {axiosSecure} = useAxiosSecure();
   const [product, refetch] = useProduct();
 
   const handleDelete = (product) => {
@@ -18,12 +20,10 @@ const ManageProduct = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/products/${product._id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
+        axiosSecure.delete(`/products/${product?._id}`)
           .then((data) => {
-            if (data.deletedCount > 0) {
+            //console.log(data)
+            if (data?.data?.deletedCount > 0) {
               refetch();
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
             }
@@ -49,7 +49,7 @@ const ManageProduct = () => {
 
             <tbody>
               {product.map((product) => (
-                <tr key={product._id} products={product}>
+                <tr key={product?._id} products={product}>
                   {/* row 1 */}
 
                   <td>
@@ -57,20 +57,20 @@ const ManageProduct = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src={product.image}
+                            src={product?.image}
                             alt="Avatar Tailwind CSS Component"
                           />
                         </div>
                       </div>
                       <div>
                         <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden">
-                          {product.productTitle}
+                          {product?.productTitle}
                         </p>
                       </div>
                     </div>
                   </td>
 
-                  <td>{product.price}</td>
+                  <td>{product?.price}</td>
 
                   <th>
                     <button className="btn btn-ghost btn-xs">details</button>

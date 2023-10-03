@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import AdminTitle from "../../../../../Component/AdminTitle";
+import useRole from "../../../../../Hooks/useRole";
 
 const OrderedProducts = () => {
+  const {role, email} = useRole();
+  const {type} = useParams();
   const { axiosSecure } = useAxiosSecure();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSize, setSearchSize] = useState(15);
@@ -15,12 +18,12 @@ const OrderedProducts = () => {
     data: orderedProducts = {},
     isLoading,
   } = useQuery({
-    queryKey: ["orderedProducts", searchQuery, searchSize, currentPage],
+    queryKey: ["orderedProducts", searchQuery, searchSize, currentPage, type, role, email],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/get-all-ordered-products?q=${searchQuery}&size=${searchSize}&currentPage=${currentPage}`
+        `/orders/${type}?q=${searchQuery}&size=${searchSize}&currentPage=${currentPage}&role=${role}&email=${email}`
       );
-
+        //console.log(res.data)
       return res.data;
     },
   });
@@ -124,9 +127,10 @@ const OrderedProducts = () => {
                                       <img className="w-10 h-10 rounded-full" src={i?.image} alt={i?.name} />
 
                                   </td> */}
-                    <td className="px-6 py-4">#{i?._id.slice(-6)}</td>
-                    <td className="px-6 py-4">
-                      {i?.orderStatus[i?.orderStatus.length - 1]?.name}
+                    <td className={`px-6 py-4 ${i?.status === "Cancelled" && "text-red-500 font-medium"}`}>#{i?._id.slice(-6)}</td>
+                    <td className={`px-6 py-4 ${i?.status === "Cancelled" && "text-red-500 font-medium"}`}>
+                    {i?.status === "Cancelled" ? "Cancelled" :
+                      i?.orderStatus[i?.orderStatus.length - 1]?.name}
                     </td>
                     <td className="px-6 py-4 text-sm">
 
@@ -145,7 +149,7 @@ const OrderedProducts = () => {
                     <td className="px-2 py-4">{i?.userPhone}</td>
                     <td className="px-6 py-4">
                       <Link
-                        to={`/dashboard/ordered-products/${i?._id}`}
+                        to={`/dashboard/orders/${type}/${i?._id}`}
                         className="font-medium text-blue-600 hover:underline"
                       >
                         See Details

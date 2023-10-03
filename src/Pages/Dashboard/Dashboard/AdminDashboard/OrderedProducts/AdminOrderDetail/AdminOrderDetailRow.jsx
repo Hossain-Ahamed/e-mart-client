@@ -1,4 +1,5 @@
 import React from "react";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const AdminOrderDetailRow = ({ products }) => {
   return (
@@ -40,7 +41,7 @@ const AdminOrderDetailRow = ({ products }) => {
                     {i?.productQuantity}
                   </p>
                 </td>
-                <td className="px-6 py-4">${i?.productPrice}</td>
+                <td className="px-6 py-4 flex items-center"><TbCurrencyTaka />{i?.productPrice}</td>
                 <td className="px-6 py-4">
                   {(i?.productQuantity * i?.productPrice).toFixed(2)}
                 </td>

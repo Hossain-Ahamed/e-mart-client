@@ -6,6 +6,7 @@ import axios from "axios";
 import { BsCheckCircle } from "react-icons/bs";
 import OrderDetailRow from "./OrderDetailRow";
 import toast from "react-hot-toast";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const OrderDetailsView = () => {
   const { orderId } = useParams();
@@ -138,7 +139,7 @@ const OrderDetailsView = () => {
                 title="Click to copy"
                 onClick={handleCopyClick}
               >
-                {orderedData?.OTP} abce{" "}
+                {orderedData?.OTP} {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -359,19 +360,20 @@ const OrderDetailsView = () => {
 
               <div className="flex justify-between items-center h-10">
                 <p className="col-span-4">Subtotal:</p>
-                <p className="col-span-2">{orderedData?.subTotalAmount}</p>
+                <p className="col-span-2 flex items-center"><TbCurrencyTaka />{orderedData?.subTotalAmount}</p>
               </div>
               <div className="flex justify-between items-center h-10">
                 <p className="col-span-4">Delivery Charge</p>
-                <p className="col-span-2">{orderedData?.courirerCharge}</p>
+                <p className="col-span-2 flex items-center"><TbCurrencyTaka />{orderedData?.courirerCharge}</p>
               </div>
               <div className="flex justify-between items-center h-10">
                 <p className="col-span-4">Discount</p>
-                <p className="col-span-2">-{orderedData?.discountedAmount}</p>
+                <p className="col-span-2 flex items-center text-red-500"><TbCurrencyTaka />-{orderedData?.discountedAmount}</p>
               </div>
-              <div className="flex justify-between items-center h-10">
+              <hr className="mt-2" />
+              <div className="flex justify-between items-center h-10 mt-3 font-semibold">
                 <p className="col-span-4">Total </p>
-                <p className="col-span-2">-{orderedData?.finalAmount}</p>
+                <p className="col-span-2 flex items-center"><TbCurrencyTaka />{orderedData?.finalAmount}</p>
               </div>
 
 

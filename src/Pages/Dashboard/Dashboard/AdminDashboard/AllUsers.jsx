@@ -4,11 +4,13 @@ import React from "react";
 import Swal from "sweetalert2";
 import AllUsers_Row from "./AllUsers_Row";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import useRole from "../../../../Hooks/useRole";
 
 const AllUsers = () => {
   const {axiosSecure} = useAxiosSecure();
+  const {email} = useRole();
   const { data: users = [], refetch, isError, error } = useQuery(["users"], async () => {
-    const res = await axiosSecure.get("/users");
+    const res = await axiosSecure.get(`/users?email=${email}`);
     //console.log(res.data);
     return res.data;
   });

@@ -75,7 +75,7 @@ const SubCategoryProductCard = ({ showProduct }) => {
               {quantity > 0 ? (
                 <div className="">
                   {alreadyAdded ? (
-                    <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto">
+                    <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl font-bold w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto">
                       <AiOutlineShoppingCart></AiOutlineShoppingCart>
                       <span className="">Added</span>
                     </button>
@@ -106,7 +106,7 @@ const SubCategoryProductCard = ({ showProduct }) => {
                 </div>
               ) : (
                 <button
-                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto"
+                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-red-600 text-white mx-auto cursor-not-allowed"
                   disabled
                 >
                   <AiOutlineShoppingCart />

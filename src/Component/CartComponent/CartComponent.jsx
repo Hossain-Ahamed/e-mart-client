@@ -11,6 +11,7 @@ import {
 } from "react-icons/ai";
 import { GrCheckbox, GrCheckboxSelected } from "react-icons/gr";
 import toast from "react-hot-toast";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const CartComponent = ({
   product,
@@ -88,7 +89,7 @@ const CartComponent = ({
             </div>
             <p
               title={productTitle}
-              className="hidden md:block w-28 font-bold line-clamp-1"
+              className="w-28 font-bold line-clamp-1"
             >
               {productTitle}
               {
@@ -100,7 +101,7 @@ const CartComponent = ({
 
             </p>
           </div>
-          <p className="">{price}</p>
+          <p className="flex items-center"><TbCurrencyTaka />{price}</p>
           <div className="flex gap-3">
             <button
               onClick={handleDecrease}
@@ -119,7 +120,7 @@ const CartComponent = ({
             </button>
           </div>
           <div className="flex md:gap-5">
-            <p>{parseFloat((quantity * price).toFixed(2))}</p>
+            <p className="flex items-center"><TbCurrencyTaka />{parseFloat((quantity * price).toFixed(2))}</p>
             <button
               onClick={() => handleDeleteCartItem(_id)}
               className=" text-red-600 hover:shadow-lg "
