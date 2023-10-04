@@ -63,9 +63,8 @@ const UpdateBottomBanner = () => {
               refetch();
               //setBanners([...banners, imgURL]);
               Swal.fire({
-                position: "top-end",
                 icon: "success",
-                title: "Category updated successfully",
+                title: "Banner uploaded successfully",
                 showConfirmButton: false,
                 timer: 1500,
               });

@@ -28,13 +28,19 @@ const AdminRoleNav = () => {
       <li>
         <Link to="/dashboard/all-categories">
           <BiCategory />
-          Manage Categories
+          Categories
         </Link>
       </li>
       <li>
         <Link to="/dashboard/upload/upload-sub-category">
           <BiDuplicate />
           Add Sub Category
+        </Link>
+      </li>
+      <li>
+        <Link to="/dashboard/manage-sub-categories">
+          <BiDuplicate />
+          Sub-Categories
         </Link>
       </li>
       <li>
@@ -46,7 +52,7 @@ const AdminRoleNav = () => {
       <li>
         <Link to="/dashboard/manageProduct">
           <AiOutlineCreditCard />
-          Manage Product
+          Products
         </Link>
       </li>
       <li>
@@ -64,7 +70,7 @@ const AdminRoleNav = () => {
       <li>
         <Link to="/dashboard/manage-coupon">
           <MdAddCard />
-          Manage Coupon
+          Coupons
         </Link>
       </li>
       <li>

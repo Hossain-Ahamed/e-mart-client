@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import useAxiosSecure from './useAxiosSecure';
 
 const useSubCategory = () => {
+    const {axiosSecure} = useAxiosSecure();
     const { refetch, data: subCategory = [] } = useQuery({
         queryKey: ['subCategory'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/sub-category`, {withCredentials: true})
+            const res = await axiosSecure.get(`/sub-category`)
             console.log(res.data)
             return res.data;
         },

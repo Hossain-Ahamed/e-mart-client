@@ -68,7 +68,6 @@ const UpdateSecondBanner = () => {
                 refetch();
                 //setBanners([...banners, imgURL]);
                 Swal.fire({
-                  position: "top-end",
                   icon: "success",
                   title: "Second Banner updated successfully",
                   showConfirmButton: false,
@@ -180,14 +179,7 @@ const UpdateSecondBanner = () => {
 
         <div className="md:w-96 mx-auto mt-10">
           <table className="table">
-            <thead>
-              <tr>
-                <th>Top Banner</th>
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody>
+             <tbody>
               {banners?.map((image, index) => (
                 <tr key={index}>
                   <td>

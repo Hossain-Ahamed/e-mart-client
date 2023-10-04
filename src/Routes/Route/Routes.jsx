@@ -55,6 +55,7 @@ import PagesForSubCategory from "../../Pages/PagesForSubCategory/PagesForSubCate
 import HomeTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeTopBanner";
 import HomeSecondBannerUpload from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeSecondBannerUpload";
 import HomeBottomBannerUpload from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeBottomBannerUpload";
+import ManageSubCategories from "../../Pages/Dashboard/Dashboard/AdminDashboard/ManageSubCategories";
 
 
 
@@ -214,6 +215,10 @@ const router = createBrowserRouter([
         {
           path: 'all-categories',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><AllCategories /></AllowAdmin>
+        },
+        {
+          path: 'manage-sub-categories',
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><ManageSubCategories /></AllowAdmin>
         },
         {
           path: 'upload/:type',

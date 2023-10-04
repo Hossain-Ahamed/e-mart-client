@@ -4,13 +4,13 @@ const SecondBanner = ({img}) => {
     //const {img, title, description} = secondBannerInfo;
     return (
         <>
-        <div className="grid justify-center p-16">
+        <div className="grid justify-center py-16">
         <div className="relative">
           <div>
             <img
               src={img}
               alt=""
-              className="rounded-lg"
+              className="rounded-lg w-[1200px] h-[500px]"
             />
           </div>
           {/* <div>

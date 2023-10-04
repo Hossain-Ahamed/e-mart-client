@@ -1,19 +1,18 @@
 import React from "react";
-
 import { BiEdit } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
-import useCategory from "../../../../Hooks/useCategory";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import AdminTitle from "../../../../Component/AdminTitle";
+import useSubCategory from "../../../../Hooks/useSubCategory";
 
-const AllCategories = () => {
+
+const ManageSubCategories = () => {
   const {axiosSecure} = useAxiosSecure();
   const navigate = useNavigate();
-  const [category, refetch] = useCategory();
+  const [subCategory, refetch] = useSubCategory();
 
-  const handleDelete = (category) => {
+  const handleDelete = (subCategory) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -24,7 +23,7 @@ const AllCategories = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/categories/${category._id}`)
+        axiosSecure.delete(`/categories/${subCategory._id}`)
           .then((data) => {
             if (data?.data?.deletedCount > 0) {
               refetch();
@@ -38,13 +37,21 @@ const AllCategories = () => {
   return (
     <>
       <div className="h-full p-10">
-        <AdminTitle heading={`Manage Categories (${category.length})`} />
         <div className="">
+          <p>{subCategory.length}</p>
           <table className="table">
-            
+            {/* head */}
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+
             <tbody>
-              {category.map((category) => (
-                <tr key={category._id} >
+              {subCategory.map((subCategory) => (
+                <tr key={subCategory._id} >
                   {/* row 1 */}
 
                   <td>
@@ -52,14 +59,14 @@ const AllCategories = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src={category.img}
+                            src={subCategory.img}
                             alt="Avatar Tailwind CSS Component"
                           />
                         </div>
                       </div>
                       <div>
                         <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden">
-                          {category.name}
+                          {subCategory.name}
                         </p>
                       </div>
                     </div>
@@ -77,12 +84,12 @@ const AllCategories = () => {
                         className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-26"
                       >
                         <li>
-                          <Link to={`/dashboard/upload/upload-category/${category.slug}/home-page-layout`}>
+                          <Link to={`/dashboard/upload/upload-sub-category/${subCategory.slug}/home-page-layout`}>
                             <BiEdit /> Edit
                           </Link>
                         </li>
                         <li>
-                          <button onClick={() => handleDelete(category)}>
+                          <button onClick={() => handleDelete(subCategory)}>
                             <AiOutlineDelete />
                             Delete
                           </button>
@@ -100,4 +107,4 @@ const AllCategories = () => {
   );
 };
 
-export default AllCategories;
+export default ManageSubCategories;
