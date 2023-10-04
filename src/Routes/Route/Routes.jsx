@@ -52,6 +52,7 @@ import BlockAdmin from "../PrivateRoute/BlockAdmin";
 import AllowAdmin from "../PrivateRoute/AllowAdmin";
 import AdminOrderDetail from "../../Pages/Dashboard/Dashboard/AdminDashboard/OrderedProducts/AdminOrderDetail/AdminOrderDetail";
 import PagesForSubCategory from "../../Pages/PagesForSubCategory/PagesForSubCategory";
+import HomeTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeTopBanner";
 
 
 
@@ -226,7 +227,11 @@ const router = createBrowserRouter([
           
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><SelectLayout /></AllowAdmin>
         },
-        
+        {
+          path: 'home-top-banner',
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><HomeTopBanner /></AllowAdmin>,
+          errorElement: <Error /> 
+        },
         {
           path: 'upload/:type/:slug/upload-top-banner',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><UpdateTopBanner /></AllowAdmin>,
