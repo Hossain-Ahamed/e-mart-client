@@ -11,7 +11,7 @@ const TopRightBannerLayout2 = () => {
   const {type, slug} = useParams();
   const { axiosSecure } = useAxiosSecure();
   const { refetch, data: banners = [], isLoading, isError } = useQuery({
-    queryKey: ["banners", type, slug],
+    queryKey: ["topRight", type, slug],
     queryFn: async () => {
       const res = await axiosSecure.get(`/${type}/${slug}/upload-top-right-banner-layout2`);
       console.log(res.data);
@@ -68,7 +68,6 @@ const TopRightBannerLayout2 = () => {
                 refetch();
                 //setBanners([...banners, imgURL]);
                 Swal.fire({
-                  position: "top-end",
                   icon: "success",
                   title: "Image uploaded successfully",
                   showConfirmButton: false,

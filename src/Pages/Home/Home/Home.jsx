@@ -8,10 +8,10 @@ import SignUp from '../../SignUp/SignUp';
 import { Helmet } from 'react-helmet-async';
 import HomeSecondBanner from '../HomeSecondBanner';
 import HomeTrendingProducts from '../HomeTrendingProducts';
-import HomeThirdBanner from '../HomeThirdBanner';
 import BackToTopButton from '../../../Component/BackToTopButton';
 import { Toaster } from 'react-hot-toast';
 import useRole from '../../../Hooks/useRole';
+import HomeBottomBanner from '../HomeBottomBanner/HomeBottomBanner';
 
 
 const Home = () => {
@@ -24,10 +24,14 @@ const Home = () => {
                     <title>E-Mart | Home</title>
                 </Helmet>
                 <Swip></Swip>
+                <div className='bg-white'>
                 <ShowCategories></ShowCategories>
+                </div>
                 <HomeSecondBanner></HomeSecondBanner>
                 <HomeTrendingProducts></HomeTrendingProducts>
-                <HomeThirdBanner></HomeThirdBanner>
+                <div className='bg-white'>
+                <HomeBottomBanner />
+                </div>
                 <ShowAllProducts></ShowAllProducts>
                 <BackToTopButton />
             </div>

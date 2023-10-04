@@ -53,6 +53,8 @@ import AllowAdmin from "../PrivateRoute/AllowAdmin";
 import AdminOrderDetail from "../../Pages/Dashboard/Dashboard/AdminDashboard/OrderedProducts/AdminOrderDetail/AdminOrderDetail";
 import PagesForSubCategory from "../../Pages/PagesForSubCategory/PagesForSubCategory";
 import HomeTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeTopBanner";
+import HomeSecondBannerUpload from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeSecondBannerUpload";
+import HomeBottomBannerUpload from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeBottomBannerUpload";
 
 
 
@@ -230,6 +232,16 @@ const router = createBrowserRouter([
         {
           path: 'home-top-banner',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><HomeTopBanner /></AllowAdmin>,
+          errorElement: <Error /> 
+        },
+        {
+          path: 'home-second-banner',
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><HomeSecondBannerUpload /></AllowAdmin>,
+          errorElement: <Error /> 
+        },
+        {
+          path: 'home-bottom-banner',
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><HomeBottomBannerUpload /></AllowAdmin>,
           errorElement: <Error /> 
         },
         {

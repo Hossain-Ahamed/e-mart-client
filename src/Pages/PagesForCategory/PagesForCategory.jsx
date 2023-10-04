@@ -40,7 +40,14 @@ const PagesForCategory = () => {
             
         </>
       )}
-      {layout === 3 && <p>Layout 3</p>}
+      {layout === 3 && (
+        <div>
+          <div className="grid lg:flex justify-center md:gap-5 py-6">
+          { category?.topLeftBannerLayout2 && <TopLeftBanner images={category?.topLeftBannerLayout2} />}
+          {category?.topRightBannerLayout2 && <TopRightBanner images={category?.topRightBannerLayout2} />}
+        </div>
+        </div>
+      )}
       <SubCategories subcategory={subcategory}></SubCategories>
       <SecondBanner img={category.secondBannerImage}></SecondBanner>
       <ThirdBanner images={category.bottomBannerImage} />

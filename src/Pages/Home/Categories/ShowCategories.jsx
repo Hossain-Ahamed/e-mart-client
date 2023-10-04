@@ -20,7 +20,7 @@ const ShowCategories = () => {
 
     return (
         <>
-        <div className=' lg:p-12 p-3 pt-6 lg:pt-20'>
+        <div className='py-20 px-16'>
             <div className='grid grid-cols-3 items-center gap-0'>
             <h3 className='text-lg md:text-2xl font-bold'>Categories</h3>
             <hr className='border'/>

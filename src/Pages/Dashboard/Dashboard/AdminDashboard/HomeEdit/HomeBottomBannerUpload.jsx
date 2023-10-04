@@ -1,20 +1,20 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import Swal from "sweetalert2";
-import Error from "../../../../Shared/error/Error";
-import { AiOutlineDelete } from "react-icons/ai";
-import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { useLoaderData, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
 
-const UpdateTopBanner = () => {
-  const {type, slug} = useParams();
+const HomeBottomBannerUpload = () => {
+   
+  const slug = "home";
   const { axiosSecure } = useAxiosSecure();
   const { refetch, data: banners = [], isLoading, isError } = useQuery({
-    queryKey: ["banners", type, slug],
+    queryKey: ["bottomBanners", slug],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/${type}/${slug}/upload-top-banner`);
+      const res = await axiosSecure.get(`/home-bottom-banners/${slug}/bottom-banner`);
       console.log(res.data);
       return res?.data;
     },
@@ -33,7 +33,7 @@ const UpdateTopBanner = () => {
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const onSubmit = (data) => {
-    console.log(data);
+   // console.log(data);
 
     const formData = new FormData();
     formData.append("image", data.image[0]);
@@ -43,63 +43,62 @@ const UpdateTopBanner = () => {
     })
       .then((res) => res.json())
       .then((imgResponse) => {
-        console.log(imgResponse);
+        //console.log(imgResponse);
         if (imgResponse.success) {
           const imgURL = imgResponse?.data?.display_url;
           const { image } = data;
-          setValue("topBannerImage", image);
+          setValue("bottomBannerImage", image);
           console.log(imgURL);
 
-          const updatedCategory = { topBannerImage: imgURL };
-          console.log(updatedCategory);
-          axios
-            .patch(`http://localhost:5000/${type}/${slug}`, updatedCategory, {
-              withCredentials: true,
-            })
-            .then((data) => {
-              console.log("updated", data.data);
-              if (data?.data?.result?.modifiedCount === 1) {
-                reset();
-                setSelectedImage(null);
-                refetch(),
-                // setBanners([...banners, imgURL]);
-                Swal.fire({
-                  icon: "success",
-                  title: "Image uploaded successfully",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-              }
-            })
-            .catch((e) => {
-              <Error />;
-            });
-        }
-      });
-  };
+          const newBanner = { slug: "home", bottomBannerImage: imgURL };
+          console.log(newBanner);
+          axiosSecure
+          .patch(`/home-top-banners/${slug}`, newBanner)
+          .then((data) => {
+            console.log("updated", data.data);
+            if (data?.data?.result?.modifiedCount === 1) {
+              reset();
+              setSelectedImage(null);
+              refetch();
+              //setBanners([...banners, imgURL]);
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Image uploaded successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((e) => {
+            <Error />;
+          });
+      }
+    });
+};
 
-  const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
-    }
-  };
-
-  if(isLoading){
-    return <><p>Loading image</p></>
+const handleImageChange = (e) => {
+  if (e.target.files[0]) {
+    setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
   }
+};
 
-  if(isError){
-    return <><p>Error</p></>
-  }
+if(isLoading){
+  return <><p>Loading image</p></>
+}
 
-  return (
-    <>
-      <div className="w-full h-full">
+if(isError){
+  return <><p>Error</p></>
+}
+
+
+    return (
+        <div className="h-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
-            className={`w-full h-40 md:h-80 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+            className={`w-full h-40 md:w-[600px] md:h-[200px] rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
           >
-            {!selectedImage && (
+             {!selectedImage && (
               <>
                 <div className="icon absolute top-3 right-3">
                   <svg
@@ -158,20 +157,21 @@ const UpdateTopBanner = () => {
               <img
                 src={selectedImage}
                 alt="Uploaded"
-                className="w-full h-40 md:h-80 rounded-2xl"
+                className="w-full h-40 md:w-[600px] md:h-[200px] rounded-2xl"
               />
             )}
             <input
               type="file"
               className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"
               {...register("image", { required: true })}
+
               onChange={handleImageChange}
             />
-          </div>
+          </div>        
           <input
             type="submit"
             className="cursor-pointer w-full h-12 bg-primary text-white text-lg font-bold rounded-md mt-5"
-            value="Upload New Banner"
+            value="New Banner"
           />
         </form>
 
@@ -183,7 +183,7 @@ const UpdateTopBanner = () => {
                 <tr key={index}>
                   <td>
                     
-                        <img src={image} alt={`Banner ${index}`} className="w-48 h-20"/>
+                        <img src={image} alt={`Banner ${index}`} className="w-48 h-28"/>
                       
                   </td>
                   <th>
@@ -196,9 +196,8 @@ const UpdateTopBanner = () => {
             </tbody>
           </table>
         </div>
-      </div>
-    </>
-  );
+        </div>
+    );
 };
 
-export default UpdateTopBanner;
+export default HomeBottomBannerUpload;

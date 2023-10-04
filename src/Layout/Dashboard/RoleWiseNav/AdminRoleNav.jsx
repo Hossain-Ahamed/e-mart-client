@@ -96,10 +96,10 @@ const AdminRoleNav = () => {
         </Link>
             </li>
             <li>
-              <Link>Second Banner</Link>
+              <Link to="/dashboard/home-second-banner">Second Banner</Link>
             </li>
             <li>
-              <Link>Bottom Banner</Link>
+              <Link to="/dashboard/home-bottom-banner">Bottom Banner</Link>
             </li>
           </ul>
         </div>

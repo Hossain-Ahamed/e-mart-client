@@ -6,11 +6,9 @@ import slugify from "slugify";
 import Swal from "sweetalert2";
 import useCategory from "../../../../../Hooks/useCategory";
 import AdminTitle from "../../../../../Component/AdminTitle";
-import { ChromePicker } from "react-color";
 
 const UploadCategory = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedColor, setSelectedColor] = useState("#FFFFFF"); // Initialize with a default color
   const navigate = useNavigate();
   const {
     register,
@@ -37,7 +35,6 @@ const UploadCategory = () => {
         setValue("img", image);
         const newCategory = {
           name,
-          color: selectedColor,
           img: imgURL,
           slug: slugify(name),
         };
@@ -54,7 +51,6 @@ const UploadCategory = () => {
               reset();
               setSelectedImage(null);
               Swal.fire({
-                position: "top-end",
                 icon: "success",
                 title: "One new category added",
                 showConfirmButton: false,
@@ -83,7 +79,7 @@ const UploadCategory = () => {
 
   return (
     <>
-      <div className="h-full p-5 px-10 bg-white">
+      <div className="p-10 bg-white">
         <AdminTitle heading="Add New Category"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
@@ -95,15 +91,6 @@ const UploadCategory = () => {
               placeholder="Category Tittle"
               className="input input-bordered rounded-md"
               {...register("name", { required: true })}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Color</span>
-            </label>
-            <ChromePicker
-              color={selectedColor}
-              onChange={(color) => setSelectedColor(color.hex)}
             />
           </div>
           <br />

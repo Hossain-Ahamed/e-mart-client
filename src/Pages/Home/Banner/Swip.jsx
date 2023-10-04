@@ -9,8 +9,8 @@ import "../Banner/Swip.css"
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const Swip = () => {
   const slug = "home";
@@ -24,7 +24,7 @@ const Swip = () => {
   });
     return (
         <>
-        <div className=' w-full h-[200px] md:h-[250px] lg:h-[400px] mb-20'>
+        <div className=' w-full h-[200px] md:h-[250px] lg:h-[500px]'>
         <Swiper
         spaceBetween={30}
         centeredSlides={true}

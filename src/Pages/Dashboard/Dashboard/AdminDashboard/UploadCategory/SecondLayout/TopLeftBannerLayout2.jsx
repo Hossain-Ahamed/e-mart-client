@@ -12,7 +12,7 @@ const TopLeftBannerLayout2 = () => {
   const {type, slug} = useParams();
   const { axiosSecure } = useAxiosSecure();
   const { refetch, data: banners = [], isLoading, isError } = useQuery({
-    queryKey: ["banners", type, slug],
+    queryKey: ["topLeft", type, slug],
     queryFn: async () => {
       const res = await axiosSecure.get(`/${type}/${slug}/upload-top-left-banner-layout2`);
       console.log(res.data);
@@ -64,9 +64,8 @@ const TopLeftBannerLayout2 = () => {
                 refetch();
                 //setBanners([...banners, imgURL]);
                 Swal.fire({
-                  position: "top-end",
                   icon: "success",
-                  title: "Category updated successfully",
+                  title: "Image uploaded successfully",
                   showConfirmButton: false,
                   timer: 1500,
                 });

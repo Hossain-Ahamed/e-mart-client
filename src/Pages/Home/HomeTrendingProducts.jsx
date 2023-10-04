@@ -23,13 +23,13 @@ const HomeTrendingProducts = () => {
       <div className="flex flex-col items-center mt-4">
         <div className="flex gap-4 mb-4">
           <button
-            className={`px-4 py-2 text-lg ${activeContent === 'content1' ? 'bg-black text-white' : 'text-gray-700'}`}
+            className={`px-4 py-2 text-lg rounded-md ${activeContent === 'content1' ? 'bg-accent text-white' : 'text-gray-700'}`}
             onClick={() => handleContentSwitch('content1')}
           >
             Featured Products
           </button>
           <button
-            className={`px-4 py-2 text-lg ${activeContent === 'content2' ? 'bg-black text-white' : 'text-gray-700'}`}
+            className={`px-4 py-2 text-lg rounded-md ${activeContent === 'content2' ? 'bg-accent text-white' : 'text-gray-700'}`}
             onClick={() => handleContentSwitch('content2')}
           >
             New Products
