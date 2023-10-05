@@ -157,9 +157,9 @@ const AddCoupon = () => {
           />
           <label
             htmlFor="datePicker"
-            className="peer-checked/datePicker:text-gray-200"
+            className="peer-checked/datePicker:text-gray-200 input input-bordered rounded-md"
           >
-            Select Range
+            Select Date Range
           </label>
           <div className="my-3 hidden peer-checked/datePicker:block">
             <DateRangePicker

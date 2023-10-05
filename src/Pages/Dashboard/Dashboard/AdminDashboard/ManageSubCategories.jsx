@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useSubCategory from "../../../../Hooks/useSubCategory";
+import AdminTitle from "../../../../Component/AdminTitle";
 
 
 const ManageSubCategories = () => {
@@ -23,7 +24,7 @@ const ManageSubCategories = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/categories/${subCategory._id}`)
+        axiosSecure.delete(`/sub-categories/${subCategory._id}`)
           .then((data) => {
             if (data?.data?.deletedCount > 0) {
               refetch();
@@ -36,19 +37,10 @@ const ManageSubCategories = () => {
 
   return (
     <>
-      <div className="h-full p-10">
+      <div className="h-full py-10 w-[300px]">
         <div className="">
-          <p>{subCategory.length}</p>
+        <AdminTitle heading={`Manage Categories (${subCategory.length})`} />
           <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-
             <tbody>
               {subCategory.map((subCategory) => (
                 <tr key={subCategory._id} >

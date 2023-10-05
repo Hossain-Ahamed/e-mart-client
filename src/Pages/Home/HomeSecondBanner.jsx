@@ -25,7 +25,7 @@ const { refetch, data: banners = [] } = useQuery({
 });
     return (
       <>
-      <div className='w-[1200px] h-[200px] md:h-[250px] lg:h-[450px] mx-auto rounded-lg'>
+      <div className='w-full lg:w-[900px] md:w-[700px] h-[200px] md:h-[250px] lg:h-[450px] mx-auto rounded-lg'>
       <Swiper
       spaceBetween={30}
       centeredSlides={true}
@@ -42,7 +42,7 @@ const { refetch, data: banners = [] } = useQuery({
     >
       {
           banners?.map((img, index) => (
-          <SwiperSlide key={index}><img src={img} alt="" className='w-[1200px] h-[200px] md:h-[250px] lg:h-[450px] mx-auto rounded-lg' /></SwiperSlide>
+          <SwiperSlide key={index}><img src={img} alt="" className='w-full lg:w-[900px] md:w-[700px] h-[200px] md:h-[250px] lg:h-[450px] mx-auto rounded-lg' /></SwiperSlide>
           ))
       }
     </Swiper>

@@ -20,13 +20,13 @@ const ShowCategories = () => {
 
     return (
         <>
-        <div className='py-20 px-16'>
+        <div className='py-8 lg:py-20 px-5 lg:px-16'>
             <div className='grid grid-cols-3 items-center gap-0'>
             <h3 className='text-lg md:text-2xl font-bold'>Categories</h3>
             <hr className='border'/>
             <hr className='border'/>
             </div>
-        <div className='w-[300px] md:w-[700px] lg:w-[1200px] mx-auto mt-3 lg:mt-10'>
+        <div className='w-full md:w-[700px] lg:w-[1200px] mx-auto mt-3 lg:mt-10'>
         <Swiper
         slidesPerView={2}
         spaceBetween={5}
@@ -44,12 +44,12 @@ const ShowCategories = () => {
             spaceBetween: 5,
           },
           "@1.00": {
-            slidesPerView: 5,
+            slidesPerView: 3,
             spaceBetween: 5,
           },
           "@1.50": {
             slidesPerView: 5,
-            spaceBetween: 10,
+            spaceBetween: 5,
           },
         }}
         modules={[Autoplay]}
@@ -61,7 +61,7 @@ const ShowCategories = () => {
           {
             category.map(categories => ( <SwiperSlide
                 key={categories._id}>
-            <div className="w-36 h-36 md:w-44 md:h-44 lg:w-64 lg:h-64 hover:drop-shadow-xl">
+            <div className="w-full h-36 md:w-44 md:h-44 lg:w-64 lg:h-64 hover:drop-shadow-xl">
             <Link to={`/categoryPages/${categories.slug}`}>
         <div className=''>
             <img src={categories.img} alt="" className='rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 mx-auto shadow-md' />

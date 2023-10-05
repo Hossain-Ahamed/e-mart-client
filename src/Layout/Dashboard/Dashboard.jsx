@@ -5,6 +5,7 @@ import {
   AiOutlineHome,
   AiOutlineCreditCard,
   AiOutlineHeart,
+  AiOutlineMenu,
 } from "react-icons/ai";
 import { BiCalendar, BiCategory, BiDuplicate } from "react-icons/bi";
 import { IoWalletOutline, IoSettingsOutline } from "react-icons/io5";
@@ -25,13 +26,14 @@ const Dashboard = () => {
     <>
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className=" relative drawer-content flex flex-col items-center justify-center">
           <Outlet></Outlet>
           <label
             htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
+            className=" absolute top-3 left-3 drawer-button lg:hidden"
           >
-            Open drawer
+            <AiOutlineMenu />
+            
           </label>
         </div>
         <div className="drawer-side">

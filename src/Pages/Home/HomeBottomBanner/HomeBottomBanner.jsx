@@ -14,11 +14,11 @@ const HomeBottomBanner = () => {
     },
   });
     return (
-        <div className='flex gap-10 justify-center py-20'>
+        <div className='grid md:flex gap-3 lg:gap-10 justify-center py-10 md:py-20'>
             {
                 banners.map((image, index) => (
                     <div key={index}>
-                        <img src={image} alt="" className='w-[600px] h-[400px] rounded-md' />
+                        <img src={image} alt="" className='w-[250px] h-[150px] md:h-[200px] lg:w-[600px] lg:h-[400px] rounded-md' />
 
                     </div>
                 ))

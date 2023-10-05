@@ -34,19 +34,10 @@ const ManageProduct = () => {
 
   return (
     <>
-      <div className="h-full p-10">
+      <div className="h-full p-10 w-full">
         <div className="">
           <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-
+            
             <tbody>
               {product.map((product) => (
                 <tr key={product?._id} products={product}>

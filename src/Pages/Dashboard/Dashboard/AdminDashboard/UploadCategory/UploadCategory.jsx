@@ -95,7 +95,7 @@ const UploadCategory = () => {
           </div>
           <br />
           <div
-            className={`rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+            className={`rounded-full w-44 h-44 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
           >
             {!selectedImage && (
               <>
@@ -156,7 +156,7 @@ const UploadCategory = () => {
               <img
                 src={selectedImage}
                 alt="Uploaded"
-                className="rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44"
+                className="rounded-full w-44 h-44"
               />
             )}
 

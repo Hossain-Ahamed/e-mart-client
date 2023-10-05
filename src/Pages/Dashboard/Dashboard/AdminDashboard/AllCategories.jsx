@@ -37,7 +37,7 @@ const AllCategories = () => {
 
   return (
     <>
-      <div className="h-full p-10">
+      <div className="h-full py-10 w-[300px]">
         <AdminTitle heading={`Manage Categories (${category.length})`} />
         <div className="">
           <table className="table">

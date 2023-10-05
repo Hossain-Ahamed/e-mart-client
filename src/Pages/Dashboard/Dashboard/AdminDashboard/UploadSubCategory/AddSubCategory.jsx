@@ -85,7 +85,7 @@ const AddSubCategory = () => {
 
     return (
         <>
-         <div className="p-5 px-10 bg-white">
+         <div className="h-full p-5 px-10 bg-white">
         <AdminTitle heading="Add New Sub Category"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
@@ -123,7 +123,7 @@ const AddSubCategory = () => {
           <div>
             
           <div
-            className={`w-64 h-64 lg:w-48 lg:h-48 rounded-full bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+            className={`w-44 h-44 rounded-full bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
           >
             {!selectedImage && (
               <>
@@ -184,7 +184,7 @@ const AddSubCategory = () => {
               <img
                 src={selectedImage}
                 alt="Uploaded"
-                className="w-64 h-64 lg:w-48 lg:h-48 rounded-full object-contain"
+                className="w-44 h-44 rounded-full object-contain"
               />
             )}
             

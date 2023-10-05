@@ -31,16 +31,16 @@ const ProductOverView = () => {
   const handleAddToCart = useAddToCart();
   return (
     <>
-      <div className="flex my-10 mx-16 gap-8">
+      <div className="md:flex my-10 mx-16 gap-8">
         <figure>
           <img
-            className="w-32 h-40 md:h-[450px] md:w-96 border"
+            className="md:h-[450px] md:w-96 border"
             src={image}
             alt={productTitle}
           />
         </figure>
 
-        <div className=" w-3/5">
+        <div className=" md:w-3/5">
           <p className="text-gray-700 text-xl font-bold">{productTitle}</p>
 
           <div className="divider"></div>
@@ -60,18 +60,6 @@ const ProductOverView = () => {
           <div className="divider"></div>
           <p>Current Stock: {quantity}</p>
           <p className="my-2">In Stock: {stock}</p>
-          {/* {
-            alreadyAdded ?
-              <button  className="flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-green-700 text-white mt-5">
-                <AiOutlineShoppingCart></AiOutlineShoppingCart>
-                <span className="">Added</span>
-              </button>
-              :
-              <button onClick={() => handleAddToCart(productDetail, 1)} className="flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-green-700 text-white mt-5">
-                <AiOutlineShoppingCart></AiOutlineShoppingCart>
-                <span className="">Add to Cart</span>
-              </button>
-          } */}
 
           {quantity > 0 ? (
             alreadyAdded ? (

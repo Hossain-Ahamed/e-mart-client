@@ -93,11 +93,11 @@ const AddProduct = () => {
   };
   return (
     <>
-      <div className="w-full h-full px-36">
+      <div className="w-full h-full p-10 xl:px-36">
         <AdminTitle heading="Add Product"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex gap-5">
-            <div className="border-2 w-2/3 px-10">
+          <div className="md:flex gap-5">
+            <div className="md:border-2 md:w-2/3 md:px-10">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Product Title</span>
@@ -121,7 +121,7 @@ const AddProduct = () => {
               </div>
               <br />
               <div
-                className={`w-32 h-40 md:h-64 md:w-52 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+                className={`h-64 w-52 rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
               >
                 {!selectedImage && (
                   <>
@@ -182,7 +182,7 @@ const AddProduct = () => {
                   <img
                     src={selectedImage}
                     alt="Uploaded"
-                    className="w-32 h-40 md:h-64 md:w-52 rounded-2xl object-contain"
+                    className="h-64 w-52 rounded-2xl object-contain"
                   />
                 )}
 
@@ -195,7 +195,7 @@ const AddProduct = () => {
               </div>
             </div>
 
-            <div className="border-2 w-1/3 p-5">
+            <div className="md:border-2 md:w-1/3 p-5">
               <div className="flex gap-3">
                 <div className="form-control w-full max-w-xs">
                   <label className="label">

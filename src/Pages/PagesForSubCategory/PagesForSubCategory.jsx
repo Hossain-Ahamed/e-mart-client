@@ -11,6 +11,7 @@ import UserTitle from "../../Component/UserTitle";
 import ThirdBanner from "../../Component/ThirdBanner";
 import SubCategories from "../../Component/SubCategory/SubCategories";
 import TrendingProducts from "../Shared/TrendingProducts";
+import SubCategoryAllProducts from "./SubCategoryAllProducts";
 
 
 const PagesForSubCategory = () => {
@@ -49,6 +50,7 @@ const PagesForSubCategory = () => {
 
       <SecondBanner img={subCategory.secondBannerImage}></SecondBanner>
       <ThirdBanner images={subCategory.bottomBannerImage} /> 
+      <SubCategoryAllProducts products={products} />
       {/* <SubCategories subcategory={subcategory}></SubCategories>
       <SecondBanner img={category.secondBannerImage}></SecondBanner>
       */}
