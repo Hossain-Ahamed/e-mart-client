@@ -11,7 +11,7 @@ const UpdateBottomBanner = () => {
   const {type, slug} = useParams();
   const { axiosSecure } = useAxiosSecure();
   const { refetch, data: banners = [], isLoading, isError } = useQuery({
-    queryKey: ["banners", type, slug],
+    queryKey: ["bannersBottom", type, slug],
     queryFn: async () => {
       const res = await axiosSecure.get(`/${type}/${slug}/upload-bottom-banner`);
       console.log(res.data);

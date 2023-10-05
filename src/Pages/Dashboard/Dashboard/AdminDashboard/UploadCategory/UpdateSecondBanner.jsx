@@ -11,7 +11,7 @@ const UpdateSecondBanner = () => {
   const {type, slug} = useParams();
   const { axiosSecure } = useAxiosSecure();
   const { refetch, data: banners = [], isLoading, isError } = useQuery({
-    queryKey: ["banners", type, slug],
+    queryKey: ["banners2", type, slug],
     queryFn: async () => {
       const res = await axiosSecure.get(`/${type}/${slug}/upload-second-banner`);
       console.log(res.data);
@@ -95,7 +95,7 @@ const UpdateSecondBanner = () => {
 
     return (          
         <>
-        <div className='w-full h-full'>
+        <div className='h-full'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
             className={`w-full h-48 lg:w-[700px] lg:h-[300px] rounded-2xl bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}

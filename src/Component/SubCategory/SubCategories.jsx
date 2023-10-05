@@ -66,7 +66,7 @@ const SubCategories = ({ subcategory }) => {
                           alt=""
                           className="rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 mx-auto shadow-md cursor-pointer"
                         />
-                        <p className="lg:text-xl font-semibold text-center mt-3">
+                        <p className="lg:text-xl font-semibold text-center mt-3 uppercase">
                           {categories?.name}
                         </p>
                       </div>
