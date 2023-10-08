@@ -51,7 +51,7 @@ const SignUp = () => {
         <Helmet>
             <title>E-Mart | SignUp</title>
         </Helmet>
-        <div className='w-80 mx-auto mt-12'>
+        <div className='w-80 mx-auto mt-12 bg-white p-10 rounded-xl shadow-xl'>
         <form onSubmit={handleSubmit(handleSignUp)}>     
         <div className="form-control">
           <label className="label">
@@ -75,10 +75,10 @@ const SignUp = () => {
           {errors.password && <p role='alert'>{errors.password?.message}</p>}
         </div>
         <div className="form-control mt-6">
-          <input type='submit' className="btn btn-black rounded-none text-white" value="Sing Up" />
+          <input type='submit' className="btn btn-black border-none rounded-none text-white hover:bg-accent" value="Sing Up" />
         </div>
         </form>
-        <Link to="/login" className='btn bg-[#c35a5a] text-white rounded-none border-0'>Already have an account !</Link>
+        <Link to="/login" className='text-accent italic'>Already have an account !</Link>
         </div>
         </>
     );

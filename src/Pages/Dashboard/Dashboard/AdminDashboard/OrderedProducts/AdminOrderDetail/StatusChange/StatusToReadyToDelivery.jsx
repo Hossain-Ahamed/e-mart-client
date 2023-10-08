@@ -15,7 +15,7 @@ const StatusToReadyToDelivery = ({ id, refetchOrderDetail }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    //TODO generate OTP
+    // generate OTP
 
     const requestData = {
       id: id,

@@ -84,9 +84,13 @@ const SubCategoryProductCard = ({ showProduct }) => {
 
                     {/* TODO: Need to change or disable addToCart for admin and others */}
                     <button
-                      onClick={() => {["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role) ? toast.error("You are not an user!") : handleAddToCart(showProduct, 1)}}
-                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto"
-                    >
+                      onClick={() => handleAddToCart(showProduct, 1)}
+                      className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto ${
+                        ["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role)
+                          ? "hidden"
+                          : ""
+                      }`}
+                      >
                       <AiOutlineShoppingCart></AiOutlineShoppingCart>
                       <span className="">Add to Cart</span>
                     </button>
@@ -106,7 +110,11 @@ const SubCategoryProductCard = ({ showProduct }) => {
                 </div>
               ) : (
                 <button
-                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-red-600 text-white mx-auto cursor-not-allowed"
+                  className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-red-600 cursor-not-allowed text-white mx-auto ${
+                    ["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role)
+                      ? "hidden"
+                      : ""
+                  }`}
                   disabled
                 >
                   <AiOutlineShoppingCart />

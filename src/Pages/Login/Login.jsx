@@ -58,7 +58,7 @@ const Login = () => {
         <Helmet>
             <title>E-Mart | Login</title>
         </Helmet>
-    <div className="w-80 my-12 mx-auto">
+    <div className="w-80 my-12 mx-auto bg-white p-10 rounded-xl shadow-xl">
         <h3 className='text-3xl'>Login</h3>
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="form-control">
