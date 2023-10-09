@@ -1,130 +1,114 @@
-import React from "react";
-import useCart from "../../../../Hooks/useCart";
-import { TbCurrencyTaka } from "react-icons/tb";
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import useProduct from "../../../../Hooks/useProduct";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import useProfile from "../../../../Hooks/useProfile";
 
 const AddReview = () => {
-  const [cart] = useCart();
+  const [profile, profileLoading] = useProfile();
+  const {
+    isLoading,
+    isError,
+    data: orderedData,
+    error,
+  } = useQuery({
+    queryKey: ["allOrders", profile],
+    enabled: !profileLoading,
+    queryFn: async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_SERVERADDRESS}/order-details?email=${
+          profile?.email
+        }&_id=${profile?._id}`,
+        { withCredentials: true }
+      );
+      
+      return res?.data?.allOrders;
+    },
+  });
+
+  if (isLoading) {
+    return <span>Loading... orderdetail</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error?.response?.data?.message}</span>;
+  }
 
   return (
     <>
-      <div className="h-full grid grid-cols-2 gap-5 p-10">
-        {cart.map((cart_product) => (
-          <div key={cart_product._id} className="">
-            <div className="border rounded-md shadow-lg">
-              <div className="grid grid-cols-2">
-                <figure>
-                  <img
-                    className="w-32 h-40 md:h-64 md:w-52 p-2"
-                    src={cart_product.image}
-                    alt={cart_product.productTitle}
-                  />
-                </figure>
+      {/* <Helmet>
+                <title>E-Mart |  Cart</title>
+            </Helmet> */}
 
-                <div className="my-1 text-center">
-                  <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden px-3">
-                    {cart_product.productTitle}
-                  </p>
-                  <p className="flex text-green-700 font-bold lg:text-xl justify-center my-1">
-                    <TbCurrencyTaka></TbCurrencyTaka>
-                    {cart_product.price}
-                    {cart_product.mainPrice !== cart_product.price && (
-                      <s className="flex text-sm text-gray-600">
-                        <TbCurrencyTaka></TbCurrencyTaka>
-                        {cart_product.mainPrice}
-                      </s>
-                    )}
-                  </p>
-                </div>
-                </div>
-                <ReviewForm cart_product={cart_product} key={cart_product._id} />
-              
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* <SectionTitle subheading="My Cart" heading="WANNA ADD MORE?" /> */}
+
+      <section className="mt-8 py-7 h-full  px-4 bg-white max-w-5xl mx-auto">
+        {/* table  */}
+
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+          <table className="w-full text-sm text-left text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+              <tr>
+                
+                <th scope="col" className="px-6 py-3">
+                  Order Id
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Status
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Placed On
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Price
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Details
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderedData &&
+                Array.isArray(orderedData) &&
+                orderedData.map((i, count) => (
+                  <tr
+                    key={i?._id}
+                    className={`bg-white border-b  hover:bg-gray-50 `}
+                  >
+
+                    {/* <td className="px-6 py-4">
+                                        <img className="w-10 h-10 rounded-full" src={i?.image} alt={i?.name} />
+
+                                    </td> */}
+                    <td className={`px-6 py-4 ${i?.status === "Cancelled" && "text-red-500 font-medium"}`}>#{i?._id.slice(-6)}</td>
+                    <td className={`px-6 py-4 ${i?.status === "Cancelled" && "text-red-500 font-medium"}`}>
+                    {i?.status === "Cancelled" ? "Cancelled" :
+                      i?.orderStatus[i?.orderStatus.length - 1]?.name}
+                    </td>
+                    <td className="px-6 py-4">
+                      <p className="text-sm">
+                        {new Intl.DateTimeFormat("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        }).format(new Date(i?.orderStatus[0]?.time))}
+                      </p>
+                      <p className="text-sm">
+                        {new Date(i?.orderStatus[0]?.time).toLocaleTimeString("en-US")}
+                      </p>
+                    </td>
+                    <td className="px-6 py-4">${i?.finalAmount}</td>
+                    <td className="px-6 py-4">
+                    <Link to={`${i?._id}`} className="font-medium text-blue-600 hover:underline">See Details</Link>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+      
+        </div>
+      </section>
     </>
-  );
-};
-
-const ReviewForm = ({ cart_product }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm();
-
-  const onSubmit = (data) => {
-    const { rating, comment, productId } = data;
-    const _id = productId;
-    console.log(_id)
-    const updatedProduct = { rating, comment };
-  
-    axios
-      .patch(`http://localhost:5000/products/${_id}`, updatedProduct, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log("Updated product:", response.data);
-        if (response.data?.result?.modifiedCount === 1) {
-          reset(); // Clear the form
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Review submitted successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Review submission failed",
-          });
-        }
-      })
-      .catch((error) => {
-        console.error("Error updating product:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong",
-        });
-      });
-  };
-  
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* Add a hidden field to store the cart_product ID */}
-      <input type="hidden" {...register("productId")} value={cart_product._id} />
-
-      <div className="form-control">
-        <input
-          type="number"
-          placeholder="Rating 1 to 5"
-          className="input input-bordered rounded-md"
-          {...register("rating", { required: true })}
-        />
-      </div>
-      <div className="form-control">
-        <textarea
-          placeholder="Comment Here"
-          className="textarea textarea-bordered rounded-md h-24"
-          {...register("comment", { required: true })}
-        ></textarea>
-      </div>
-      <input
-        type="submit"
-        className="w-full h-10 bg-primary text-white font-bold rounded-md mt-5"
-        value="Add your review"
-      />
-    </form>
   );
 };
 

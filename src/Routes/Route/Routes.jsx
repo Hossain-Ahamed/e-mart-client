@@ -56,6 +56,8 @@ import HomeTopBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEd
 import HomeSecondBannerUpload from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeSecondBannerUpload";
 import HomeBottomBannerUpload from "../../Pages/Dashboard/Dashboard/AdminDashboard/HomeEdit/HomeBottomBannerUpload";
 import ManageSubCategories from "../../Pages/Dashboard/Dashboard/AdminDashboard/ManageSubCategories";
+import ShowDeliveredOrder from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/ShowDeliveredOrder";
+import DeliveredOrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/DeliveredOrderDetails";
 
 
 
@@ -175,7 +177,14 @@ const router = createBrowserRouter([
           path: "add-review",
           element: <BlockAdmin><AddReview /></BlockAdmin>
         },
-
+        {
+          path: 'add-review/:type',
+          element: <ShowDeliveredOrder />
+        },
+        {
+          path: 'add-review/:type/:orderId',
+          element: <DeliveredOrderDetails />
+        },
         {
           path: "allUsers",
           element: <AllowAdmin allowedRoles={["admin"]}><AllUsers></AllUsers></AllowAdmin>

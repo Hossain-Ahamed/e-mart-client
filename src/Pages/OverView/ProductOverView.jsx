@@ -5,6 +5,7 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import { useLoaderData, useParams } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
 import BackToTopButton from "../../Component/BackToTopButton";
+import ReactStars from "react-rating-stars-component";
 
 const ProductOverView = () => {
   const productDetail = useLoaderData();
@@ -23,6 +24,7 @@ const ProductOverView = () => {
     weight,
     size,
     quantity,
+    reviews
   } = productDetail;
   useEffect(() => {
     setalreadyAdded(cart.some((obj) => obj._id === _id));
@@ -91,6 +93,27 @@ const ProductOverView = () => {
         <h3 className="text-xl font-bold">Description</h3>
         <div className="divider"></div>
         <p className=" text-gray-600">{des}</p>
+      </div>
+
+      <div className="border p-5 m-16">
+        <h3 className="text-xl font-bold">Reviews</h3>
+        <div className="divider"></div>
+        {
+          reviews?.map((review, index) => (
+            <div key={index}>
+              <p>By {review?.name}</p>
+              <ReactStars
+              count={5}
+              value={review?.rating}
+              edit={false}
+              size={24}
+              activeColor="#ffd700"
+            />
+              <p>{review?.comment}</p>
+              <div className="divider"></div>
+            </div>
+          ))
+        }
       </div>
       <BackToTopButton />
     </>

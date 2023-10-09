@@ -58,6 +58,12 @@ const UserNav = () => {
                     Add Review
                   </Link>
                 </li>
+                <li>
+                  <Link to="/dashboard/add-review/delivered">
+                    <MdAddCard />
+                    Delivered Orders
+                  </Link>
+                </li>
               </>
     );
 };
