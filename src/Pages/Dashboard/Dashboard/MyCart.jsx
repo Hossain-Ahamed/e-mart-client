@@ -198,8 +198,8 @@ const MyCart = () => {
                 ))}
               </div>
               <div className=" bg-white p-5 h-40">
-                <div className="grid grid-cols-4">
-                  <div className="col-span-3">
+                <div className="grid grid-cols-3">
+                  <div className="col-span-2">
                     <p className="font-bold">Total Price:</p>
                     
                   </div>

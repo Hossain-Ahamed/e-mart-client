@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useAddToCart from "../../Hooks/useAddToCart";
-import { AiFillHeart, AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiOutlineHeart,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
@@ -11,11 +15,11 @@ import ReactStars from "react-rating-stars-component";
 // import useWishList from "../../Hooks/useWishList";
 
 const SubCategoryProductCard = ({ showProduct }) => {
-  const { _id, image, productTitle, price, mainPrice, quantity, reviews  } = showProduct;
+  const { _id, image, productTitle, price, mainPrice, quantity, reviews } =
+    showProduct;
 
-  const {role} = useRole();
+  const { role } = useRole();
   //console.log(role);
-
 
   const [cart] = useCart();
   // const [wishList] = useWishList();
@@ -25,8 +29,7 @@ const SubCategoryProductCard = ({ showProduct }) => {
   // const [inWishList, setInWishList] = useState(false);
 
   useEffect(() => {
-    if(role === "user")
-    {
+    if (role === "user") {
       setalreadyAdded(cart.some((obj) => obj._id === _id));
     }
   }, [cart, _id, role]);
@@ -101,20 +104,24 @@ const SubCategoryProductCard = ({ showProduct }) => {
                     </button>
                   ) : (
                     <>
-
-                    {/* TODO: Need to change or disable addToCart for admin and others */}
-                    <button
-                      onClick={() => handleAddToCart(showProduct, 1)}
-                      className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto ${
-                        ["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role)
-                          ? "hidden"
-                          : ""
-                      }`}
+                      {/* TODO: Need to change or disable addToCart for admin and others */}
+                      <button
+                        onClick={() => handleAddToCart(showProduct, 1)}
+                        className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-accent text-white mx-auto ${
+                          [
+                            "admin",
+                            "Order Manager",
+                            "Product Manager",
+                            "Delivery Partner",
+                          ].includes(role)
+                            ? "hidden"
+                            : ""
+                        }`}
                       >
-                      <AiOutlineShoppingCart></AiOutlineShoppingCart>
-                      <span className="">Add to Cart</span>
-                    </button>
-                    {/* <button
+                        <AiOutlineShoppingCart></AiOutlineShoppingCart>
+                        <span className="">Add to Cart</span>
+                      </button>
+                      {/* <button
                         onClick={() => handleAddToWishList(showProduct, 1)}
                         className="absolute bottom-10 left-48 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 mx-auto"
                       >
@@ -126,12 +133,16 @@ const SubCategoryProductCard = ({ showProduct }) => {
                       </button> */}
                     </>
                   )}
-                  
                 </div>
               ) : (
                 <button
                   className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-52 md:h-10 bg-red-600 cursor-not-allowed text-white mx-auto ${
-                    ["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role)
+                    [
+                      "admin",
+                      "Order Manager",
+                      "Product Manager",
+                      "Delivery Partner",
+                    ].includes(role)
                       ? "hidden"
                       : ""
                   }`}
@@ -141,7 +152,7 @@ const SubCategoryProductCard = ({ showProduct }) => {
                   <span>Out of Stock</span>
                 </button>
               )}
-           </>
+            </>
           )}
         </div>
         <hr className="mb-1" />
@@ -161,13 +172,20 @@ const SubCategoryProductCard = ({ showProduct }) => {
               )}
             </p>
             <div className="mx-12">
-            {averageRating ? (<ReactStars
-              count={5}
-              value={averageRating}
-              edit={false}
-              size={24}
-              activeColor="#ffd700"
-            /> ): <></>}
+              {averageRating ? (
+                <ReactStars
+                  count={5}
+                  value={averageRating}
+                  edit={false}
+                  isHalf={true}
+                  halfIcon={<i className="fa fa-star-half-alt"></i>}
+                  fullIcon={<i className="fa fa-star"></i>}
+                  size={24}
+                  activeColor="#ffd700"
+                />
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>

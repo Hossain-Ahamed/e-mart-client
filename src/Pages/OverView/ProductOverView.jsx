@@ -95,13 +95,18 @@ const ProductOverView = () => {
         <p className=" text-gray-600">{des}</p>
       </div>
 
-      <div className="border p-5 m-16">
+      {
+        reviews ? (<div className="border p-5 m-16 overflow-y-scroll h-96">
         <h3 className="text-xl font-bold">Reviews</h3>
         <div className="divider"></div>
         {
           reviews?.map((review, index) => (
             <div key={index}>
-              <p>By {review?.name}</p>
+              <p>Posted By {review?.name} <span className="text-sm text-gray-600">on {new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }).format(new Date(review?.createdAt))}</span></p>
               <ReactStars
               count={5}
               value={review?.rating}
@@ -114,7 +119,9 @@ const ProductOverView = () => {
             </div>
           ))
         }
-      </div>
+      </div>) :
+      <></>
+      }
       <BackToTopButton />
     </>
   );

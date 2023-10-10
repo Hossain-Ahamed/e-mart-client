@@ -9,28 +9,28 @@ const DetailRow = ({ products }) => {
     //console.log(products)
   return (
     <>
-      <div className="h-full grid grid-cols-2 gap-5 p-10">
+      <div className="h-full grid grid-cols-3 gap-10 p-5">
       {products &&
             Array.isArray(products) &&
             products.map((i, count) => (
           <div key={count} className="">
-            <div className="border rounded-md shadow-lg">
-              <div className="grid grid-cols-2">
+            <div className="border rounded-md shadow-lg w-52 h-96">
+              <div className="h-60">
                 <figure>
                   <img
-                    className="w-32 h-40 md:h-64 md:w-52 p-2"
+                    className="w-32 h-40 md:h-48 md:w-44 p-2 mx-auto"
                     src={i?.productImage}
                     alt={i?.productName}
                   />
                 </figure>
 
                 <div className="my-1 text-center">
-                  <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden px-3">
+                  <p className="text-gray-700 text-sm px-3">
                     {i?.productName}
                   </p>
                  
                 </div>
-                <p>Id, {i?.productId}</p>
+                
                 </div>
                 <ReviewForm cart_product={i} id={i?.productId} />
               
@@ -65,7 +65,6 @@ const ReviewForm = ({ cart_product, id }) => {
             if (response.data?.message === "Review added successfully.") {
               reset(); // Clear the form
               Swal.fire({
-                position: "top-end",
                 icon: "success",
                 title: "Review submitted successfully",
                 showConfirmButton: false,
@@ -107,13 +106,13 @@ const ReviewForm = ({ cart_product, id }) => {
         <div className="form-control">
           <textarea
             placeholder="Comment Here"
-            className="textarea textarea-bordered rounded-md h-24"
+            className="textarea textarea-bordered rounded-md h-14 my-2"
             {...register("comment", { required: true })}
           ></textarea>
         </div>
         <input
           type="submit"
-          className="w-full h-10 bg-primary text-white font-bold rounded-md mt-5"
+          className="w-full h-10 bg-accent cursor-pointer text-white font-bold rounded-md"
           value="Add your review"
         />
       </form>

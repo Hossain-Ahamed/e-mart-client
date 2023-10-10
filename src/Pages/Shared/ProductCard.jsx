@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
 import useRole from "../../Hooks/useRole";
 import toast from "react-hot-toast";
+import ReactStars from "react-rating-stars-component";
 // import useAddToWishList from "../../Hooks/useAddToWishList";
 // import useWishList from "../../Hooks/useWishList";
 
+
 const ProductCard = ({ showProduct }) => {
-  const { _id, image, productTitle, price, mainPrice, quantity } = showProduct;
+  const { _id, image, productTitle, price, mainPrice, quantity, reviews } = showProduct;
 
   const {role} = useRole();
   //console.log(role);
@@ -53,6 +55,25 @@ const ProductCard = ({ showProduct }) => {
   //   }
   //   setInWishList(!inWishList);
   // };
+
+  // Calculate the average rating from the reviews array
+  const calculateAverageRating = () => {
+    if (!reviews || reviews?.length === 0) {
+      return 0; // Return 0 if there are no reviews
+    }
+
+    // Calculate the sum of all ratings
+    const totalRating = reviews?.reduce(
+      (sum, review) => sum + review?.rating,
+      0
+    );
+
+    // Calculate the average rating by dividing the totalRating by the number of reviews
+    return totalRating / reviews?.length;
+  };
+
+  // Use the calculateAverageRating function to get the average rating
+  const averageRating = calculateAverageRating();
   return (
     <>
       <div className="w-36 h-60 lg:h-96 md:w-52 md:h-80 border">
@@ -141,6 +162,22 @@ const ProductCard = ({ showProduct }) => {
                 </s>
               )}
             </p>
+            <div className="mx-12">
+              {averageRating ? (
+                <ReactStars
+                  count={5}
+                  value={averageRating}
+                  edit={false}
+                  isHalf={true}
+                  halfIcon={<i className="fa fa-star-half-alt"></i>}
+                  fullIcon={<i className="fa fa-star"></i>}
+                  size={24}
+                  activeColor="#ffd700"
+                />
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
       </div>
