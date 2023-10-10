@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useRole from "../../../../../../Hooks/useRole";
 import useAxiosSecure from "../../../../../../Hooks/useAxiosSecure";
+import { MdOutlineReviews } from "react-icons/md";
 
 
 const ShowDeliveredOrder = () => {
@@ -150,9 +151,10 @@ const ShowDeliveredOrder = () => {
                     <td className="px-6 py-4">
                       <Link
                         to={`/dashboard/add-review/${type}/${i?._id}`}
-                        className="font-medium text-blue-600 hover:underline"
+                        className="flex items-center font-medium text-accent hover:underline"
                       >
-                        See Details
+                        <MdOutlineReviews />
+                    Add Review
                       </Link>
                     </td>
                   </tr>

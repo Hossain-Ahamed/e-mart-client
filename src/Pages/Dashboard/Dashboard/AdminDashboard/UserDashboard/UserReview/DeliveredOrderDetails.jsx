@@ -42,7 +42,7 @@ const DeliveredOrderDetails = () => {
   
   return (
     <>
-      <div className="w-[900px] h-full p-20">
+      <div className="w-[300px] md:w-[600px] lg:w-[900px] h-full lg:p-20">
        
         
         <div className="bg-white p-5 rounded-md shadow-lg text-md mt-5">

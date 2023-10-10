@@ -174,10 +174,6 @@ const router = createBrowserRouter([
           element: <BlockAdmin><OrderDetailsView /></BlockAdmin>
         },
         {
-          path: "add-review",
-          element: <BlockAdmin><AddReview /></BlockAdmin>
-        },
-        {
           path: 'add-review/:type',
           element: <ShowDeliveredOrder />
         },

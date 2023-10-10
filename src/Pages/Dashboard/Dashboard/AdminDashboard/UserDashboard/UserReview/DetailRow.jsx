@@ -9,16 +9,16 @@ const DetailRow = ({ products }) => {
     //console.log(products)
   return (
     <>
-      <div className="h-full grid grid-cols-3 gap-10 p-5">
+      <div className="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       {products &&
             Array.isArray(products) &&
             products.map((i, count) => (
           <div key={count} className="">
-            <div className="border rounded-md shadow-lg w-52 h-96">
-              <div className="h-60">
+            <div className="border rounded-md shadow-lg w-52 h-96 mx-auto p-3">
+              <div className="h-52">
                 <figure>
                   <img
-                    className="w-32 h-40 md:h-48 md:w-44 p-2 mx-auto"
+                    className="w-32 h-40 mx-auto"
                     src={i?.productImage}
                     alt={i?.productName}
                   />
@@ -32,7 +32,9 @@ const DetailRow = ({ products }) => {
                 </div>
                 
                 </div>
+                <div>
                 <ReviewForm cart_product={i} id={i?.productId} />
+                </div>
               
             </div>
           </div>
@@ -112,7 +114,7 @@ const ReviewForm = ({ cart_product, id }) => {
         </div>
         <input
           type="submit"
-          className="w-full h-10 bg-accent cursor-pointer text-white font-bold rounded-md"
+          className="w-full h-8 bg-accent cursor-pointer text-white text-sm font-semibold rounded-md"
           value="Add your review"
         />
       </form>

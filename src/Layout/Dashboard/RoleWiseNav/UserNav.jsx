@@ -53,12 +53,6 @@ const UserNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/add-review">
-                    <MdOutlineReviews />
-                    Add Review
-                  </Link>
-                </li>
-                <li>
                   <Link to="/dashboard/add-review/delivered">
                     <MdAddCard />
                     Delivered Orders
