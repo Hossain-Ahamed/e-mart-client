@@ -58,6 +58,7 @@ import HomeBottomBannerUpload from "../../Pages/Dashboard/Dashboard/AdminDashboa
 import ManageSubCategories from "../../Pages/Dashboard/Dashboard/AdminDashboard/ManageSubCategories";
 import ShowDeliveredOrder from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/ShowDeliveredOrder";
 import DeliveredOrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/DeliveredOrderDetails";
+import NoProfileWarning from "../PrivateRoute/NoProfileWarning";
 
 
 
@@ -147,15 +148,15 @@ const router = createBrowserRouter([
         },
         {
           path: "check-out",
-          element:<BlockAdmin><CheckOut /></BlockAdmin> 
+          element:<BlockAdmin><NoProfileWarning><CheckOut /></NoProfileWarning></BlockAdmin> 
         },
         {
           path: "payment-methods/:_OrderID",
-          element: <BlockAdmin><PaymentMethods /></BlockAdmin>
+          element: <BlockAdmin><NoProfileWarning><PaymentMethods /></NoProfileWarning></BlockAdmin>
         },
         {
           path: "payment/:_OrderID",
-          element: <BlockAdmin><Payment /></BlockAdmin>
+          element: <BlockAdmin><NoProfileWarning><Payment /></NoProfileWarning></BlockAdmin>
         },
         {
           path: "payment-history",
@@ -163,7 +164,7 @@ const router = createBrowserRouter([
         },
         {
           path: "check-out-form",
-          element: <BlockAdmin><CheckoutForm /></BlockAdmin>
+          element: <BlockAdmin><NoProfileWarning><CheckoutForm /></NoProfileWarning></BlockAdmin>
         },
         {
           path: "order-details",
@@ -175,7 +176,7 @@ const router = createBrowserRouter([
         },
         {
           path: 'add-review/:type',
-          element: <ShowDeliveredOrder />
+          element: <NoProfileWarning><ShowDeliveredOrder /></NoProfileWarning>
         },
         {
           path: 'add-review/:type/:orderId',

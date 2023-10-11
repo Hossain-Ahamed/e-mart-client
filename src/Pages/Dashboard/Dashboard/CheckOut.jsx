@@ -11,8 +11,10 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import AdminTitle from "../../../Component/AdminTitle";
 import UserTitle from "../../../Component/UserTitle";
+// import {PiHandCoins} from "react-icons/pi"
 const CheckOut = () => {
   // states
+  const [typeOfDiscount, setTypeOfDiscount] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
   const [serverRequesting, setserverRequesting] = useState(false);
@@ -40,13 +42,15 @@ const CheckOut = () => {
         }
       )
       .then((data) => {
-        // console.log(data.data);
+        console.log(data.data);
         setselectedOrderItems(data.data.cart);
         setDeliveryCharge(data.data?.deliveryCharge);
         settotalProductPrice(data.data?.totalProductPrice);
       })
       .catch((e) => {
-        <Error />;
+        console.error(e)
+        // <Error />
+
       })
       .finally(() => {
         setLoading(false);
@@ -60,7 +64,9 @@ const CheckOut = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const handleCoupon = (data) => {
+    
     // console.log(data);
     setserverRequesting(true);
 
@@ -70,11 +76,43 @@ const CheckOut = () => {
       }
     )
       .then((data) => {
+        setTypeOfDiscount("coupon")
         toast.success("YAY !!!")
         setDiscount({
           couponCode: data.data?.couponCode,
           discountedAmmount: data.data?.discountedAmmount,
         });
+      })
+      .catch((e) => {
+        setDiscount({ couponCode: "", discountedAmmount: 0 });
+        toast.error(e?.response?.data?.message);
+        reset();
+      })
+      .finally(() => setserverRequesting(false));
+  };
+  
+  const handleCoin = () => {
+    // console.log(data);
+    setserverRequesting(true);
+    const data = {finalAmount: totalProductPrice + deliveryCharge}
+    axios.post(`${import.meta.env.VITE_SERVERADDRESS}/get-discount-by-coin?email=${user?.email}`, data,
+      {
+        withCredentials: true,
+      }
+    )
+      .then((data) => {
+        if(data.data?.success)
+        {
+          setTypeOfDiscount("coin")
+        toast.success("YAY !!!")
+        setDiscount({
+          couponCode: data.data?.couponCode,
+          discountedAmmount: data.data?.discountedAmmount,
+        });
+        }
+        else{
+          toast.error("Sorry you are not eligable")
+        }
       })
       .catch((e) => {
         setDiscount({ couponCode: "", discountedAmmount: 0 });
@@ -191,8 +229,9 @@ const CheckOut = () => {
               </table>
             </div>
           </div>
-          <div className="border rounded-md shadow-lg bg-white p-5 h-72">
+          <div className="border rounded-md shadow-lg bg-white p-5 h-fit">
             <div>
+              {typeOfDiscount !== "coin" && 
               <form onSubmit={handleSubmit(handleCoupon)}>
                 <label
                   htmlFor="default-search"
@@ -219,7 +258,14 @@ const CheckOut = () => {
                   </button>
                 </div>
               </form>
-
+            }
+            {typeOfDiscount !== "coupon" && 
+              <button onClick={handleCoin} type="button" className="mt-3 text-gray-900 bg-gray-100 hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center w-full mb-2">
+              <svg className="w-4 h-4 mr-2 -ml-1 text-[#626890]" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="ethereum" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M311.9 260.8L160 353.6 8 260.8 160 0l151.9 260.8zM160 383.4L8 290.6 160 512l152-221.4-152 92.8z"></path></svg>
+              Use E-mart Coin
+            </button>
+            }
+            
               <div className="flex justify-between items-center px-1 my-2">
                 <p>Total Product Price:</p> <p>{totalProductPrice} </p>
               </div>

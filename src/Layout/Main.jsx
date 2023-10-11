@@ -10,7 +10,9 @@ const Main = () => {
         <>
         <SubNav></SubNav>
         <Navbar></Navbar>
+        <div className='max-w-[1500px] mx-auto'>
         <Outlet></Outlet>
+        </div>
         <Footer></Footer>
         </>
     );
