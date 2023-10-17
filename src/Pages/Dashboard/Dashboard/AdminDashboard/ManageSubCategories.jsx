@@ -37,16 +37,20 @@ const ManageSubCategories = () => {
 
   return (
     <>
-      <div className="h-full py-10 w-[300px]">
-        <div className="">
-        <AdminTitle heading={`Manage Categories (${subCategory.length})`} />
-          <table className="table">
+      <div className="h-full">
+        
+        <AdminTitle heading={`Manage Sub-Categories (${subCategory.length})`} />
+        <section className="px-4 bg-white max-w-5xl mx-auto">
+        {/* table  */}
+
+        <div className="relative shadow-md sm:rounded-lg mt-5">
+          <table className="w-full text-sm text-left text-gray-500">
             <tbody>
               {subCategory.map((subCategory) => (
-                <tr key={subCategory._id} >
+                <tr key={subCategory._id} className={`bg-white border-b  hover:bg-gray-50 `} >
                   {/* row 1 */}
 
-                  <td>
+                  <td className="px-6 py-4">
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
@@ -63,37 +67,26 @@ const ManageSubCategories = () => {
                       </div>
                     </div>
                   </td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                  <th>
-                    <div className="dropdown dropdown-left">
-                      <label tabIndex={0} className="btn btn-ghost btn-xs m-1">
-                        Action
-                      </label>
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-26"
-                      >
-                        <li>
-                          <Link to={`/dashboard/upload/upload-sub-category/${subCategory.slug}/home-page-layout`}>
+                  
+                  <td  className="px-6 py-4">
+                    
+                          <Link className="flex items-center font-medium text-blue-600 hover:underline" to={`/dashboard/upload/upload-sub-category/${subCategory.slug}/home-page-layout`}>
                             <BiEdit /> Edit
                           </Link>
-                        </li>
-                        <li>
-                          <button onClick={() => handleDelete(subCategory)}>
+                        
+                          
+                        
+                  </td>
+                  <td  className="px-6 py-4"><button className="flex items-center font-medium text-red-600" onClick={() => handleDelete(subCategory)}>
                             <AiOutlineDelete />
                             Delete
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </th>
+                          </button></td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        </section>
       </div>
     </>
   );

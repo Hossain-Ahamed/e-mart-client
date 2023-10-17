@@ -13,12 +13,26 @@ import { Link } from "react-router-dom";
 
 const ProductManagerNav = () => {
     return (
-        <>
-                <li>
-                  <Link to="/dashboard/admin-home">
-                    <AiOutlineUser></AiOutlineUser>Admin Home
-                  </Link>
-                </li>
+        <><li>
+        <div className="dropdown dropdown-bottom">
+          <label tabIndex={0} className="flex items-center gap-3"><MdAddCard />Banners</label>
+          <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+            <li>
+            <Link to="/dashboard/home-top-banner">
+          
+          Top Banner
+        </Link>
+            </li>
+            <li>
+              <Link to="/dashboard/home-second-banner">Second Banner</Link>
+            </li>
+            <li>
+              <Link to="/dashboard/home-bottom-banner">Bottom Banner</Link>
+            </li>
+          </ul>
+        </div>
+      </li>
+              
                 <li>
                   <Link to="/dashboard/upload/upload-category">
                     <BiDuplicate />
@@ -28,7 +42,7 @@ const ProductManagerNav = () => {
                 <li>
                   <Link to="/dashboard/all-categories">
                     <BiCategory />
-                    Manage Categories
+                    Categories
                   </Link>
                 </li>
                 <li>
@@ -37,6 +51,12 @@ const ProductManagerNav = () => {
                     Add Sub Category
                   </Link>
                 </li>
+                <li>
+        <Link to="/dashboard/manage-sub-categories">
+          <BiDuplicate />
+          Sub-Categories
+        </Link>
+      </li>
                 <li>
                   <Link to="/dashboard/addProduct">
                     <MdAddCard />

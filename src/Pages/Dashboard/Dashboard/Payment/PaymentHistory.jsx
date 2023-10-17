@@ -5,43 +5,69 @@ import axios from 'axios';
 import UserTitle from '../../../../Component/UserTitle';
 import { TbCurrencyTaka } from 'react-icons/tb';
 import usePaymentHistory from '../../../../Hooks/usePaymentHistory';
+import useProfile from '../../../../Hooks/useProfile';
 
 const PaymentHistory = () => {
 
-  const [payments] = usePaymentHistory();
+  const [profile, profileLoading] = useProfile();
+  const {
+    isLoading,
+    isError,
+    data: orderedData,
+    error,
+  } = useQuery({
+    queryKey: ["allOrders", profile],
+    enabled: !profileLoading,
+    queryFn: async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_SERVERADDRESS}/order-details?email=${
+          profile?.email
+        }&_id=${profile?._id}`,
+        { withCredentials: true }
+      );
+      
+      return res?.data?.allOrders;
+    },
+  });
+
+  if (isLoading) {
+    return <span>Loading... orderdetail</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error?.response?.data?.message}</span>;
+  }
     return (
         <>
-        <UserTitle heading="Your Payment History" />
+        <UserTitle heading="Payment History" />
 
-        <div className="overflow-x-auto">
-        <table className="table">
+        <section className="mt-8 py-7 px-4 bg-white max-w-5xl mx-auto">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+        <table className="w-full text-sm text-left text-gray-500">
           {/* head */}
-          <thead>
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
-              <th></th>
-              <th>Email</th>
-              <th>Transaction Id</th>
-              <th>Cash On Delivery</th>
-              <th>Amount</th>
-              <th></th>
+            <th scope="col" className="px-6 py-3">Type Of Payment</th>
+              <th scope="col" className="px-6 py-3">Transaction Id</th>
+              
+              <th scope="col" className="px-6 py-3">Amount</th>
+              
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            {payments.map((info, index) => (
-              <tr key={info._id}>
-                <th>{index + 1}</th>
-                <td>
-                {info.email}
-                </td>
-                <td>{info.transactionId}</td>
-                <td>{info.cashOnDelivery}</td>
-                <td className='flex items-center'><TbCurrencyTaka />{info.price}</td>
+            {orderedData.map((info, index) => (
+              <tr key={info?._id} className="bg-white border-b  hover:bg-gray-50 ">
+                <td className="px-6 py-4">{info?.typeOfPayment}</td>
+                <td className="px-6 py-4">{info?.transactionId}</td>
+                
+                <td className='px-6 py-4 flex items-center'><TbCurrencyTaka />{info?.finalAmount}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+        </div>
+      </section>
         </>
     );
 };

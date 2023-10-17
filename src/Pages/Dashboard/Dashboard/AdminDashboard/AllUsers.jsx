@@ -40,7 +40,7 @@ const AllUsers = () => {
   };
   return (
     <>
-      {users.length}
+      
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

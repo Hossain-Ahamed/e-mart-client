@@ -79,7 +79,7 @@ const UploadCategory = () => {
 
   return (
     <>
-      <div className="p-10 bg-white">
+      <div className="p-10 border rounded-md shadow-md">
         <AdminTitle heading="Add New Category"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">

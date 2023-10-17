@@ -37,17 +37,19 @@ const AllCategories = () => {
 
   return (
     <>
-      <div className="h-full py-10 w-[300px]">
+      
         <AdminTitle heading={`Manage Categories (${category.length})`} />
-        <div className="">
-          <table className="table">
-            
+        <section className="px-4 bg-white max-w-5xl mx-auto">
+        {/* table  */}
+
+        <div className="relative shadow-md sm:rounded-lg mt-5">
+          <table className="w-full text-sm text-left text-gray-500">
             <tbody>
               {category.map((category) => (
-                <tr key={category._id} >
+                <tr key={category._id} className={`bg-white border-b  hover:bg-gray-50 `} >
                   {/* row 1 */}
 
-                  <td>
+                  <td className="px-6 py-4">
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
@@ -64,38 +66,25 @@ const AllCategories = () => {
                       </div>
                     </div>
                   </td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                  <th>
-                    <div className="dropdown dropdown-left">
-                      <label tabIndex={0} className="btn btn-ghost btn-xs m-1">
-                        Action
-                      </label>
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-26"
-                      >
-                        <li>
-                          <Link to={`/dashboard/upload/upload-category/${category.slug}/home-page-layout`}>
+                  <td className="px-6 py-4"><Link className="flex items-center font-medium text-blue-600 hover:underline" to={`/dashboard/upload/upload-category/${category.slug}/home-page-layout`}>
                             <BiEdit /> Edit
-                          </Link>
-                        </li>
-                        <li>
-                          <button onClick={() => handleDelete(category)}>
+                          </Link></td>
+                  <td className="px-6 py-4">
+                    
+                          <button className="flex items-center font-medium text-red-600" onClick={() => handleDelete(category)}>
                             <AiOutlineDelete />
                             Delete
                           </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </th>
+                        
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </div>
+        </section>
+      
+      
     </>
   );
 };

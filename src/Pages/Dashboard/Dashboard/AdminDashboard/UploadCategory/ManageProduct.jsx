@@ -4,6 +4,8 @@ import { BiEdit } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
+import AdminTitle from "../../../../../Component/AdminTitle";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const ManageProduct = () => {
   const {axiosSecure} = useAxiosSecure();
@@ -35,65 +37,82 @@ const ManageProduct = () => {
   return (
     <>
       <div className="h-full p-10 w-full">
-        <div className="">
-          <table className="table">
-            
+        <AdminTitle heading={`All Products(${product.length})`} />
+      <section className="px-4 bg-white max-w-5xl mx-auto">
+        {/* table  */}
+
+        <div className="relative shadow-md sm:rounded-lg mt-5">
+          <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+              <tr>
+                
+                <th scope="col" className="px-6 py-3 text-center">
+                  Product
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Category
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Sub-Category
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Price
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Edit
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Delete
+                </th>
+                
+              </tr>
+            </thead>
             <tbody>
               {product.map((product) => (
-                <tr key={product?._id} products={product}>
+                <tr key={product?._id} className={`bg-white border-b  hover:bg-gray-50 `}>
                   {/* row 1 */}
 
-                  <td>
+                  <td className="px-6 py-4">
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
                             src={product?.image}
-                            alt="Avatar Tailwind CSS Component"
+                            alt={product?.productTitle}
                           />
                         </div>
                       </div>
                       <div>
-                        <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden">
+                        <p className="text-gray-700 text-sm line-clamp-1">
                           {product?.productTitle}
                         </p>
                       </div>
                     </div>
                   </td>
+                  <td className="px-6 py-4 text-center">{product?.category}</td>
+                  <td className="px-6 py-4 text-center">{product?.subCategory}</td>
+                  <td className="px-6 py-4 text-center"><p className="flex"><TbCurrencyTaka />{product?.price}</p></td>
 
-                  <td>{product?.price}</td>
-
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                  <th>
-                    <div className="dropdown dropdown-left">
-                      <label tabIndex={0} className="btn btn-ghost btn-xs m-1">
-                        Action
-                      </label>
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-26"
-                      >
-                        <li>
+                  <td className="px-6 py-4 text-lg text-blue-600 text-center">
+                    
                           <a>
-                            <BiEdit /> Edit
+                            <BiEdit />
                           </a>
-                        </li>
-                        <li>
-                          <button onClick={() => handleDelete(product)}>
+                        
+                                 
+                  </td>
+                  <td className="px-6 py-4 text-lg text-red-600 text-center">
+                  <button onClick={() => handleDelete(product)}>
                             <AiOutlineDelete />
-                            Delete
+                           
                           </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </th>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        </section>
       </div>
     </>
   );
