@@ -107,6 +107,7 @@ const PaymentMethods = () => {
                   type="text"
                   className="input input-bordered rounded-md"
                   value={orderedData?.totalAmount}
+                  readOnly
                   {...register("quantity", { required: true })}
                 />
               </div>
@@ -115,12 +116,13 @@ const PaymentMethods = () => {
                   type="text"
                   className="input input-bordered rounded-md"
                   value="Cash On Delivery (COD)"
+                  readOnly
                   {...register("typeOfPayment", { required: true })}
                 />
               </div>
               <input
                 type="submit"
-                className="w-full h-12 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-5"
+                className="w-full h-12 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-black font-bold rounded-md mt-5"
                 value="Confirm Order"
               />
             </form>

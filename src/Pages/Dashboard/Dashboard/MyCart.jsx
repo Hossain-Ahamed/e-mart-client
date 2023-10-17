@@ -174,7 +174,7 @@ const MyCart = () => {
         ) : (
           <div className="w-full h-full md:p-10 user-select-none">
             <div className="">
-            <UserTitle heading={`Your Cart (${cart.length} Products)`} />
+            <UserTitle heading={`My Cart (${cart.length} Products)`} />
             </div>
             <div className="grid lg:grid-cols-3 gap-5">
               <div className="bg-white col-span-2 p-5">

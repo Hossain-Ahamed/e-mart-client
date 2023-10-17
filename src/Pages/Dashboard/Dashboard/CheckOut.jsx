@@ -111,7 +111,7 @@ const CheckOut = () => {
         });
         }
         else{
-          toast.error("Sorry you are not eligable")
+          toast.error("Sorry you are not eligible")
         }
       })
       .catch((e) => {

@@ -53,7 +53,7 @@ const AllUsers = () => {
               <th></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {/* row 1 */}
             {users.map((user, index) => <AllUsers_Row key={index} user={user} index={index+1}></AllUsers_Row>)}
           </tbody>

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../../Contexts/AuthProvider";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import useProfile from "../../../../../Hooks/useProfile";
+import UserTitle from "../../../../../Component/UserTitle";
 
 const UserProfile = () => {
   const { user } = useContext(AuthContext);
@@ -32,7 +32,7 @@ const UserProfile = () => {
   return (
     <>
       <div className=' w-screen max-w-5xl mx-auto min-h-screen mt-5' >
-      <div className='text-center my-5 text-slate-700 '><h1 className='text-3xl font-bold'>Profile</h1></div>
+      <UserTitle heading="Profile"></UserTitle>
                 {/* image  */}
 
                 <div className="flex items-center justify-center max-w-[300px] mx-auto relative">
@@ -90,7 +90,7 @@ const UserProfile = () => {
                     <p className="bg-gray-50 border-b border-gray-300 text-gray-900 text-sm  block w-full p-2.5  " >{profile?.address || "N/A"} {profile?.city && ","} {profile?.city}</p>
                 </div>
                 <div className="mb-6 flex justify-center">
-                    <button onClick={() => navigate('/dashboard/edit-user-profile')} className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Update Profile</button>
+                    <button onClick={() => navigate('/dashboard/edit-user-profile')} className="text-white  bg-accent focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Update Profile</button>
                 </div>
             </div >
     </>

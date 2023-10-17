@@ -74,6 +74,12 @@ const ProductCard = ({ showProduct }) => {
 
   // Use the calculateAverageRating function to get the average rating
   const averageRating = calculateAverageRating();
+
+  // Determine the size of the star rating based on screen width
+  const screenSize = window.innerWidth;
+
+  // Calculate the desired size for the star rating component
+  const starRatingSize = screenSize < 768 ? 16 : 24; // Adjust the size as needed
   return (
     <>
       <div className="w-36 h-60 lg:h-96 md:w-52 md:h-80 border">
@@ -162,7 +168,7 @@ const ProductCard = ({ showProduct }) => {
                 </s>
               )}
             </p>
-            <div className="mx-12">
+            <div className="lg:mx-12">
               {averageRating ? (
                 <ReactStars
                   count={5}
@@ -171,7 +177,7 @@ const ProductCard = ({ showProduct }) => {
                   isHalf={true}
                   halfIcon={<i className="fa fa-star-half-alt"></i>}
                   fullIcon={<i className="fa fa-star"></i>}
-                  size={24}
+                  size={starRatingSize}
                   activeColor="#ffd700"
                 />
               ) : (

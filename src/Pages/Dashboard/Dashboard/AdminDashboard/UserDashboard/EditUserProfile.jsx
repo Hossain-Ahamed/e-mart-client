@@ -9,6 +9,7 @@ import useGeolocation from "../../../../../Hooks/useGeolocation";
 import toast from "react-hot-toast";
 import useProfile from "../../../../../Hooks/useProfile";
 import { useNavigate } from "react-router-dom";
+import UserTitle from "../../../../../Component/UserTitle";
 const EditUserProfile = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
@@ -129,14 +130,14 @@ const EditUserProfile = () => {
 
   return (
     <>
-      <div className="bg-white p-20 h-full">
-        <h1>My Profile</h1>
+      <div className="p-20">
+        <UserTitle heading="Update Profile"></UserTitle>
         <div className="flex">
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* ------image---- */}
               <div
-                className={`rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+                className={`w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
               >
                 {!selectedImage && (
                   <>
@@ -197,7 +198,7 @@ const EditUserProfile = () => {
                   <img
                     src={selectedImage}
                     alt="Uploaded"
-                    className="rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44"
+                    className="w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44"
                   />
                 )}
 
@@ -208,6 +209,10 @@ const EditUserProfile = () => {
                   onChange={handleImageChange}
                 />
               </div>
+
+              <div className="grid grid-cols-2 gap-20 mt-5">
+              <div>
+                
 
               {/* ------Name------ */}
               <div className="form-control w-full max-w-xs">
@@ -236,12 +241,9 @@ const EditUserProfile = () => {
                   {...register("email", {})}
                 />
               </div>
-
-              {/* -----Address----- */}
-
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">City</span>
+                  <span className="label-text font-semibold">City</span>
                 </label>
                 <select
                   {...register("city", {
@@ -270,6 +272,12 @@ const EditUserProfile = () => {
                 )}
 
               </div>
+              </div>
+
+              <div>
+                {/* -----Address----- */}
+
+              
 
               {
                 city && <>
@@ -279,7 +287,7 @@ const EditUserProfile = () => {
                         Address
                       </span>
                     </label>
-                    <textarea id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                    <textarea id="message" rows="4" className="input input-bordered rounded-md"
                       placeholder="Address here..."
                       defaultValue={profile?.address}
                       {...register("address", {
@@ -327,10 +335,12 @@ const EditUserProfile = () => {
 
               <br />
               <input
-                className="w-full h-12 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-5"
+                className="w-full h-12 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-2"
                 type="submit"
                 value="Submit"
               />
+              </div>
+              </div>
             </form>
           </div>
         </div>

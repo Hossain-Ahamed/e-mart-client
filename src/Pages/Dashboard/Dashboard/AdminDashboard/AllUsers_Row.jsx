@@ -45,13 +45,13 @@ const AllUsers_Row = ({user, index}) => {
     };
     return (
        <>
-       <tr>
+       <tr className='bg-white'>
                 <th>{index}</th>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img src={user.img} />
+                        <img src={user?.img} />
                       </div>
                     </div>
                     <div>
