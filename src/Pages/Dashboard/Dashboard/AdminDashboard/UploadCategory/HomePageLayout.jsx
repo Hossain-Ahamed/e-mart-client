@@ -4,9 +4,11 @@ import Layout1 from "../../../../../Component/HomeLayout/Layout1";
 import Layout2 from "../../../../../Component/HomeLayout/Layout2";
 import Layout3 from "../../../../../Component/HomeLayout/Layout3";
 import axios from "axios";
+import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 
 const HomePageLayout = () => {
   const { slug, type } = useParams();
+  const { axiosSecure } = useAxiosSecure();
   const { layout } = useParams();
   // console.log(layout)
   const [activeContent, setActiveContent] = useState("content1");
@@ -21,7 +23,7 @@ const HomePageLayout = () => {
     try {
       
       console.log("Selected Layout:", selectedLayout);
-      const response = await axios.patch(
+      const response = await axiosSecure.patch(
         `http://localhost:5000/${type}/${slug}/layout`,
         {layout: selectedLayout},
         { withCredentials: true }

@@ -10,6 +10,9 @@ import SlimBanner from "../../Component/SlimBanner";
 import UserTitle from "../../Component/UserTitle";
 import ThirdBanner from "../../Component/ThirdBanner";
 import SubCategories from "../../Component/SubCategory/SubCategories";
+import TrendingProducts from "../Shared/TrendingProducts";
+import SubCategoryAllProducts from "../PagesForSubCategory/SubCategoryAllProducts";
+
 
 
 const PagesForCategory = () => {
@@ -22,7 +25,6 @@ const PagesForCategory = () => {
       {layout === 1 && (
         <>
         {category?.topBannerImage && <TopBanner images={category.topBannerImage}></TopBanner>}
-        <UserTitle heading="Category"></UserTitle>
 
         </>
       )}
@@ -49,8 +51,12 @@ const PagesForCategory = () => {
         </div>
       )}
       <SubCategories subcategory={subcategory}></SubCategories>
-      <SecondBanner img={category.secondBannerImage}></SecondBanner>
+      <SecondBanner images={category.secondBannerImage}></SecondBanner>
+      <div className="bg-white">
+     <TrendingProducts products={products} />
+     </div>
       <ThirdBanner images={category.bottomBannerImage} />
+      <SubCategoryAllProducts products={products} />
     </>
   );
 };

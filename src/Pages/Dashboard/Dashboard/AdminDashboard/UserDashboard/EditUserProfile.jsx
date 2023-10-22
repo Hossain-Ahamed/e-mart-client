@@ -15,7 +15,7 @@ const EditUserProfile = () => {
   const { user } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(null);
   const [city, setCity] = useState("");
-  const [profile,profileLoading] = useProfile();
+  const [profile,profileLoading, refetch] = useProfile();
 
 
   useEffect(()=>{
@@ -94,7 +94,7 @@ const EditUserProfile = () => {
               showConfirmButton: false,
               timer: 1500,
             });
-
+            refetch();
             navigate('/dashboard/user-profile')
           })
           .catch((e) => {

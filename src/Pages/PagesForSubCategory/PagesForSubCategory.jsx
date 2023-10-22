@@ -24,7 +24,7 @@ const PagesForSubCategory = () => {
       {layout === 1 && (
         <>
         {subCategory?.topBannerImage && <TopBanner images={subCategory?.topBannerImage}></TopBanner>}
-        <UserTitle heading="Category"></UserTitle>
+        
 
         </>
       )}

@@ -84,6 +84,44 @@ const UpdateTopBanner = () => {
     }
   };
 
+  const handleDeleteImage = (index) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/delete-top-banner/${slug}/${index}`)
+          .then((response) => {
+            console.log(response);
+            if (response.data.message === "Image deleted successfully") {
+              // If the image is successfully deleted, manually update the state
+              const updatedBanners = [...banners];
+              updatedBanners.splice(index, 1);
+              //setSelectedImage(null);
+              // Update the state to reflect the changes
+              // This assumes that the useQuery hook is configured to automatically
+              // update the data when the state is changed
+              refetch(updatedBanners);
+              Swal.fire({
+                icon: "success",
+                title: "Image deleted successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          });
+      }
+    });
+  };
+  
+
+
   if(isLoading){
     return <><p>Loading image</p></>
   }
@@ -187,7 +225,7 @@ const UpdateTopBanner = () => {
                       
                   </td>
                   <th>
-                    <button className="btn btn-ghost text-red-700 text-2xl">
+                    <button onClick={() => handleDeleteImage(index)} className="btn btn-ghost text-red-700 text-2xl">
                       <AiOutlineDelete />
                     </button>
                   </th>

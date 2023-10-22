@@ -1,18 +1,22 @@
 import React from 'react';
 
-const SecondBanner = ({img}) => {
+const SecondBanner = ({images}) => {
     //const {img, title, description} = secondBannerInfo;
     return (
         <>
-        <div className="grid justify-center py-16">
+        <div className="grid justify-center">
         <div className="relative">
-          <div>
+          {
+            images?.slice(-1).map((img, index) => (
+              <div key={index}>
             <img
               src={img}
               alt=""
               className="rounded-lg w-[1200px] h-[500px]"
             />
           </div>
+            ))
+          }
           {/* <div>
             <div className="absolute left-16 bottom-16 text-white">
               <h1 className="text-base lg:text-3xl">{title}</h1>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import useProduct from '../../Hooks/useProduct';
 import ProductCard from '../Shared/ProductCard';
-import SubCategoryProductCard from './SubCategoryProductCard';
 
 const TrendingProducts = ({products}) => {
     console.log(products)
@@ -41,10 +40,10 @@ const TrendingProducts = ({products}) => {
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-[300px] md:w-[700px] lg:w-[1200px] mx-auto py-10'>
               
                 {product.slice(0, 5).map(showProduct => 
-                  <SubCategoryProductCard 
+                  <ProductCard 
                     key={showProduct._id}
                     showProduct={showProduct}
-                ></SubCategoryProductCard>
+                ></ProductCard>
                 )}
             </div>
           )}
@@ -53,10 +52,10 @@ const TrendingProducts = ({products}) => {
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-[300px] md:w-[700px] lg:w-[1200px] mx-auto py-10'>
               
             {newProducts.slice(-5).map(showProduct => 
-                  <SubCategoryProductCard 
+                  <ProductCard 
                     key={showProduct._id}
                     showProduct={showProduct}
-                ></SubCategoryProductCard>)}
+                ></ProductCard>)}
         </div>
           )}
         </div>

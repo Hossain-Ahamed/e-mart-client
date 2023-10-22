@@ -24,7 +24,7 @@ const Swip = () => {
   });
     return (
         <>
-        <div className=' w-full h-[200px] md:h-[250px] lg:h-[500px]'>
+        <div className='w-[1000px] h-[200px] md:h-[250px] lg:h-[400px] mx-auto'>
         <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -40,8 +40,8 @@ const Swip = () => {
         className="mySwiper"
       >
         {
-            banners?.map((img, index) => (
-            <SwiperSlide key={index}><img src={img} alt="" className='w-full h-[200px] md:h-[250px] lg:h-[500px]' /></SwiperSlide>
+            banners?.slice(-3).map((img, index) => (
+            <SwiperSlide key={index}><img src={img} alt="" className='w-[1000px] h-[200px] md:h-[250px] lg:h-[400px]' /></SwiperSlide>
             ))
         }
       </Swiper>

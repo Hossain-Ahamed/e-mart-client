@@ -6,6 +6,26 @@ import { Link } from 'react-router-dom';
 const ShowAllProducts = () => {
     const  [ product ]  = useProduct();
 
+    const [visibleProducts, setVisibleProducts] = useState(15); // Number of products initially visible
+    const [additionalProducts, setAdditionalProducts] = useState(15); // Number of products to load on each "Load More" click
+
+    // Function to handle the "Load More" button click
+    const handleLoadMore = () => {
+        setVisibleProducts(visibleProducts + additionalProducts);
+    };
+
+     // Function to shuffle an array randomly using Fisher-Yates algorithm
+     const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    };
+
+    // Shuffle the product array randomly
+    const shuffledProducts = shuffleArray(product);
+
     return (
         <>
             <div className=' py-12'>
@@ -17,7 +37,7 @@ const ShowAllProducts = () => {
         <div className='w-[300px] md:w-[700px] lg:w-[1200px] mx-auto mt-10 relative'>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 gap-8'>
               
-                {product.slice(0,15).map(showProduct => 
+                {shuffledProducts.slice(0, visibleProducts).map(showProduct => 
                   <ProductCard 
                     key={showProduct._id}
                     showProduct={showProduct}
@@ -25,9 +45,16 @@ const ShowAllProducts = () => {
                 )}
             </div>
         </div>
-        <div className=' absolute right-6 bottom-[-4]'>
-        <Link to='/allproducts' className='btn p-2 px-5 m-1 bg-slate-100 text-black hover:bg-accent hover:text-white font-semibold text-lg rounded-md border-none'>view all</Link>
-        </div>
+        {visibleProducts < product.length && (
+                    <div className='absolute right-6 bottom-[-4]'>
+                        <button
+                            onClick={handleLoadMore}
+                            className='btn p-2 px-5 m-1 bg-slate-100 text-black hover:bg-accent hover:text-white font-semibold text-lg rounded-md border-none'
+                        >
+                            Load More
+                        </button>
+                    </div>
+                )}
         </div>
         </>
     );
