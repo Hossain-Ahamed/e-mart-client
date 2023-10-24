@@ -48,9 +48,10 @@ const PagesForSubCategory = () => {
      <TrendingProducts products={products} />
      </div>
 
-      <SecondBanner img={subCategory.secondBannerImage}></SecondBanner>
+      
       <ThirdBanner images={subCategory.bottomBannerImage} /> 
       <SubCategoryAllProducts products={products} />
+      {/* <SecondBanner images={subCategory.secondBannerImage}></SecondBanner> */}
       {/* <SubCategories subcategory={subcategory}></SubCategories>
       <SecondBanner img={category.secondBannerImage}></SecondBanner>
       */}

@@ -24,56 +24,57 @@ const SubNav = () => {
   const subMenuItem = (
     <>
       <li>
-        <Link to="/profile">
-          Profile<span className="badge">New</span>
+        <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" to="/profile">
+          Profile
         </Link>
       </li>
       {user?.uid ? (
         <li>
-          <button onClick={handleLogOut}>LogOut</button>
+          <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={handleLogOut}>LogOut</button>
         </li>
       ) : (
         <li>
-          <Link to="/login">Login</Link>
+          <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" to="/login">Login</Link>
         </li>
       )}
     </>
   );
   const menuItem = (
     <>
-      <li className="text-semibold">
-        <Link to="/">Home</Link>
+      <li>
+        <Link className="hover:bg-accent hover:text-white" aria-current="page" to="/">Home</Link>
       </li>
-      <li className="text-semibold">
-        <Link to="/about">About</Link>
+      <li>
+        <Link className="hover:bg-accent hover:text-white" to="/about">About</Link>
       </li>
-      <li className="text-semibold">
-        <Link to="/reviews">Reviews</Link>
+      <li>
+        <Link className="hover:bg-accent hover:text-white" to="/reviews">Reviews</Link>
       </li>
       {isAdmin ? (
-        <li className="text-semibold">
-          <Link to="/dashboard/admin-home">Dashboard</Link>
+        <li>
+          <Link className="hover:bg-accent hover:text-white" to="/dashboard/admin-home">Dashboard</Link>
         </li>
       ) : (
-        <li className="text-semibold">
-          <Link to="/dashboard/user-home">Dashboard</Link>
+        <li>
+          <Link className="hover:bg-accent hover:text-white" to="/dashboard/user-home">Dashboard</Link>
         </li>
       )}
       {user?.uid ? (
-        <li className="text-semibold">
-          <button onClick={handleLogOut}>LogOut</button>
+        <li>
+          <button className="hover:bg-accent hover:text-white" onClick={handleLogOut}>LogOut</button>
         </li>
       ) : (
-        <li className="text-semibold">
-          <Link to="/login">Login</Link>
+        <li>
+          <Link className="hover:bg-accent hover:text-white" to="/login">Login</Link>
         </li>
       )}
     </>
   );
   return (
     <>
+
       <div className="">
-        <div className="navbar bg-slate-100 p-5">
+        <div className="navbar bg-slate-100 p-3">
           <div className="navbar-start ml-5">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -126,7 +127,7 @@ const SubNav = () => {
                           alt={name}
                         />
                       ) : (
-                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-yellow-600 rounded-full ">
+                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-accent rounded-full ">
                           <span className="font-medium text-gray-100 ">
                             {name &&
                               name
@@ -140,7 +141,7 @@ const SubNav = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow w-52 hover:rounded-none"
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-100 w-40 hover:rounded-none"
                   >
                     {subMenuItem}
                   </ul>

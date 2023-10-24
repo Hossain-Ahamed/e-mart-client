@@ -1,17 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, getAuth, sendPasswordResetEmail, signInWithPopup } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
 import SignUp from '../SignUp/SignUp';
 import { Helmet } from 'react-helmet-async';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const auth = getAuth(app)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const {logIn} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
+    const emailRef = useRef();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -53,6 +55,21 @@ const Login = () => {
             console.error('error: ', error);
         })
     }
+
+    const handleResetPassword = event => {
+      const email = emailRef.current.value;
+      if(!email){
+        toast.error("Please Provide Your Email Address to Reset Password")
+      }
+      sendPasswordResetEmail(auth, email)
+      .then(() => {
+        toast.success("Please Check Your Email")
+      })
+      .catch(error => {
+        console.log(error);
+        setLoginError(error.message)
+      })
+    }
     return (
         <>
         <Helmet>
@@ -63,7 +80,7 @@ const Login = () => {
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="form-control">
           <br />
-          <input type="email" {...register("email", { required:"Email Address is required"})} placeholder="email" className="input-bordered w-full max-w-xs" />
+          <input type="email" {...register("email", { required:"Email Address is required"})} placeholder="email" ref={emailRef} className="input-bordered w-full max-w-xs" />
           {errors.email && <p role='alert'>{errors.email?.message}</p>}
         </div>
         <div className="form-control">
@@ -71,7 +88,7 @@ const Login = () => {
           <input type="password" {...register("password", { required: "Password is required", minLength: {value:6, message:"Your Password Should At Least 6 Characters"} })} placeholder="password" className="input-bordered w-full max-w-xs" />
           {errors.password && <p role='alert'>{errors.password?.message}</p>}
           <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+            <button onClick={handleResetPassword} className="label-text-alt link link-hover">Forgot password?</button>
           </label>
         </div>
         <div className="form-control mt-6">

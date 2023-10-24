@@ -4,7 +4,6 @@ import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 import useCart from "../../../Hooks/useCart";
-import useAdmin from "../../../Hooks/useAdmin";
 import useProfile from "../../../Hooks/useProfile";
 import { MdShoppingCart } from "react-icons/md";
 import useRole from "../../../Hooks/useRole";
@@ -12,7 +11,6 @@ import useRole from "../../../Hooks/useRole";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
-  const [isAdmin] = useAdmin();
   const [profile] = useProfile();
   const { role, name } = useRole();
 
@@ -120,17 +118,16 @@ const Navbar = () => {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="w-full md:w-96 rounded-none border-none"
+                  className="w-full md:w-96 lg:w-[600px] rounded-md border-none"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  className="p-2 px-5 m-1 bg-slate-100 hover:bg-accent hover:text-white font-semibold text-lg rounded-md"
+                  className="p-2 m-1 bg-slate-100 hover:bg-accent hover:text-white font-semibold text-lg rounded-md"
                   onClick={handleSearch}
                 >
-                  <div className="flex justify-items-center items-center gap-2">
+                  <div className="flex justify-items-center items-center">
                     <BsSearch />
-                    <span className="hidden lg:block">Search</span>
                   </div>
                 </button>
               </div>
