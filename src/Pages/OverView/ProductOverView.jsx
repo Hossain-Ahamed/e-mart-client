@@ -20,7 +20,6 @@ const ProductOverView = () => {
     price,
     mainPrice,
     des,
-    stock,
     weight,
     size,
     quantity,
@@ -61,7 +60,6 @@ const ProductOverView = () => {
           <p className="my-2">Size: {size}</p>
           <div className="divider"></div>
           <p>Current Stock: {quantity}</p>
-          <p className="my-2">In Stock: {stock}</p>
 
           {quantity > 0 ? (
             alreadyAdded ? (

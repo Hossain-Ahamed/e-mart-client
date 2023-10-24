@@ -28,6 +28,7 @@ const Login = () => {
           navigate(from, {replace: true});
       })
       .catch(error => {
+        console.log(error)
           setLoginError(error.message);
       });
   }
@@ -67,7 +68,6 @@ const Login = () => {
       })
       .catch(error => {
         console.log(error);
-        setLoginError(error.message)
       })
     }
     return (
@@ -80,12 +80,12 @@ const Login = () => {
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="form-control">
           <br />
-          <input type="email" {...register("email", { required:"Email Address is required"})} placeholder="email" ref={emailRef} className="input-bordered w-full max-w-xs" />
+          <input type="email" name='email' ref={emailRef} {...register("email", { required:"Email Address is required"})} placeholder="email"  className="input-bordered w-full max-w-xs" />
           {errors.email && <p role='alert'>{errors.email?.message}</p>}
         </div>
         <div className="form-control">
           <br />
-          <input type="password" {...register("password", { required: "Password is required", minLength: {value:6, message:"Your Password Should At Least 6 Characters"} })} placeholder="password" className="input-bordered w-full max-w-xs" />
+          <input type="password" name='password' {...register("password", { required: "Password is required", minLength: {value:6, message:"Your Password Should At Least 6 Characters"} })} placeholder="password" className="input-bordered w-full max-w-xs" />
           {errors.password && <p role='alert'>{errors.password?.message}</p>}
           <label className="label">
             <button onClick={handleResetPassword} className="label-text-alt link link-hover">Forgot password?</button>
