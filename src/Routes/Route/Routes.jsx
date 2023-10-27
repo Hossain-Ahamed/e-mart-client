@@ -59,6 +59,7 @@ import ManageSubCategories from "../../Pages/Dashboard/Dashboard/AdminDashboard/
 import ShowDeliveredOrder from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/ShowDeliveredOrder";
 import DeliveredOrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/DeliveredOrderDetails";
 import NoProfileWarning from "../PrivateRoute/NoProfileWarning";
+import Reviews from "../../Pages/Reviews/Reviews";
 
 
 
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
           path: "/sub-category-pages/:slug",
           element: <PagesForSubCategory />,
           loader: ({params}) => fetch(`http://localhost:5000/sub-categories/${params.slug}`)
+        },
+        {
+          path: "/reviews",
+          element: <Reviews />
         },
         {
           path: "/mensFashion",

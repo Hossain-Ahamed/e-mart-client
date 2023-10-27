@@ -13,11 +13,9 @@ import ReactStars from "react-rating-stars-component";
 
 const ProductCard = ({ showProduct }) => {
   const { _id, image, productTitle, price, mainPrice, quantity, reviews } = showProduct;
-  
 
   const {role} = useRole();
   //console.log(role);
-
 
   const [cart] = useCart();
   // const [wishList] = useWishList();
@@ -75,8 +73,6 @@ const ProductCard = ({ showProduct }) => {
     return roundedAverage;
   };
   
-  
-
   // Use the calculateAverageRating function to get the average rating
   const averageRating = calculateAverageRating();
 
