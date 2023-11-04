@@ -10,8 +10,10 @@ import toast from "react-hot-toast";
 import useProfile from "../../../../../Hooks/useProfile";
 import { useNavigate } from "react-router-dom";
 import UserTitle from "../../../../../Component/UserTitle";
+import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 const EditUserProfile = () => {
   const navigate = useNavigate();
+  const {axiosSecure} = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(null);
   const [city, setCity] = useState("");
@@ -48,6 +50,16 @@ const EditUserProfile = () => {
     reset,
   } = useForm();
 
+  const validateMobileNumber = (number) => {
+
+    const regex = /^(?:\+88)?01[3-9][0-9]{8}$/;
+  
+    // Remove "+88" if it exists
+    const formattedNumber = number.replace(/^\+88/, '');
+  
+    // Check if the formatted number matches the regex pattern
+    return regex.test(formattedNumber);
+  };
 
   const img_hosting_token = "2f18d2acff1da26cc85eee5c8407a95f";
 
@@ -78,7 +90,7 @@ const EditUserProfile = () => {
         };
         console.log(newProfile);
 
-        axios
+        axiosSecure
           .post("http://localhost:5000/upload-profile", newProfile, {
             withCredentials: true,
           })
@@ -323,8 +335,11 @@ const EditUserProfile = () => {
                       value: true,
                       message: "* phone is Required",
                     },
-                  })}
-                />
+                    validate: {
+                      notPhone: (value) => validateMobileNumber(value)
+                    },
+                  })} />
+                {errors.phone && errors.phone.type === "notPhone" && <p className='p-1 text-xs text-red-600'>*Invalid</p>}
                 {
                   <span className="label-text-alt text-red-500 mt-1">
                     {errors?.phone?.message}

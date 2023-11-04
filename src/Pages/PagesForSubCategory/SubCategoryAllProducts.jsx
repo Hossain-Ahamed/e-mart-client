@@ -6,7 +6,7 @@ const SubCategoryAllProducts = ({products}) => {
 
     return (
        <>
-       <h1 className='text-center font-bold lg:text-4xl my-8 pt-14'>All Products</h1>
+       <h1 className='text-center font-bold lg:text-4xl my-8'>All Products</h1>
 
         <div className="p-4">
           

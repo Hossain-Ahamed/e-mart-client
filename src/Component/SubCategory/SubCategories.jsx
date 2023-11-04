@@ -56,18 +56,18 @@ const SubCategories = ({ subcategory }) => {
           >
             {subcategory &&
               Array.isArray(subcategory) &&
-              subcategory.map((categories) => (
-                <SwiperSlide onClick={() => {navigate(`/sub-category-pages/${categories?.slug}`)}} key={categories?._id}>
+              subcategory.map((subCategories) => (
+                <SwiperSlide onClick={() => {navigate(`/sub-category-pages/${subCategories?.slug}`)}} key={subCategories?._id}>
                   <div className="w-36 h-36 md:w-44 md:h-44 lg:w-64 lg:h-64 hover:drop-shadow-xl">
                     
                       <div className="">
                         <img
-                          src={categories?.img}
+                          src={subCategories?.img}
                           alt=""
                           className="rounded-full w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 mx-auto shadow-md cursor-pointer"
                         />
                         <p className="lg:text-xl font-semibold text-center mt-3 uppercase">
-                          {categories?.name}
+                          {subCategories?.name}
                         </p>
                       </div>
                    

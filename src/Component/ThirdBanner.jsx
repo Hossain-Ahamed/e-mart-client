@@ -4,7 +4,7 @@ const ThirdBanner = ({ images }) => {
     console.log(images)
     return (
         <>
-        <div className="grid grid-cols-1 md:flex gap-10 justify-center py-20">
+        <div className="grid grid-cols-1 md:flex gap-10 justify-center py-10">
         {
             images?.slice(-2).map((img, index) => (
                 <div key={index} className=''>
