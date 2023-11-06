@@ -61,7 +61,7 @@ const EditUserProfile = () => {
     return regex.test(formattedNumber);
   };
 
-  const img_hosting_token = "2f18d2acff1da26cc85eee5c8407a95f";
+  const img_hosting_token = `${import.meta.env.VITE_IMAGE_TOKEN}`;
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
   const onSubmit = (data) => {
