@@ -60,6 +60,7 @@ import ShowDeliveredOrder from "../../Pages/Dashboard/Dashboard/AdminDashboard/U
 import DeliveredOrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/DeliveredOrderDetails";
 import NoProfileWarning from "../PrivateRoute/NoProfileWarning";
 import Reviews from "../../Pages/Reviews/Reviews";
+import EditProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/EditProduct";
 
 
 
@@ -202,6 +203,11 @@ const router = createBrowserRouter([
         {
           path: 'manageProduct',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><ManageProduct /></AllowAdmin>
+        },
+        {
+          path: 'edit-product/:id',
+          element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><EditProduct /></AllowAdmin>,
+          loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
         },
         {
           path: 'delivery-charge',

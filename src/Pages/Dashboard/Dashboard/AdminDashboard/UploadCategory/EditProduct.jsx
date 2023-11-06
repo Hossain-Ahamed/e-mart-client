@@ -1,26 +1,49 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import useCategory from "../../../../Hooks/useCategory";
-import slugify from "slugify";
-import AdminTitle from "../../../../Component/AdminTitle";
-import useSubCategory from "../../../../Hooks/useSubCategory";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useLoaderData } from 'react-router-dom';
+import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
+import AdminTitle from '../../../../../Component/AdminTitle';
+import Swal from 'sweetalert2';
+import slugify from 'slugify';
 
-const AddProduct = () => {
-  const [category] = useCategory();
-  const {axiosSecure} = useAxiosSecure();
-  const [subCategory] = useSubCategory();
-  console.log(category);
-  const [selectedImage, setSelectedImage] = useState(null);
+const EditProduct = () => {
+    const {axiosSecure} = useAxiosSecure();
+    const [selectedImage, setSelectedImage] = useState(null);
+    const productDetail = useLoaderData();
+    const {
+        _id,
+        image,
+        productTitle,
+        price,
+        mainPrice,
+        des,
+        weight,
+        size,
+        quantity,
+        reviews,
+        category,
+        subCategory,
+        bestDeal
+      } = productDetail;
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+      const { register, handleSubmit, setValue } = useForm();
+
+      useEffect(() => {
+        // Initialize form fields with the product details
+        setValue('productTitle', productTitle);
+        setValue('des', des);
+        setValue('price', price);
+        setValue('mainPrice', mainPrice);
+        setValue('weight', weight);
+        setValue('size', size);
+        setValue('quantity', quantity);
+        setValue('category', category);
+        setValue('subCategory', subCategory);
+        setValue('bestDeal', bestDeal);
+        if (image) {
+          setSelectedImage(image);
+        }
+      }, [setValue, productTitle, des, image, price, mainPrice, weight, size, quantity, category, subCategory, bestDeal]);
 
   const img_hosting_token = `${import.meta.env.VITE_IMAGE_TOKEN}`;
 
@@ -28,6 +51,12 @@ const AddProduct = () => {
 
   const onSubmit = (data) => {
     const formData = new FormData();
+    console.log(formData, "formData")
+    // Check if a new image has been selected
+  const isNewImageSelected = data.image[0] && data.image[0] !== image;
+
+  if (isNewImageSelected) {
+    // Append the new image to formData
     formData.append("image", data.image[0]);
     fetch(img_hosting_url, {
       method: "POST",
@@ -51,10 +80,57 @@ const AddProduct = () => {
             quantity,
           } = data;
 
-          const newProduct = {
+          const updatedProduct = {
             productTitle,
             des,
             image: imgURL,
+            mainPrice: parseFloat(mainPrice),
+            price: parseFloat(price),
+            weight: parseFloat(weight),
+            size,
+            bestDeal,
+            category,
+            subCategory,
+            quantity: parseInt(quantity),
+            productSlug: slugify(productTitle),
+          };
+          console.log(updatedProduct);
+          axiosSecure
+      .put(`/products/${_id}`, updatedProduct)
+      .then((response) => {
+        if (response.status === 200) {
+          // Product updated successfully
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product updated successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+              }
+            });
+        }
+      });
+  }
+    else {
+        const {
+            productTitle,
+            des,
+            image,
+            mainPrice,
+            price,
+            weight,
+            size,
+            bestDeal,
+            category,
+            subCategory,
+            quantity,
+          } = data;
+
+          const updatedProduct = {
+            productTitle,
+            des,
+            image: productDetail?.image,
             mainPrice: parseFloat(mainPrice),
             price: parseFloat(price),
             weight,
@@ -65,35 +141,33 @@ const AddProduct = () => {
             quantity: parseInt(quantity),
             productSlug: slugify(productTitle),
           };
-          console.log(newProduct);
+          console.log(updatedProduct);
           axiosSecure
-            .post("/products", newProduct)
-            .then((data) => {
-              console.log("new", data.data);
-              if (data?.data?.insertedId) {
-                reset();
-                setSelectedImage(null);
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "One new product added",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
+      .put(`/products/${_id}`, updatedProduct)
+      .then((response) => {
+        if (response.status === 200) {
+          // Product updated successfully
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product updated successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
               }
             });
-        }
-      });
-  };
+  }
+};
+    
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
     }
   };
-  return (
-    <>
-      <div className="w-full h-full p-10 xl:px-36">
+    return (
+        <>
+        <div className="w-full h-full p-10 xl:px-36">
         <AdminTitle heading="Add Product"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="md:flex gap-5">
@@ -104,9 +178,9 @@ const AddProduct = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="Product Title"
                   className="input input-bordered rounded-md"
-                  {...register("productTitle", { required: true })}
+                  defaultValue={productTitle}
+                  {...register("productTitle")}
                 />
               </div>
               <div className="form-control">
@@ -114,9 +188,9 @@ const AddProduct = () => {
                   <span className="label-text">Description</span>
                 </label>
                 <textarea
-                placeholder="Product Description"
                   className="textarea textarea-bordered rounded-md h-24"
-                  {...register("des", { required: true })}
+                  defaultValue={des}
+                  {...register("des")}
                 ></textarea>
               </div>
               <br />
@@ -184,12 +258,14 @@ const AddProduct = () => {
                     alt="Uploaded"
                     className="h-64 w-52 rounded-2xl object-contain"
                   />
-                )}
+                ) 
+                }
 
                 <input
                   type="file"
                   className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"
-                  {...register("image", { required: true })}
+                 
+                  {...register("image")}
                   onChange={handleImageChange}
                 />
               </div>
@@ -204,7 +280,8 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("mainPrice", { required: true })}
+                    defaultValue={mainPrice}
+                    {...register("mainPrice")}
                   />
                 </div>
                 <div className="form-control w-full max-w-xs">
@@ -214,7 +291,8 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("price", { required: true })}
+                    defaultValue={price}
+                    {...register("price")}
                   />
                 </div>
               </div>
@@ -226,7 +304,8 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("weight", { required: true })}
+                    defaultValue={weight}
+                    {...register("weight")}
                   />
                 </div>
                 <div className="form-control w-full max-w-xs">
@@ -234,15 +313,17 @@ const AddProduct = () => {
                     <span className="label-text">Size</span>
                   </label>
                   <select
-                    {...register("size", { required: true })}
+                  defaultValue={size}
+                    {...register("size")}
                     className="select select-bordered rounded-md w-full max-w-xs"
                   >
-                    <option value="XS">XS</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="XXL">XXL</option>
+                    <option defaultValue="Null">No Size</option>
+                    <option defaultValue="XS">XS</option>
+                    <option defaultValue="S">S</option>
+                    <option defaultValue="M">M</option>
+                    <option defaultValue="L">L</option>
+                    <option defaultValue="XL">XL</option>
+                    <option defaultValue="XXL">XXL</option>
                   </select>
                 </div>
               </div>
@@ -251,31 +332,26 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text">Category</span>
                 </label>
-                <select
-                  {...register("category", { required: true })}
-                  className="select select-bordered rounded-md"
-                >
-                  {category?.map((categories) => (
-                    <option key={categories?._id} value={categories?.name}>
-                      {categories?.name}
-                    </option>
-                  ))}
-                </select>
+                <input
+                    type="text"
+                    className="input input-bordered rounded-md w-full max-w-xs"
+                    defaultValue={category}
+                  {...register("category")}
+                  
+                />
+                  
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Sub-Category</span>
                 </label>
-                <select
-                  {...register("subCategory", { required: true })}
-                  className="select select-bordered rounded-md"
-                >
-                  {subCategory?.map((subCategories) => (
-                    <option key={subCategories?._id} value={subCategories?.name}>
-                      {subCategories?.name}
-                    </option>
-                  ))}
-                </select>
+                <input
+                    type="text"
+                    className="input input-bordered rounded-md w-full max-w-xs"
+                   defaultValue={subCategory}
+                  {...register("subCategory")}
+                  
+                />
               </div>
               <div className="form-control">
                 <label className="label cursor-pointer">
@@ -283,8 +359,8 @@ const AddProduct = () => {
                   <input
                     type="checkbox"
                     className="checkbox"
+                    defaultValue={bestDeal}
                     {...register("bestDeal")}
-                    //defaultChecked={true}
                   />
                 </label>
               </div>
@@ -295,20 +371,21 @@ const AddProduct = () => {
                 <input
                   type="text"
                   className="input input-bordered rounded-md"
-                  {...register("quantity", { required: true })}
+                  defaultValue={quantity}
+                  {...register("quantity")}
                 />
               </div>
               <input
                 type="submit"
                 className="w-full h-10 bg-primary text-white font-bold rounded-md mt-5 cursor-pointer"
-                value="Add New Product"
+                value="Update Product"
               />
             </div>
           </div>
         </form>
       </div>
-    </>
-  );
+        </>
+    );
 };
 
-export default AddProduct;
+export default EditProduct;

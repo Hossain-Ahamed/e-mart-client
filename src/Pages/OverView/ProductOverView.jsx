@@ -57,7 +57,10 @@ const ProductOverView = () => {
           </p>
           <div className="divider"></div>
           <p>Weight: {weight}</p>
-          <p className="my-2">Size: {size}</p>
+          {
+            !size==="No Size" && (<p className="my-2">Size: {size}</p>)
+          }
+          
           <div className="divider"></div>
           <p>Current Stock: {quantity}</p>
 

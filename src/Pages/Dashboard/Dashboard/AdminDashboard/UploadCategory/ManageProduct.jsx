@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import AdminTitle from "../../../../../Component/AdminTitle";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const ManageProduct = () => {
   const {axiosSecure} = useAxiosSecure();
@@ -95,9 +96,9 @@ const ManageProduct = () => {
 
                   <td className="px-6 py-4 text-lg text-blue-600 text-center">
                     
-                          <a>
+                          <Link to={`/dashboard/edit-product/${product?._id}`}>
                             <BiEdit />
-                          </a>
+                          </Link>
                         
                                  
                   </td>

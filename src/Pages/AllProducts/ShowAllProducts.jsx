@@ -12,7 +12,7 @@ const ShowAllProducts = () => {
     // Function to handle the "Load More" button click
     const handleLoadMore = () => {
         setVisibleProducts(visibleProducts + additionalProducts);
-    };
+    };    
 
      // Function to shuffle an array randomly using Fisher-Yates algorithm
      const shuffleArray = (array) => {
