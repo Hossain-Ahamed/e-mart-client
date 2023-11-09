@@ -179,7 +179,7 @@ const ProductCard = ({ showProduct }) => {
                   halfIcon={<i className="fa fa-star-half-alt"></i>}
                   fullIcon={<i className="fa fa-star"></i>}
                   size={starRatingSize}
-                  activeColor="#ffd700"
+                  activeColor="#FB8C00"
                 />
               ) : (
                 <></>

@@ -177,7 +177,7 @@ const EditProduct = () => {
   return (
     <>
       <div className="w-full h-full p-10 xl:px-36">
-        <AdminTitle heading="Add Product"></AdminTitle>
+        <AdminTitle heading="Update Product Details"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="md:flex gap-5">
             <div className="md:border-2 md:w-2/3 md:px-10">
