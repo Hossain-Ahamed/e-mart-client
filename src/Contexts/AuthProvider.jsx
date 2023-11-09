@@ -3,6 +3,7 @@ import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithE
 import app from '../firebase/firebase.config';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import Loading from '../Pages/Shared/Loading/Loading';
 
 export const AuthContext = createContext();
 const auth = getAuth(app)
@@ -97,7 +98,7 @@ const AuthProvider = ({children}) => {
     }
 
     if(loading){
-      return <><p>Loading AuthProviderLoading</p></>
+      return <><p className='text-red-600 text-4xl'><span className="loading loading-infinity loading-lg"></span>Loading...</p></>
     }
     return (
         <AuthContext.Provider value={authInfo}>

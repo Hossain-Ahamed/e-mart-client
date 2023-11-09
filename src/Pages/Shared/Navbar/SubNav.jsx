@@ -42,30 +42,30 @@ const SubNav = () => {
   const menuItem = (
     <>
       <li>
-        <Link className="hover:bg-accent hover:text-white" aria-current="page" to="/">Home</Link>
+        <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white" aria-current="page" to="/">Home</Link>
       </li>
       <li>
-        <Link className="hover:bg-accent hover:text-white" to="/about">About</Link>
+        <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white" to="/about">About</Link>
       </li>
       <li>
-        <Link className="hover:bg-accent hover:text-white" to="/reviews">Reviews</Link>
+        <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white" to="/reviews">Reviews</Link>
       </li>
       {isAdmin ? (
         <li>
-          <Link className="hover:bg-accent hover:text-white" to="/dashboard/admin-home">Dashboard</Link>
+          <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white" to="/dashboard/admin-home">Dashboard</Link>
         </li>
       ) : (
         <li>
-          <Link className="hover:bg-accent hover:text-white" to="/dashboard/user-home">Dashboard</Link>
+          <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white" to="/dashboard/user-profile">Dashboard</Link>
         </li>
       )}
       {user?.uid ? (
         <li>
-          <button className="hover:bg-accent hover:text-white" onClick={handleLogOut}>LogOut</button>
+          <button className="text-white font-semibold text-lg hover:bg-accent hover:text-white" onClick={handleLogOut}>LogOut</button>
         </li>
       ) : (
         <li>
-          <Link className="hover:bg-accent hover:text-white" to="/login">Login</Link>
+          <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white" to="/login">Login</Link>
         </li>
       )}
     </>
@@ -74,7 +74,7 @@ const SubNav = () => {
     <>
 
       <div className="">
-        <div className="navbar bg-slate-100 p-3">
+        <div className="navbar bg-accent p-3">
           <div className="navbar-start ml-5">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -82,17 +82,17 @@ const SubNav = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 p-2 shadow rounded-box w-52"
               >
                 {menuItem}
               </ul>
             </div>
-            <Link to="/" className="flex items-center text-2xl font-bold ">
+            <Link to="/" className="flex items-center font-bold font-serif">
               <p>
-                <span className="text-accent text-xl font-extrabold">E</span>
-                Mart
+                <span className="text-white text-2xl font-extrabold">E</span>
+                <span className="text-4xl">Mart</span>
               </p>
-              <GiShoppingCart className="text-5xl text-accent" />
+              <GiShoppingCart className="text-6xl text-white" />
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
@@ -127,8 +127,8 @@ const SubNav = () => {
                           alt={name}
                         />
                       ) : (
-                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-accent rounded-full ">
-                          <span className="font-medium text-gray-100 ">
+                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-white rounded-full ">
+                          <span className="font-medium text-accent text-xl ">
                             {name &&
                               name
                                 .split(" ")

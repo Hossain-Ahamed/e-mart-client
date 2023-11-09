@@ -4,11 +4,8 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import useRole from '../../../../Hooks/useRole';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
-import useProfile from '../../../../Hooks/useProfile';
 
-const AllUsers_Row = ({user, index}) => {
-
-  const [profile] = useProfile();
+const AllUsers_Row = ({user, index, img}) => {
   const {axiosSecure} = useAxiosSecure();
    const [role, setRole] = useState(user?.role);
 
@@ -53,12 +50,11 @@ const AllUsers_Row = ({user, index}) => {
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img src={profile?.img} />
+                        <img src={img} />
                       </div>
                     </div>
                     <div>
                       <div className="font-bold">{user.name}</div>
-                      <div className="text-sm opacity-50">United States</div>
                     </div>
                   </div>
                 </td>

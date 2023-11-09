@@ -5,9 +5,11 @@ import Swal from "sweetalert2";
 import AllUsers_Row from "./AllUsers_Row";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useRole from "../../../../Hooks/useRole";
+import useProfile from "../../../../Hooks/useProfile";
 
 const AllUsers = () => {
   const {axiosSecure} = useAxiosSecure();
+  const [profile] = useProfile();
   const {email} = useRole();
   const { data: users = [], refetch, isError, error } = useQuery(["users"], async () => {
     const res = await axiosSecure.get(`/users?email=${email}`);
@@ -19,25 +21,6 @@ const AllUsers = () => {
     console.log(error)
   }
 
-  const handleMakeAdmin = (user) => {
-    const ghorardim = { id: user?._id };
-    axios
-      .patch(`http://localhost:5000/users/admin/${user._id}`, ghorardim, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        if (data.data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${user.name} is an Admin Now!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
-  };
   return (
     <>
       
@@ -55,7 +38,7 @@ const AllUsers = () => {
           </thead>
           <tbody className="">
             {/* row 1 */}
-            {users.map((user, index) => <AllUsers_Row key={index} user={user} index={index+1}></AllUsers_Row>)}
+            {users.map((user, index) => <AllUsers_Row key={index} user={user} index={index+1} img={profile?.img}></AllUsers_Row>)}
           </tbody>
         </table>
       </div>

@@ -49,7 +49,7 @@ const ShowAllProducts = () => {
                     <div className='absolute right-6 bottom-[-4]'>
                         <button
                             onClick={handleLoadMore}
-                            className='btn p-2 px-5 m-1 bg-slate-100 text-black hover:bg-accent hover:text-white font-semibold text-lg rounded-md border-none'
+                            className='btn p-2 px-10 mt-8 m-1 bg-white text-accent hover:bg-accent hover:text-white hover:border-none border-2 border-accent font-semibold text-lg rounded-md'
                         >
                             Load More
                         </button>

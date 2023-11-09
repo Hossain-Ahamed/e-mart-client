@@ -22,7 +22,7 @@ const UserProfile = () => {
         `http://localhost:5000/get-profile/${user?.email}`,
         { withCredentials: true }
       );
-      // console.log(res.data);
+      console.log(res.data);
       return res?.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || "An error occurred");

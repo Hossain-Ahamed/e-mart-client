@@ -162,7 +162,7 @@ const ProductCard = ({ showProduct }) => {
             <p className="flex text-yellow-700 font-bold text-xs lg:text-xl justify-center my-1">
               <TbCurrencyTaka></TbCurrencyTaka>
               {price}
-              {mainPrice !== price && (
+              {mainPrice && (
                 <s className="flex text-sm text-gray-600">
                   <TbCurrencyTaka></TbCurrencyTaka>
                   {mainPrice}

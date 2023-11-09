@@ -1,49 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router-dom';
-import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
-import AdminTitle from '../../../../../Component/AdminTitle';
-import Swal from 'sweetalert2';
-import slugify from 'slugify';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router-dom";
+import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
+import AdminTitle from "../../../../../Component/AdminTitle";
+import Swal from "sweetalert2";
+import slugify from "slugify";
 
 const EditProduct = () => {
-    const {axiosSecure} = useAxiosSecure();
-    const [selectedImage, setSelectedImage] = useState(null);
-    const productDetail = useLoaderData();
-    const {
-        _id,
-        image,
-        productTitle,
-        price,
-        mainPrice,
-        des,
-        weight,
-        size,
-        quantity,
-        reviews,
-        category,
-        subCategory,
-        bestDeal
-      } = productDetail;
+  const { axiosSecure } = useAxiosSecure();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const productDetail = useLoaderData();
+  const {
+    _id,
+    image,
+    productTitle,
+    price,
+    mainPrice,
+    des,
+    weight,
+    size,
+    quantity,
+    reviews,
+    category,
+    subCategory,
+    bestDeal,
+  } = productDetail;
 
-      const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
-      useEffect(() => {
-        // Initialize form fields with the product details
-        setValue('productTitle', productTitle);
-        setValue('des', des);
-        setValue('price', price);
-        setValue('mainPrice', mainPrice);
-        setValue('weight', weight);
-        setValue('size', size);
-        setValue('quantity', quantity);
-        setValue('category', category);
-        setValue('subCategory', subCategory);
-        setValue('bestDeal', bestDeal);
-        if (image) {
-          setSelectedImage(image);
-        }
-      }, [setValue, productTitle, des, image, price, mainPrice, weight, size, quantity, category, subCategory, bestDeal]);
+  useEffect(() => {
+    // Initialize form fields with the product details
+    setValue("productTitle", productTitle);
+    setValue("des", des);
+    setValue("price", price);
+    setValue("mainPrice", mainPrice);
+    setValue("weight", weight);
+    setValue("size", size);
+    setValue("quantity", quantity);
+    setValue("category", category);
+    setValue("subCategory", subCategory);
+    setValue("bestDeal", bestDeal);
+    if (image) {
+      setSelectedImage(image);
+    }
+  }, [
+    setValue,
+    productTitle,
+    des,
+    image,
+    price,
+    mainPrice,
+    weight,
+    size,
+    quantity,
+    category,
+    subCategory,
+    bestDeal,
+  ]);
 
   const img_hosting_token = `${import.meta.env.VITE_IMAGE_TOKEN}`;
 
@@ -51,53 +64,97 @@ const EditProduct = () => {
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    console.log(formData, "formData")
+    console.log(formData, "formData");
     // Check if a new image has been selected
-  const isNewImageSelected = data.image[0] && data.image[0] !== image;
+    const isNewImageSelected = data.image[0] && data.image[0] !== image;
 
-  if (isNewImageSelected) {
-    // Append the new image to formData
-    formData.append("image", data.image[0]);
-    fetch(img_hosting_url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imgResponse) => {
-        if (imgResponse.success) {
-          const imgURL = imgResponse?.data?.display_url;
-          const {
-            productTitle,
-            des,
-            image,
-            mainPrice,
-            price,
-            weight,
-            size,
-            bestDeal,
-            category,
-            subCategory,
-            quantity,
-          } = data;
+    if (isNewImageSelected) {
+      // Append the new image to formData
+      formData.append("image", data.image[0]);
+      fetch(img_hosting_url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((imgResponse) => {
+          if (imgResponse.success) {
+            const imgURL = imgResponse?.data?.display_url;
+            const {
+              productTitle,
+              des,
+              image,
+              mainPrice,
+              price,
+              weight,
+              size,
+              bestDeal,
+              category,
+              subCategory,
+              quantity,
+            } = data;
 
-          const updatedProduct = {
-            productTitle,
-            des,
-            image: imgURL,
-            mainPrice: parseFloat(mainPrice),
-            price: parseFloat(price),
-            weight: parseFloat(weight),
-            size,
-            bestDeal,
-            category,
-            subCategory,
-            quantity: parseInt(quantity),
-            productSlug: slugify(productTitle),
-          };
-          console.log(updatedProduct);
-          axiosSecure
-      .put(`/products/${_id}`, updatedProduct)
-      .then((response) => {
+            const updatedProduct = {
+              productTitle,
+              des,
+              image: imgURL,
+              mainPrice: parseFloat(mainPrice),
+              price: parseFloat(price),
+              weight: parseFloat(weight),
+              size,
+              bestDeal,
+              category,
+              subCategory,
+              quantity: parseInt(quantity),
+              productSlug: slugify(productTitle),
+            };
+            console.log(updatedProduct);
+            axiosSecure
+              .put(`/products/${_id}`, updatedProduct)
+              .then((response) => {
+                if (response.status === 200) {
+                  // Product updated successfully
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Product updated successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                }
+              });
+          }
+        });
+    } else {
+      const {
+        productTitle,
+        des,
+        image,
+        mainPrice,
+        price,
+        weight,
+        size,
+        bestDeal,
+        category,
+        subCategory,
+        quantity,
+      } = data;
+
+      const updatedProduct = {
+        productTitle,
+        des,
+        image: productDetail?.image,
+        mainPrice: parseFloat(mainPrice),
+        price: parseFloat(price),
+        weight,
+        size,
+        bestDeal,
+        category,
+        subCategory,
+        quantity: parseInt(quantity),
+        productSlug: slugify(productTitle),
+      };
+      console.log(updatedProduct);
+      axiosSecure.put(`/products/${_id}`, updatedProduct).then((response) => {
         if (response.status === 200) {
           // Product updated successfully
           Swal.fire({
@@ -107,67 +164,19 @@ const EditProduct = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-              }
-            });
         }
       });
-  }
-    else {
-        const {
-            productTitle,
-            des,
-            image,
-            mainPrice,
-            price,
-            weight,
-            size,
-            bestDeal,
-            category,
-            subCategory,
-            quantity,
-          } = data;
-
-          const updatedProduct = {
-            productTitle,
-            des,
-            image: productDetail?.image,
-            mainPrice: parseFloat(mainPrice),
-            price: parseFloat(price),
-            weight,
-            size,
-            bestDeal,
-            category,
-            subCategory,
-            quantity: parseInt(quantity),
-            productSlug: slugify(productTitle),
-          };
-          console.log(updatedProduct);
-          axiosSecure
-      .put(`/products/${_id}`, updatedProduct)
-      .then((response) => {
-        if (response.status === 200) {
-          // Product updated successfully
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Product updated successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-              }
-            });
-  }
-};
-    
+    }
+  };
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0])); // Set selectedImage state with the URL
     }
   };
-    return (
-        <>
-        <div className="w-full h-full p-10 xl:px-36">
+  return (
+    <>
+      <div className="w-full h-full p-10 xl:px-36">
         <AdminTitle heading="Add Product"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="md:flex gap-5">
@@ -258,13 +267,11 @@ const EditProduct = () => {
                     alt="Uploaded"
                     className="h-64 w-52 rounded-2xl object-contain"
                   />
-                ) 
-                }
+                )}
 
                 <input
                   type="file"
                   className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"
-                 
                   {...register("image")}
                   onChange={handleImageChange}
                 />
@@ -313,7 +320,7 @@ const EditProduct = () => {
                     <span className="label-text">Size</span>
                   </label>
                   <select
-                  defaultValue={size}
+                    defaultValue={size}
                     {...register("size")}
                     className="select select-bordered rounded-md w-full max-w-xs"
                   >
@@ -333,24 +340,21 @@ const EditProduct = () => {
                   <span className="label-text">Category</span>
                 </label>
                 <input
-                    type="text"
-                    className="input input-bordered rounded-md w-full max-w-xs"
-                    defaultValue={category}
+                  type="text"
+                  className="input input-bordered rounded-md w-full max-w-xs"
+                  defaultValue={category}
                   {...register("category")}
-                  
                 />
-                  
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Sub-Category</span>
                 </label>
                 <input
-                    type="text"
-                    className="input input-bordered rounded-md w-full max-w-xs"
-                   defaultValue={subCategory}
+                  type="text"
+                  className="input input-bordered rounded-md w-full max-w-xs"
+                  defaultValue={subCategory}
                   {...register("subCategory")}
-                  
                 />
               </div>
               <div className="form-control">
@@ -384,8 +388,8 @@ const EditProduct = () => {
           </div>
         </form>
       </div>
-        </>
-    );
+    </>
+  );
 };
 
 export default EditProduct;

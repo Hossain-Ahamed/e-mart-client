@@ -108,7 +108,7 @@ const Navbar = () => {
     <>
       <div
         className={`${
-          isSticky ? "fixed top-0 w-full bg-slate-100" : "relative bg-white lg:py-2 "
+          isSticky ? "fixed top-0 w-full bg-accent" : "relative bg-white lg:py-2 "
         } z-10`}
       >
         <div className="flex items-center">
@@ -123,7 +123,7 @@ const Navbar = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  className="p-2 m-1 bg-slate-100 hover:bg-accent hover:text-white font-semibold text-lg rounded-md"
+                  className="p-2 px-4 m-1 hover:bg-slate-100 bg-accent text-white hover:text-gray-800 font-semibold text-lg rounded-md"
                   onClick={handleSearch}
                 >
                   <div className="flex justify-items-center items-center">
@@ -178,8 +178,8 @@ const Navbar = () => {
                           alt={name}
                         />
                       ) : (
-                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-yellow-600 rounded-full ">
-                          <span className="font-medium text-gray-100 ">
+                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-white rounded-full ">
+                          <span className="font-medium text-gray-800 text-xl">
                             {name &&
                               name
                                 .split(" ")

@@ -133,17 +133,14 @@ const router = createBrowserRouter([
       element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
       children: [
         {
-          path: "user-home",
-          element: <UserHome></UserHome>
+          path: "user-profile",
+          element: <UserProfile />
         },
         {
           path: "edit-user-profile",
           element: <EditUserProfile />
         },
-        {
-          path: "user-profile",
-          element: <UserProfile />
-        },
+        
         {
           path: "myCart",
           element: <BlockAdmin><MyCart></MyCart></BlockAdmin>

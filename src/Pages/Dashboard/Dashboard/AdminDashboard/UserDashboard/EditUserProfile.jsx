@@ -71,6 +71,11 @@ const EditUserProfile = () => {
       return ;
     }
     const formData = new FormData();
+    console.log(formData, "formData");
+    // Check if a new image has been selected
+    const isNewImageSelected = data.image[0] && data.image[0] !== profile?.img;
+
+    if (isNewImageSelected) {
     formData.append("image", data?.image[0]);
     axios.post(img_hosting_url, formData).then((imgResponse) => {
       console.log(imgResponse);
@@ -117,6 +122,47 @@ const EditUserProfile = () => {
           });
       }
     });
+  }
+  else{
+    const { name, email, image, address, phone, city } = data;
+        setValue("img", image);
+        const newProfile = {
+          name,
+          email,
+          img: profile?.img,
+          address,
+          city,
+          phone,
+          slug: slugify(name),
+        };
+        console.log(newProfile);
+
+        axiosSecure
+          .post("http://localhost:5000/upload-profile", newProfile, {
+            withCredentials: true,
+          })
+          .then((data) => {
+            console.log("new", data?.data);
+            // reset();
+            // setSelectedImage(null);
+
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Done",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            refetch();
+            navigate('/dashboard/user-profile')
+          })
+          .catch((e) => {
+            console.log(e);
+            if (e?.response?.status === 409) {
+              //
+            }
+          });
+  }
   };
 
   const handleImageChange = (e) => {

@@ -12,41 +12,35 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const handleSignUp = data => {
-        
-        createUser(data.email, data.password)
-        .then(result =>{
+      createUser(data.email, data.password)
+        .then(result => {
           const user = result.user;
-            console.log(user)
-            updateUserProfile(data.name)
+          console.log(user);
+          updateUserProfile(data.name)
             .then(() => {
-              const saveUser = { name: data.name, email: data.email}
-              // axios.post('http://localhost:5000/users', saveUser, {withCredentials: true})
-              // fetch('http://localhost:5000/users', {
-              //               method: 'POST',
-              //               headers: {
-              //                   'content-type': 'application/json'
-              //               },
-              //               body: JSON.stringify(saveUser)
-              //           })
-              //           .then(res => res.json())
-              //           .then(data => {
-              //               if (data.insertedId) {
-              //                   reset();
-              //     Swal.fire({
-              //       position: 'top-end',
-              //       icon: 'success',
-              //       title: 'User created successfully.',
-              //       showConfirmButton: false,
-              //       timer: 1500
-              //   });
-                
-              //   }
-              // })
-              navigate('/');
+              const saveUser = { name: data.name, email: data.email };
+              console.log(saveUser)
+              axios.post('http://localhost:5000/users', saveUser, { withCredentials: true })
+                .then(data => {
+                  console.log(data)
+                  if (data.insertedId) {
+                    reset();
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'User created successfully.',
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                    navigate('/');
+                  }
+                })
+                .catch(error => console.log(error));
             })
+            .catch(error => console.log(error));
         })
         .catch(error => console.log(error));
     }
+    
     return (
         <>
         <Helmet>

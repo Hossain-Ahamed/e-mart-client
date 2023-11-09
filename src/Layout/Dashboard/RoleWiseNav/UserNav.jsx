@@ -17,11 +17,7 @@ import { Link, Outlet } from "react-router-dom";
 const UserNav = () => {
     return (
         <>
-                <li>
-                  <Link to="/dashboard/user-home">
-                    <AiOutlineUser></AiOutlineUser>User
-                  </Link>
-                </li>
+                
                 <li>
                   <Link to="/dashboard/user-profile">
                     <ImProfile />
