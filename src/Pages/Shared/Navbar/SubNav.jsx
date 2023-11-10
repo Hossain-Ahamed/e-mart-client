@@ -47,9 +47,9 @@ const SubNav = () => {
       <li>
         <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white uppercase" to="/about">About</Link>
       </li>
-      <li>
+      {/* <li>
         <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white uppercase" to="/reviews">Reviews</Link>
-      </li>
+      </li> */}
       {isAdmin ? (
         <li>
           <Link className="text-white font-semibold text-lg hover:bg-accent hover:text-white uppercase" to="/dashboard/admin-home">Dashboard</Link>

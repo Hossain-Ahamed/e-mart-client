@@ -6,13 +6,11 @@ import { useLoaderData, useParams } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
 import BackToTopButton from "../../Component/BackToTopButton";
 import ReactStars from "react-rating-stars-component";
+import useRole from "../../Hooks/useRole";
 
 const ProductOverView = () => {
+  const {role} = useRole();
   const productDetail = useLoaderData();
-  const [cart] = useCart();
-
-  const [alreadyAdded, setalreadyAdded] = useState(false);
-
   const {
     _id,
     image,
@@ -25,11 +23,20 @@ const ProductOverView = () => {
     quantity,
     reviews
   } = productDetail;
-  useEffect(() => {
-    setalreadyAdded(cart.some((obj) => obj._id === _id));
-  }, [cart, _id]);
+  const [cart] = useCart();
 
+  const [alreadyAdded, setalreadyAdded] = useState(false);
+  
   const handleAddToCart = useAddToCart();
+
+  useEffect(() => {
+    if(role === "user")
+    {
+      setalreadyAdded(cart.some((obj) => obj._id === _id));
+    }
+  }, [cart, _id, role]);
+
+
   return (
     <>
       <div className="md:flex my-10 mx-16 gap-8">
@@ -73,7 +80,11 @@ const ProductOverView = () => {
             ) : (
               <button
                 onClick={() => handleAddToCart(productDetail, 1)}
-                className="flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5"
+                className={`flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5 ${
+                  ["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role)
+                    ? "hidden"
+                    : ""
+                }`}
               >
                 <AiOutlineShoppingCart />
                 <span>Add to Cart</span>
@@ -81,7 +92,11 @@ const ProductOverView = () => {
             )
           ) : (
             <button
-              className="flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5 cursor-not-allowed"
+              className={`flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5 ${
+                ["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role)
+                  ? "hidden"
+                  : ""
+              }`}
               disabled
             >
               <AiOutlineShoppingCart />

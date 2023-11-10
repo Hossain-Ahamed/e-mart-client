@@ -56,7 +56,8 @@ const ReviewForm = ({ cart_product, id }) => {
     const onSubmit = (data) => {
         const { rating, comment } = data;
         const {_id, name, email} = profile
-        const reviewData = { rating, comment, _id, name, email };
+        const reviewData = { rating: parseFloat(rating),
+           comment, _id, name, email };
       
         axios
           .post(`http://localhost:5000/products/${id}/reviews`, reviewData, {

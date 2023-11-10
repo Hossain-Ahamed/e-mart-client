@@ -35,36 +35,10 @@ const ManageProduct = () => {
     setCurrentPage(0)
     setSearchQuery(e.target.value);
   };
-  // const [searchQuery, setSearchQuery] = useState('');
-
-  // const fetchProducts = useCallback(async () => {
-  //   try {
-  //     const response = await axiosSecure.get('/products');
-  //     setProducts(response?.data || []);
-  //   } catch (error) {
-  //     console.error("Error fetching products:", error);
-  //   }
-  // }, [axiosSecure]);
-  
-  // useEffect(() => {
-  //   // Fetch products when the component mounts
-  //   fetchProducts();
-  // }, [fetchProducts]);
-
-  // const handleSearch = useCallback(() => {
-  //   axiosSecure.get(`/products?search=${searchQuery}`)
-  //     .then((data) => {
-  //       console.log("Search Result:", data);
-  //       setProducts(data?.data || []);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching search results:", error);
-  //     });
-  // }, [axiosSecure, searchQuery]);
 
   const handleDelete = (product) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: `Are you want to delete ${product?.productTitle}?`,
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -91,16 +65,6 @@ const ManageProduct = () => {
     <>
       <div className="h-full p-10 w-full">
         <AdminTitle heading={`All Products(${products.length})`} />
-        {/* <div className="flex items-center gap-3 border w-[450px]">
-          <input
-            type="text"
-            placeholder="Search Here"
-            className="w-96 border-none"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button onClick={handleSearch} ><BsSearch /></button>
-        </div> */}
          <div className="relative mt-5 flex justify-between items-center mb-3">
         <div>
           <select
@@ -141,7 +105,7 @@ const ManageProduct = () => {
               type="text"
               value={searchQuery}
               onChange={handleInputChange}
-              placeholder="Search By Phone"
+              placeholder="Search By Product"
               className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
             />
           </div>

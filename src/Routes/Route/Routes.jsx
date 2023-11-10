@@ -102,10 +102,10 @@ const router = createBrowserRouter([
           element: <PagesForSubCategory />,
           loader: ({params}) => fetch(`http://localhost:5000/sub-categories/${params.slug}`)
         },
-        {
-          path: "/reviews",
-          element: <Reviews />
-        },
+        // {
+        //   path: "/reviews",
+        //   element: <Reviews />
+        // },
         {
           path: "/mensFashion",
           element: <HomeForMen></HomeForMen>
