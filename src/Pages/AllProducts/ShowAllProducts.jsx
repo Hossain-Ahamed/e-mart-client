@@ -1,63 +1,90 @@
-import React, { useEffect, useState } from 'react';
-import useProduct from '../../Hooks/useProduct';
-import ProductCard from '../Shared/ProductCard';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import ProductCard from "../Shared/ProductCard";
+import axios from "axios";
+import ProductCardLoading from "../Shared/ProductCardLoading";
 
 const ShowAllProducts = () => {
-    const  [ product ]  = useProduct();
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [NotReachedToTheEnd, setNotReachedToTheEnd] = useState(true);
 
-    const [visibleProducts, setVisibleProducts] = useState(15); // Number of products initially visible
-    const [additionalProducts, setAdditionalProducts] = useState(15); // Number of products to load on each "Load More" click
+  useEffect(() => {
+    fetchProducts();
+    window.addEventListener("scroll", handleScroll);
 
-    // Function to handle the "Load More" button click
-    const handleLoadMore = () => {
-        setVisibleProducts(visibleProducts + additionalProducts);
-    };    
-
-     // Function to shuffle an array randomly using Fisher-Yates algorithm
-     const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
 
-    // Shuffle the product array randomly
-    const shuffledProducts = shuffleArray(product);
+  useEffect(() => {
+    if (page > 1) {
+      fetchNextPageProducts();
+    }
+  }, [page]);
 
-    return (
-        <>
-            <div className=' py-12'>
-        <div className='grid grid-cols-3 items-center gap-0 mx-6 lg:ml-12'>
-            <h3 className='text-lg md:text-2xl font-bold'>All Products</h3>
-            <hr className='border'/>
-            <hr className='border'/>
-            </div>
-        <div className='w-[300px] md:w-[700px] lg:w-[1200px] mx-auto mt-10 relative'>
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 gap-8'>
-              
-                {shuffledProducts.slice(0, visibleProducts).map(showProduct => 
-                  <ProductCard 
-                    key={showProduct._id}
-                    showProduct={showProduct}
-                ></ProductCard>
-                )}
-            </div>
+  const fetchProducts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(
+        `http://localhost:5000/api/products?page=${page}`
+      );
+      setProducts(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      setIsLoading(false);
+    }
+  };
+
+  const fetchNextPageProducts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(
+        `http://localhost:5000/api/products?page=${page}`
+      );
+      const newProducts = response.data;
+      setProducts((prevProducts) => [...prevProducts, ...response.data]);
+      if (newProducts.length > 0) {
+        setNotReachedToTheEnd(true);
+      } else {
+        setNotReachedToTheEnd(false);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching next page products:", error);
+    }
+  };
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  return (
+    <>
+      <div className="py-12">
+        {/* Your existing code here */}
+        <div className="w-[300px] md:w-[700px] lg:w-[1200px] mx-auto mt-10 relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 gap-8">
+            {products.map((product) => (
+              <ProductCard key={product._id} showProduct={product} />
+            ))}
+          </div>
         </div>
-        {visibleProducts < product.length && (
-                    <div className='absolute right-6 bottom-[-4]'>
-                        <button
-                            onClick={handleLoadMore}
-                            className='btn p-2 px-10 mt-8 m-1 bg-white text-accent hover:bg-accent hover:text-white hover:border-none border-2 border-accent font-semibold text-lg rounded-md'
-                        >
-                            Load More
-                        </button>
-                    </div>
-                )}
-        </div>
-        </>
-    );
+        {isLoading && (
+          <>
+            <ProductCardLoading />
+          </>
+        )}
+      </div>
+    </>
+  );
 };
 
 export default ShowAllProducts;

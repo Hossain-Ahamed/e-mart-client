@@ -9,13 +9,13 @@ const HomeTrendingProducts = () => {
     setActiveContent(contentId);
   };
 
-  const  [ product ]  = useProduct();
+  const  [ products, isLoading ]  = useProduct();
 
-    const products = product.filter(
+    const bestDealProducts = products.filter(
       showProduct => showProduct['bestDeal'] === true
             );
 
-    const newProducts = product
+    const newProducts = products
 
     return (
        <>
@@ -40,7 +40,7 @@ const HomeTrendingProducts = () => {
           {activeContent === 'content1' && (
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:mt-10'>
               
-                {products.slice(0, 5).map(showProduct => 
+                {bestDealProducts.slice(0, 5).map(showProduct => 
                   <ProductCard 
                     key={showProduct._id}
                     showProduct={showProduct}

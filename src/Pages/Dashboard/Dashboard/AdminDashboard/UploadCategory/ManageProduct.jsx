@@ -1,5 +1,4 @@
 import React from "react";
-import useProduct from "../../../../../Hooks/useProduct";
 import { BiEdit } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
@@ -7,16 +6,11 @@ import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import AdminTitle from "../../../../../Component/AdminTitle";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
 import { useState } from "react";
-import { useEffect } from "react";
-import { useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 const ManageProduct = () => {
   const {axiosSecure} = useAxiosSecure();
- // const [product, refetch] = useProduct();
-  // const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSize, setSearchSize] = useState(15);
   const [currentPage, setCurrentPage] = useState(0);
