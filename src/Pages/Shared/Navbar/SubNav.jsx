@@ -8,6 +8,7 @@ import useCart from "../../../Hooks/useCart";
 import useAdmin from "../../../Hooks/useAdmin";
 import useProfile from "../../../Hooks/useProfile";
 import useRole from "../../../Hooks/useRole";
+import img from "../../../assets/emart.png"
 
 const SubNav = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -88,11 +89,12 @@ const SubNav = () => {
               </ul>
             </div>
             <Link to="/" className="flex items-center font-bold font-serif">
-              <p>
-                <span className="text-white text-2xl font-extrabold">E</span>
-                <span className="text-4xl">Mart</span>
-              </p>
-              <GiShoppingCart className="text-6xl text-white" />
+              {/* <p>
+                <span className="text-white text-5xl font-extrabold">E</span>
+                <span className="text-2xl">Mart</span>
+              </p> */}
+              <img src={img} alt="" />
+              {/* <GiShoppingCart className="text-6xl text-white" /> */}
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
