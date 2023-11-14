@@ -282,7 +282,7 @@ const EditProduct = () => {
               <div className="flex gap-3">
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
-                    <span className="label-text">Buying Price</span>
+                    <span className="label-text">Main Price</span>
                   </label>
                   <input
                     type="text"

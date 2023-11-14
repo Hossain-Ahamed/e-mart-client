@@ -108,8 +108,8 @@ const Navbar = () => {
     <>
       <div
         className={`${
-          isSticky ? "fixed top-0 w-full bg-accent" : "relative bg-white lg:py-2 "
-        } z-10`}
+          isSticky ? "fixed top-0 w-full " : "relative lg:py-2 "
+        } z-10 bg-accent`}
       >
         <div className="flex items-center">
           <div className="container mx-auto px-4" ref={searchRef}>

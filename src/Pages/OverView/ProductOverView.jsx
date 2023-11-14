@@ -55,15 +55,17 @@ const ProductOverView = () => {
           <p className="flex text-yellow-700 font-bold lg:text-xl my-1">
             <TbCurrencyTaka></TbCurrencyTaka>
             {price}
-            {mainPrice !== price && (
+            {mainPrice && (
               <s className="flex text-sm text-gray-600">
                 <TbCurrencyTaka></TbCurrencyTaka>
                 {mainPrice}
               </s>
             )}
           </p>
-          <div className="divider"></div>
-          <p>Weight: {weight}</p>
+          {
+            weight && (<><div className="divider"></div>
+            <p>Weight: {weight}</p></>)
+          }
           {
             !size==="No Size" && (<p className="my-2">Size: {size}</p>)
           }
