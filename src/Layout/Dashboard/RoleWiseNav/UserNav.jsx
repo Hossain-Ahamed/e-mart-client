@@ -19,37 +19,37 @@ const UserNav = () => {
         <>
                 
                 <li>
-                  <Link to="/dashboard/user-profile">
+                  <Link className="focus:bg-accent" to="/dashboard/user-profile">
                     <ImProfile />
                     User Profile
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/myCart">
+                  <Link className="focus:bg-accent" to="/dashboard/myCart">
                     <BsCart3 />
                     My Cart
                   </Link>
                 </li>
-                <li>
-                  <Link to="/dashboard/wish-list">
+                {/* <li>
+                  <Link className="focus:bg-accent" to="/dashboard/wish-list">
                     <AiOutlineHeart />
                     Wish List
                   </Link>
-                </li>
+                </li> */}
                 <li>
-                  <Link to="/dashboard/payment-history">
+                  <Link className="focus:bg-accent" to="/dashboard/payment-history">
                     <IoWalletOutline />
                     Payment History
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/order-details">
+                  <Link className="focus:bg-accent" to="/dashboard/order-details">
                     <BiCalendar />
                     Order Details
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/add-review/delivered">
+                  <Link className="focus:bg-accent" to="/dashboard/add-review/delivered">
                     <MdAddCard />
                     Delivered Orders
                   </Link>

@@ -7,6 +7,8 @@ import useCart from "../../../Hooks/useCart";
 import useProfile from "../../../Hooks/useProfile";
 import { MdShoppingCart } from "react-icons/md";
 import useRole from "../../../Hooks/useRole";
+import img from "../../../assets/emart.png"
+import { GiShoppingCart } from "react-icons/gi";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -22,25 +24,52 @@ const Navbar = () => {
 
   const subMenuItem = (
     <>
-      <li>
-        <Link to="/profile">
-          Profile<span className="badge">New</span>
+      {role==="admin" ? (
+        <li>
+          <Link className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/dashboard/admin-home">Dashboard</Link>
+        </li>
+      ) :
+      role==="Product Manager" ? (
+        <li>
+          <Link to="/dashboard/upload/upload-category">
+          Dashboard
         </Link>
-      </li>
+        </li>
+      ) :
+      role==="Order Manager" ? (
+        <li>
+          <Link to="/dashboard/add-coupon">
+          Dashboard
+        </Link>
+        </li>
+      ) :
+      role==="Delivery Partner" ? (
+        <li>
+          <Link to="/dashboard/orders/current">
+          Dashboard
+        </Link>
+        </li>
+      ) :
+       (
+        <li>
+          <Link className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/dashboard/user-profile">Dashboard</Link>
+        </li>
+      )}
+
       {user?.uid ? (
         <li>
-          <button onClick={handleLogOut}>LogOut</button>
+          <button className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" onClick={handleLogOut}>LogOut</button>
         </li>
       ) : (
         <li>
-          <Link to="/login">Login</Link>
+          <Link className="block px-4 py-2 hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/login">Login</Link>
         </li>
       )}
     </>
   );
 
   
-   const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -114,6 +143,18 @@ const Navbar = () => {
         <div className="flex items-center">
           <div className="container mx-auto px-4" ref={searchRef}>
             <div className="navbar flex">
+            <div className={`${isSticky ? "block" : "hidden"} mx-5`}>
+            <Link to="/" className="flex justify-center items-center font-serif">
+              <p>
+                <span className="text-white text-5xl font-extrabold">E</span>
+                <span className="text-2xl font-semibold">Mart</span>
+              </p>
+              {/* <div className="w-20">
+              <img src={img} alt="" />
+              </div> */}
+              <GiShoppingCart className="text-6xl text-white" />
+            </Link>
+            </div>
               <div className="flex items-center border-2 rounded-md mx-auto bg-white">
                 <input
                   type="text"

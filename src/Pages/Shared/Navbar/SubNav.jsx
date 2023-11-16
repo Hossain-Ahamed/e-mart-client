@@ -24,11 +24,38 @@ const SubNav = () => {
   };
   const subMenuItem = (
     <>
-      <li>
-        <Link className="block px-4 py-2 hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/profile">
-          Profile
+      {role==="admin" ? (
+        <li>
+          <Link className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/dashboard/admin-home">Dashboard</Link>
+        </li>
+      ) :
+      role==="Product Manager" ? (
+        <li>
+          <Link to="/dashboard/upload/upload-category">
+          Dashboard
         </Link>
-      </li>
+        </li>
+      ) :
+      role==="Order Manager" ? (
+        <li>
+          <Link to="/dashboard/add-coupon">
+          Dashboard
+        </Link>
+        </li>
+      ) :
+      role==="Delivery Partner" ? (
+        <li>
+          <Link to="/dashboard/orders/current">
+          Dashboard
+        </Link>
+        </li>
+      ) :
+       (
+        <li>
+          <Link className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/dashboard/user-profile">Dashboard</Link>
+        </li>
+      )}
+      
       {user?.uid ? (
         <li>
           <button className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" onClick={handleLogOut}>LogOut</button>
@@ -43,30 +70,21 @@ const SubNav = () => {
   const menuItem = (
     <>
       <li>
-        <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" aria-current="page" to="/">Home</Link>
+        <Link className="text-accent hover:text-accent font-semibold text-xs hover:bg-white uppercase" aria-current="page" to="/">Home</Link>
       </li>
       <li>
-        <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" to="/about">About</Link>
+        <Link className="text-accent hover:text-accent font-semibold text-xs hover:bg-white uppercase" to="/about">About</Link>
       </li>
       {/* <li>
         <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" to="/reviews">Reviews</Link>
       </li> */}
-      {isAdmin ? (
-        <li>
-          <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" to="/dashboard/admin-home">Dashboard</Link>
-        </li>
-      ) : (
-        <li>
-          <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" to="/dashboard/user-profile">Dashboard</Link>
-        </li>
-      )}
       {user?.uid ? (
         <li>
-          <button className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" onClick={handleLogOut}>LogOut</button>
+          {/* <button className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" onClick={handleLogOut}>LogOut</button> */}
         </li>
       ) : (
         <li>
-          <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" to="/login">Login</Link>
+          <Link className="text-accent hover:text-accent font-semibold text-xs hover:bg-white uppercase" to="/login">Login</Link>
         </li>
       )}
     </>
@@ -75,7 +93,7 @@ const SubNav = () => {
     <>
 
       <div className="">
-        <div className="navbar bg-white">
+        <div className="navbar bg-white px-10">
           <div className="navbar-start ml-5">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -88,22 +106,20 @@ const SubNav = () => {
                 {menuItem}
               </ul>
             </div>
-            <Link to="/" className="pt-2">
+            <Link to="/" className="">
               {/* <p>
                 <span className="text-white text-5xl font-extrabold">E</span>
                 <span className="text-2xl">Mart</span>
               </p> */}
-              <div className="w-20 h-20">
+              <div className="w-20">
               <img src={img} alt="" />
               </div>
               {/* <GiShoppingCart className="text-6xl text-white" /> */}
             </Link>
           </div>
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{menuItem}</ul>
-          </div>
-
+          
           <div className="navbar-end mr-5">
+          <ul className="menu menu-horizontal px-1">{menuItem}</ul>
             <div className="flex justify-items-center gap-3">
               {role === "user" && (
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

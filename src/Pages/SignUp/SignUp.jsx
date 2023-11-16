@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { UserDataContext } from "../../Contexts/UserDataProvider";
+import signUpImage from "../../assets/signup.png"
 
 
 
@@ -62,36 +63,33 @@ const SignUp = () => {
       <Helmet>
         <title>E-Mart | SignUp</title>
       </Helmet>
-      <div className="w-80 mx-auto mt-12 bg-white p-10 rounded-xl shadow-xl">
+      <div className="grid md:grid-cols-3 items-center">
+        <div className=" md:col-span-2">
+      <div className="w-72 md:w-96 mx-auto my-16 bg-white p-5 md:p-10 rounded-xl shadow-xl">
+      
+              <h3 className="text-xl md:text-3xl font-bold mb-5 md:mb-10">Sign Up</h3>
         <form onSubmit={handleSubmit(handleSignUp)}>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Name</span>
-            </label>
+          <div className="form-control"> 
             <input
               type="text"
               {...register("name", { required: "User name is required" })}
               placeholder="name"
-              className="input-bordered w-full max-w-xs"
+              className="border-none bg-orange-50 rounded-lg w-full max-w-xs"
             />
             {errors.name && <p role="alert">{errors.name?.message}</p>}
           </div>
+          <br />
           <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
             <input
               type="email"
               {...register("email", { required: "Email Address is required" })}
               placeholder="email"
-              className="input-bordered w-full max-w-xs"
+              className="border-none bg-orange-50 rounded-lg w-full max-w-xs"
             />
             {errors.email && <p role="alert">{errors.email?.message}</p>}
           </div>
+          <br />
           <div className="form-control">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
             <input
               type="password"
               {...register("password", {
@@ -102,21 +100,34 @@ const SignUp = () => {
                 },
               })}
               placeholder="password"
-              className="input-bordered w-full max-w-xs"
+              className="border-none bg-orange-50 rounded-lg w-full max-w-xs"
             />
             {errors.password && <p role="alert">{errors.password?.message}</p>}
           </div>
+          <br />
           <div className="form-control mt-6">
             <input
               type="submit"
-              className="btn btn-black border-none rounded-none text-white hover:bg-accent"
+              className="bg-accent py-2 hover:bg-accent rounded-full text-white border-0 w-28 mx-auto cursor-pointer"
               value="Sing Up"
             />
           </div>
         </form>
-        <Link to="/login" className="text-accent italic">
-          Already have an account !
-        </Link>
+        <div>
+                <p className="text-sm font-light text-gray-400 text-center mt-5">
+                Already have an account !{" "}
+                  <span className="text-md font-bold text-accent cursor-pointer">
+                    <Link to="/login" className="">
+                      Sign in
+                    </Link>
+                  </span>
+                </p>
+              </div>
+      </div>
+      </div>
+      <div className="bg-orange-100 h-screen relative hidden md:block">
+        <img className=" absolute bottom-10 md:-left-20 lg:-left-52" src={signUpImage} alt="" />
+      </div>
       </div>
     </>
   );
