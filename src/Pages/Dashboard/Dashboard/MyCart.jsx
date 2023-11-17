@@ -24,7 +24,7 @@ const MyCart = () => {
   const [loading, setLoading] = useState(true);
   const [selectedOrders, setSelectedOrders] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/get-cart?email=${user?.email}`, {
+    axios.get(`https://e-mart-server-one.vercel.app/get-cart?email=${user?.email}`, {
       withCredentials: true,
     })
       .then((data) => {
@@ -143,7 +143,7 @@ const MyCart = () => {
       _id
     };
     console.log(data)
-    axios.delete(`http://localhost:5000/remove-from-cart/${user.email}/${_id}`, {
+    axios.delete(`https://e-mart-server-one.vercel.app/remove-from-cart/${user.email}/${_id}`, {
       data,
       withCredentials: true,
     })

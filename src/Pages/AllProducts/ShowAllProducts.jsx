@@ -28,7 +28,7 @@ const ShowAllProducts = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/products?page=${page}`
+        `https://e-mart-server-one.vercel.app/api/products?page=${page}`
       );
       // Shuffle the products before setting them in state
       const shuffledProducts = shuffle(response.data);
@@ -44,7 +44,7 @@ const ShowAllProducts = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/products?page=${page}`
+        `https://e-mart-server-one.vercel.app/api/products?page=${page}`
       );
       const newProducts = response.data;
       // Shuffle the new products before combining with existing products

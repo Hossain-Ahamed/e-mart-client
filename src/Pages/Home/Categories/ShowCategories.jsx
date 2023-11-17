@@ -13,7 +13,7 @@ const ShowCategories = () => {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/categories')
+        fetch('https://e-mart-server-one.vercel.app/categories')
         .then(res => res.json())
         .then(data => setCategory(data))
     }, [])

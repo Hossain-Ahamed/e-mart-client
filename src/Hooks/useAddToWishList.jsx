@@ -25,7 +25,7 @@ const useAddToWishList = () => {
         checked: false
       }
       // console.log(cartProduct);
-      axios.post(`http://localhost:5000/add-to-wish-list`, WishListProduct, { withCredentials: true } )
+      axios.post(`https://e-mart-server-one.vercel.app/add-to-wish-list`, WishListProduct, { withCredentials: true } )
       .then((response) => {
         console.log(response);
         // Check if the response contains the updated cart data

@@ -41,7 +41,7 @@ const CheckoutForm = ({ price, products }) => {
 
   useEffect(() => {
     axios
-      .post(`http://localhost:5000/create-payment-intent`, { price })
+      .post(`https://e-mart-server-one.vercel.app/create-payment-intent`, { price })
       .then((res) => {
         //console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
@@ -111,7 +111,7 @@ const CheckoutForm = ({ price, products }) => {
       //   // payItems: products?.map(item => item.productId),
       //   date: new Date()
       // }
-      // axios.post('http://localhost:5000/payments', payment )
+      // axios.post('https://e-mart-server-one.vercel.app/payments', payment )
       // .then((res)=>{
       //   console.log(res.data)
       //   if(res.data.insertedId){

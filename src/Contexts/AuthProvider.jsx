@@ -36,7 +36,7 @@ const AuthProvider = ({children}) => {
     //         setUser(currenUser);
 
     //         if(currenUser){
-    //             axios.post('http://localhost:5000/jwt', {email: currenUser.email})
+    //             axios.post('https://e-mart-server-one.vercel.app/jwt', {email: currenUser.email})
     //             .then(data => {
     //                 localStorage.setItem('access-token', data.data.token)
     //             })
@@ -56,7 +56,7 @@ const AuthProvider = ({children}) => {
     
           if (currentUser) {
             const email = {email:currentUser.email}
-            axios.post('http://localhost:5000/jwt', email , { withCredentials: true } )
+            axios.post('https://e-mart-server-one.vercel.app/jwt', email , { withCredentials: true } )
               .then((response) => {
                 const token = response.data.token;
                 Cookies.set("_at", token, { secure: true, sameSite: 'none' });
@@ -69,7 +69,7 @@ const AuthProvider = ({children}) => {
           } 
           else{
             // console.log('ewfergetg')
-            axios.delete('http://localhost:5000/jwt', { withCredentials: true } )
+            axios.delete('https://e-mart-server-one.vercel.app/jwt', { withCredentials: true } )
               .then((response) => {
                 // console.log('habijabi')
                 Cookies.remove("_at");

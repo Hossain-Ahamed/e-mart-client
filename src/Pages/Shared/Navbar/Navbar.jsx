@@ -114,7 +114,7 @@ const Navbar = () => {
   const handleSearch = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:5000/search", {
+      const response = await axios.post("https://e-mart-server-one.vercel.app/search", {
         query: searchQuery,
       });
       setSearchResults(response.data);
@@ -141,18 +141,18 @@ const Navbar = () => {
         } z-10 bg-accent`}
       >
         <div className="flex items-center">
-          <div className="container mx-auto px-4" ref={searchRef}>
+          <div className="container lg:mx-auto lg:px-4" ref={searchRef}>
             <div className="navbar flex">
-            <div className={`${isSticky ? "block" : "hidden"} mx-5`}>
+            <div className={`${isSticky ? "block" : "hidden"} md:mx-5 hidden md:block`}>
             <Link to="/" className="flex justify-center items-center font-serif">
               <p>
-                <span className="text-white text-5xl font-extrabold">E</span>
-                <span className="text-2xl font-semibold">Mart</span>
+                <span className="text-white text-2xl lg:text-5xl font-extrabold">E</span>
+                <span className="text-lg lg:text-2xl font-semibold">Mart</span>
               </p>
               {/* <div className="w-20">
               <img src={img} alt="" />
               </div> */}
-              <GiShoppingCart className="text-6xl text-white" />
+              <GiShoppingCart className="text-3xl lg:text-6xl text-white" />
             </Link>
             </div>
               <div className="flex items-center border-2 rounded-lg mx-auto bg-white">
@@ -164,7 +164,7 @@ const Navbar = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  className="p-1 px-4 mx-1 hover:bg-slate-100 bg-accent text-white hover:text-gray-800 font-semibold text-lg rounded-md"
+                  className="p-1 md:px-4 mx-1 hover:bg-slate-100 bg-accent text-white hover:text-gray-800 font-semibold text-lg rounded-md"
                   onClick={handleSearch}
                 >
                   <div className="flex justify-items-center items-center">
@@ -177,9 +177,9 @@ const Navbar = () => {
             <div>
               {loading && <p>Loading...</p>}
               {!loading && searchResults.length > 0 && (
-                <ul className="fixed right-0 left-0 bg-white md:w-[520px] mx-auto rounded-md p-5 font-bold">
+                <ul className="fixed right-0 left-0 bg-white w-60 md:w-[520px] mx-auto rounded-md p-2 md:p-5 text-xs md:text-base md:font-bold">
                   {searchResults.slice(0, 8).map((product) => (
-                    <li key={product._id} className="my-1">
+                    <li key={product._id} className="my-1 hover:underline">
                       {/* Link to the product overview route */}
                       <Link to={`/overview/${product._id}`}>
                         {product.productTitle}

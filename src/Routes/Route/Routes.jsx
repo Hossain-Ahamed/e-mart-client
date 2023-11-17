@@ -80,7 +80,7 @@ const router = createBrowserRouter([
         {
           path: "/overview/:id",
           element: <ProductOverView></ProductOverView>,
-          loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+          loader: ({params}) => fetch(`https://e-mart-server-one.vercel.app/products/${params.id}`)
         },
         {
           path: "/allproducts",
@@ -89,12 +89,12 @@ const router = createBrowserRouter([
         {
           path: "/categoryPages/:slug",
           element: <PagesForCategory></PagesForCategory>,
-          loader: ({params}) => fetch(`http://localhost:5000/categories/${params.slug}`)
+          loader: ({params}) => fetch(`https://e-mart-server-one.vercel.app/categories/${params.slug}`)
         },
         {
           path: "/sub-category-pages/:slug",
           element: <PagesForSubCategory />,
-          loader: ({params}) => fetch(`http://localhost:5000/sub-categories/${params.slug}`)
+          loader: ({params}) => fetch(`https://e-mart-server-one.vercel.app/sub-categories/${params.slug}`)
         },
         {
           path: "/about-us",
@@ -183,7 +183,7 @@ const router = createBrowserRouter([
         {
           path: 'edit-product/:id',
           element: <AllowAdmin allowedRoles={["admin", "Product Manager"]}><EditProduct /></AllowAdmin>,
-          loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+          loader: ({params}) => fetch(`https://e-mart-server-one.vercel.app/products/${params.id}`)
         },
         {
           path: 'delivery-charge',

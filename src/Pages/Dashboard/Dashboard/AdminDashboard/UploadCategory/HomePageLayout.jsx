@@ -24,7 +24,7 @@ const HomePageLayout = () => {
       
       console.log("Selected Layout:", selectedLayout);
       const response = await axiosSecure.patch(
-        `http://localhost:5000/${type}/${slug}/layout`,
+        `https://e-mart-server-one.vercel.app/${type}/${slug}/layout`,
         {layout: selectedLayout},
         { withCredentials: true }
       );

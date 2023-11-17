@@ -91,19 +91,19 @@ const SubNav = () => {
     <>
 
       <div className="">
-        <div className="navbar bg-white px-10">
+        <div className="navbar bg-white lg:px-10">
           <div className="navbar-start ml-5">
-            <div className="dropdown">
+            {/* <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
                 <LuMenu className=" text-2xl"></LuMenu>
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 px-2 shadow rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 px-2 shadow rounded-box w-32 bg-white"
               >
                 {menuItem}
               </ul>
-            </div>
+            </div> */}
             <Link to="/" className="">
               {/* <p>
                 <span className="text-white text-5xl font-extrabold">E</span>
@@ -117,7 +117,9 @@ const SubNav = () => {
           </div>
           
           <div className="navbar-end mr-5">
+          <div className="hidden lg:flex ">
           <ul className="menu menu-horizontal px-1">{menuItem}</ul>
+          </div>
             <div className="flex justify-items-center gap-3">
               {role === "user" && (
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

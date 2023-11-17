@@ -42,7 +42,7 @@ const AddSubCategory = () => {
         console.log(newSubCategory);
 
         axios
-          .post("http://localhost:5000/upload-sub-category", newSubCategory, {
+          .post("https://e-mart-server-one.vercel.app/upload-sub-category", newSubCategory, {
             withCredentials: true,
           })
           .then((data) => {

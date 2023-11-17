@@ -19,7 +19,7 @@ const UserProfile = () => {
   } = useQuery(["profile"], async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/get-profile/${user?.email}`,
+        `https://e-mart-server-one.vercel.app/get-profile/${user?.email}`,
         { withCredentials: true }
       );
       console.log(res.data);

@@ -10,7 +10,7 @@ const usePaymentHistory = () => {
         enabled: !loading,
         queryFn: async () => {
           
-            const res = await axios.get(`http://localhost:5000/get-payments?email=${user?.email}`, { withCredentials: true })
+            const res = await axios.get(`https://e-mart-server-one.vercel.app/get-payments?email=${user?.email}`, { withCredentials: true })
             console.log(res?.data);
             return res?.data;
         },

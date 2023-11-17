@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 const Coupon = () => {
   const { data: coupons = [], refetch } = useQuery(["coupon"], async () => {
-    const res = await axios.get("http://localhost:5000/get-coupon", {
+    const res = await axios.get("https://e-mart-server-one.vercel.app/get-coupon", {
       withCredentials: true,
     });
     console.log(res.data);
@@ -24,7 +24,7 @@ const Coupon = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/delete-coupon/${coupon?._id}`, {
+        axios.delete(`https://e-mart-server-one.vercel.app/delete-coupon/${coupon?._id}`, {
           withCredentials: true
         })
           .then((data) => {

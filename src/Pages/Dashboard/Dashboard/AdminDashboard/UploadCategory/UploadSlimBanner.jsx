@@ -58,7 +58,7 @@ const UploadSlimBanner = () => {
           //console.log(imgURL);
   
           axios
-            .patch(`http://localhost:5000/${type}/${slug}`, updateCategory, {
+            .patch(`https://e-mart-server-one.vercel.app/${type}/${slug}`, updateCategory, {
               withCredentials: true,
             })
             .then((data) => {

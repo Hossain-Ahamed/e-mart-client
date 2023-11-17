@@ -60,7 +60,7 @@ const ReviewForm = ({ cart_product, id }) => {
            comment, _id, name, email };
       
         axios
-          .post(`http://localhost:5000/products/${id}/reviews`, reviewData, {
+          .post(`https://e-mart-server-one.vercel.app/products/${id}/reviews`, reviewData, {
             withCredentials: true,
           })
           .then((response) => {

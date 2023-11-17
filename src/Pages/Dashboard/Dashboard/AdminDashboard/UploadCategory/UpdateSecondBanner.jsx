@@ -54,7 +54,7 @@ const UpdateSecondBanner = () => {
           console.log(updatedCategory);
           axios
             .patch(
-              `http://localhost:5000/${type}/${slug}`,
+              `https://e-mart-server-one.vercel.app/${type}/${slug}`,
               updatedCategory,
               {
                 withCredentials: true,

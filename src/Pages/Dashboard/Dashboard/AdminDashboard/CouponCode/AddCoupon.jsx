@@ -68,7 +68,7 @@ const AddCoupon = () => {
     console.log(newCoupon);
 
     axios
-      .post("http://localhost:5000/coupon", newCoupon, {
+      .post("https://e-mart-server-one.vercel.app/coupon", newCoupon, {
         withCredentials: true,
       })
       .then((data) => {
