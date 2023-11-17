@@ -5,7 +5,6 @@ import { AuthContext } from "../../../Contexts/AuthProvider";
 import { MdShoppingCart } from "react-icons/md";
 import { LuMenu } from "react-icons/lu";
 import useCart from "../../../Hooks/useCart";
-import useAdmin from "../../../Hooks/useAdmin";
 import useProfile from "../../../Hooks/useProfile";
 import useRole from "../../../Hooks/useRole";
 import img from "../../../assets/emart.png"
@@ -14,7 +13,6 @@ const SubNav = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
   const { role, name } = useRole();
-  const [isAdmin] = useAdmin();
   const [profile] = useProfile();
 
   const handleLogOut = () => {
@@ -73,7 +71,7 @@ const SubNav = () => {
         <Link className="text-accent hover:text-accent font-semibold text-xs hover:bg-white uppercase" aria-current="page" to="/">Home</Link>
       </li>
       <li>
-        <Link className="text-accent hover:text-accent font-semibold text-xs hover:bg-white uppercase" to="/about">About</Link>
+        <Link className="text-accent hover:text-accent font-semibold text-xs hover:bg-white uppercase" to="/about-us">About</Link>
       </li>
       {/* <li>
         <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" to="/reviews">Reviews</Link>

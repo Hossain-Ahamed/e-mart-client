@@ -30,7 +30,9 @@ const ShowAllProducts = () => {
       const response = await axios.get(
         `http://localhost:5000/api/products?page=${page}`
       );
-      setProducts(response.data);
+      // Shuffle the products before setting them in state
+      const shuffledProducts = shuffle(response.data);
+      setProducts(shuffledProducts);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -45,7 +47,9 @@ const ShowAllProducts = () => {
         `http://localhost:5000/api/products?page=${page}`
       );
       const newProducts = response.data;
-      setProducts((prevProducts) => [...prevProducts, ...response.data]);
+      // Shuffle the new products before combining with existing products
+      const shuffledNewProducts = shuffle(newProducts);
+      setProducts((prevProducts) => [...prevProducts, ...shuffledNewProducts]);
       if (newProducts.length > 0) {
         setNotReachedToTheEnd(true);
       } else {
@@ -64,6 +68,24 @@ const ShowAllProducts = () => {
     ) {
       setPage((prevPage) => prevPage + 1);
     }
+  };
+
+  // Fisher-Yates shuffle algorithm
+  const shuffle = (array) => {
+    let currentIndex = array.length,
+      randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
   };
 
   return (

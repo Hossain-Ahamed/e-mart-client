@@ -137,7 +137,7 @@ const Navbar = () => {
     <>
       <div
         className={`${
-          isSticky ? "fixed top-0 w-full " : "relative lg:py-2 "
+          isSticky ? "fixed top-0 w-full " : "relative "
         } z-10 bg-accent`}
       >
         <div className="flex items-center">
@@ -155,16 +155,16 @@ const Navbar = () => {
               <GiShoppingCart className="text-6xl text-white" />
             </Link>
             </div>
-              <div className="flex items-center border-2 rounded-md mx-auto bg-white">
+              <div className="flex items-center border-2 rounded-lg mx-auto bg-white">
                 <input
                   type="text"
                   placeholder="Search"
-                  className="w-full md:w-96 lg:w-[600px] rounded-md border-none"
+                  className="w-full md:w-96 lg:w-[600px] rounded-lg border-none"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  className="p-2 px-4 m-1 hover:bg-slate-100 bg-accent text-white hover:text-gray-800 font-semibold text-lg rounded-md"
+                  className="p-1 px-4 mx-1 hover:bg-slate-100 bg-accent text-white hover:text-gray-800 font-semibold text-lg rounded-md"
                   onClick={handleSearch}
                 >
                   <div className="flex justify-items-center items-center">

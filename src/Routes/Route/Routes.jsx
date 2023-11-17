@@ -3,12 +3,7 @@ import Main from "../../Layout/Main";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
-import HomeForBeauty from "../../Pages/Beauty&Glamour/HomeForBeauty";
 import PagesForCategory from "../../Pages/PagesForCategory/PagesForCategory";
-import HomeForMen from "../../Pages/Men'sFashion/HomeForMen/HomeForMen";
-import HomeForWomen from "../../Pages/Women'sFashion/HomeForWomen/HomeForWomen";
-import HomeForGrocery from "../../Pages/Grocery/HomeForGrocery/HomeForGrocery";
-import HomeForKitchenTools from "../../Pages/KitchenTools/Home/HomeForKitchenTools";
 import PrivateRoutes from "../PrivateRoute/PrivateRoutes";
 import MyCart from "../../Pages/Dashboard/Dashboard/MyCart";
 import AllProducts from "../../Pages/AllProducts/AllProducts";
@@ -32,7 +27,6 @@ import TopRightBannerLayout2 from "../../Pages/Dashboard/Dashboard/AdminDashboar
 import TopLeftBannerLayout2 from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/SecondLayout/TopLeftBannerLayout2";
 import UploadSlimBanner from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/UploadSlimBanner";
 import SelectType from "../../Pages/SelectType/SelectType";
-import AddReview from "../../Pages/Dashboard/Dashboard/AdminDashboard/AddReview";
 import CheckOut from "../../Pages/Dashboard/Dashboard/CheckOut";
 import UserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserProfile";
 import EditUserProfile from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/EditUserProfile";
@@ -59,8 +53,8 @@ import ManageSubCategories from "../../Pages/Dashboard/Dashboard/AdminDashboard/
 import ShowDeliveredOrder from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/ShowDeliveredOrder";
 import DeliveredOrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboard/UserDashboard/UserReview/DeliveredOrderDetails";
 import NoProfileWarning from "../PrivateRoute/NoProfileWarning";
-import Reviews from "../../Pages/Reviews/Reviews";
 import EditProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/EditProduct";
+import AboutUs from "../../Pages/Shared/AboutUs/AboutUs";
 
 
 
@@ -102,30 +96,15 @@ const router = createBrowserRouter([
           element: <PagesForSubCategory />,
           loader: ({params}) => fetch(`http://localhost:5000/sub-categories/${params.slug}`)
         },
+        {
+          path: "/about-us",
+          element: <AboutUs />
+        },
         // {
         //   path: "/reviews",
         //   element: <Reviews />
         // },
-        {
-          path: "/mensFashion",
-          element: <HomeForMen></HomeForMen>
-        },
-        {
-          path: "/womensFashion",
-          element: <HomeForWomen></HomeForWomen>
-        },
-        {
-          path: "/grocery",
-          element: <HomeForGrocery></HomeForGrocery>
-        },
-        {
-          path: "/beauty&glamour",
-          element: <HomeForBeauty></HomeForBeauty>
-        },
-        {
-          path: "/kitchenTools",
-          element: <HomeForKitchenTools></HomeForKitchenTools>
-        }
+        
       ]
     },
     {
@@ -145,10 +124,10 @@ const router = createBrowserRouter([
           path: "myCart",
           element: <BlockAdmin><MyCart></MyCart></BlockAdmin>
         },
-        {
-          path: "wish-list",
-          element: <BlockAdmin><WishList /></BlockAdmin>
-        },
+        // {
+        //   path: "wish-list",
+        //   element: <BlockAdmin><WishList /></BlockAdmin>
+        // },
         {
           path: "check-out",
           element:<BlockAdmin><NoProfileWarning><CheckOut /></NoProfileWarning></BlockAdmin> 

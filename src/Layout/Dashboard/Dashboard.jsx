@@ -14,7 +14,6 @@ import { HiOutlineUserGroup } from "react-icons/hi";
 import { ImProfile } from "react-icons/im";
 // import { MdAddCard } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
-import useAdmin from "../../Hooks/useAdmin";
 import useRole from "../../Hooks/useRole";
 import AdminRoleNav from "./RoleWiseNav/AdminRoleNav";
 import SelectNav from "./RoleWiseNav/SelectNav";

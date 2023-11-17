@@ -13,6 +13,7 @@ import SignUp from "../SignUp/SignUp";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import loginImage from "../../assets/login.png";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const auth = getAuth(app);
@@ -21,7 +22,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { logIn } = useContext(AuthContext);
+  const { logIn, loading, setLoading } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const emailRef = useRef();
 
@@ -35,12 +36,43 @@ const Login = () => {
     logIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
+        setLoading(false)
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
         setLoginError(error.message);
-      });
+        if (error.code === "auth/wrong-password") {
+          //    console.log(error)
+          setLoginError("Password Wrong");
+          Swal.fire({
+              title: 'Error!',
+              text: "Your Password is Wrong",
+              icon: 'error',
+              confirmButtonText: 'OK'
+          })
+
+      } else if (error.code === "auth/user-not-found") {
+          setLoginError("No User by this E-mail");
+          
+          Swal.fire({
+              title: 'Error!',
+              text:"No User by this E-mail",
+              icon: 'error',
+              confirmButtonText: 'OK'
+          })
+      } else {
+
+          setLoginError("An error occurred during sign up. Please try again later.");
+          Swal.fire({
+              title: 'Error!',
+              text: "An error occurred during sign up. Please try again later.",
+              icon: 'error',
+              confirmButtonText: 'OK'
+          })
+      }
+    });
+  
   };
 
   const provider = new GoogleAuthProvider();

@@ -17,8 +17,7 @@ import HomeBottomBanner from '../HomeBottomBanner/HomeBottomBanner';
 const Home = () => {
    // const user = useRole();
     return (
-        <>
-        
+        <>    
             <div className=''>
                 <Helmet>
                     <title>E-Mart | Home</title>

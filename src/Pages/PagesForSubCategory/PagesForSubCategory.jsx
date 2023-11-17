@@ -1,15 +1,10 @@
 import React from "react";
-import ShowBeautyProducts from "../Beauty&Glamour/ShowBeautyProducts";
-import HomeForBeauty from "../Beauty&Glamour/HomeForBeauty";
 import { useLoaderData } from "react-router-dom";
-import SecondBanner from "../../Component/SecondBanner";
 import TopLeftBanner from "../../Component/HomeLayout/TopBanner/TopLeftBanner";
 import TopRightBanner from "../../Component/HomeLayout/TopBanner/TopRightBanner";
 import TopBanner from "../../Component/HomeLayout/TopBanner/TopBanner";
 import SlimBanner from "../../Component/SlimBanner";
-import UserTitle from "../../Component/UserTitle";
 import ThirdBanner from "../../Component/ThirdBanner";
-import SubCategories from "../../Component/SubCategory/SubCategories";
 import TrendingProducts from "../Shared/TrendingProducts";
 import SubCategoryAllProducts from "./SubCategoryAllProducts";
 
