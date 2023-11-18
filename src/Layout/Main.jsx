@@ -11,7 +11,7 @@ const Main = () => {
     //console.log(import.meta.env.VITE_TEST)
     return (
         <>
-        { noNavFooter || <SubNav />}
+        {/* { noNavFooter || <SubNav />} */}
         { noNavFooter || <Navbar />}
         <div className='max-w-[1500px] mx-auto'>
        <Outlet />

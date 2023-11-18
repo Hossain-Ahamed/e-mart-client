@@ -22,6 +22,29 @@ const Navbar = () => {
       .catch((err) => console.log(err));
   };
 
+  const menuItem = (
+    <>
+      <li>
+        <Link className="text-black hover:text-accent font-bold text-xs hover:bg-white uppercase" aria-current="page" to="/">Home</Link>
+      </li>
+      <li>
+        <Link className="text-black hover:text-accent font-bold text-xs hover:bg-white uppercase" to="/about-us">About</Link>
+      </li>
+      {/* <li>
+        <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" to="/reviews">Reviews</Link>
+      </li> */}
+      {user?.uid ? (
+        <li>
+          {/* <button className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" onClick={handleLogOut}>LogOut</button> */}
+        </li>
+      ) : (
+        <li>
+          <Link className="text-black hover:text-accent font-semibold text-xs hover:bg-white uppercase" to="/login">Login</Link>
+        </li>
+      )}
+    </>
+  );
+
   const subMenuItem = (
     <>
       {role==="admin" ? (
@@ -136,25 +159,30 @@ const Navbar = () => {
   return (
     <>
       <div
+      // className="fixed w-full z-20 top-0 left-0  bg-orange-50"
         className={`${
           isSticky ? "fixed top-0 w-full " : "relative "
-        } z-10 bg-accent`}
+        } z-10 bg-orange-50`}
       >
-        <div className="flex items-center">
-          <div className="container lg:mx-auto lg:px-4" ref={searchRef}>
-            <div className="navbar flex">
-            <div className={`${isSticky ? "block" : "hidden"} md:mx-5 hidden md:block`}>
-            <Link to="/" className="flex justify-center items-center font-serif">
-              <p>
+        <div className="navbar">
+          <div className="navbar-start lg:ml-8">
+          <div 
+          // className={`${isSticky ? "md:block" : "hidden"} md:mx-5`}
+          >
+            <Link to="/" className="hidden md:block">
+              {/* <p>
                 <span className="text-white text-2xl lg:text-5xl font-extrabold">E</span>
                 <span className="text-lg lg:text-2xl font-semibold">Mart</span>
-              </p>
-              {/* <div className="w-20">
+              </p> */}
+              <div className="w-20">
               <img src={img} alt="" />
-              </div> */}
-              <GiShoppingCart className="text-3xl lg:text-6xl text-white" />
+              </div>
+              {/* <GiShoppingCart className="text-3xl lg:text-6xl text-white" /> */}
             </Link>
             </div>
+          </div>
+          <div className="navbar-center flex" ref={searchRef}>
+            <div className="">
               <div className="flex items-center border-2 rounded-lg mx-auto bg-white">
                 <input
                   type="text"
@@ -191,7 +219,10 @@ const Navbar = () => {
               {!loading && searchResults.length === 0 && <></>}
             </div>
           </div>
-          <div className={`${isSticky ? "block" : "hidden"} mx-5`}>
+          <div className="navbar-end mr-5">
+          <div className="hidden lg:flex ">
+          <ul className="menu menu-horizontal px-1">{menuItem}</ul>
+          </div>
             <div className="flex justify-items-center gap-3">
               {role === "user" && (
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -219,8 +250,8 @@ const Navbar = () => {
                           alt={name}
                         />
                       ) : (
-                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-white rounded-full ">
-                          <span className="font-medium text-gray-800 text-xl">
+                        <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-accent rounded-full ">
+                          <span className="font-medium text-white text-xl ">
                             {name &&
                               name
                                 .split(" ")
@@ -233,7 +264,7 @@ const Navbar = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow w-52 hover:rounded-none"
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-100 w-40 rounded-lg hover:rounded-none"
                   >
                     {subMenuItem}
                   </ul>
