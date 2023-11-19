@@ -7,7 +7,7 @@ import useCart from "../../../Hooks/useCart";
 import useProfile from "../../../Hooks/useProfile";
 import { MdShoppingCart } from "react-icons/md";
 import useRole from "../../../Hooks/useRole";
-import img from "../../../assets/emart.png"
+import img from "../../../assets/emart.png";
 import { GiShoppingCart } from "react-icons/gi";
 
 const Navbar = () => {
@@ -25,10 +25,21 @@ const Navbar = () => {
   const menuItem = (
     <>
       <li>
-        <Link className="text-black hover:text-accent font-bold text-xs hover:bg-white uppercase" aria-current="page" to="/">Home</Link>
+        <Link
+          className="text-black hover:text-accent font-bold text-xs hover:bg-white uppercase"
+          aria-current="page"
+          to="/"
+        >
+          Home
+        </Link>
       </li>
       <li>
-        <Link className="text-black hover:text-accent font-bold text-xs hover:bg-white uppercase" to="/about-us">About</Link>
+        <Link
+          className="text-black hover:text-accent font-bold text-xs hover:bg-white uppercase"
+          to="/about-us"
+        >
+          About
+        </Link>
       </li>
       {/* <li>
         <Link className="text-accent hover:text-accent font-semibold text-lg hover:bg-white uppercase" to="/reviews">Reviews</Link>
@@ -39,7 +50,12 @@ const Navbar = () => {
         </li>
       ) : (
         <li>
-          <Link className="text-black hover:text-accent font-semibold text-xs hover:bg-white uppercase" to="/login">Login</Link>
+          <Link
+            className="text-black hover:text-accent font-semibold text-xs hover:bg-white uppercase"
+            to="/login"
+          >
+            Login
+          </Link>
         </li>
       )}
     </>
@@ -47,53 +63,64 @@ const Navbar = () => {
 
   const subMenuItem = (
     <>
-      {role==="admin" ? (
+      {role === "admin" ? (
         <li>
-          <Link className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/dashboard/admin-home">Dashboard</Link>
+          <Link
+            className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase"
+            to="/dashboard/admin-home"
+          >
+            Dashboard
+          </Link>
         </li>
-      ) :
-      role==="Product Manager" ? (
+      ) : role === "Product Manager" ? (
         <li>
-          <Link to="/dashboard/upload/upload-category">
-          Dashboard
-        </Link>
+          <Link to="/dashboard/upload/upload-category">Dashboard</Link>
         </li>
-      ) :
-      role==="Order Manager" ? (
+      ) : role === "Order Manager" ? (
         <li>
-          <Link to="/dashboard/add-coupon">
-          Dashboard
-        </Link>
+          <Link to="/dashboard/add-coupon">Dashboard</Link>
         </li>
-      ) :
-      role==="Delivery Partner" ? (
+      ) : role === "Delivery Partner" ? (
         <li>
-          <Link to="/dashboard/orders/current">
-          Dashboard
-        </Link>
+          <Link to="/dashboard/orders/current">Dashboard</Link>
         </li>
-      ) :
-       (
+      ) : (
         <li>
-          <Link className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/dashboard/user-profile">Dashboard</Link>
+          <Link
+            className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase"
+            to="/dashboard/user-profile"
+          >
+            Dashboard
+          </Link>
         </li>
       )}
 
       {user?.uid ? (
         <li>
-          <button className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" onClick={handleLogOut}>LogOut</button>
+          <button
+            className="block text-left hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase"
+            onClick={handleLogOut}
+          >
+            LogOut
+          </button>
         </li>
       ) : (
         <li>
-          <Link className="block px-4 py-2 hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase" to="/login">Login</Link>
+          <Link
+            className="block px-4 py-2 hover:text-white text-sm text-gray-700 hover:bg-accent font-semibold uppercase"
+            to="/login"
+          >
+            Login
+          </Link>
         </li>
       )}
     </>
   );
 
-  
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  // Add a state to track whether search results are closed
+  const [isSearchResultsClosed, setIsSearchResultsClosed] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [isSticky, setIsSticky] = useState(false);
@@ -124,6 +151,7 @@ const Navbar = () => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
         // Click occurred outside of the search navbar, close search results
         setSearchResults([]);
+       // setIsSearchResultsClosed(true);
       }
     };
 
@@ -137,9 +165,12 @@ const Navbar = () => {
   const handleSearch = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("https://e-mart-server-one.vercel.app/search", {
-        query: searchQuery,
-      });
+      const response = await axios.post(
+        "https://e-mart-server-one.vercel.app/search",
+        {
+          query: searchQuery,
+        }
+      );
       setSearchResults(response.data);
       setLoading(false);
     } catch (error) {
@@ -159,26 +190,26 @@ const Navbar = () => {
   return (
     <>
       <div
-      // className="fixed w-full z-20 top-0 left-0  bg-orange-50"
+        // className="fixed w-full z-20 top-0 left-0  bg-orange-50"
         className={`${
           isSticky ? "fixed top-0 w-full " : "relative "
         } z-10 bg-orange-50`}
       >
         <div className="navbar">
           <div className="navbar-start lg:ml-8">
-          <div 
-          // className={`${isSticky ? "md:block" : "hidden"} md:mx-5`}
-          >
-            <Link to="/" className="hidden md:block">
-              {/* <p>
+            <div
+            // className={`${isSticky ? "md:block" : "hidden"} md:mx-5`}
+            >
+              <Link to="/" className="hidden md:block">
+                {/* <p>
                 <span className="text-white text-2xl lg:text-5xl font-extrabold">E</span>
                 <span className="text-lg lg:text-2xl font-semibold">Mart</span>
               </p> */}
-              <div className="w-20">
-              <img src={img} alt="" />
-              </div>
-              {/* <GiShoppingCart className="text-3xl lg:text-6xl text-white" /> */}
-            </Link>
+                <div className="w-20">
+                  <img src={img} alt="" />
+                </div>
+                {/* <GiShoppingCart className="text-3xl lg:text-6xl text-white" /> */}
+              </Link>
             </div>
           </div>
           <div className="navbar-center flex" ref={searchRef}>
@@ -203,26 +234,42 @@ const Navbar = () => {
             </div>
             {/* Display search results */}
             <div>
-              {loading && <p>Loading...</p>}
-              {!loading && searchResults.length > 0 && (
-                <ul className="fixed right-0 left-0 bg-white w-60 md:w-[520px] mx-auto rounded-md p-2 md:p-5 text-xs md:text-base md:font-bold">
-                  {searchResults.slice(0, 8).map((product) => (
-                    <li key={product._id} className="my-1 hover:underline">
-                      {/* Link to the product overview route */}
-                      <Link to={`/overview/${product._id}`}>
-                        {product.productTitle}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+              {loading && <></>}
+              {
+                !loading && searchResults.length > 0 && (
+                  <ul className="fixed right-0 left-0 bg-white w-60 md:w-[500px] mx-96 mt-6 rounded-md p-2 md:p-5 text-xs md:text-base md:font-bold">
+                    {searchResults.slice(0, 8).map((product) => (
+                      <li key={product._id} className="my-1 hover:underline">
+                        {/* Link to the product overview route */}
+                        <Link to={`/overview/${product._id}`}>
+                          {product.productTitle}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )
+                //  :
+                // (
+                //   <ul className="fixed right-0 left-0 bg-white w-60 md:w-[500px] mx-96 mt-6 rounded-md p-2 md:p-5 text-xs md:text-base md:font-bold">
+
+                //       <li className="my-1 hover:underline">
+
+                //       </li>
+
+                //   </ul>
+                // )
+              }
+              {!loading && searchQuery && searchResults.length === 0 && (
+                <div className="fixed right-0 left-0 bg-white w-60 md:w-[500px] mx-96 mt-6 rounded-md p-2 md:p-5 text-xs md:text-base md:font-bold">
+                  <p>No results found</p>
+                </div>
               )}
-              {!loading && searchResults.length === 0 && <></>}
             </div>
           </div>
           <div className="navbar-end mr-5">
-          <div className="hidden lg:flex ">
-          <ul className="menu menu-horizontal px-1">{menuItem}</ul>
-          </div>
+            <div className="hidden lg:flex ">
+              <ul className="menu menu-horizontal px-1">{menuItem}</ul>
+            </div>
             <div className="flex justify-items-center gap-3">
               {role === "user" && (
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

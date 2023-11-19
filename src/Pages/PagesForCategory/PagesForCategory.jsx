@@ -47,13 +47,21 @@ const PagesForCategory = () => {
         </div>
         </div>
       )}
-      <SubCategories subcategory={subcategory}></SubCategories>
+      {
+        subcategory.length > 0 && (<SubCategories subcategory={subcategory}></SubCategories>)
+      }
       <SecondBanner images={category.secondBannerImage}></SecondBanner>
+      {
+      products.length > 0 && (
       <div className="bg-white">
-     <TrendingProducts products={products} />
+      <TrendingProducts products={products} />
      </div>
+     )
+    }
       <ThirdBanner images={category.bottomBannerImage} />
-      <SubCategoryAllProducts products={products} />
+      {
+        products.length > 0 && (<SubCategoryAllProducts products={products} />)
+      }
     </>
   );
 };

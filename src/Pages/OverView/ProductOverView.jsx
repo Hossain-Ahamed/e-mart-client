@@ -23,6 +23,7 @@ const ProductOverView = () => {
     quantity,
     reviews
   } = productDetail;
+  console.log(reviews.length, "re")
   const [cart] = useCart();
 
   const [alreadyAdded, setalreadyAdded] = useState(false);
@@ -67,7 +68,7 @@ const ProductOverView = () => {
             <p>Weight: {weight}</p></>)
           }
           {
-            !size==="No Size" && (<p className="my-2">Size: {size}</p>)
+            size && (<p className="my-2">Size: {size}</p>)
           }
           
           <div className="divider"></div>
@@ -107,14 +108,16 @@ const ProductOverView = () => {
           )}
         </div>
       </div>
-      <div className="border p-5 m-16">
+      {
+        des && (<div className="border p-5 m-16">
         <h3 className="text-xl font-bold">Description</h3>
         <div className="divider"></div>
         <p className=" text-gray-600">{des}</p>
-      </div>
+      </div>)
+      }
 
       {
-        reviews ? (<div className="border p-5 m-16 overflow-y-scroll h-96">
+        reviews.length===0 ? <></> : (<div className="border p-5 m-16 overflow-y-scroll h-96">
         <h3 className="text-xl font-bold">Reviews</h3>
         <div className="divider"></div>
         {
@@ -137,8 +140,7 @@ const ProductOverView = () => {
             </div>
           ))
         }
-      </div>) :
-      <></>
+      </div>)
       }
       <BackToTopButton />
     </>

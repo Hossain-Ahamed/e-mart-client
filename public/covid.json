@@ -1,0 +1,65 @@
+[
+    {
+        "productTitle": "Alcohol Pad",
+        "image": "https://cdn1.arogga.com/eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJtZWRpY2luZVwvMjhcLzI4MTY0LWQ1ZjU3ZmIxNTU4N2VhYzc5NzFiMjA5YTY5MWZhNjFkLWZsbTkwOC5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Im91dHNpZGUifSwib3ZlcmxheVdpdGgiOnsiYnVja2V0IjoiYXJvZ2dhIiwia2V5IjoibWlzY1wvd20ucG5nIiwiYWxwaGEiOjkwfX19",
+        "mainPrice": "90.00",
+        "price": "72.00",
+        "category": "medicine",
+        "subCategory": "covid-19 special",
+        "quantity": 20
+      },
+    {
+        "productTitle": "Rossmax Fingertip Pulse Oximeter SB-100",
+        "image": "https://cdn1.arogga.com/eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJtZWRpY2luZVwvMjdcLzI3Nzk2LVNCMTAwXzNEX0dCX1dlYi0wMDJjNzA5Ny01MTB4NjIzLWp3bjF4eC5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwiZml0Ijoib3V0c2lkZSJ9LCJvdmVybGF5V2l0aCI6eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJtaXNjXC93bS5wbmciLCJhbHBoYSI6OTB9fX0=",
+        "mainPrice": "4400.00",
+        "price": "3080.00",
+        "category": "medicine",
+        "subCategory": "covid-19 special",
+        "quantity": 20
+      },
+    {
+        "productTitle": "Thermometer Digital Flexible Tip",
+        "image": "https://cdn1.arogga.com/eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJtZWRpY2luZVwvMjhcLzI4MTQ5LWI0YWZkMzgyZjFhZjNkNGRjN2FkYzIyZWVkZjFlOTllLTZlZXd3MC5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Im91dHNpZGUifSwib3ZlcmxheVdpdGgiOnsiYnVja2V0IjoiYXJvZ2dhIiwia2V5IjoibWlzY1wvd20ucG5nIiwiYWxwaGEiOjkwfX19",
+        "mainPrice": "150.00",
+        "price": "120.00",
+        "category": "medicine",
+        "subCategory": "covid-19 special",
+        "quantity": 20
+      },
+    {
+        "productTitle": "Sepnil Face Mask",
+        "image": "https://cdn1.arogga.com/eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJtZWRpY2luZVwvMzJcLzMyNjMzLVNlcG5pbC1GYWNlLU1hc2stQm94LTFneHQuanBlZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjoxMDAwLCJmaXQiOiJvdXRzaWRlIn0sIm92ZXJsYXlXaXRoIjp7ImJ1Y2tldCI6ImFyb2dnYSIsImtleSI6Im1pc2NcL3dtLnBuZyIsImFscGhhIjo5MH19fQ==",
+        "mainPrice": "350.00",
+        "price": "280.00",
+        "category": "medicine",
+        "subCategory": "covid-19 special",
+        "quantity": 20
+      },
+    {
+        "productTitle": "Savlon Liquid Antiseptic 1 litre",
+        "image": "https://cdn1.arogga.com/eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJtZWRpY2luZVwvMjJcLzIyNjI2LVNhdmxvbi1MaXF1aWQtQW50aXNlcHRpYy0xLUxpdHJlLXN0c3EuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Im91dHNpZGUifSwib3ZlcmxheVdpdGgiOnsiYnVja2V0IjoiYXJvZ2dhIiwia2V5IjoibWlzY1wvd20ucG5nIiwiYWxwaGEiOjkwfX19",
+        "mainPrice": "255.00",
+        "price": "242.00",
+        "category": "medicine",
+        "subCategory": "covid-19 special",
+        "quantity": 20
+      },
+    {
+        "productTitle": "Paxovir",
+        "image": "https://cdn1.arogga.com/eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJtZWRpY2luZVwvMzRcLzM0ODEyLVBheG92aXItMTUwbWctMTAwbWctcDJ4Yi5qcGVnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Im91dHNpZGUifSwib3ZlcmxheVdpdGgiOnsiYnVja2V0IjoiYXJvZ2dhIiwia2V5IjoibWlzY1wvd20ucG5nIiwiYWxwaGEiOjkwfX19",
+        "mainPrice": "3200.00",
+        "price": "3040.00",
+        "category": "medicine",
+        "subCategory": "covid-19 special",
+        "quantity": 20
+      },
+    {
+        "productTitle": "Protective Suit",
+        "image": "https://cdn1.arogga.com/eyJidWNrZXQiOiJhcm9nZ2EiLCJrZXkiOiJtZWRpY2luZVwvMjdcLzI3OTMxLVBQRS1XYXNoYWJsZS1QZXJzb25hbC1Qcm90ZWN0aXZlLVN1aXQtd2l0aC1zaG9lLWNvdmVyLXozZmcuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMDAwLCJoZWlnaHQiOjEwMDAsImZpdCI6Im91dHNpZGUifSwib3ZlcmxheVdpdGgiOnsiYnVja2V0IjoiYXJvZ2dhIiwia2V5IjoibWlzY1wvd20ucG5nIiwiYWxwaGEiOjkwfX19",
+        "mainPrice": "900.00",
+        "price": "699.00",
+        "category": "medicine",
+        "subCategory": "covid-19 special",
+        "quantity": 20
+      }
+]

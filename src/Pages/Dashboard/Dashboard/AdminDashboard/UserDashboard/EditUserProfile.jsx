@@ -374,7 +374,7 @@ const EditUserProfile = () => {
                 <input
                   type="tel"
                   placeholder="Contact Number"
-                  className="input input-bordered rounded-md"
+                  className="bg-gray-50 border-gray-300 text-gray-900 text-sm  block w-full p-2.5 rounded-lg"
                   defaultValue={profile?.phone}
                   {...register("phone", {
                     required: {
@@ -394,14 +394,16 @@ const EditUserProfile = () => {
 
               </div>
 
+              
+              
+              </div>
+              </div>
               <br />
               <input
                 className="w-full h-12 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-2"
                 type="submit"
                 value="Submit"
               />
-              </div>
-              </div>
             </form>
           </div>
         </div>

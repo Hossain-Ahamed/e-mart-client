@@ -1,0 +1,63 @@
+[
+    {
+        "productTitle": "Shagor Kola (Banana Sagor)",
+        "image": "https://chaldn.com/_mpimage/shagor-kola-banana-sagor-4-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D76879&q=best&v=1&m=400&webp=1",
+        "mainPrice": "50",
+        "price": "45",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "Fruits",
+        "quantity": 20,
+        "weight":"4 pcs"
+      },
+    {
+        "productTitle": "Malta ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/malta-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D131779&q=best&v=1&m=400&webp=1",
+        "price": "299",
+        "category": "Grocery",
+        "subCategory": "Fruits",
+        "quantity": 20,
+        "weight":"1 kg"
+      },
+    {
+        "productTitle": "Guava Premium (± 50 gm)",
+        "image": "https://chaldn.com/_mpimage/guava-premium-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D67818&q=best&v=1&m=400&webp=1",
+        "price": "79",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "Fruits",
+        "quantity": 20,
+        "weight":"1 kg"
+      },
+    {
+        "productTitle": "Lal Angur (Red Grapes) ± 12 gm",
+        "image": "https://chaldn.com/_mpimage/lal-angur-red-grapes-12-gm-250-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D26171&q=best&v=1&m=400&webp=1",
+        "mainPrice": "105",
+        "price": "99",
+        "category": "Grocery",
+        "subCategory": "Fruits",
+        "quantity": 20,
+        "weight":"250 gm"
+      },
+    {
+        "productTitle": "Daab (Green Coconut)",
+        "image": "https://chaldn.com/_mpimage/daab-green-coconut-1-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D40755&q=best&v=1&m=400&webp=1",
+        "mainPrice": "150",
+        "price": "139",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "Fruits",
+        "quantity": 20,
+        "weight":"each"
+      },
+    {
+        "productTitle": "Anaros (Pineapple)",
+        "image": "https://chaldn.com/_mpimage/anaros-pineapple-1-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D61358&q=low&v=1&m=400&webp=1",
+        "mainPrice": "85",
+        "price": "75",
+        "category": "Grocery",
+        "subCategory": "Fruits",
+        "quantity": 20,
+        "weight":"each"
+      }
+]

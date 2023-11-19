@@ -1,0 +1,63 @@
+[
+    {
+        "productTitle": "Chichinga (Snake Gourd) ± 25 gm 500 gm And Paka Pape ± 50 gm (Thai) 1 kg (Combo)",
+        "image": "https://chaldn.com/_mpimage/chichinga-snake-gourd-25-gm-500-gm-and-paka-pape-50-gm-thai-1-kg-combo?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D150896&q=best&v=1&m=400&webp=1",
+        "mainPrice": "179",
+        "price": "171",
+        "category": "Grocery",
+        "subCategory": "Vegetable",
+        "quantity": 20,
+        "weight":"1kg"
+      },
+    {
+        "productTitle": "Deshi Ada (Local Ginger) ± 25 gm 500 gm And Mete Alu (Mud Potato) ± 25 gm 500 gm (Combo)",
+        "image": "https://chaldn.com/_mpimage/deshi-ada-local-ginger-25-gm-500-gm-and-mete-alu-mud-potato-25-gm-500-gm-combo?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D150903&q=best&v=1&m=400&webp=1",
+        "mainPrice": "219",
+        "price": "166",
+        "category": "Grocery",
+        "bestDeal": true,
+        "subCategory": "Vegetable",
+        "quantity": 20,
+        "weight":"500gm"
+      },
+    {
+        "productTitle": "Potato Regular (± 50 gm)",
+        "image": "https://chaldn.com/_mpimage/potato-regular-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D81244&q=best&v=1&m=400&webp=1",
+        "price": "52",
+        "category": "Grocery",
+        "subCategory": "Vegetable",
+        "quantity": 20,
+        "weight":"1kg"
+      },
+    {
+        "productTitle": "Deshi Peyaj (Local Onion) ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/deshi-peyaj-local-onion-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D52358&q=low&v=1&m=400&webp=1",
+        "price": "129",
+        "category": "Grocery",
+        "bestDeal": true,
+        "subCategory": "Vegetable",
+        "quantity": 20,
+        "weight":"1kg"
+      },
+    {
+        "productTitle": "Red Tomato ± 25 gm",
+        "image": "https://chaldn.com/_mpimage/red-tomato-25-gm-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D64361&q=best&v=1&m=400&webp=1",
+        "mainPrice": "80",
+        "price": "75",
+        "category": "Grocery",
+        "subCategory": "Vegetable",
+        "quantity": 20,
+        "weight":"500 gm"
+      },
+    {
+        "productTitle": "Deshi Gajor (Local Carrot) ± 25 gm",
+        "image": "https://chaldn.com/_mpimage/deshi-gajor-local-carrot-25-gm-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D64363&q=best&v=1&m=400&webp=1",
+        "mainPrice": "59",
+        "price": "39",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "Vegetable",
+        "quantity": 20,
+        "weight":"500 gm"
+      }
+]
