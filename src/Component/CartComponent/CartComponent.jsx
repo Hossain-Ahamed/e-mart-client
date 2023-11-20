@@ -81,7 +81,7 @@ const CartComponent = ({
                 <GrCheckbox></GrCheckbox>
               )}
             </button>
-
+            <div className="grid">
             <div className="avatar">
               <div className="w-16 lg:w-24 rounded">
                 <img src={image} />
@@ -89,7 +89,7 @@ const CartComponent = ({
             </div>
             <p
               title={productTitle}
-              className="w-28 font-bold line-clamp-1"
+              className="md:w-28 font-bold line-clamp-1"
             >
               {productTitle}
               {
@@ -100,9 +100,10 @@ const CartComponent = ({
               }
 
             </p>
+            </div>
           </div>
           <p className="flex items-center"><TbCurrencyTaka />{price}</p>
-          <div className="flex gap-3">
+          <div className="flex gap-2 md:gap-3">
             <button
               onClick={handleDecrease}
               className="md:p-1 bg-gray-200 shadow-md rounded-sm"
@@ -123,7 +124,7 @@ const CartComponent = ({
             <p className="flex items-center"><TbCurrencyTaka />{parseFloat((quantity * price).toFixed(2))}</p>
             <button
               onClick={() => handleDeleteCartItem(_id)}
-              className=" text-red-600 hover:shadow-lg "
+              className=" text-red-600 hover:shadow-lg ml-1"
             >
               <AiOutlineDelete className="text-lg hover:text-2xl" />
             </button>

@@ -9,20 +9,20 @@ const AboutUs = () => {
         className="bg-fixed bg-no-repeat"
         style={{ backgroundImage: `url(${aboutImage})` }}
       >
-        <div className="h-[600px] relative">
-          <div className=" absolute bottom-32 left-80">
-            <p className="text-5xl font-bold capitalize text-center">
+        <div className="h-72 md:h-96 lg:h-[600px] relative">
+          <div className=" absolute bottom-20 left-5 md:left-60 lg:bottom-32 lg:left-80">
+            <p className="text-xl lg:text-5xl font-bold capitalize text-center">
               delivering happiness on the go !
             </p>
-            <p className="text-3xl font-semibold capitalize text-center">
+            <p className="text-lg lg:text-3xl font-semibold capitalize text-center">
               happy shopping
             </p>
           </div>
         </div>
       </div>
       <div className="my-20">
-        <p className="text-center text-4xl font-bold">Our Story</p>
-        <div className="grid grid-cols-2 w-[900px] mx-auto gap-10 font-semibold text-lg text-gray-500 text-justify mt-10">
+        <p className="text-center text-2xl md:text-4xl font-bold">Our Story</p>
+        <div className="grid md:grid-cols-2 px-5 md:w-[700px] lg:w-[900px] mx-auto gap-10 font-semibold md:text-lg text-gray-500 text-justify mt-20">
           <p className="">
             Launched in 2023, E-Mart E-Commerce Website is a comprehensive
             online shopping platform designed to offer a seamless shopping
@@ -40,14 +40,14 @@ const AboutUs = () => {
         </div>
       </div>
       <div className="my-20">
-        <p className="text-center text-4xl font-bold">Our Promises</p>
-        <div className="grid grid-cols-2 w-[900px] mx-auto gap-10 font-semibold text-xl text-justify mt-10">
-          <div>
+        <p className="text-center text-2xl md:text-4xl font-bold">Our Promises</p>
+        <div className="grid md:grid-cols-2 px-5 md:w-[700px] lg:w-[900px] mx-auto gap-10 font-semibold text-xl text-justify mt-20">
+          <div className="">
             <img src={promisesImage} alt="" />
           </div>
           <div>
             <div>
-              <div className="flex items-center gap-5 my-8">
+              <div className="flex items-center gap-5">
                 <svg
                   width="40"
                   height="40"

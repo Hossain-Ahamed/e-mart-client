@@ -32,7 +32,7 @@ const SlimBanner = ({ slimBanners }) => {
           spaceBetween: 5,
         },
         "@1.00": {
-          slidesPerView: 3,
+          slidesPerView: 2,
           spaceBetween: 5,
         },
         "@1.50": {
@@ -45,14 +45,14 @@ const SlimBanner = ({ slimBanners }) => {
         {
               slimBanners?.map((slimBanner, index) => (
                 <SwiperSlide key={index}>
-                <div className="flex gap-16 lg:gap-28 h-[110px] bg-white p-4">
+                <div className="flex gap-16 lg:gap-28 h-[110px] bg-white p-4 justify-center">
                  <div className=" border-r-2 w-24 h-20">
                  <img src={slimBanner?.slimBannerImage} alt="" className="w-20 h-20" />
                   
                  </div>
                  <div>
-                  <h3 className=" text-red-500">{slimBanner?.titleSlim}</h3>
-                  <p className="lg:text-xl font-bold my-1">{slimBanner?.headingsSlim}</p>
+                  <h3 className="text-sm md:text-md text-red-500">{slimBanner?.titleSlim}</h3>
+                  <p className="text-sm md:text-md lg:text-xl font-bold my-1">{slimBanner?.headingsSlim}</p>
                   <p className="text-sm text-green-500">{slimBanner?.offerSlim}</p>
                   </div>
                   </div>

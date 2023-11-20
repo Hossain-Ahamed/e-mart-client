@@ -23,27 +23,27 @@ const ProductOverView = () => {
     quantity,
     reviews
   } = productDetail;
-  console.log(reviews.length, "re")
+  //console.log(reviews.length, "re")
   const [cart] = useCart();
 
-  const [alreadyAdded, setalreadyAdded] = useState(false);
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
   
   const handleAddToCart = useAddToCart();
 
   useEffect(() => {
     if(role === "user")
     {
-      setalreadyAdded(cart.some((obj) => obj._id === _id));
+      setAlreadyAdded(cart.some((obj) => obj._id === _id));
     }
   }, [cart, _id, role]);
 
 
   return (
     <>
-      <div className="md:flex my-10 mx-16 gap-8">
+      <div className="md:flex my-10 mx-5 md:mx-16 md:gap-8">
         <figure>
           <img
-            className="md:h-[450px] md:w-96 border"
+            className="w-60 md:h-[450px] md:w-96 border"
             src={image}
             alt={productTitle}
           />
@@ -117,13 +117,13 @@ const ProductOverView = () => {
       }
 
       {
-        reviews.length===0 ? <></> : (<div className="border p-5 m-16 overflow-y-scroll h-96">
+        reviews.length===0 ? <></> : (<div className="border p-5 m-5 md:m-16 overflow-y-scroll h-96">
         <h3 className="text-xl font-bold">Reviews</h3>
         <div className="divider"></div>
         {
           reviews?.map((review, index) => (
             <div key={index}>
-              <p>Posted By {review?.name} <span className="text-sm text-gray-600">on {new Intl.DateTimeFormat("en-US", {
+              <p>Posted By <span className="font-semibold italic text-orange-800">{review?.name}</span> <span className="text-sm text-gray-600">on {new Intl.DateTimeFormat("en-US", {
                     year: "numeric",
                     month: "short",
                     day: "numeric",
@@ -135,7 +135,7 @@ const ProductOverView = () => {
               size={24}
               activeColor="#ffd700"
             />
-              <p>{review?.comment}</p>
+              <p className="text-sm text-justify text-gray-500">{review?.comment}</p>
               <div className="divider"></div>
             </div>
           ))

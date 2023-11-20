@@ -13,7 +13,7 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 const TopBanner = ({images}) => {
     return (
         <>
-        <div className='w-[900px] h-[200px] md:h-[250px] lg:h-[400px] mx-auto'>
+        <div className='lg:w-[900px] h-[200px] md:h-[250px] lg:h-[400px] mx-auto'>
         <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -30,7 +30,7 @@ const TopBanner = ({images}) => {
       >
         {
             images?.slice(-3).map((img, index) => (
-            <SwiperSlide key={index}><img src={img} alt="" className='w-[900px] h-[200px] md:h-[250px] lg:h-[400px]' /></SwiperSlide>
+            <SwiperSlide key={index}><img src={img} alt="" className='lg:w-[900px] h-[200px] md:h-[250px] lg:h-[400px]' /></SwiperSlide>
             ))
         }
       </Swiper>

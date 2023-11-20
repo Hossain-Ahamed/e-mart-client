@@ -21,13 +21,13 @@ const ProductCard = ({ showProduct }) => {
   // const [wishList] = useWishList();
 
   const [hoveredProduct, setHoveredProduct] = useState(null);
-  const [alreadyAdded, setalreadyAdded] = useState(false);
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
   // const [inWishList, setInWishList] = useState(false);
 
   useEffect(() => {
     if(role === "user")
     {
-      setalreadyAdded(cart.some((obj) => obj._id === _id));
+      setAlreadyAdded(cart.some((obj) => obj._id === _id));
     }
   }, [cart, _id, role]);
 

@@ -172,12 +172,12 @@ const MyCart = () => {
         {loading ? (
           <p>loading....</p>
         ) : (
-          <div className="w-full h-full md:p-10 user-select-none">
+          <div className="w-full h-full p-5 md:p-10 user-select-none">
             <div className="">
             <UserTitle heading={`My Cart (${cart.length} Products)`} />
             </div>
             <div className="grid lg:grid-cols-3 gap-5">
-              <div className="bg-white col-span-2 p-5">
+              <div className="bg-white col-span-2 md:p-5">
                 <div className="grid grid-cols-4 md:grid-cols-5 lg:text-lg font-bold items-center justify-items-center">
                   <p className="md:col-span-2">Item</p>
                   <p>Price</p>
@@ -197,7 +197,7 @@ const MyCart = () => {
                   ></CartComponent>
                 ))}
               </div>
-              <div className=" bg-white p-5 h-40">
+              <div className=" bg-white p-5 h-40 mt-10">
                 <div className="grid grid-cols-3">
                   <div className="col-span-2">
                     <p className="font-bold">Total Price:</p>

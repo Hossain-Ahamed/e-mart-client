@@ -188,14 +188,14 @@ const EditUserProfile = () => {
 
   return (
     <>
-      <div className="p-20">
+      <div className="w-screen lg:w-[900px] mx-auto min-h-screen mt-5 p-5">
         <UserTitle heading="Update Profile"></UserTitle>
-        <div className="flex">
+        <div>
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* ------image---- */}
               <div
-                className={`w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+                className={`w-44 h-44 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
               >
                 {!selectedImage && (
                   <>
@@ -256,7 +256,7 @@ const EditUserProfile = () => {
                   <img
                     src={selectedImage}
                     alt="Uploaded"
-                    className="w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44"
+                    className="w-44 h-44"
                   />
                 )}
 
@@ -268,7 +268,7 @@ const EditUserProfile = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-20 mt-5">
+              <div className="mt-6 grid gap-6 mb-6 md:grid-cols-2">
               <div>
                 
 
@@ -299,7 +299,7 @@ const EditUserProfile = () => {
                   {...register("email", {})}
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control w-full max-w-xs">
                 <label className="label">
                   <span className="label-text font-semibold">City</span>
                 </label>
@@ -400,7 +400,7 @@ const EditUserProfile = () => {
               </div>
               <br />
               <input
-                className="w-full h-12 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-2"
+                className="w-40 h-12 md:mx-72 lg:mx-96 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-2"
                 type="submit"
                 value="Submit"
               />

@@ -19,12 +19,12 @@ const SubCategories = ({ subcategory }) => {
   return (
     <>
       <div className=" lg:p-12 p-3 pt-6 lg:pt-20">
-        <div className="grid grid-cols-3 items-center gap-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-0">
           <h3 className="text-lg md:text-2xl font-bold">Sub-Categories</h3>
           <hr className="border" />
-          <hr className="border" />
+          <hr className="hidden md:block border" />
         </div>
-        <div className="w-[300px] md:w-[700px] lg:w-[1200px] mx-auto mt-3 lg:mt-10">
+        <div className="w-[300px] md:w-[700px] lg:w-[1200px] mx-auto my-5 md:my-10">
           <Swiper
             slidesPerView={2}
             spaceBetween={5}
@@ -43,7 +43,7 @@ const SubCategories = ({ subcategory }) => {
                 spaceBetween: 5,
               },
               "@1.00": {
-                slidesPerView: 5,
+                slidesPerView: 3,
                 spaceBetween: 5,
               },
               "@1.50": {

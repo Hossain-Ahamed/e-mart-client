@@ -16,7 +16,7 @@ const CheckOut = () => {
   // states
   const [typeOfDiscount, setTypeOfDiscount] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [serverRequesting, setserverRequesting] = useState(false);
   const [selectedOrderItems, setselectedOrderItems] = useState([]);
   const [deliveryCharge, setDeliveryCharge] = useState(10000);
@@ -48,9 +48,8 @@ const CheckOut = () => {
         settotalProductPrice(data.data?.totalProductPrice);
       })
       .catch((e) => {
-        console.error(e)
+        console.error(e);
         // <Error />
-
       })
       .finally(() => {
         setLoading(false);
@@ -66,18 +65,22 @@ const CheckOut = () => {
   } = useForm();
 
   const handleCoupon = (data) => {
-    
     // console.log(data);
     setserverRequesting(true);
 
-    axios.post(`${import.meta.env.VITE_SERVERADDRESS}/get-discount-by-coupon?email=${user?.email}`, data,
-      {
-        withCredentials: true,
-      }
-    )
+    axios
+      .post(
+        `${import.meta.env.VITE_SERVERADDRESS}/get-discount-by-coupon?email=${
+          user?.email
+        }`,
+        data,
+        {
+          withCredentials: true,
+        }
+      )
       .then((data) => {
-        setTypeOfDiscount("coupon")
-        toast.success("YAY !!!")
+        setTypeOfDiscount("coupon");
+        toast.success("YAY !!!");
         setDiscount({
           couponCode: data.data?.couponCode,
           discountedAmmount: data.data?.discountedAmmount,
@@ -90,28 +93,31 @@ const CheckOut = () => {
       })
       .finally(() => setserverRequesting(false));
   };
-  
+
   const handleCoin = () => {
     // console.log(data);
     setserverRequesting(true);
-    const data = {finalAmount: totalProductPrice + deliveryCharge}
-    axios.post(`${import.meta.env.VITE_SERVERADDRESS}/get-discount-by-coin?email=${user?.email}`, data,
-      {
-        withCredentials: true,
-      }
-    )
-      .then((data) => {
-        if(data.data?.success)
+    const data = { finalAmount: totalProductPrice + deliveryCharge };
+    axios
+      .post(
+        `${import.meta.env.VITE_SERVERADDRESS}/get-discount-by-coin?email=${
+          user?.email
+        }`,
+        data,
         {
-          setTypeOfDiscount("coin")
-        toast.success("YAY !!!")
-        setDiscount({
-          couponCode: data.data?.couponCode,
-          discountedAmmount: data.data?.discountedAmmount,
-        });
+          withCredentials: true,
         }
-        else{
-          toast.error("Sorry you are not eligible")
+      )
+      .then((data) => {
+        if (data.data?.success) {
+          setTypeOfDiscount("coin");
+          toast.success("YAY !!!");
+          setDiscount({
+            couponCode: data.data?.couponCode,
+            discountedAmmount: data.data?.discountedAmmount,
+          });
+        } else {
+          toast.error("Sorry you are not eligible");
         }
       })
       .catch((e) => {
@@ -127,34 +133,42 @@ const CheckOut = () => {
   }
 
   const handlePlaceOrder = () => {
-
-    const data = { couponName: discount?.couponCode }
-    axios.post(`${import.meta.env.VITE_SERVERADDRESS}/checkout?email=${user?.email}`, data,
-      {
-        withCredentials: true,
-      } )
+    const data = { couponName: discount?.couponCode };
+    axios
+      .post(
+        `${import.meta.env.VITE_SERVERADDRESS}/checkout?email=${user?.email}`,
+        data,
+        {
+          withCredentials: true,
+        }
+      )
       .then((data) => {
-        console.log(data.data)
-        navigate(`/dashboard/payment-methods/${data.data?.orderData?.insertedId}`, {
-          state: {
-            totalPayment: totalProductPrice + deliveryCharge - discount?.discountedAmmount,
-            products: selectedOrderItems,
-            _id : data.data?.insertedId
+        console.log(data.data);
+        navigate(
+          `/dashboard/payment-methods/${data.data?.orderData?.insertedId}`,
+          {
+            state: {
+              totalPayment:
+                totalProductPrice +
+                deliveryCharge -
+                discount?.discountedAmmount,
+              products: selectedOrderItems,
+              _id: data.data?.insertedId,
+            },
           }
-        });
+        );
       })
       .catch((e) => {
         <Error />;
-      })
-
-  }
+      });
+  };
 
   return (
     <>
       <div className="h-full p-10">
         <UserTitle heading="CheckOut" />
-        <div className="grid grid-cols-3 gap-5 m-10">
-          <div className="col-span-2">
+        <div className="grid md:grid-cols-3 gap-5 lg:m-10">
+          <div className="md:col-span-2">
             <div className="border rounded-md shadow-lg bg-white mb-5 p-5">
               <p className="text-sm">
                 Deliver to:{" "}
@@ -229,43 +243,61 @@ const CheckOut = () => {
               </table>
             </div>
           </div>
-          <div className="border rounded-md shadow-lg bg-white p-5 h-fit">
+          <div className="border rounded-md shadow-lg bg-white p-5 lg:h-fit">
             <div>
-              {typeOfDiscount !== "coin" && 
-              <form onSubmit={handleSubmit(handleCoupon)}>
-                <label
-                  htmlFor="default-search"
-                  className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-                >
-                  Search
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    {...register("couponName")}
-                    autoComplete="off"
-                    id="default-search"
-                    className="block w-full p-3  text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
-                    placeholder="Coupon Code"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    disabled={serverRequesting}
-                    className="text-white absolute right-2.5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 disabled:bg-slate-400"
+              {typeOfDiscount !== "coin" && (
+                <form onSubmit={handleSubmit(handleCoupon)}>
+                  <label
+                    htmlFor="default-search"
+                    className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
                   >
-                    Apply
-                  </button>
-                </div>
-              </form>
-            }
-            {typeOfDiscount !== "coupon" && 
-              <button onClick={handleCoin} type="button" className="mt-3 text-gray-900 bg-gray-100 hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center w-full mb-2">
-              <svg className="w-4 h-4 mr-2 -ml-1 text-[#626890]" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="ethereum" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M311.9 260.8L160 353.6 8 260.8 160 0l151.9 260.8zM160 383.4L8 290.6 160 512l152-221.4-152 92.8z"></path></svg>
-              Use E-mart Coin
-            </button>
-            }
-            
+                    Search
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      {...register("couponName")}
+                      autoComplete="off"
+                      id="default-search"
+                      className="block w-full p-3  text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
+                      placeholder="Coupon Code"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      disabled={serverRequesting}
+                      className="text-white absolute right-2.5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 disabled:bg-slate-400"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </form>
+              )}
+              {typeOfDiscount !== "coupon" && (
+                <button
+                  onClick={handleCoin}
+                  type="button"
+                  className="mt-3 text-gray-900 bg-gray-100 hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center w-full mb-2"
+                >
+                  <svg
+                    className="w-4 h-4 mr-2 -ml-1 text-[#626890]"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="ethereum"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M311.9 260.8L160 353.6 8 260.8 160 0l151.9 260.8zM160 383.4L8 290.6 160 512l152-221.4-152 92.8z"
+                    ></path>
+                  </svg>
+                  Use E-mart Coin
+                </button>
+              )}
+
               <div className="flex justify-between items-center px-1 my-2">
                 <p>Total Product Price:</p> <p>{totalProductPrice} </p>
               </div>
@@ -285,7 +317,8 @@ const CheckOut = () => {
                 </p>
               </div>
             </div>
-            <button onClick={handlePlaceOrder}
+            <button
+              onClick={handlePlaceOrder}
               className="w-full h-10 focus:ring focus:ring-3 ring-yellow-300  bg-accent text-white text-lg font-bold rounded-sm mt-10 disabled:bg-gray-500"
               disabled={serverRequesting}
             >

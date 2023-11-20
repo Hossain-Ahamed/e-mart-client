@@ -67,17 +67,17 @@ const PaymentMethods = () => {
 
   return (
     <>
-      <div className='w-full p-10'>
+      <div className='w-full p-5 lg:p-10'>
         <UserTitle heading="Select Payment Method"></UserTitle>
-        <div className='grid grid-cols-2 gap-10'>
+        <div className='grid md:grid-cols-2 gap-10'>
           <div className=''>
             <div className='grid grid-cols-2 gap-5 px-5'>
               <label
 
                 htmlFor="booking-modal"
-                className='grid justify-items-center text-lg p-5 shadow-lg rounded-lg font-bold bg-white'><BsCashCoin className='text-2xl' />Cash On Delivery</label>
+                className='grid justify-items-center md:text-lg p-5 shadow-lg rounded-lg font-bold bg-white'><BsCashCoin className='text-2xl' />Cash On Delivery</label>
 
-              <button className='grid justify-items-center text-lg p-5 shadow-lg rounded-lg font-bold bg-white' onClick={handleCardPayment}><BsCreditCard className='text-2xl' />Card Payment</button>
+              <button className='grid justify-items-center md:text-lg p-5 shadow-lg rounded-lg font-bold bg-white' onClick={handleCardPayment}><BsCreditCard className='text-2xl' />Card Payment</button>
             </div>
           </div>
           <div className='bg-white shadow-lg rounded-lg p-5'>
@@ -85,11 +85,11 @@ const PaymentMethods = () => {
             <div className='grid grid-cols-4 gap-5 my-5'>
               <div className=' col-span-3'>
                 <p>Subtotal ({orderedData?.productLength} items and shipping fee included)</p>
-                <p className='mt-2 text-2xl'>Total Amount</p>
+                <p className='text-2xl'>Total Amount</p>
               </div>
               <div>
                 <p className='flex items-center'><TbCurrencyTaka />{orderedData?.totalAmount}</p>
-                <p className='mt-2 flex items-center text-2xl text-accent font-bold'><TbCurrencyTaka />{orderedData?.totalAmount}</p>
+                <p className='flex items-center text-2xl text-accent font-bold'><TbCurrencyTaka />{orderedData?.totalAmount}</p>
               </div>
             </div>
           </div>

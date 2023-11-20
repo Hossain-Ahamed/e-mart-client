@@ -9,6 +9,7 @@ import { MdShoppingCart } from "react-icons/md";
 import useRole from "../../../Hooks/useRole";
 import img from "../../../assets/emart.png";
 import { GiShoppingCart } from "react-icons/gi";
+import { LuMenu } from "react-icons/lu";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -197,6 +198,17 @@ const Navbar = () => {
       >
         <div className="navbar">
           <div className="navbar-start lg:ml-8">
+          <div className="dropdown">
+              <label tabIndex={0} className="lg:hidden">
+                <LuMenu className="m-1 text-2xl"></LuMenu>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 px-2 shadow rounded-box w-32 bg-white"
+              >
+                {menuItem}
+              </ul>
+            </div>
             <div
             // className={`${isSticky ? "md:block" : "hidden"} md:mx-5`}
             >
@@ -211,6 +223,7 @@ const Navbar = () => {
                 {/* <GiShoppingCart className="text-3xl lg:text-6xl text-white" /> */}
               </Link>
             </div>
+            
           </div>
           <div className="navbar-center flex" ref={searchRef}>
             <div className="">
@@ -218,7 +231,7 @@ const Navbar = () => {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="w-full md:w-96 lg:w-[600px] rounded-lg border-none"
+                  className="w-32 md:w-96 lg:w-[600px] rounded-lg border-none"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -266,11 +279,11 @@ const Navbar = () => {
               )}
             </div>
           </div>
-          <div className="navbar-end mr-5">
+          <div className="navbar-end m:mr-5">
             <div className="hidden lg:flex ">
               <ul className="menu menu-horizontal px-1">{menuItem}</ul>
             </div>
-            <div className="flex justify-items-center gap-3">
+            <div className="flex justify-items-center md:gap-3">
               {role === "user" && (
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <Link to="/dashboard/myCart">
@@ -292,7 +305,7 @@ const Navbar = () => {
                     <div className="w-10 rounded-full">
                       {profile?.img ? (
                         <img
-                          className="w-10 h-10 rounded-full"
+                          className="w-8 h-8 md:w-10 md:h-10 rounded-full"
                           src={profile?.img}
                           alt={name}
                         />

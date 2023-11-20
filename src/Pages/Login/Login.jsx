@@ -117,9 +117,9 @@ const Login = () => {
         <title>E-Mart | Login</title>
       </Helmet>
       <div className="">
-        <div className="grid grid-cols-3">
-          <div className=" col-span-2">
-            <div className="w-96 my-16 mx-auto bg-white p-10 rounded-lg shadow-xl">
+        <div className="md:grid md:grid-cols-3">
+          <div className=" md:col-span-2">
+            <div className="w-72 my-14 md:my-16 mx-auto bg-white p-5 md:p-10 rounded-lg shadow-xl">
               <p className="text-sm text-gray-600 mb-1">Welcome Back !!!</p>
               <h3 className="text-3xl font-bold">Sign in</h3>
               <form onSubmit={handleSubmit(handleLogin)}>
@@ -224,7 +224,7 @@ const Login = () => {
               </div>
             </div>
           </div>
-          <div className="bg-orange-100 h-screen relative">
+          <div className="bg-orange-100 md:h-screen relative hidden md:block">
           <img
               className=" absolute bottom-10 -left-40 border-b-2 border-gray-300"
               src={loginImage}
