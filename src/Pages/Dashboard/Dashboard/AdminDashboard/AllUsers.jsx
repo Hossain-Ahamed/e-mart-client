@@ -6,25 +6,25 @@ import AllUsers_Row from "./AllUsers_Row";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useRole from "../../../../Hooks/useRole";
 import useProfile from "../../../../Hooks/useProfile";
+import { useEffect } from "react";
 
 const AllUsers = () => {
   const {axiosSecure} = useAxiosSecure();
-  const [profile] = useProfile();
   const {email} = useRole();
-  const { data: users = [], refetch, isError, error } = useQuery(["users"], async () => {
+  const { data: users = [], isError, error } = useQuery(["users"], async () => {
     const res = await axiosSecure.get(`/users?email=${email}`);
-    //console.log(res.data);
+    // console.log(res.data);
     return res.data;
   });
 
-  if(isError){
-    console.log(error)
+  if (isError) {
+    console.log(error);
   }
 
   return (
     <>
       
-      <div className="overflow-x-auto">
+      <div className="w-full h-full p-10 lg:px-28">
         <table className="table">
           {/* head */}
           <thead>
@@ -38,7 +38,7 @@ const AllUsers = () => {
           </thead>
           <tbody className="">
             {/* row 1 */}
-            {users.map((user, index) => <AllUsers_Row key={index} user={user} index={index+1} img={profile?.img}></AllUsers_Row>)}
+            {users.map((user, index) => <AllUsers_Row key={index} user={user} index={index+1} ></AllUsers_Row>)}
           </tbody>
         </table>
       </div>

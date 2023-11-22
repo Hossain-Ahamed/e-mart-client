@@ -54,7 +54,7 @@ const OrderDetailsView = () => {
   };
   return (
     <>
-      <div className="w-[900px] h-full p-20">
+      <div className="w-full lg:w-[900px] h-full p-10 lg:p-20">
         <div className="bg-white p-5 rounded-md shadow-lg text-md grid gap-1">
           <p>
             Order Id:{" "}
@@ -349,7 +349,7 @@ const OrderDetailsView = () => {
 
         </div>
 
-        <div className="bg-white p-5 rounded-md shadow-lg text-md mt-5">
+        <div className="bg-white md:p-5 rounded-md shadow-lg text-md mt-5">
           <OrderDetailRow products={orderedData?.orderedItems}></OrderDetailRow>
         </div>
         <div className="w-full" >

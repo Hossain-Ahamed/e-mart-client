@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import SecondBanner from "../../Component/SecondBanner";
 import TopLeftBanner from "../../Component/HomeLayout/TopBanner/TopLeftBanner";
 import TopRightBanner from "../../Component/HomeLayout/TopBanner/TopRightBanner";
@@ -48,17 +48,29 @@ const PagesForCategory = () => {
         </div>
       )}
       {
+        category.name==="medicine" && (<><Link to="/upload-prescription">Upload your prescription</Link></>)
+      }
+      {
         subcategory.length > 0 && (<SubCategories subcategory={subcategory}></SubCategories>)
       }
-      <SecondBanner images={category.secondBannerImage}></SecondBanner>
+      {
+        category?.secondBannerImage && (<div className="bg-white">
+          <SecondBanner images={category.secondBannerImage}></SecondBanner>
+        </div>)
+      }
       {
       products.length > 0 && (
-      <div className="bg-white">
+      <div className="">
       <TrendingProducts products={products} />
      </div>
      )
     }
-      <ThirdBanner images={category.bottomBannerImage} />
+    {
+      category?.bottomBannerImage && (<div className="bg-white">
+        <ThirdBanner images={category.bottomBannerImage} />
+      </div>)
+    }
+      
       {
         products.length > 0 && (<SubCategoryAllProducts products={products} />)
       }

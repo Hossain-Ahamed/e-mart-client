@@ -5,6 +5,7 @@ import { AuthContext } from "../../../../../../Contexts/AuthProvider";
 import useProfile from "../../../../../../Hooks/useProfile";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const OrderDetails = () => {
   const [profile, profileLoading] = useProfile();
@@ -99,7 +100,7 @@ const OrderDetails = () => {
                         {new Date(i?.orderStatus[0]?.time).toLocaleTimeString("en-US")}
                       </p>
                     </td>
-                    <td className="px-6 py-4">${i?.finalAmount}</td>
+                    <td className="px-6 py-4"><p className="inline-flex"><span><TbCurrencyTaka /></span>{i?.finalAmount}</p></td>
                     <td className="px-6 py-4">
                     <Link to={`${i?._id}`} className="font-medium text-blue-600 hover:underline">See Details</Link>
                     </td>

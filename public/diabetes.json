@@ -1,0 +1,67 @@
+[
+    {
+        "productTitle": "NovoFine Needle",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FIMG-20231029-WA0066.jpg&w=750&q=75",
+        "price": "12.00",
+        "category": "medicine",
+        "subCategory": "diabetes care",
+        "quantity": 20,
+        "weight":"per piece",
+        "des": "The NovoFine Needle 3 ml is designed for injecting insulin into the body and is particularly used for diabetes management. This NovoFine Needle 3 ml is thin, polished, and coated with a tapered point, making the injection process less painful and more comfortable for individuals with diabetes."
+      },
+    {
+        "productTitle": "DispoVan Syringe 100IU",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FIMG-20231029-WA0076_zaOSAYL.jpg&w=750&q=75",
+        "mainPrice": "10.09",
+        "price": "9.00",
+        "bestDeal": true,
+        "category": "medicine",
+        "subCategory": "diabetes care",
+        "quantity": 20,
+        "weight":"per piece",
+        "des": "DispoVan Syringe 100IU U-100 1ml are designed for injecting insulin. They are sterile and provide accurate doses to ensure optimal hygiene and safety. DispoVan Syringe 100IU U-100 1ml come with a pre-attached needle, eliminating the need for repeated use or cleaning and preventing the risk of contamination or infection."
+      },
+    {
+        "productTitle": "Quick Check Test Strip",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FIMG-20231029-WA0090.jpg&w=750&q=75",
+        "mainPrice": "400.00",
+        "price": "360.00",
+        "category": "medicine",
+        "subCategory": "diabetes care",
+        "quantity": 20,
+        "weight":"25's Pack"
+      },
+    {
+        "productTitle": "Blood Lancets (Mediron)",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FIMG-20231029-WA0074.jpg&w=750&q=75",
+        "mainPrice": "120.00",
+        "price": "108.00",
+        "category": "medicine",
+        "subCategory": "diabetes care",
+        "quantity": 20,
+        "weight":"100's Strip",
+        "des": "Blood Lancets (Mediron) 100 are widely used for taking blood samples and are known for their relatively painless use. These devices feature a sharp surgical steel tip covered in plastic, designed to gently pierce the skin, typically at the tip of the finger. Blood Lancets (Mediron) 100s, essentially small lancets, serve the purpose of making a precise skin puncture to collect blood samples for various diagnostic procedures."
+      },
+    {
+        "productTitle": "VivaChek Ino Test Strip",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FIMG-20231029-WA0106.jpg&w=750&q=75",
+        "mainPrice": "1050.00",
+        "price": "945.00",
+        "category": "medicine",
+        "subCategory": "diabetes care",
+        "quantity": 20,
+        "weight":"50's Pack"
+      },
+    {
+        "productTitle": "Insulin Carry Bag",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2Fmedeasy_insulin_carry_bag.jpg&w=750&q=75",
+        "mainPrice": "1050.00",
+        "price": "945.00",
+        "category": "medicine",
+        "subCategory": "diabetes care",
+        "bestDeal": true,
+        "quantity": 20,
+        "weight":"50's Pack",
+        "des": "Blood Lancets (Mediron) 100 are widely used for taking blood samples and are known for their relatively painless use. These devices feature a sharp surgical steel tip covered in plastic, designed to gently pierce the skin, typically at the tip of the finger. Blood Lancets (Mediron) 100s, essentially small lancets, serve the purpose of making a precise skin puncture to collect blood samples for various diagnostic procedures."
+      }
+]

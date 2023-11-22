@@ -41,9 +41,8 @@ const OrderDetailRow = ({ products }) => {
                     {i?.productQuantity}
                   </p>
                 </td>
-                <td className="px-6 py-4 flex items-center"><TbCurrencyTaka />{i?.productPrice}</td>
-                <td className="px-6 py-4">
-                  {(i?.productQuantity * i?.productPrice).toFixed(2)}
+                <td className="px-6 py-4"><p className="inline-flex"><span><TbCurrencyTaka /></span>{i?.productPrice}</p></td>
+                <td className="px-6 py-4"><p className="inline-flex"><span><TbCurrencyTaka /></span>{(i?.productQuantity * i?.productPrice).toFixed(2)}</p> 
                 </td>
               </tr>
             ))}

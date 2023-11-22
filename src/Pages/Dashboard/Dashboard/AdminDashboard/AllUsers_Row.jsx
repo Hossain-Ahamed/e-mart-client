@@ -4,10 +4,20 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import useRole from '../../../../Hooks/useRole';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query';
 
 const AllUsers_Row = ({user, index, img}) => {
   const {axiosSecure} = useAxiosSecure();
    const [role, setRole] = useState(user?.role);
+
+   const { refetch, data: profile = [] } = useQuery({
+    queryKey: ['profile'],
+    queryFn: async () => {
+        const res = await axiosSecure.get(`/get-profile`)
+        console.log(res.data)
+        return res.data;
+    },
+      });
 
    useEffect(() => {
     setRole(user?.role)
@@ -48,11 +58,17 @@ const AllUsers_Row = ({user, index, img}) => {
                 <th>{index}</th>
                 <td>
                   <div className="flex items-center space-x-3">
-                    <div className="avatar">
+                    {/* <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img src={img} />
+                        {
+                          profile.map((i, index)=>(
+                            <div key={index}>
+                              <img src={i.img} alt={user.name} />
+                            </div>
+                          ))
+                        }
                       </div>
-                    </div>
+                    </div> */}
                     <div>
                       <div className="font-bold">{user.name}</div>
                     </div>

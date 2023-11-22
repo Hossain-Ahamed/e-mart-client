@@ -42,12 +42,12 @@ const AdminHome = () => {
 
       if (screenWidth < 375) {
         setChartWidth(300); // Set width for small screens
-      } else if (screenWidth < 768) {
-        setChartWidth(320); // Set width for small screens
-      } else if (screenWidth < 1024) {
-        setChartWidth(420); // Set width for medium screens
+      } else if (screenWidth <= 768) {
+        setChartWidth(350); // Set width for small screens
+      } else if (screenWidth <= 1024) {
+        setChartWidth(300); // Set width for medium screens
       } else {
-        setChartWidth(420); // Set width for large screens
+        setChartWidth(450); // Set width for large screens
       }
     };
 
@@ -62,8 +62,8 @@ const AdminHome = () => {
   return (
     <>
       <div className="w-full h-full">
-        <div className="h-28 md:h-16 lg:h-[100px] bg-gradient-to-r from-primary to-white relative ">
-          <div className="grid grid-cols-2 md:grid-cols-4 w-[250px] md:w-[500px] lg:w-[600px] xl:w-[1000px] gap-2 mx-auto md:absolute md:inset-x-0 md:-bottom-8 lg:inset-x-0 lg:-bottom-11">
+        <div className="h-28 md:h-16 lg:h-[100px] bg-gradient-to-r from-primary to-white relative py-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 w-[250px] md:w-[600px] xl:w-[1000px] gap-2 mx-auto md:absolute md:inset-x-0 md:-bottom-8 lg:inset-x-0 lg:-bottom-11">
             <div className="w-28 h-12 md:w-36 md:h-16 lg:w-[200px] lg:h-[90px] rounded-[11px] backdrop-blur-xl bg-white/50 flex items-center justify-center gap-2 lg:gap-5 drop-shadow-md px-2">
               <div className="md:bg-white rounded-xl">
                 <BiCategoryAlt className="md:m-1 lg:m-2 lg:text-lg" />

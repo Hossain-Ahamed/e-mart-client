@@ -83,7 +83,7 @@ const ProductCard = ({ showProduct }) => {
   const starRatingSize = screenSize < 768 ? 16 : 24; // Adjust the size as needed
   return (
     <>
-      <div className="w-36 h-60 lg:h-96 md:w-52 md:h-80 border">
+      <div className="w-36 h-60 lg:h-96 md:w-52 md:h-80 border bg-white rounded-md">
         <div
           className="relative"
           onMouseEnter={() => handleMouseEnter(showProduct)}
@@ -92,7 +92,7 @@ const ProductCard = ({ showProduct }) => {
           <Link to={`/overView/${_id}`}>
             <figure>
               <img
-                className="w-36 h-40 md:h-64 md:w-52"
+                className="w-36 h-40 md:h-64 md:w-52 rounded-md"
                 src={image}
                 alt={productTitle}
               />

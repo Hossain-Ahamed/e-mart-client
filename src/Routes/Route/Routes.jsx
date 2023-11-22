@@ -55,6 +55,7 @@ import DeliveredOrderDetails from "../../Pages/Dashboard/Dashboard/AdminDashboar
 import NoProfileWarning from "../PrivateRoute/NoProfileWarning";
 import EditProduct from "../../Pages/Dashboard/Dashboard/AdminDashboard/UploadCategory/EditProduct";
 import AboutUs from "../../Pages/Shared/AboutUs/AboutUs";
+import UploadPrescription from "../../Pages/Prescription/UploadPrescription";
 
 
 
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
         {
           path: "/about-us",
           element: <AboutUs />
+        },
+        {
+          path: "/upload-prescription",
+          element: <UploadPrescription />
         },
         // {
         //   path: "/reviews",

@@ -4,7 +4,7 @@ const SecondBanner = ({images}) => {
     //const {img, title, description} = secondBannerInfo;
     return (
         <>
-        <div className="grid justify-center m-5">
+        <div className="grid justify-center p-5">
         <div className="relative">
           {
             images?.slice(-1).map((img, index) => (

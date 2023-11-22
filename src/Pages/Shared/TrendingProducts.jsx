@@ -18,7 +18,7 @@ const TrendingProducts = ({products}) => {
 
     return (
        <>
-       <h1 className='text-center font-bold text-xl md:text-2xl lg:text-4xl my-8 pt-14'>Trending Products</h1>
+       <h1 className='text-center font-bold text-xl md:text-2xl lg:text-4xl py-5'>Trending Products</h1>
       <div className="flex flex-col items-center mt-4">
         <div className="flex gap-4 mb-4">
           {

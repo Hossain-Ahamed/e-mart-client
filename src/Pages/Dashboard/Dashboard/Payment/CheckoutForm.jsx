@@ -5,43 +5,66 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../../../Contexts/AuthProvider";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import SuccessFullPage from "./SuccessFullPage";
+import PaymentError from "./PaymentError";
+import Field from "./Field";
+import CardField from "./CardField";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 //import './CheckoutForm.css'
 
 const CheckoutForm = ({ price, products }) => {
-  console.log(price, products)
+  console.log(price, products);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
+  const [cardComplete, setCardComplete] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null);
   const [transactionId, setTransactionId] = useState("");
+  const [billingDetails, setBillingDetails] = useState({
+    email: "",
+    phone: "",
+    name: "",
+  });
 
   const { _OrderID } = useParams();
 
-  const { isLoading, isError, data : orderedData, error } = useQuery({
-    queryKey: ['orderData', _OrderID],
+  const {
+    isLoading,
+    isError,
+    data: orderedData,
+    error,
+  } = useQuery({
+    queryKey: ["orderData", _OrderID],
     queryFn: async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_SERVERADDRESS}/payment-methods?email=${
+          user?.email
+        }&_orderID=${_OrderID}`,
+        { withCredentials: true }
+      );
 
-      const res = await axios.get(`${import.meta.env.VITE_SERVERADDRESS}/payment-methods?email=${user?.email}&_orderID=${_OrderID}`, { withCredentials: true })
-   
       return res?.data;
     },
-  })
+  });
 
   if (isLoading) {
-    return <span>Loading... checkouy</span>
+    return <span>Loading... checkouy</span>;
   }
 
   if (isError) {
-    return <span>Error: {error?.response?.data?.message}</span>
+    return <span>Error: {error?.response?.data?.message}</span>;
   }
 
   useEffect(() => {
     axios
-      .post(`https://e-mart-server-one.vercel.app/create-payment-intent`, { price })
+      .post(`https://e-mart-server-one.vercel.app/create-payment-intent`, {
+        price,
+      })
       .then((res) => {
         //console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
@@ -65,102 +88,162 @@ const CheckoutForm = ({ price, products }) => {
     if (card == null) {
       return;
     }
-    const { error } = await stripe.createPaymentMethod({
-      type: "card",
-      card,
-    });
 
     if (error) {
-      //console.log("[error]", error);
-      setCardError(error.message);
-    } else {
-      setCardError("");
-      //console.log("[PaymentMethod]", paymentMethod);
+      card.focus();
+      return;
     }
 
-    setProcessing(true);
+    if (cardComplete) {
+      setProcessing(true);
+    }
+
+    const payload = await stripe.createPaymentMethod({
+      type: "card",
+      card,
+      billing_details: billingDetails,
+    });
+
+    if (payload.error) {
+      setCardError(payload.error.message);
+    } else {
+      setProcessing(true);
+    }
 
     const { paymentIntent, error: intentError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
-          billing_details: {
-            email: user?.email || "Unknown",
-            name: user?.displayName || "Anonymous",
-          },
+          billing_details: billingDetails,
         },
       });
+    setProcessing(false);
+
     if (intentError) {
-     // console.log(intentError);
+      setCardError(intentError.message);
     }
     //console.log(paymentIntent);
 
-    setProcessing(false);
+    if (payload.error) {
+      setCardError(payload.error);
+    } else {
+      setPaymentMethod(payload.paymentMethod);
 
-    if (paymentIntent.status === "succeeded") {
-      setTransactionId(paymentIntent.id);
-      //const transactionId = paymentIntent.id;
-      // const payment = {
-      //   email: user?.email,
-      //   transactionId: paymentIntent.id,
-      //   price,
-      //   quantity: products,
-      //   // cartItems: products?.map(item => item._id),
-      //   // cartItemsName: products?.map(item => item.productTitle),
-      //   // cartItemsQuantity: products?.map(item => item.quantity),
-      //   // payItems: products?.map(item => item.productId),
-      //   date: new Date()
-      // }
-      // axios.post('https://e-mart-server-one.vercel.app/payments', payment )
-      // .then((res)=>{
-      //   console.log(res.data)
-      //   if(res.data.insertedId){
+      if (paymentIntent.status === "succeeded") {
+        setTransactionId(paymentIntent.id);
+        const updatedData = {
+          typeOfPayment: "Card",
+          email: user?.email,
+          transaction_method_email:
+            payload.paymentMethod?.billing_details?.email,
+          transaction_method_name: payload.paymentMethod?.billing_details?.name,
+          transaction_method_phone:
+            payload.paymentMethod?.billing_details?.phone,
+          transactionId: paymentIntent.id,
+          methodID: payload.paymentMethod?.id,
+          price: parseFloat((paymentIntent?.amount / 100.0).toFixed(2)),
+          // orderLength: products.length,
+          // productsID: products.map(i => i?._id),
+          // menuItems: products.map(i => i?.productID),
+          // itemsName: products.map(i => { return {  name: i?.name, price: i?.price } }),
+          payment_date: new Date().toISOString(),
+        };
 
-      //   }
-      // })
-      const updatedData = {
-        typeOfPayment: "Card", 
-        transactionId: paymentIntent.id,
-      };
-     
-      axios.patch(`${import.meta.env.VITE_SERVERADDRESS}/payment/${_OrderID}?email=${user?.email}`, updatedData, { withCredentials: true })
-      .then(data => {
-        toast.success("successfully paid")
-        navigate("/dashboard/order-details")
-      })
-      .catch(e => {
-        toast.error("try again")
-        console.error(e)
-      })
+        axios
+          .patch(
+            `${import.meta.env.VITE_SERVERADDRESS}/payment/${_OrderID}?email=${
+              user?.email
+            }`,
+            updatedData,
+            { withCredentials: true }
+          )
+          .then((data) => {
+            toast.success("successfully paid");
+            navigate("/dashboard/order-details");
+          })
+          .catch((e) => {
+            toast.error("try again");
+            console.error(e);
+          });
+      }
     }
   };
 
+  const reset = () => {
+    setCardError(null);
+    setProcessing(false);
+    setPaymentMethod(null);
+    setBillingDetails({
+      email: "",
+      phone: "",
+      name: "",
+    });
+  };
+
+  if (paymentMethod && transactionId) {
+    return (
+      <SuccessFullPage
+        transactionId={transactionId}
+        id={paymentMethod.id}
+        reset={reset}
+      />
+    );
+  }
+
   return (
     <>
-      <div className="w-[500px]">
+      <div className="w-60 md:w-96 lg:w-[500px]">
         <form onSubmit={handleSubmit}>
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#424770",
-                  "::placeholder": {
-                    color: "#aab7c4",
-                  },
-                },
-                invalid: {
-                  color: "#9e2146",
-                },
-              },
-            }}
-          />
+          <fieldset className="FormGroup">
+            <Field
+              label="Name"
+              id="name"
+              type="text"
+              required
+              autoComplete="name"
+              value={billingDetails.name}
+              onChange={(e) => {
+                setBillingDetails({ ...billingDetails, name: e.target.value });
+              }}
+            />
+            <Field
+              label="Email"
+              id="email"
+              type="email"
+              required
+              autoComplete="email"
+              value={billingDetails.email}
+              onChange={(e) => {
+                setBillingDetails({ ...billingDetails, email: e.target.value });
+              }}
+            />
+            <Field
+              label="Phone"
+              id="phone"
+              type="tel"
+              required
+              autoComplete="tel"
+              value={billingDetails.phone}
+              onChange={(e) => {
+                setBillingDetails({ ...billingDetails, phone: e.target.value });
+              }}
+            />
+          </fieldset>
+          <fieldset className="FormGroup mt-5">
+            <CardField
+              onChange={(e) => {
+                setCardError(e.error);
+                setCardComplete(e.complete);
+              }}
+            />
+          </fieldset>
+          {error && <PaymentError message={error.message} />}
           <button
             type="submit"
             disabled={!stripe || !clientSecret || processing}
-            className="bg-accent text-white font-bold text-lg w-32 h-10 rounded-md mt-10"
+            className="bg-accent text-white font-bold text-lg p-2 rounded-md mt-10"
           >
-            Pay Now
+            <span className="inline-flex">Pay Now Only <TbCurrencyTaka />{price}</span>
           </button>
         </form>
         {cardError && toast.error(cardError)}

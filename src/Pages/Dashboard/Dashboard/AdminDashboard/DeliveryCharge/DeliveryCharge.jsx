@@ -62,7 +62,7 @@ const DeliveryCharge = () => {
 
   return (
     <>
-      <div className="bg-white w-fit h-full p-10">
+      <div className="bg-white w-fit h-full p-5 lg:p-10">
 
         <AdminTitle heading="Delivery Charges" />
 

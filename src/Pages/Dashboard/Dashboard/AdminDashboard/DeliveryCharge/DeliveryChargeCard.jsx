@@ -50,7 +50,7 @@ const DeliveryChargeCard = ({ disctrict, count }) => {
 
 
     return (
-        <div className='flex justify-center items-center gap-x-2 px-2  py-2 hover:bg-slate-100 border-b'>
+        <div className='flex flex-wrap justify-center items-center gap-x-2 px-2  py-2 hover:bg-slate-100 border-b'>
             <div className='flex flex-col items-start justify-center gap-y-1'>
                 <p className='text-xs p-0  m-0'>City Name</p>
                 <input type="text" className='input input-bordered read-only:cursor-not-allowed rounded-md' defaultValue={disctrict?.name} readOnly />

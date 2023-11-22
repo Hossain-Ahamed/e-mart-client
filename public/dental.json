@@ -1,0 +1,93 @@
+[
+    {
+        "productTitle": "Orostar Plus",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FIMG-20231021-WA0085.jpg&w=750&q=75",
+        "mainPrice": "150.00",
+        "price": "135.00",
+        "category": "medicine",
+        "subCategory": "dental care",
+        "bestDeal": true,
+        "quantity": 20,
+        "weight":"250 ml",
+        "des": "Eucalyptol is a natural organic compound which is a colorless liquid. It is a cyclic ether and a monoterpenoid. Eucalyptol is an ingredient in many brands of mouthwash and cough suppressant. It controls airway mucus hypersecretion and asthma via anti-inflammatory cytokine inhibition.Menthol: It provides cooling sensation by stimulation of cooling receptor and gives local anesthetic actionMethyl Salicylate: It penetrates and reaches at high concentration in pain regions and inhibit the prostaglandin synthesis and relieves pain effectivelyThymol, one of the chemicals in thyme, is used with another chemical, chlorhexidine, as a dental varnish to prevent tooth decay. In foods, thyme is used as a flavoring agent. In manufacturing, red thyme oil is used in perfumes. It is also used in soaps, cosmetics, and toothpastes.Fluoride salts are often added to municipal drinking water (as well as certain food products in some countries) for the purposes of maintaining dental health. The fluoride enhances the strength of teeth by the formation of fluorapatite, a naturally occurring component of tooth enamel. Toothpaste often contains sodium fluoride to prevent cavities, although tin(II) fluoride is generally considered superior for this application."
+      },
+    {
+        "productTitle": "Listacare Blue Mint",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FIMG-20231019-WA0499.jpg&w=750&q=75",
+        "mainPrice": "80.00",
+        "price": "72.00",
+        "category": "medicine",
+        "subCategory": "dental care",
+        "quantity": 20,
+        "weight":"120 ml",
+        "des": "This preparation is a clinically proven antiseptic mouthwash that provides you complete care for healthier mouth with around-the-clock protection against bacteria and plaque. Your mouth stays cleaner, fresher and healthier. 24 hours protection against plaque, gingivitis and gum disease Fights against germs that cause bad breath Kills germs between teeth and keeps teeth cleaner & brighter"
+      },
+    {
+        "productTitle": "Orostar Plus",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2Fmedeasy_orostar_plus.jpg&w=750&q=75",
+        "mainPrice": "85.00",
+        "price": "76.00",
+        "bestDeal": true,
+        "category": "medicine",
+        "subCategory": "dental care",
+        "quantity": 20,
+        "weight":"120 ml",
+        "des": "Eucalyptol is a natural organic compound which is a colorless liquid. It is a cyclic ether and a monoterpenoid. Eucalyptol is an ingredient in many brands of mouthwash and cough suppressant. It controls airway mucus hypersecretion and asthma via anti-inflammatory cytokine inhibition.Menthol: It provides cooling sensation by stimulation of cooling receptor and gives local anesthetic actionMethyl Salicylate: It penetrates and reaches at high concentration in pain regions and inhibit the prostaglandin synthesis and relieves pain effectivelyThymol, one of the chemicals in thyme, is used with another chemical, chlorhexidine, as a dental varnish to prevent tooth decay. In foods, thyme is used as a flavoring agent. In manufacturing, red thyme oil is used in perfumes. It is also used in soaps, cosmetics, and toothpastes.Fluoride salts are often added to municipal drinking water (as well as certain food products in some countries) for the purposes of maintaining dental health. The fluoride enhances the strength of teeth by the formation of fluorapatite, a naturally occurring component of tooth enamel. Toothpaste often contains sodium fluoride to prevent cavities, although tin(II) fluoride is generally considered superior for this application."
+      },
+    {
+        "productTitle": "Sensodyne Fresh Gel",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2Fmedeasy_sensodyne_rapid_action.jpg&w=750&q=75",
+        "mainPrice": "185.00",
+        "price": "176.00",
+        "category": "medicine",
+        "subCategory": "dental care",
+        "quantity": 20,
+        "weight":"75 gm Tube",
+        "des": "Sensodyne Fresh Gel 75 gm is known for its effectiveness in keeping teeth clean and healthy. It contains fluoride to prevent tooth decay and strengthens enamel. Sensodyne Fresh Gel 75 gm also has a refreshing mint flavor that leaves the mouth feeling clean and fresh."
+      },
+    {
+        "productTitle": "Sensodyne Fresh Mint",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FSensodyne-Fresh-Mint.jpg&w=750&q=75",
+        "mainPrice": "185.00",
+        "price": "176.00",
+        "bestDeal": true,
+        "category": "medicine",
+        "subCategory": "dental care",
+        "quantity": 20,
+        "weight":"75 gm Tube",
+        "des": "Sensodyne Fresh Mint 75 gm is known for its effectiveness in keeping teeth clean and healthy. It contains fluoride to prevent tooth decay and strengthens enamel. Sensodyne Fresh Mint 75 gm also has a refreshing mint flavor that leaves the mouth feeling clean and fresh."
+      },
+    {
+        "productTitle": "Mediplus",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2Fmedeasy_mediplus_toothpaste.jpg&w=750&q=75",
+        "mainPrice": "90.00",
+        "price": "85.00",
+        "category": "medicine",
+        "subCategory": "dental care",
+        "quantity": 20,
+        "weight":"140 gm Tube"
+      },
+    {
+        "productTitle": "Mediplus DS",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2Fmedeasy_mediplus_ds.jpg&w=750&q=75",
+        "mainPrice": "135.00",
+        "price": "128.25",
+        "category": "medicine",
+        "subCategory": "dental care",
+        "quantity": 20,
+        "weight":"140 gm Tube",
+        "des": "Mediplus DS 140 gm is known for its effectiveness in keeping teeth clean and healthy. It contains fluoride to prevent tooth decay and strengthens enamel. Mediplus DS 140 gm also has a refreshing mint flavor that leaves the mouth feeling clean and fresh."
+      },
+    {
+        "productTitle": "Mediplus Toothbrush",
+        "image": "https://medeasy.health/_next/image?url=https%3A%2F%2Fcdn.medeasy.health%2Fmedia%2Fmedicines%2FIMG-20231029-WA0079.jpg&w=750&q=75",
+        "mainPrice": "90.00",
+        "price": "85.25",
+        "bestDeal": true,
+        "category": "medicine",
+        "subCategory": "dental care",
+        "quantity": 20,
+        "weight":"Per piece",
+        "des": "Made with soft and nylon bristles, the Mediplus Toothbrush is gentle on the gums. The bristles are also angled to reach all surfaces of the teeth, including the back teeth. The Mediplus Toothbrush has a comfortable handle that makes it easy to grip."
+      }
+]
