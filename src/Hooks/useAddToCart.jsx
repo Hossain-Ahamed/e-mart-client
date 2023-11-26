@@ -34,7 +34,6 @@ const useAddToCart = () => {
             //console.log(data.data)
             refetch();
             Swal.fire({
-              position: 'top-end',
               icon: 'success',
               title: 'Product added on the Cart.',
               showConfirmButton: false,

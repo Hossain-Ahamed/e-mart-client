@@ -3,7 +3,7 @@ import useProduct from '../../Hooks/useProduct';
 import ProductCard from '../Shared/ProductCard';
 
 const TrendingProducts = ({products}) => {
-    console.log(products)
+    //console.log(products)
     const [activeContent, setActiveContent] = useState('content1');
 
   const handleContentSwitch = (contentId) => {

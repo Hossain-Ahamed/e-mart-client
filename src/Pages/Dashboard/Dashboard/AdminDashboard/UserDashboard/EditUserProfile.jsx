@@ -188,14 +188,15 @@ const EditUserProfile = () => {
 
   return (
     <>
-      <div className="w-screen lg:w-[900px] mx-auto min-h-screen mt-5 p-5">
+      <div className="w-screen lg:w-[700px] mx-auto h-full">
         <UserTitle heading="Update Profile"></UserTitle>
         <div>
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* ------image---- */}
+              
               <div
-                className={`w-44 h-44 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative mx-auto`}
+                className={`w-44 h-44 bg-[#EFEFEF] border-2 border-gray-300 flex items-center justify-center relative`}
               >
                 {!selectedImage && (
                   <>
@@ -268,12 +269,8 @@ const EditUserProfile = () => {
                 />
               </div>
 
-              <div className="mt-6 grid gap-6 mb-6 md:grid-cols-2">
-              <div>
-                
-
               {/* ------Name------ */}
-              <div className="form-control w-full max-w-xs">
+              <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text font-semibold">Name</span>
                 </label>
@@ -287,7 +284,7 @@ const EditUserProfile = () => {
               </div>
 
               {/* ------Email------ */}
-              <div className="form-control w-full max-w-xs">
+              <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text font-semibold">Email</span>
                 </label>
@@ -299,7 +296,8 @@ const EditUserProfile = () => {
                   {...register("email", {})}
                 />
               </div>
-              <div className="form-control w-full max-w-xs">
+              
+              <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text font-semibold">City</span>
                 </label>
@@ -330,22 +328,19 @@ const EditUserProfile = () => {
                 )}
 
               </div>
-              </div>
-
-              <div>
                 {/* -----Address----- */}
 
               
 
               {
                 city && <>
-                  <div className="form-control w-full max-w-xs">
+                  <div className="form-control w-full">
                     <label className="label">
                       <span className="label-text font-semibold">
                         Address
                       </span>
                     </label>
-                    <textarea id="message" rows="4" className="input input-bordered rounded-md"
+                    <textarea id="message" className="input input-bordered rounded-md"
                       placeholder="Address here..."
                       defaultValue={profile?.address}
                       {...register("address", {
@@ -365,7 +360,7 @@ const EditUserProfile = () => {
 
 
               {/* -------phone----- */}
-              <div className="form-control w-full max-w-xs">
+              <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text font-semibold">
                     Contact Number
@@ -393,19 +388,14 @@ const EditUserProfile = () => {
                 }
 
               </div>
-
-              
-              
-              </div>
-              </div>
               <br />
               <input
-                className="w-40 h-12 md:mx-72 lg:mx-96 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-2"
+                className="w-40 h-12 cursor-pointer bg-accent text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-2"
                 type="submit"
                 value="Submit"
               />
             </form>
-          </div>
+            </div>
         </div>
       </div>
     </>

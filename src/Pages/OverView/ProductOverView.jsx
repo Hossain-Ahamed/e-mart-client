@@ -23,7 +23,9 @@ const ProductOverView = () => {
     quantity,
     reviews
   } = productDetail;
-  //console.log(reviews.length, "re")
+  console.log(productDetail)
+
+  const [selectedSize, setSelectedSize] = useState(""); // State to track the selected size
   const [cart] = useCart();
 
   const [alreadyAdded, setAlreadyAdded] = useState(false);
@@ -67,23 +69,42 @@ const ProductOverView = () => {
             weight && (<><div className="divider"></div>
             <p>Weight: {weight}</p></>)
           }
-          {
-            size && (<p className="my-2">Size: {size}</p>)
-          }
+          {/* Size selection dropdown */}
+          {size && (
+            <>
+              <div className="divider"></div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Size</span>
+                </label>
+                <select
+                  value={selectedSize}
+                  onChange={(e) => setSelectedSize(e.target.value)}
+                  className="select select-bordered rounded-md w-full max-w-xs"
+                >
+                  {size.map((sizeOption) => (
+                    <option key={sizeOption.trim()} value={sizeOption.trim()}>
+                      {sizeOption.trim()}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </>
+          )}
           
           <div className="divider"></div>
           <p>Current Stock: {quantity}</p>
 
           {quantity > 0 ? (
             alreadyAdded ? (
-              <button className="flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5">
+              <button className="flex justify-center items-center gap-2 rounded-lg  lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5">
                 <AiOutlineShoppingCart />
                 <span>Added</span>
               </button>
             ) : (
               <button
                 onClick={() => handleAddToCart(productDetail, 1)}
-                className={`flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5 ${
+                className={`flex justify-center items-center gap-2 rounded-lg lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5 ${
                   ["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role)
                     ? "hidden"
                     : ""
@@ -95,7 +116,7 @@ const ProductOverView = () => {
             )
           ) : (
             <button
-              className={`flex justify-center items-center gap-2 lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5 ${
+              className={`flex justify-center items-center gap-2 rounded-lg  lg:text-xl w-32 h-8 md:w-48 md:h-14 bg-accent text-white mt-5 ${
                 ["admin", "Order Manager", "Product Manager", "Delivery Partner"].includes(role)
                   ? "hidden"
                   : ""

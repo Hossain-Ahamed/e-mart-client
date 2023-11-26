@@ -1,0 +1,60 @@
+[
+    {
+        "productTitle": "Beef Bone In ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/chaldal-premium-beef-bone-in-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D131834&q=best&v=1&m=400&webp=1",
+        "price": "840",
+        "category": "Grocery",
+        "subCategory": "meat",
+        "quantity": 20,
+        "weight":"1 kg"
+      },
+    {
+        "productTitle": "Beef Boneless ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/chaldal-premium-beef-boneless-50-gm-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D131693&q=best&v=1&m=400&webp=1",
+        "price": "559",
+        "category": "Grocery",
+        "subCategory": "meat",
+        "quantity": 20,
+        "weight":"500 gm"
+      },
+    {
+        "productTitle": "Beef Head Meat ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/chaldal-premium-beef-head-meat-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D131691&q=best&v=1&m=400&webp=1",
+        "price": "649",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "meat",
+        "quantity": 20,
+        "weight":"1 kg"
+      },
+    {
+        "productTitle": "Bengal Meat Beef Bone In ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/bengal-meat-beef-bone-in-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D77384&q=low&v=1&m=400&webp=1",
+        "price": "840",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "meat",
+        "quantity": 20,
+        "weight":"1 kg"
+      },
+    {
+        "productTitle": "Beef Front Leg Bone in ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/chaldal-premium-beef-front-leg-bone-in-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D130964&q=best&v=1&m=400&webp=1",
+        "price": "929",
+        "category": "Grocery",
+        "subCategory": "meat",
+        "quantity": 20,
+        "weight":"1 kg"
+      },
+    {
+        "productTitle": "Mutton Bone in (Khashi) ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/mutton-bone-in-khashi-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D74656&q=best&v=1&m=400&m=400&webp=1",
+        "mainPrice": "1110",
+        "price": "1099",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "meat",
+        "quantity": 20,
+        "weight":"1 kg"
+      }
+]

@@ -149,6 +149,7 @@ const AddCoupon = () => {
               {...register("numberOfUse", { required: true })}
             />
           </div>
+          <div className="mt-3">
           <input
             type="checkbox"
             name="datePicker"
@@ -157,11 +158,11 @@ const AddCoupon = () => {
           />
           <label
             htmlFor="datePicker"
-            className="peer-checked/datePicker:text-gray-200 input input-bordered rounded-md"
+            className="text-gray-400"
           >
             Select Date Range
           </label>
-          <div className="my-3 hidden peer-checked/datePicker:block">
+          <div className="my-3">
             <DateRangePicker
               onChange={(item) => dateFunction(item)}
               showSelectionPreview={true}
@@ -171,10 +172,11 @@ const AddCoupon = () => {
               direction="horizontal"
             />
           </div>
+          </div>
 
           <input
             type="submit"
-            className="w-full h-12 cursor-pointer bg-primary text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md mt-5"
+            className="w-full h-12 cursor-pointer bg-primary text-white hover:bg-slate-200 hover:text-primary font-bold rounded-md"
             value="Add Coupon Code"
           />
         </form>

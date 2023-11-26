@@ -28,7 +28,7 @@ const MyCart = () => {
       withCredentials: true,
     })
       .then((data) => {
-        // console.log(data.data);
+         console.log(data.data);
         setCart(data.data.cart);
       })
       .catch((e) => {

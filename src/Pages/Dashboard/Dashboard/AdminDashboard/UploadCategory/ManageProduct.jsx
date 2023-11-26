@@ -62,7 +62,7 @@ const ManageProduct = () => {
   return (
     <>
       <div className="h-full p-10 w-full">
-        <AdminTitle heading={`All Products(${products.length})`} />
+        <AdminTitle heading={`All Products(${count})`} />
         <div className="relative mt-5 flex justify-between items-center mb-3">
           <div>
             <select

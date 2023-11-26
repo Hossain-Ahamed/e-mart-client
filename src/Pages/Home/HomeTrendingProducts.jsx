@@ -10,8 +10,19 @@ const HomeTrendingProducts = () => {
   };
 
   const  [ products, isLoading ]  = useProduct();
+  // Function to shuffle an array randomly using Fisher-Yates algorithm
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
 
-    const bestDealProducts = products.filter(
+// Shuffle the product array randomly
+const shuffledProducts = shuffleArray(products);
+
+    const bestDealProducts = shuffledProducts.filter(
       showProduct => showProduct['bestDeal'] === true
             );
 

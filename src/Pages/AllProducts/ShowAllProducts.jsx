@@ -101,7 +101,15 @@ const ShowAllProducts = () => {
         </div>
         {isLoading && (
           <>
-            <ProductCardLoading />
+          <div className="w-[300px] md:w-[700px] lg:w-[1200px] mx-auto mt-10 relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 gap-8">
+          {
+              products.map(productLoading => (
+                <ProductCardLoading key={productLoading._id} />
+              ))
+            }
+          </div>
+        </div>    
           </>
         )}
       </div>

@@ -77,10 +77,21 @@ const ProductCard = ({ showProduct }) => {
   const averageRating = calculateAverageRating();
 
   // Determine the size of the star rating based on screen width
-  const screenSize = window.innerWidth;
+const screenSize = window.innerWidth;
 
-  // Calculate the desired size for the star rating component
-  const starRatingSize = screenSize < 768 ? 16 : 24; // Adjust the size as needed
+// Calculate the desired size for the star rating component
+let starRatingSize;
+
+if (screenSize < 480) {
+  starRatingSize = 14;
+} else if (screenSize <= 768) {
+  starRatingSize = 20;
+} else if (screenSize < 1024) {
+  starRatingSize = 20;
+} else {
+  starRatingSize = 24; // Default size for larger screens
+}
+
   return (
     <>
       <div className="w-36 h-60 lg:h-96 md:w-52 md:h-80 border bg-white rounded-md">
@@ -92,7 +103,7 @@ const ProductCard = ({ showProduct }) => {
           <Link to={`/overView/${_id}`}>
             <figure>
               <img
-                className="w-36 h-40 md:h-64 md:w-52 rounded-md"
+                className="w-36 h-40 md:h-56 lg:h-64 md:w-52 rounded-md"
                 src={image}
                 alt={productTitle}
               />
@@ -159,7 +170,7 @@ const ProductCard = ({ showProduct }) => {
             <p className="text-gray-700 text-sm truncate text-ellipsis overflow-hidden px-3">
               {productTitle}
             </p>
-            <p className="flex text-yellow-700 font-bold text-xs lg:text-xl justify-center my-1">
+            <p className="flex text-yellow-700 font-bold text-xs md:text-lg lg:text-xl justify-center lg:my-1">
               <TbCurrencyTaka></TbCurrencyTaka>
               {price}
               {mainPrice && (
@@ -169,7 +180,7 @@ const ProductCard = ({ showProduct }) => {
                 </s>
               )}
             </p>
-            <div className="lg:mx-12">
+            <div className="mx-10 md:mx-12">
               {averageRating ? (
                 <ReactStars
                   count={5}

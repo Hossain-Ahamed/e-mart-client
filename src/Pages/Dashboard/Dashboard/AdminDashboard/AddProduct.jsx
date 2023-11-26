@@ -44,13 +44,16 @@ const AddProduct = () => {
             mainPrice,
             price,
             weight,
-            size,
+            size: sizeInput,  // Rename to avoid confusion with 'size' in the form data
             bestDeal,
             category,
             subCategory,
             quantity,
           } = data;
-
+        
+          // Convert the comma-separated string to an array
+          const sizeArray = sizeInput.split(',').map(size => size.trim());
+        
           const newProduct = {
             productTitle,
             des,
@@ -58,7 +61,7 @@ const AddProduct = () => {
             mainPrice: parseFloat(mainPrice),
             price: parseFloat(price),
             weight,
-            size,
+            size: sizeArray,  // Use the converted array
             bestDeal,
             category,
             subCategory,
@@ -116,7 +119,7 @@ const AddProduct = () => {
                 <textarea
                 placeholder="Product Description"
                   className="textarea textarea-bordered rounded-md h-24"
-                  {...register("des", { required: true })}
+                  {...register("des")}
                 ></textarea>
               </div>
               <br />
@@ -204,7 +207,7 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("mainPrice", { required: true })}
+                    {...register("mainPrice")}
                   />
                 </div>
                 <div className="form-control w-full max-w-xs">
@@ -226,16 +229,22 @@ const AddProduct = () => {
                   <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
-                    {...register("weight", { required: true })}
+                    {...register("weight")}
                   />
                 </div>
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Size</span>
                   </label>
-                  <select
+                  <input
+                    type="text"
+                    className="input input-bordered rounded-md w-full max-w-xs"
+                    {...register("size")}
+                  />
+                  {/* <select
                     {...register("size", { required: true })}
                     className="select select-bordered rounded-md w-full max-w-xs"
+                    
                   >
                     <option value="XS">XS</option>
                     <option value="S">S</option>
@@ -243,7 +252,7 @@ const AddProduct = () => {
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                     <option value="XXL">XXL</option>
-                  </select>
+                  </select> */}
                 </div>
               </div>
 

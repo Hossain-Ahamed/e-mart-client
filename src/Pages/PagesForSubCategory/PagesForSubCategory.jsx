@@ -12,7 +12,7 @@ import SubCategoryAllProducts from "./SubCategoryAllProducts";
 const PagesForSubCategory = () => {
   const {subCategory, products} = useLoaderData();
   const { _id, name, slug, layout } = subCategory;
-  console.log(products);
+  //console.log(products);
   return (
     <>
     

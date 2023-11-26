@@ -52,7 +52,7 @@ const Navbar = () => {
       ) : (
         <li>
           <Link
-            className="text-black hover:text-accent font-semibold text-xs hover:bg-white uppercase"
+            className="text-black hover:text-accent font-bold text-xs hover:bg-white uppercase"
             to="/login"
           >
             Login
@@ -281,7 +281,7 @@ const Navbar = () => {
           </div>
           <div className="navbar-end m:mr-5">
             <div className="hidden lg:flex ">
-              <ul className="menu menu-horizontal px-1">{menuItem}</ul>
+              <ul className="menu menu-horizontal">{menuItem}</ul>
             </div>
             <div className="flex justify-items-center md:gap-3">
               {role === "user" && (

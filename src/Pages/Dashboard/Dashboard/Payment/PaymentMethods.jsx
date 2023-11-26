@@ -103,13 +103,16 @@ const PaymentMethods = () => {
             <h3 className="text-lg font-bold"></h3>
             <form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-1 gap-3 mt-10'>
               <div className="form-control">
+                <div className='inline-flex relative'>
+                <TbCurrencyTaka className=' absolute left-0 bottom-5'/>
                 <input
                   type="text"
-                  className="input input-bordered rounded-md"
+                  className="input input-bordered rounded-md w-full"
                   value={orderedData?.totalAmount}
                   readOnly
                   {...register("quantity", { required: true })}
                 />
+                </div>
               </div>
               <div className="form-control">
                 <input

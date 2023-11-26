@@ -1,0 +1,89 @@
+[
+    {
+        "productTitle": "Chaldal Premium Roast Chicken ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/chaldal-premium-roast-chicken-50-gm-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D133413&q=best&v=1&m=400&webp=1",
+        "price": "419",
+        "category": "Grocery",
+        "subCategory": "chicken",
+        "quantity": 20,
+        "weight":"500 gm"
+      },
+    {
+        "productTitle": "Broiler Chicken Skin On ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/broiler-chicken-skin-on-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D73931&q=best&v=1&m=400&webp=1",
+        "mainPrice": "285",
+        "price": "279",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "chicken",
+        "quantity": 10,
+        "weight":"1 kg"
+      },
+    {
+        "productTitle": "Cock Chicken Skin Off ± 25 gm",
+        "image": "https://chaldn.com/_mpimage/cock-chicken-skin-off-25-gm-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D74651&q=best&v=1&m=400&webp=1",
+        "price": "319",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "chicken",
+        "quantity": 20,
+        "weight":"500 gm"
+      },
+    {
+        "productTitle": "Broiler Chicken Skin Off ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/broiler-chicken-skin-off-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D74661&q=best&v=1&m=400&webp=1",
+        "mainPrice": "310",
+        "price": "299",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "chicken",
+        "quantity": 30,
+        "weight":"1 kg"
+      },
+    {
+        "productTitle": "Roast Chicken ± 10 gm",
+        "image": "https://chaldn.com/_mpimage/roast-chicken-10-gm-275-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D74658&q=best&v=1&m=400&webp=1",
+        "mainPrice": "190",
+        "price": "169",
+        "category": "Grocery",
+        "subCategory": "chicken",
+        "quantity": 20,
+        "weight":"275 gm",
+        "des": "Before processing this product live weight was 500-550 gm. After Processed Weight: 275-300 gm Roast chicken is chicken prepared as food by roasting whether in a home kitchen, over a fire, or with a rotisserie (rotary spit)."
+      },
+    {
+        "productTitle": "Broiler Chicken Curry Cut ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/chaldal-premium-broiler-chicken-curry-cut-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D130045&q=best&v=1&m=400&webp=1",
+        "mainPrice": "399",
+        "price": "349",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "chicken",
+        "quantity": 20,
+        "weight":"1 kg",
+        "des": "Every 1 kg of the product will contain 22-25 pcs of Premium Broiler Chicken. The hygiene is well maintained and halal way is maintained. Our curry cut offers a healthy and high-quality protein option that's sure to impress. No added hormones or preservatives, it's a healthy and high-quality protein option that's sure to elevate your meals."
+      },
+    {
+        "productTitle": "Broiler Chicken Wings ± 50 gm",
+        "image": "https://chaldn.com/_mpimage/chaldal-premium-broiler-chicken-wings-50-gm-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D130039&q=best&v=1&m=400&webp=1",
+        "mainPrice": "280",
+        "price": "219",
+        "category": "Grocery",
+        "subCategory": "chicken",
+        "quantity": 20,
+        "weight":"500 gm",
+        "des": "Every 500 gm of the product will contain 7-8 pcs of Premium Broiler Chicken Wings. The hygiene is well maintained and halal way is maintained. Our Broiler Chicken Wings Premium are the perfect choice for a delicious and protein-rich snack or meal. Sourced from premium farms, these chicken wings offer exceptional taste and texture that's perfect for grilling, baking, or frying. With no added hormones or preservatives, they're a healthy and high-quality protein option that's sure to satisfy your cravings. Try them today and experience the premium taste and nutrition of our Broiler Chicken Wings Premium."
+      },
+    {
+        "productTitle": "Broiler Chicken Drumsticks ± 50 gm (9-12 pcs)",
+        "image": "https://chaldn.com/_mpimage/broiler-chicken-drumsticks-50-gm-9-12-pcs-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D74667&q=best&v=1&m=400&m=400&webp=1",
+        "mainPrice": "489",
+        "price": "499",
+        "bestDeal": true,
+        "category": "Grocery",
+        "subCategory": "chicken",
+        "quantity": 5,
+        "weight":"1 kg",
+        "des": "In reference to poultry, the drumstick is the lower, chickeny leg portion of the bird, such as a chicken, turkey or duck, which exists from the knee joint down to almost the foot. The drumstick is different from the drummette, which is the part of the bird's wing existing between the shoulder joint and the elbow joint."
+      }
+]
