@@ -62,13 +62,15 @@ const ShowAllProducts = () => {
   };
 
   const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
+    const scrolledToBottom =
+      window.innerHeight + document.documentElement.scrollTop + 100 >=
+      document.documentElement.offsetHeight;
+  
+    if (scrolledToBottom) {
       setPage((prevPage) => prevPage + 1);
     }
   };
+  
 
   // Fisher-Yates shuffle algorithm
   const shuffle = (array) => {
