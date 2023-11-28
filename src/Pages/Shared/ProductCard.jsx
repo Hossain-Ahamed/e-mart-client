@@ -7,6 +7,7 @@ import useCart from "../../Hooks/useCart";
 import useRole from "../../Hooks/useRole";
 import toast from "react-hot-toast";
 import ReactStars from "react-rating-stars-component";
+import { IoMdStar } from "react-icons/io";
 // import useAddToWishList from "../../Hooks/useAddToWishList";
 // import useWishList from "../../Hooks/useWishList";
 
@@ -19,7 +20,6 @@ const ProductCard = ({ showProduct }) => {
 
   const [cart] = useCart();
   // const [wishList] = useWishList();
-
   const [hoveredProduct, setHoveredProduct] = useState(null);
   const [alreadyAdded, setAlreadyAdded] = useState(false);
   // const [inWishList, setInWishList] = useState(false);
@@ -76,21 +76,6 @@ const ProductCard = ({ showProduct }) => {
   // Use the calculateAverageRating function to get the average rating
   const averageRating = calculateAverageRating();
 
-  // Determine the size of the star rating based on screen width
-const screenSize = window.innerWidth;
-
-// Calculate the desired size for the star rating component
-let starRatingSize;
-
-if (screenSize < 480) {
-  starRatingSize = 14;
-} else if (screenSize <= 768) {
-  starRatingSize = 20;
-} else if (screenSize < 1024) {
-  starRatingSize = 20;
-} else {
-  starRatingSize = 24; // Default size for larger screens
-}
 
   return (
     <>
@@ -180,7 +165,8 @@ if (screenSize < 480) {
                 </s>
               )}
             </p>
-            <div className="mx-10 md:mx-12">
+            {
+              <div className="hidden md:flex justify-center">
               {averageRating ? (
                 <ReactStars
                   count={5}
@@ -189,12 +175,18 @@ if (screenSize < 480) {
                   isHalf={true}
                   halfIcon={<i className="fa fa-star-half-alt"></i>}
                   fullIcon={<i className="fa fa-star"></i>}
-                  size={starRatingSize}
+                  size="20"
                   activeColor="#FB8C00"
                 />
               ) : (
                 <></>
               )}
+            </div>
+            }
+            <div className="block md:hidden">
+            {
+              averageRating ? (<><p className="flex items-center justify-center gap-1 text-sm text-gray-700"><span className="text-accent text-lg"><IoMdStar /></span>{averageRating}/5<span>({reviews?.length})</span></p></>) : <></>
+            }
             </div>
           </div>
         </div>

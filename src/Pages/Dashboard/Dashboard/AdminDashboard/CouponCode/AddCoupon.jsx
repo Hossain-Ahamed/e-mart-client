@@ -93,7 +93,7 @@ const AddCoupon = () => {
 
   return (
     <>
-      <div className="h-full px-10">
+      <div className="w-full h-full px-10">
         <AdminTitle heading="Create New Coupon"></AdminTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">

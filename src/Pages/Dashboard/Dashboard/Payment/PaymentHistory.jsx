@@ -53,7 +53,7 @@ const PaymentHistory = () => {
               <th scope="col" className="px-6 py-3">Transaction Id</th>
               
               <th scope="col" className="px-6 py-3">Amount</th>
-              th
+              
             </tr>
           </thead>
           <tbody>
