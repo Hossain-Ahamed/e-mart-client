@@ -82,7 +82,7 @@ const ProductOverView = () => {
                   onChange={(e) => setSelectedSize(e.target.value)}
                   className="select select-bordered rounded-md w-full max-w-xs"
                 >
-                  {size.map((sizeOption) => (
+                  {size?.map((sizeOption) => (
                     <option key={sizeOption.trim()} value={sizeOption.trim()}>
                       {sizeOption.trim()}
                     </option>
