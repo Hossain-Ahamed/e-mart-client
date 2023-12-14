@@ -48,12 +48,12 @@ const PaymentHistory = () => {
           {/* head */}
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
-              <th></th>
+              <th scope="col" className="px-6 py-3">User Info</th>
             <th scope="col" className="px-6 py-3">Type Of Payment</th>
               <th scope="col" className="px-6 py-3">Transaction Id</th>
               
               <th scope="col" className="px-6 py-3">Amount</th>
-              
+              <th scope="col" className="px-6 py-3">Date & Time</th>
             </tr>
           </thead>
           <tbody>

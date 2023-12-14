@@ -70,7 +70,7 @@ const ProductOverView = () => {
             <p>Weight: {weight}</p></>)
           }
           {/* Size selection dropdown */}
-          {size && (
+          {/* {size && (
             <>
               <div className="divider"></div>
               <div className="form-control">
@@ -90,8 +90,11 @@ const ProductOverView = () => {
                 </select>
               </div>
             </>
-          )}
-          
+          )} */}
+          {
+            size && (<><div className="divider"></div>
+            <p>Size: {size}</p></>)
+          }
           <div className="divider"></div>
           <p>Current Stock: {quantity}</p>
 

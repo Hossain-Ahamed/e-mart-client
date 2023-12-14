@@ -44,7 +44,7 @@ const AddProduct = () => {
             mainPrice,
             price,
             weight,
-            size: sizeInput,  // Rename to avoid confusion with 'size' in the form data
+            size,  // Rename to avoid confusion with 'size' in the form data
             bestDeal,
             category,
             subCategory,
@@ -52,7 +52,7 @@ const AddProduct = () => {
           } = data;
         
           // Convert the comma-separated string to an array
-          const sizeArray = sizeInput.split(',').map(size => size.trim());
+          //const sizeArray = sizeInput.split(',').map(size => size.trim());
         
           const newProduct = {
             productTitle,
@@ -61,7 +61,7 @@ const AddProduct = () => {
             mainPrice: parseFloat(mainPrice),
             price: parseFloat(price),
             weight,
-            size: sizeArray,  // Use the converted array
+            size,
             bestDeal,
             category,
             subCategory,
@@ -236,12 +236,12 @@ const AddProduct = () => {
                   <label className="label">
                     <span className="label-text">Size</span>
                   </label>
-                  <input
+                  {/* <input
                     type="text"
                     className="input input-bordered rounded-md w-full max-w-xs"
                     {...register("size")}
-                  />
-                  {/* <select
+                  /> */}
+                  <select
                     {...register("size", { required: true })}
                     className="select select-bordered rounded-md w-full max-w-xs"
                     
@@ -252,7 +252,7 @@ const AddProduct = () => {
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                     <option value="XXL">XXL</option>
-                  </select> */}
+                  </select>
                 </div>
               </div>
 
