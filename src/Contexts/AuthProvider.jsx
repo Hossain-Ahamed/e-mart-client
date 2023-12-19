@@ -60,10 +60,11 @@ const AuthProvider = ({children}) => {
               .then((response) => {
                 const token = response.data.token;
                 Cookies.set("_at", token, { secure: true, sameSite: 'none' });
-                setLoading(false);
               })
               .catch((error) => {
                 console.error('Error fetching token:', error);
+              }).finally(()=>{
+                setLoading(false);
               });
               
           } 
