@@ -4,30 +4,37 @@ import { useQuery } from "@tanstack/react-query";
 import useRole from "../../../../../../Hooks/useRole";
 import useAxiosSecure from "../../../../../../Hooks/useAxiosSecure";
 import { MdOutlineReviews } from "react-icons/md";
+import useProfile from "../../../../../../Hooks/useProfile";
 
 
 const ShowDeliveredOrder = () => {
   const {role, email} = useRole();
+  const [profile, profileLoading] = useProfile();
   const {type} = useParams();
   const { axiosSecure } = useAxiosSecure();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSize, setSearchSize] = useState(15);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const {
-    refetch,
-    data: orderedProducts = {},
-    isLoading,
-  } = useQuery({
-    queryKey: ["orderedProducts", searchQuery, searchSize, currentPage, type, role, email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/orders/${type}?q=${searchQuery}&size=${searchSize}&currentPage=${currentPage}&role=${role}&email=${email}`
-      );
-        //console.log(res.data)
-      return res.data;
-    },
-  });
+  // Assuming profile is an object with an _id property
+const profileId = profile?._id;
+//console.log(profileId)
+
+const {
+  refetch,
+  data: orderedProducts = {},
+  isLoading,
+} = useQuery({
+  queryKey: ["orderedProducts", searchQuery, searchSize, currentPage, type, role, email],
+  queryFn: async () => {
+    const res = await axiosSecure.get(
+      `/orders/${type}?q=${searchQuery}&size=${searchSize}&currentPage=${currentPage}&role=${role}&email=${email}`
+    );
+   // console.log(res.data)
+    return res.data;
+  },
+});
+
 
   //const pages = Math.ceil
   const handleInputChange = (e) => {
@@ -43,14 +50,14 @@ const ShowDeliveredOrder = () => {
       <div>
         <div className="flex  justify-between items-center">
           <p className="text-xl font-bold text-accent mt-5">Delivered Orders</p>
-          <button  onClick={refetch} 
+          {/* <button  onClick={refetch} 
           type="button"
-           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Reload</button>
+           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Reload</button> */}
         </div>
         <div className="divider"></div>
       </div>
 
-      <div className="relative mt-5 flex justify-between items-center mb-3">
+      {/* <div className="relative mt-5 flex justify-between items-center mb-3">
         <div>
           <select
             value={searchSize}
@@ -95,7 +102,7 @@ const ShowDeliveredOrder = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
       {
         isLoading ? <>Loading</> : <>
 
@@ -122,12 +129,8 @@ const ShowDeliveredOrder = () => {
             <tbody>
               {orderedProducts &&
                 Array.isArray(orderedProducts?.orders) &&
-                orderedProducts?.orders.map((i, count) => (
+                orderedProducts?.orders.map((i, count) => (i?.userId === profileId) && (
                   <tr key={i?._id} className="bg-white border-b  hover:bg-gray-50 ">
-                    {/* <td className="px-6 py-4">
-                                      <img className="w-10 h-10 rounded-full" src={i?.image} alt={i?.name} />
-
-                                  </td> */}
                     <td className={`px-6 py-4 ${i?.status === "Cancelled" && "text-red-500 font-medium"}`}>#{i?._id.slice(-6)}</td>
                     <td className={`px-6 py-4 ${i?.status === "Cancelled" && "text-red-500 font-medium"}`}>
                     {i?.status === "Cancelled" ? "Cancelled" :
@@ -164,7 +167,7 @@ const ShowDeliveredOrder = () => {
         </>
       }
 
-      <nav
+      {/* <nav
         className="w-full flex justify-center mt-5 select-none pb-5"
         aria-label="Page navigation example"
       >
@@ -190,7 +193,7 @@ const ShowDeliveredOrder = () => {
             </li>
           ))}
         </ul>
-      </nav>
+      </nav> */}
     </section>
   );
 };
